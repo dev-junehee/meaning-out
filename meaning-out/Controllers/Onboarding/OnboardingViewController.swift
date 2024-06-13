@@ -13,21 +13,25 @@ class OnboardingViewController: UIViewController {
     
     let titleLabel = UILabel()
     let onboardingImage = UIImageView()
-    let startButton = PointButton(title: Constants.Text.start.rawValue)
+    let startButton = PointButton(title: Constants.Text.Button.start.rawValue)
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
         
         configureHierarchy()
         configureLayout()
         configureUI()
         configureData()
+        configureHandler()
+    }
+    
+    private func configureView() {
+        view.backgroundColor = Resource.Colors.white
     }
     
     private func configureHierarchy() {
+        
         view.addSubview(titleLabel)
         view.addSubview(onboardingImage)
         view.addSubview(startButton)
@@ -62,8 +66,15 @@ class OnboardingViewController: UIViewController {
     }
     
     private func configureData() {
-        titleLabel.text = Constants.Text.mainTitle.rawValue
+        titleLabel.text = Constants.Text.Title.main.rawValue
         onboardingImage.image = Resource.Images.launch
     }
+    
+    private func configureHandler() {
+        startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+    }
 
+    @objc func startButtonClicked() {
+        navigationController?.pushViewController(ProfileNicknameViewController(), animated: true)
+    }
 }

@@ -30,4 +30,14 @@ enum Resource {
     enum Images {
         static let launch: UIImage = .launch
     }
+    
+    enum SystemImages {
+        static let search = UIImage(systemName: "magnifyingglass")!
+        static let clock = UIImage(systemName: "clock")!
+        static let person = UIImage(systemName: "person")!
+        static let exit = UIImage(systemName: "xmark")!
+        static let left = UIImage(systemName: "chevron.left")!
+        static let right = UIImage(systemName: "chevron.right")!
+        static let camara = UIImage(systemName: "camera.fill")!
+    }
 }

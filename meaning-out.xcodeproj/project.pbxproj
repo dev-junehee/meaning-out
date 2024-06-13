@@ -19,6 +19,8 @@
 		C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A272C1B4F6200A3EC84 /* Resource.swift */; };
 		C48B9A2B2C1B4FC800A3EC84 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */; };
 		C48B9A2E2C1B537800A3EC84 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C48B9A2D2C1B537800A3EC84 /* SnapKit */; };
+		C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */; };
+		C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		C48B9A242C1B4EC100A3EC84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C48B9A272C1B4F6200A3EC84 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameViewController.swift; sourceTree = "<group>"; };
+		C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */,
+				C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -114,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A302C1B5EE000A3EC84 /* Onboarding */,
+				C48B9A312C1B5F6100A3EC84 /* ProfileNickname */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -124,6 +130,14 @@
 				C48B9A1E2C1B4A3D00A3EC84 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C48B9A312C1B5F6100A3EC84 /* ProfileNickname */ = {
+			isa = PBXGroup;
+			children = (
+				C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */,
+			);
+			path = ProfileNickname;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,10 +219,12 @@
 			files = (
 				C48B99E42C1AEE5300A3EC84 /* ViewController.swift in Sources */,
 				C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */,
+				C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */,
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,
+				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,
 				C48B9A252C1B4EC100A3EC84 /* Constants.swift in Sources */,
 				C48B9A2B2C1B4FC800A3EC84 /* UIColor+Extension.swift in Sources */,
 			);

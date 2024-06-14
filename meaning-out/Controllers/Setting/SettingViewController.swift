@@ -93,7 +93,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as! SettingMenuTableViewCell
             
-            let menu = SettingOptions.allCases[indexPath.section].menuOptions[indexPath.row]
+            let menu = SettingOptions.allCases[section].menuOptions[idx]
          
             cell.configureCellHierarchy()
             cell.configureCellLayout()
@@ -109,5 +109,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if section == 0 {
+            let editNicknameVC = EditNicknameViewController()
+            navigationController?.pushViewController(editNicknameVC, animated: true)
+        }
+    }
     
 }

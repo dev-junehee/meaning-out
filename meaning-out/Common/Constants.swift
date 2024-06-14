@@ -17,6 +17,13 @@ enum Constants {
             case profile = "PROFILE SETTING"
             case setting = "SETTING"
             case edit = "EDIT PROFILE"
+            
+            
+        }
+        
+        enum Tab: String {
+            case search = "검색"
+            case setting = "설정"
         }
         
         enum Button: String {

@@ -31,6 +31,8 @@
 		C48B9A502C1C5AA800A3EC84 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */; };
 		C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A522C1C671200A3EC84 /* SettingViewController.swift */; };
 		C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */; };
+		C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */; };
+		C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C48B9A522C1C671200A3EC84 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
+		C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
+		C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A492C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift */,
+				C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */,
+				C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
+				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,
 				C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */,
 				C48B9A502C1C5AA800A3EC84 /* MainViewController.swift in Sources */,
+				C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,

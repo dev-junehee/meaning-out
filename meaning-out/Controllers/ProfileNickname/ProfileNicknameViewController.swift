@@ -172,7 +172,6 @@ class ProfileNicknameViewController: UIViewController {
     
     @objc func profileTapped() {
         let VC = ProfileImageViewController()
-//        VC.isSelectedProfileNumber = isSelectedProfileNumber
         navigationController?.pushViewController(VC, animated: true)
     }
     

@@ -47,6 +47,4 @@ enum Constants {
         case borderWidth = 3
         case borderWidthEnabled = 1
     }
-    
-    
 }

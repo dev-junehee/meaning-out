@@ -21,6 +21,8 @@
 		C48B9A2E2C1B537800A3EC84 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C48B9A2D2C1B537800A3EC84 /* SnapKit */; };
 		C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */; };
 		C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */; };
+		C48B9A3A2C1B6D5300A3EC84 /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C48B9A392C1B6D5300A3EC84 /* TextFieldEffects */; };
+		C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,7 @@
 		C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameViewController.swift; sourceTree = "<group>"; };
 		C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C48B9A2E2C1B537800A3EC84 /* SnapKit in Frameworks */,
+				C48B9A3A2C1B6D5300A3EC84 /* TextFieldEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */,
+				C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */,
 			);
 			path = ProfileNickname;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			name = "meaning-out";
 			packageProductDependencies = (
 				C48B9A2D2C1B537800A3EC84 /* SnapKit */,
+				C48B9A392C1B6D5300A3EC84 /* TextFieldEffects */,
 			);
 			productName = "meaning-out";
 			productReference = C48B99DC2C1AEE5300A3EC84 /* meaning-out.app */;
@@ -189,6 +195,7 @@
 			mainGroup = C48B99D32C1AEE5300A3EC84;
 			packageReferences = (
 				C48B9A2C2C1B537800A3EC84 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C48B9A382C1B6D5300A3EC84 /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
 			);
 			productRefGroup = C48B99DD2C1AEE5300A3EC84 /* Products */;
 			projectDirPath = "";
@@ -223,6 +230,7 @@
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
+				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,
 				C48B9A252C1B4EC100A3EC84 /* Constants.swift in Sources */,
@@ -461,6 +469,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		C48B9A382C1B6D5300A3EC84 /* XCRemoteSwiftPackageReference "TextFieldEffects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raulriera/TextFieldEffects.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -468,6 +484,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C48B9A2C2C1B537800A3EC84 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		C48B9A392C1B6D5300A3EC84 /* TextFieldEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C48B9A382C1B6D5300A3EC84 /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
+			productName = TextFieldEffects;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

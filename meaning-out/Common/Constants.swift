@@ -28,5 +28,6 @@ enum Constants {
     
     enum Integer: Int {
         case buttonRadius = 25
+        case borderWidth = 3
     }
 }

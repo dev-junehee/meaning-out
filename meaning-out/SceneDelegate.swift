@@ -14,16 +14,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        let isUser = UserDefaults.standard.bool(forKey: "isUser")
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        var rootViewController: UINavigationController?
+        var rootViewController: UIViewController?
         
-        rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+        if isUser {
+            let tabBarController = UITabBarController()
+            tabBarController.view.backgroundColor = Resource.Colors.white
+            tabBarController.tabBar.tintColor = Resource.Colors.primary
+            
+            let main = UINavigationController(rootViewController: MainViewController())
+            let setting = UINavigationController(rootViewController: SettingViewController())
+            
+            let controllers = [main, setting]
+            tabBarController.setViewControllers(controllers, animated: true)
+            
+            if let items = tabBarController.tabBar.items {
+                items[0].title = Constants.Text.Tab.search.rawValue
+                items[0].image = Resource.SystemImages.search
+                
+                items[1].title = Constants.Text.Tab.setting.rawValue
+                items[1].image = Resource.SystemImages.person
+            }
+            
+            rootViewController = tabBarController
+            
+        } else {
+            rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+        }
         
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
-        
         
     }
 

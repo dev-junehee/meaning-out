@@ -17,6 +17,13 @@ enum Constants {
             case profile = "PROFILE SETTING"
             case setting = "SETTING"
             case edit = "EDIT PROFILE"
+            
+            
+        }
+        
+        enum Tab: String {
+            case search = "검색"
+            case setting = "설정"
         }
         
         enum Button: String {
@@ -24,9 +31,24 @@ enum Constants {
             case done = "완료"
             case save = "저장"
         }
+        
+        enum Placeholder: String {
+            case nickname = "닉네임 NICKNAME"
+        }
+        
+        enum UserDefaults: String {
+            case nickname = "nickname"
+            case profile = "profileImageNumber"
+            case joinDate = "joinDate"
+            case cart = "cart"
+        }
     }
     
     enum Integer: Int {
         case buttonRadius = 25
+        case borderWidth = 3
+        case borderWidthEnabled = 1
     }
+    
+    
 }

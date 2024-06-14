@@ -11,7 +11,7 @@ class PointButton: UIButton {
     
     init(title: String) {
         super.init(frame: .zero)
-        
+    
         backgroundColor = Resource.Colors.primary
         layer.cornerRadius = CGFloat(Constants.Integer.buttonRadius.rawValue)
         

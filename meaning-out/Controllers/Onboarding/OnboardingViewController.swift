@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 
-
 class OnboardingViewController: UIViewController {
     
     let titleLabel = UILabel()
@@ -19,6 +18,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureView()
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -31,7 +31,6 @@ class OnboardingViewController: UIViewController {
     }
     
     private func configureHierarchy() {
-        
         view.addSubview(titleLabel)
         view.addSubview(onboardingImage)
         view.addSubview(startButton)
@@ -47,7 +46,6 @@ class OnboardingViewController: UIViewController {
         onboardingImage.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(50)
             $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
-            $0.size.equalTo(250)
         }
         
         startButton.snp.makeConstraints {

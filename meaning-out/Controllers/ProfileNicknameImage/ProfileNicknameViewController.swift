@@ -171,8 +171,8 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func profileTapped() {
-        let VC = ProfileImageViewController()
-        navigationController?.pushViewController(VC, animated: true)
+        let profileImageVC = ProfileImageViewController()
+        navigationController?.pushViewController(profileImageVC, animated: true)
     }
     
     @objc func validateNickname() {

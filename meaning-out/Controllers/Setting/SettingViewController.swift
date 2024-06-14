@@ -59,8 +59,8 @@ class SettingViewController: UIViewController {
 
 
 // MARK: SettingViewController 익스텐션
-
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return SettingOptions.allCases.count
     }
@@ -116,7 +116,32 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             let editNicknameVC = EditNicknameViewController()
             navigationController?.pushViewController(editNicknameVC, animated: true)
+            return
+        }
+        
+        if row == 4 {
+            showAlert(
+                title: "탈퇴하기",
+                message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?",
+                okHandler: alertOkayClicked,
+                cancelHandler: alertCancelClicked
+            )
         }
     }
     
+}
+
+
+// MARK: Alert Action 알럿 액션 함수
+extension SettingViewController {
+    func alertOkayClicked(action: UIAlertAction) {
+        print("Alert 확인 클릭")
+        // UserDefaults 삭제하기
+        // 온보딩 화면으로 전환하기
+    }
+    
+    func alertCancelClicked(action: UIAlertAction) {
+        print("Alert 취소 클릭~")
+        return
+    }
 }

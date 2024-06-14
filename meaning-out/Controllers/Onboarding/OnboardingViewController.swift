@@ -12,7 +12,7 @@ class OnboardingViewController: UIViewController {
     
     let titleLabel = UILabel()
     let onboardingImage = UIImageView()
-    let startButton = PointButton(title: Constants.Text.Button.start.rawValue)
+    let startButton = PointButton(title: Constants.Button.start.rawValue)
     
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ class OnboardingViewController: UIViewController {
     }
     
     private func configureData() {
-        titleLabel.text = Constants.Text.Title.main.rawValue
+        titleLabel.text = Constants.Title.main.rawValue
         onboardingImage.image = Resource.Images.launch
     }
     

@@ -100,7 +100,7 @@ class SettingProfileTableViewCell: UITableViewCell {
     }
     
     func configureCellData() {
-        let imageNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue)
+        let imageNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue)
         profileImage.image = Resource.Images.profiles[imageNum]
        
         nicknameLabel.text = "JuneHee"

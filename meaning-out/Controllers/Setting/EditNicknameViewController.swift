@@ -20,7 +20,7 @@ class EditNicknameViewController: UIViewController {
         navigationItem.title = "EDIT PROFILE"
         
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backButtonClicked), type: .left)
-        addTextBarBtn(title: Constants.Text.Button.save.rawValue, style: .plain, target: self, action: #selector(saveButtonClicked), type: .right)
+        addTextBarBtn(title: Constants.Button.save.rawValue, style: .plain, target: self, action: #selector(saveButtonClicked), type: .right)
     }
     
     

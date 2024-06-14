@@ -17,9 +17,9 @@ class ProfileImageViewController: UIViewController {
     let cameraImage = UIImageView()
     
     // 사용자가 선택한 프로필 이미지 (임시)
-    var profileNum: Int = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue) {
+    var profileNum: Int = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue) {
         didSet {
-            UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
+            UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
         }
     }
     
@@ -57,7 +57,7 @@ class ProfileImageViewController: UIViewController {
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = Constants.Text.Title.profile.rawValue
+        navigationItem.title = Constants.Title.profile.rawValue
         
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backButtonClicked), type: .left)
     }
@@ -159,9 +159,9 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         print("프로필 이미지를 선택했을 때", indexPath.item)
         profileNum = indexPath.item
         
-        UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
+        UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
         
-        print("선택한 값으로 저장한 값 맞는지 확인", UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue))
+        print("선택한 값으로 저장한 값 맞는지 확인", UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue))
         
         profileImage.image = Resource.Images.profiles[profileNum]
     }

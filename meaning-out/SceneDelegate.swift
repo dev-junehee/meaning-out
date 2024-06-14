@@ -34,10 +34,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.setTabBarUI()
             
             if let items = tabBarController.tabBar.items {
-                items[0].title = Constants.Text.Tab.search.rawValue
+                items[0].title = Constants.Tab.search.rawValue
                 items[0].image = Resource.SystemImages.search
                 
-                items[1].title = Constants.Text.Tab.setting.rawValue
+                items[1].title = Constants.Tab.setting.rawValue
                 items[1].image = Resource.SystemImages.person
             }
             

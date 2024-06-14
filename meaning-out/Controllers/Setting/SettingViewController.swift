@@ -32,7 +32,7 @@ class SettingViewController: UIViewController {
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = Constants.Text.Title.setting.rawValue
+        navigationItem.title = Constants.Title.setting.rawValue
 //        navigationItem.scrollEdgeAppearance = navigationItem.standardAppearance
     }
     

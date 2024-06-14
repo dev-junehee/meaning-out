@@ -17,8 +17,6 @@ enum Constants {
             case profile = "PROFILE SETTING"
             case setting = "SETTING"
             case edit = "EDIT PROFILE"
-            
-            
         }
         
         enum Tab: String {

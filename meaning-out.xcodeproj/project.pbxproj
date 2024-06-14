@@ -30,6 +30,7 @@
 		C48B9A4D2C1C2A3A00A3EC84 /* ReuseableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A4C2C1C2A3A00A3EC84 /* ReuseableProtocol.swift */; };
 		C48B9A502C1C5AA800A3EC84 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */; };
 		C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A522C1C671200A3EC84 /* SettingViewController.swift */; };
+		C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		C48B9A4C2C1C2A3A00A3EC84 /* ReuseableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseableProtocol.swift; sourceTree = "<group>"; };
 		C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C48B9A522C1C671200A3EC84 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */,
 				C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */,
 				C48B9A3F2C1C016F00A3EC84 /* TextFieldEffects+Extension.swift */,
+				C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
+				C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */,
 				C48B9A502C1C5AA800A3EC84 /* MainViewController.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,

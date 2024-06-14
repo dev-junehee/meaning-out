@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let controllers = [main, setting]
             tabBarController.setViewControllers(controllers, animated: true)
+            tabBarController.setTabBarUI()
             
             if let items = tabBarController.tabBar.items {
                 items[0].title = Constants.Text.Tab.search.rawValue
@@ -81,4 +82,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

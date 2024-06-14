@@ -192,24 +192,47 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func doneButtonClicked() {
-        // 유효성 검사 통과 시 프로필 사진/닉네임 저장
-        if isValidate {
-            print(isUser)
-            UserDefaults.standard.set(nicknameField.text, forKey: Constants.Text.UserDefaults.nickname.rawValue)
-            UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
-            UserDefaults.standard.set(true, forKey: "isUser")
-        
-            // rootViewController 변경
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            let sceneDeleagate = windowScene?.delegate as? SceneDelegate
-                
-            let rootViewController = UINavigationController(rootViewController: MainViewController())
-                
-            sceneDeleagate?.window?.rootViewController = rootViewController
-            sceneDeleagate?.window?.makeKeyAndVisible()
-        } else {
+        // 유효성 검사 미통과 시 실패 처리 - 추후 수정
+        if !isValidate {
             print("유효성 검사 실패")
+            return
         }
+        
+        // 유효성 검사 통과 시 프로필 사진/닉네임 저장
+        print(isUser)
+        UserDefaults.standard.set(nicknameField.text, forKey: Constants.Text.UserDefaults.nickname.rawValue)
+        UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
+        UserDefaults.standard.set(true, forKey: "isUser")
+    
+        // rootViewController 변경
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+        
+        var rootViewController: UIViewController?
+        
+        let tabBarController = UITabBarController()
+        tabBarController.view.backgroundColor = Resource.Colors.white
+        tabBarController.tabBar.tintColor = Resource.Colors.primary
+        
+        let main = UINavigationController(rootViewController: MainViewController())
+        let setting = UINavigationController(rootViewController: SettingViewController())
+        
+        let controllers = [main, setting]
+        tabBarController.setViewControllers(controllers, animated: true)
+        tabBarController.setTabBarUI()
+        
+        if let items = tabBarController.tabBar.items {
+            items[0].title = Constants.Text.Tab.search.rawValue
+            items[0].image = Resource.SystemImages.search
+            
+            items[1].title = Constants.Text.Tab.setting.rawValue
+            items[1].image = Resource.SystemImages.person
+        }
+        
+        rootViewController = tabBarController
+            
+        sceneDeleagate?.window?.rootViewController = rootViewController
+        sceneDeleagate?.window?.makeKeyAndVisible()
     }
 
 }

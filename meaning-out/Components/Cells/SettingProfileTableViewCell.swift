@@ -93,11 +93,9 @@ class SettingProfileTableViewCell: UITableViewCell {
         profileImage.layer.borderColor = Resource.Colors.primary.cgColor
         profileImage.layer.borderWidth = CGFloat(Constants.Integer.borderWidth.rawValue)
 
-        nicknameLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        
-        joinDateLabel.font = .systemFont(ofSize: 11, weight: .regular)
+        nicknameLabel.font = Resource.Fonts.bold16
+        joinDateLabel.font = Resource.Fonts.regular13
         joinDateLabel.textColor = Resource.Colors.gray
-        
         rightButton.tintColor = Resource.Colors.gray
     }
     
@@ -105,7 +103,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         let imageNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue)
         profileImage.image = Resource.Images.profiles[imageNum]
        
-        nicknameLabel.text = "옹골찬 고래밥"
+        nicknameLabel.text = "JuneHee"
         joinDateLabel.text = "2024. 06. 15 가입"
         
         rightButton.setImage(Resource.SystemImages.right, for: .normal)

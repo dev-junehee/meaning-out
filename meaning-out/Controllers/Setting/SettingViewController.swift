@@ -85,18 +85,28 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let section = indexPath.section
         let idx = indexPath.row
         
-        var cell: UITableViewCell?
-        
         if section == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id, for: indexPath) as! SettingProfileTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id, for: indexPath) as! SettingProfileTableViewCell
  
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as! SettingMenuTableViewCell
+            return cell
             
-            cell?.backgroundColor = .yellow
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as! SettingMenuTableViewCell
+            
+            let menu = SettingOptions.allCases[indexPath.section].menuOptions[indexPath.row]
+         
+            cell.configureCellHierarchy()
+            cell.configureCellLayout()
+            cell.configureCellUI()
+            
+            if indexPath.row == 0 {
+                cell.configureCartCellData(data: menu)
+            } else {
+                cell.configureCellData(data: menu)
+            }
+            
+            return cell
         }
-        
-        return cell!
     }
     
     

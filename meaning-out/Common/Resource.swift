@@ -25,7 +25,17 @@ enum Resource {
     enum Fonts {
         static let mainTitle: UIFont = .systemFont(ofSize: 42, weight: .black)
         static let button: UIFont = .systemFont(ofSize: 16, weight: .black)
-        
+        static let bold16: UIFont = .systemFont(ofSize: 16, weight: .bold)
+        static let bold15: UIFont = .systemFont(ofSize: 15, weight: .bold)
+        static let bold14: UIFont = .systemFont(ofSize: 14, weight: .bold)
+        static let bold13: UIFont = .systemFont(ofSize: 13, weight: .bold)
+        static let semiBold16: UIFont = .systemFont(ofSize: 16, weight: .semibold)
+        static let semiBold15: UIFont = .systemFont(ofSize: 15, weight: .semibold)
+        static let semiBold14: UIFont = .systemFont(ofSize: 14, weight: .semibold)
+        static let semiBold13: UIFont = .systemFont(ofSize: 13, weight: .semibold)
+        static let regular16: UIFont = .systemFont(ofSize: 13, weight: .regular)
+        static let regular15: UIFont = .systemFont(ofSize: 13, weight: .regular)
+        static let regular14: UIFont = .systemFont(ofSize: 13, weight: .regular)
         static let regular13: UIFont = .systemFont(ofSize: 13, weight: .regular)
     }
     
@@ -46,5 +56,6 @@ enum Resource {
         static let left = UIImage(systemName: "chevron.left")!
         static let right = UIImage(systemName: "chevron.right")!
         static let camara = UIImage(systemName: "camera.fill")!
+        static let cart = UIImage(systemName: "handbag.fill")
     }
 }

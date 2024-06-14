@@ -25,14 +25,23 @@ enum Constants {
             case save = "저장"
         }
         
-        
         enum Placeholder: String {
             case nickname = "닉네임 NICKNAME"
+        }
+        
+        enum UserDefaults: String {
+            case nickname = "nickname"
+            case profile = "profileImageNumber"
+            case joinDate = "joinDate"
+            case cart = "cart"
         }
     }
     
     enum Integer: Int {
         case buttonRadius = 25
         case borderWidth = 3
+        case borderWidthEnabled = 1
     }
+    
+    
 }

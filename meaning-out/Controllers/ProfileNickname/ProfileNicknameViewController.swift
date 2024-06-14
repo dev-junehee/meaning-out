@@ -23,10 +23,22 @@ class ProfileNicknameViewController: UIViewController {
     
     let doneButton = PointButton(title: Constants.Text.Button.done.rawValue)
     
+    // 닉네임 유효성 검사 여부
     var isValidate = false
+    
+    // 프로필 이미지 선택값 (임시)
+    var isUser = UserDefaults.standard.bool(forKey: "isUser")
+    
+    var profileNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue) {
+        didSet {
+            profileImage.image = Resource.Images.profiles[profileNum]
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("맨 처음 찍히는", profileNum)
         
         configureView()
         configureHierarchy()
@@ -34,6 +46,15 @@ class ProfileNicknameViewController: UIViewController {
         configureUI()
         configureData()
         configureHandler()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("화면 전환 후 다시 돌아왔을 때", profileNum)
+        
+        // 화면 전환 시 저장됐던 프로필 이미지 가져오기
+        profileNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue)
     }
     
     private func configureView() {
@@ -53,7 +74,6 @@ class ProfileNicknameViewController: UIViewController {
         subviews.forEach { subview in
             view.addSubview(subview)
         }
-        
     }
     
     private func configureLayout() {
@@ -122,8 +142,13 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     private func configureData() {
-        profileImage.image = Resource.Images.profiles.randomElement()
-//        invalidMessage.text = ""
+        // 기존 유저가 아닐 경우 프로필 이미지 랜덤
+        if !isUser {
+            profileNum = Int.random(in: 0...11)
+        }
+        
+        UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
+        profileImage.image = Resource.Images.profiles[profileNum]
     }
     
     private func configureHandler() {
@@ -141,11 +166,14 @@ class ProfileNicknameViewController: UIViewController {
     
     // MARK: @objc 함수
     @objc func backBarButtonClicked() {
+        
         navigationController?.popViewController(animated: true)
     }
     
     @objc func profileTapped() {
-        navigationController?.pushViewController(ProfileImageViewController(), animated: true)
+        let VC = ProfileImageViewController()
+//        VC.isSelectedProfileNumber = isSelectedProfileNumber
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     @objc func validateNickname() {
@@ -165,8 +193,24 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func doneButtonClicked() {
-        print("완료 버튼을 눌렀어요")
-        print(isValidate)
+        // 유효성 검사 통과 시 프로필 사진/닉네임 저장
+        if isValidate {
+            print(isUser)
+            UserDefaults.standard.set(nicknameField.text, forKey: Constants.Text.UserDefaults.nickname.rawValue)
+            UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
+            UserDefaults.standard.set(true, forKey: "isUser")
+        
+            // rootViewController 변경
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+                
+            let rootViewController = UINavigationController(rootViewController: MainViewController())
+                
+            sceneDeleagate?.window?.rootViewController = rootViewController
+            sceneDeleagate?.window?.makeKeyAndVisible()
+        } else {
+            print("유효성 검사 실패")
+        }
     }
 
 }

@@ -24,6 +24,11 @@ enum Constants {
             case done = "완료"
             case save = "저장"
         }
+        
+        
+        enum Placeholder: String {
+            case nickname = "닉네임 NICKNAME"
+        }
     }
     
     enum Integer: Int {

@@ -23,6 +23,8 @@
 		C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */; };
 		C48B9A3A2C1B6D5300A3EC84 /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C48B9A392C1B6D5300A3EC84 /* TextFieldEffects */; };
 		C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */; };
+		C48B9A402C1C016F00A3EC84 /* TextFieldEffects+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A3F2C1C016F00A3EC84 /* TextFieldEffects+Extension.swift */; };
+		C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A422C1C1C2C00A3EC84 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameViewController.swift; sourceTree = "<group>"; };
 		C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewController.swift; sourceTree = "<group>"; };
+		C48B9A3F2C1C016F00A3EC84 /* TextFieldEffects+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldEffects+Extension.swift"; sourceTree = "<group>"; };
+		C48B9A422C1C1C2C00A3EC84 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 		C48B99DE2C1AEE5300A3EC84 /* meaning-out */ = {
 			isa = PBXGroup;
 			children = (
+				C48B9A412C1C1C1E00A3EC84 /* Utils */,
 				C48B9A262C1B4F1700A3EC84 /* Common */,
 				C48B9A292C1B4FB700A3EC84 /* Extension */,
 				C48B9A202C1B4DF500A3EC84 /* CustomViews */,
@@ -115,6 +120,7 @@
 			children = (
 				C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */,
 				C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */,
+				C48B9A3F2C1C016F00A3EC84 /* TextFieldEffects+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -143,6 +149,14 @@
 				C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */,
 			);
 			path = ProfileNickname;
+			sourceTree = "<group>";
+		};
+		C48B9A412C1C1C1E00A3EC84 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C48B9A422C1C1C2C00A3EC84 /* Utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,10 +243,12 @@
 				C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */,
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
+				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,
+				C48B9A402C1C016F00A3EC84 /* TextFieldEffects+Extension.swift in Sources */,
 				C48B9A252C1B4EC100A3EC84 /* Constants.swift in Sources */,
 				C48B9A2B2C1B4FC800A3EC84 /* UIColor+Extension.swift in Sources */,
 			);

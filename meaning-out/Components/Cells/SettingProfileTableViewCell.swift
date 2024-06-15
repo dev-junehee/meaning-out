@@ -100,11 +100,11 @@ class SettingProfileTableViewCell: UITableViewCell {
     }
     
     func configureCellData() {
-        let imageNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue)
+        let imageNum = UserDefaultsManager.profile
         profileImage.image = Resource.Images.profiles[imageNum]
        
-        nicknameLabel.text = "JuneHee"
-        joinDateLabel.text = "2024. 06. 15 가입"
+        nicknameLabel.text = UserDefaultsManager.nickname
+        joinDateLabel.text = "\(UserDefaultsManager.joinDate) 가입"
         
         rightButton.setImage(Resource.SystemImages.right, for: .normal)
     }

@@ -8,15 +8,9 @@
 import UIKit
 import SnapKit
 
-enum SettingOptions: CaseIterable {
-    case profile
-    case menu
-    
-    var menuOptions: [String] {
-        return ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
-    }
-}
-
+/**
+ 메인 - 설정 탭
+ */
 class SettingViewController: UIViewController {
     
     let settingTableView = UITableView()
@@ -61,14 +55,14 @@ class SettingViewController: UIViewController {
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SettingOptions.allCases.count
+        return Constants.SettingOptions.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
-            return SettingOptions.allCases[section].menuOptions.count
+            return Constants.SettingOptions.allCases[section].menuOptions.count
         }
     }
     
@@ -86,13 +80,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id, for: indexPath) as! SettingProfileTableViewCell
- 
+            
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as! SettingMenuTableViewCell
             
-            let menu = SettingOptions.allCases[section].menuOptions[idx]
+            let menu = Constants.SettingOptions.allCases[section].menuOptions[idx]
          
             cell.configureCellHierarchy()
             cell.configureCellLayout()
@@ -136,19 +130,14 @@ extension SettingViewController {
     func alertOkayClicked(action: UIAlertAction) {
         print("Alert 확인 클릭")
         
-        // UserDefaults 삭제
-        UserDefaults.standard.removeObject(forKey: "nickname")
-        UserDefaults.standard.removeObject(forKey: "profileImageNumber")
-        UserDefaults.standard.removeObject(forKey: "joinDate")
-        UserDefaults.standard.removeObject(forKey: "cart")
-        UserDefaults.standard.removeObject(forKey: "isUser")
+        UserDefaultsManager.deleteAllUserDefaults()
         
         // 온보딩 화면으로 전환
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDeleagate = windowScene?.delegate as? SceneDelegate
         
         let onboardingVC = UINavigationController(rootViewController: OnboardingViewController())
-        var rootViewController = onboardingVC
+        let rootViewController = onboardingVC
         
         sceneDeleagate?.window?.rootViewController = rootViewController
         sceneDeleagate?.window?.makeKeyAndVisible()

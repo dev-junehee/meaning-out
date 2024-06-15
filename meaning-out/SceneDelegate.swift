@@ -14,13 +14,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        let isUser = UserDefaults.standard.bool(forKey: "isUser")
+        let isUser = UserDefaultsManager.isUser
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
         var rootViewController: UIViewController?
         
+        // 기존 유저일 경우 메인으로 이동/기존 유저가 아닐 경우 온보딩으로 이동
         if isUser {
             let tabBarController = UITabBarController()
             tabBarController.view.backgroundColor = Resource.Colors.white

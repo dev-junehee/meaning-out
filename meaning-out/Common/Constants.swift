@@ -8,7 +8,6 @@
 import Foundation
 
 /**
- 
  Constants: 프로젝트에서 상수로 활용될 문자열, 숫자 데이터
  
  Title: 프로젝트 대표 타이틀, NavigationController 타이틀
@@ -17,15 +16,18 @@ import Foundation
  Alert: 알럿 사용하는 텍스트
  Placeholder: 텍스트필드, 서치바 등 플레이스홀더
  Integer: 프로젝트에서 사용하는 상수 Int 데이터
- 
  */
 
 enum Constants {
     enum Title: String {
-        case main = "MeaningOut"
+        case meaningout = "MeaningOut"
         case profile = "PROFILE SETTING"
         case setting = "SETTING"
         case edit = "EDIT PROFILE"
+ 
+        static var main: String {
+            return "\(UserDefaultsManager.nickname)'s MEANING OUT"
+        }
     }
     
     enum Tab: String {
@@ -48,15 +50,17 @@ enum Constants {
         }
     }
     
-    enum Placeholder: String {
-        case nickname = "닉네임 NICKNAME"
+    enum SettingOptions: CaseIterable {
+        case profile
+        case menu
+        
+        var menuOptions: [String] {
+            return ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
+        }
     }
     
-    enum UserDefaults: String {
-        case nickname = "nickname"
-        case profile = "profileImageNumber"
-        case joinDate = "joinDate"
-        case cart = "cart"
+    enum Placeholder: String {
+        case nickname = "닉네임 NICKNAME"
     }
     
     enum Integer: Int {

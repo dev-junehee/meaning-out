@@ -7,6 +7,9 @@
 
 import UIKit
 
+/**
+ 메인 - 설정 탭 - 프로필 수정 화면
+ */
 class EditNicknameViewController: UIViewController {
     
     override func viewDidLoad() {

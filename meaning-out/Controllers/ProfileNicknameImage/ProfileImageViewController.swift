@@ -16,10 +16,10 @@ class ProfileImageViewController: UIViewController {
     let cameraImageView = UIView()
     let cameraImage = UIImageView()
     
-    // 사용자가 선택한 프로필 이미지 (임시)
-    var profileNum: Int = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue) {
+    // 사용자가 선택한 프로필 이미지
+    var profileNum: Int = UserDefaultsManager.profile {
         didSet {
-            UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
+            UserDefaultsManager.profile = profileNum
         }
     }
     
@@ -159,9 +159,9 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         print("프로필 이미지를 선택했을 때", indexPath.item)
         profileNum = indexPath.item
         
-        UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
+        UserDefaultsManager.profile = profileNum
         
-        print("선택한 값으로 저장한 값 맞는지 확인", UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue))
+        print("선택한 값으로 저장한 값 맞는지 확인",  UserDefaultsManager.profile)
         
         profileImage.image = Resource.Images.profiles[profileNum]
     }

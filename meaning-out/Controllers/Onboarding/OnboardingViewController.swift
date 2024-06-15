@@ -64,7 +64,7 @@ class OnboardingViewController: UIViewController {
     }
     
     private func configureData() {
-        titleLabel.text = Constants.Title.main.rawValue
+        titleLabel.text = Constants.Title.meaningout.rawValue
         onboardingImage.image = Resource.Images.launch
     }
     

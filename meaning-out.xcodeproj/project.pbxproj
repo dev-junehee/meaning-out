@@ -34,6 +34,7 @@
 		C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */; };
 		C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */; };
 		C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */; };
+		C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
 		C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuTableViewCell.swift; sourceTree = "<group>"; };
 		C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewController.swift; sourceTree = "<group>"; };
+		C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				C48B9A242C1B4EC100A3EC84 /* Constants.swift */,
 				C48B9A272C1B4F6200A3EC84 /* Resource.swift */,
+				C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
+				C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
 				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,

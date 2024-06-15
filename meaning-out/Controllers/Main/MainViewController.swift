@@ -7,9 +7,12 @@
 
 import UIKit
 
+/**
+ 메인 - 검색 탭
+ */
 class MainViewController: UIViewController {
-    
-    let nickname = UserDefaults.standard.string(forKey: Constants.UserDefaults.nickname.rawValue) ?? "손님"
+
+    let nickname = UserDefaultsManager.nickname
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +22,7 @@ class MainViewController: UIViewController {
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = "\(nickname)'s MEANING OUT"
+        navigationItem.title = Constants.Title.main
     }
 
 }

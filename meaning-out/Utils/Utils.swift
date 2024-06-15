@@ -41,3 +41,19 @@ func getValidationResult(_ nickname: String) -> Array<Any> {
         return [true, "사용할 수 있는 닉네임이에요."]
     }
 }
+
+
+/**
+ 오늘 날짜를 YYYY. mm. DD 형식으로 변환
+ */
+func getTodayString() -> String {
+    let today = Date()
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+    dateFormatter.dateFormat = "yyyy. MM. dd"
+    
+    let convertedToday = dateFormatter.string(from: today)
+    
+    return convertedToday
+}

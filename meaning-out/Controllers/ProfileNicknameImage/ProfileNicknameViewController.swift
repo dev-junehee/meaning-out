@@ -26,10 +26,9 @@ class ProfileNicknameViewController: UIViewController {
     // 닉네임 유효성 검사 여부
     var isValidate = false
     
-    // 프로필 이미지 선택값 (임시)
-    var isUser = UserDefaults.standard.bool(forKey: "isUser")
-    
-    var profileNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue) {
+    // 유저 데이터
+    var isUser = UserDefaultsManager.isUser
+    var profileNum = UserDefaultsManager.profile {
         didSet {
             profileImage.image = Resource.Images.profiles[profileNum]
         }
@@ -54,7 +53,7 @@ class ProfileNicknameViewController: UIViewController {
         print("화면 전환 후 다시 돌아왔을 때", profileNum)
         
         // 화면 전환 시 저장됐던 프로필 이미지 가져오기
-        profileNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue)
+        profileNum = UserDefaultsManager.profile
     }
     
     private func configureView() {
@@ -147,7 +146,7 @@ class ProfileNicknameViewController: UIViewController {
             profileNum = Int.random(in: 0...11)
         }
         
-        UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
+        UserDefaultsManager.profile = profileNum
         profileImage.image = Resource.Images.profiles[profileNum]
     }
     
@@ -200,9 +199,15 @@ class ProfileNicknameViewController: UIViewController {
         
         // 유효성 검사 통과 시 프로필 사진/닉네임 저장
         print(isUser)
-        UserDefaults.standard.set(nicknameField.text, forKey: Constants.UserDefaults.nickname.rawValue)
-        UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
-        UserDefaults.standard.set(true, forKey: "isUser")
+        
+        guard let nickname = nicknameField.text else {
+            return
+        }
+        UserDefaultsManager.nickname = nickname
+        UserDefaultsManager.profile = profileNum
+        UserDefaultsManager.joinDate = getTodayString()
+        UserDefaultsManager.cart = 0
+        UserDefaultsManager.isUser = true
     
         // rootViewController 변경
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene

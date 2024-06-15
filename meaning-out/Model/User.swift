@@ -8,9 +8,9 @@
 import UIKit
 
 struct User {
-    var nickname: String = UserDefaults.standard.string(forKey: Constants.UserDefaults.nickname.rawValue) ?? "손님"
-    var profile: Int = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue)
-    let joinDate: String = UserDefaults.standard.string(forKey: Constants.UserDefaults.joinDate.rawValue) ?? "가입 날짜 없음"
-    var cart: Int = UserDefaults.standard.integer(forKey: Constants.UserDefaults.cart
-        .rawValue)
+    var nickname: String
+    var profile: Int
+    var joinDate: String
+    var cart: Int
+    var isUser: Bool
 }

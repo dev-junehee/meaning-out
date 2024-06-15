@@ -14,10 +14,12 @@ import SnapKit
 class SettingMenuTableViewCell: UITableViewCell {
     
     let menuStack = UIStackView()
-    let menuTitle = UILabel()
-    let menuSubTitle = UIButton()
     
-    let cartCount = UILabel()   // 임시 데이터
+    let menuTitle = UILabel()
+    
+    let menuSubTitle = UIStackView()
+    let cartImage = UIImageView()
+    let cartCount = UILabel()
     let cartLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,6 +35,11 @@ class SettingMenuTableViewCell: UITableViewCell {
     }
     
     func configureCellHierarchy() {
+        let cartSubViews = [cartImage, cartCount, cartLabel]
+        cartSubViews.forEach {
+            menuSubTitle.addArrangedSubview($0)
+        }
+        
         let menuSubViews = [menuTitle, menuSubTitle]
         menuSubViews.forEach {
             menuStack.addArrangedSubview($0)
@@ -61,27 +68,22 @@ class SettingMenuTableViewCell: UITableViewCell {
     
     func configureCellUI() {
         menuTitle.font = Resource.Fonts.regular14
-        
-        cartCount.text = "0개"
-        cartCount.font = Resource.Fonts.bold14
-        cartLabel.text = "의 상품"
-        cartLabel.font = Resource.Fonts.regular14
+        cartImage.tintColor = Resource.Colors.black
+        cartImage.contentMode = .scaleAspectFit
+        cartCount.font = Resource.Fonts.bold13
+        cartLabel.font = Resource.Fonts.regular16
     }
     
     func configureCartCellData(data: String) {
         menuTitle.text = data
-        
-        guard let cartCount = cartCount.text, let cartLabel = cartLabel.text else { return }
-        menuSubTitle.setImage(Resource.SystemImages.cart, for: .normal)
-        menuSubTitle.setTitle("\(cartCount)\(cartLabel)", for: .normal)
-        menuSubTitle.setTitleColor(Resource.Colors.black, for: .normal)
-        menuSubTitle.titleLabel?.font = Resource.Fonts.regular14
-        menuSubTitle.tintColor = Resource.Colors.black
+        cartImage.image = Resource.SystemImages.cart
+        cartCount.text = "\(String(UserDefaultsManager.cart))개"
+        cartLabel.text = "의 상품"
     }
     
     func configureCellData(data: String) {
         menuTitle.text = data
-        menuSubTitle.setTitle("", for: .normal)
+        cartLabel.text = ""
     }
     
 }

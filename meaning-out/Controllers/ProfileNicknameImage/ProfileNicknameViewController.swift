@@ -165,7 +165,6 @@ class ProfileNicknameViewController: UIViewController {
     
     // MARK: @objc 함수
     @objc func backBarButtonClicked() {
-        
         navigationController?.popViewController(animated: true)
     }
     
@@ -205,7 +204,7 @@ class ProfileNicknameViewController: UIViewController {
         }
         UserDefaultsManager.nickname = nickname
         UserDefaultsManager.profile = profileNum
-        UserDefaultsManager.joinDate = getTodayString()
+        UserDefaultsManager.joinDate = getTodayString(formatType: "yyyy. MM. dd")
         UserDefaultsManager.cart = 0
         UserDefaultsManager.isUser = true
     

@@ -214,10 +214,10 @@ class ProfileNicknameViewController: UIViewController {
         tabBarController.view.backgroundColor = Resource.Colors.white
         tabBarController.tabBar.tintColor = Resource.Colors.primary
         
-        let main = UINavigationController(rootViewController: MainViewController())
-        let setting = UINavigationController(rootViewController: SettingViewController())
+        let mainVC = UINavigationController(rootViewController: MainViewController())
+        let settingVC = UINavigationController(rootViewController: SettingViewController())
         
-        let controllers = [main, setting]
+        let controllers = [mainVC, settingVC]
         tabBarController.setViewControllers(controllers, animated: true)
         tabBarController.setTabBarUI()
         

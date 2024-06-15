@@ -37,11 +37,15 @@ enum Constants {
         case start = "시작하기"
         case done = "완료"
         case save = "저장"
-    }
-    
-    enum Alert: String {
         case okay = "확인"
         case cancel = "취소"
+    }
+    
+    enum Alert {
+        enum Cancelation: String {
+            case title = "탈퇴하기"
+            case message = "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?"
+        }
     }
     
     enum Placeholder: String {

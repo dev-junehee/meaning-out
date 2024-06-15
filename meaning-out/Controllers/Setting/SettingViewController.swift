@@ -23,7 +23,7 @@ class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureView()
         configureHierarchy()
         configureLayout()
@@ -33,7 +33,6 @@ class SettingViewController: UIViewController {
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
         navigationItem.title = Constants.Title.setting.rawValue
-//        navigationItem.scrollEdgeAppearance = navigationItem.standardAppearance
     }
     
     private func configureHierarchy() {
@@ -121,8 +120,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if row == 4 {
             showAlert(
-                title: "탈퇴하기",
-                message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?",
+                title: Constants.Alert.Cancelation.title.rawValue,
+                message: Constants.Alert.Cancelation.message.rawValue,
                 okHandler: alertOkayClicked,
                 cancelHandler: alertCancelClicked
             )
@@ -136,12 +135,27 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingViewController {
     func alertOkayClicked(action: UIAlertAction) {
         print("Alert 확인 클릭")
-        // UserDefaults 삭제하기
-        // 온보딩 화면으로 전환하기
+        
+        // UserDefaults 삭제
+        UserDefaults.standard.removeObject(forKey: "nickname")
+        UserDefaults.standard.removeObject(forKey: "profileImageNumber")
+        UserDefaults.standard.removeObject(forKey: "joinDate")
+        UserDefaults.standard.removeObject(forKey: "cart")
+        UserDefaults.standard.removeObject(forKey: "isUser")
+        
+        // 온보딩 화면으로 전환
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+        
+        let onboardingVC = UINavigationController(rootViewController: OnboardingViewController())
+        var rootViewController = onboardingVC
+        
+        sceneDeleagate?.window?.rootViewController = rootViewController
+        sceneDeleagate?.window?.makeKeyAndVisible()
     }
     
     func alertCancelClicked(action: UIAlertAction) {
-        print("Alert 취소 클릭~")
+        print("Alert 취소 클릭")
         return
     }
 }

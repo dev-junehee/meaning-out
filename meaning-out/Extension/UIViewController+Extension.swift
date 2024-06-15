@@ -47,8 +47,8 @@ extension UIViewController {
             message: message,
             preferredStyle: .alert)
         
-        let okay = UIAlertAction(title: Constants.Alert.okay.rawValue, style: .default, handler: okHandler)
-        let cancel = UIAlertAction(title: Constants.Alert.cancel.rawValue, style: .cancel, handler: cancelHandler)
+        let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default, handler: okHandler)
+        let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel, handler: cancelHandler)
 
         alert.addAction(okay)
         alert.addAction(cancel)

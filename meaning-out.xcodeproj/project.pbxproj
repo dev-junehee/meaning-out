@@ -35,6 +35,7 @@
 		C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */; };
 		C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */; };
 		C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */; };
+		C48B9A612C1DFD5A00A3EC84 /* EditProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuTableViewCell.swift; sourceTree = "<group>"; };
 		C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewController.swift; sourceTree = "<group>"; };
 		C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 			children = (
 				C48B9A522C1C671200A3EC84 /* SettingViewController.swift */,
 				C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */,
+				C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
+				C48B9A612C1DFD5A00A3EC84 /* EditProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,
 				C48B9A402C1C016F00A3EC84 /* TextFieldEffects+Extension.swift in Sources */,

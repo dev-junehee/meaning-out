@@ -12,6 +12,11 @@ enum BarButtonType {
     case right
 }
 
+enum AlertType {
+    case oneButton
+    case twoButton
+}
+
 extension UIViewController {
     // BarButton - text
     func addTextBarBtn(title: String?, style: UIBarButtonItem.Style, target: Any?, action: Selector?, type: BarButtonType) {
@@ -41,18 +46,26 @@ extension UIViewController {
         }
     }
     
-    func showAlert(title: String?, message: String?, okHandler: ((UIAlertAction) -> Void)?, cancelHandler: ((UIAlertAction) -> Void)?) {
+    func showAlert(title: String?, message: String?, type: AlertType, okHandler: ((UIAlertAction) -> Void)?, cancelHandler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(
             title: title,
             message: message,
             preferredStyle: .alert)
         
-        let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default, handler: okHandler)
-        let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel, handler: cancelHandler)
-
-        alert.addAction(okay)
-        alert.addAction(cancel)
+        switch type {
+        case .oneButton:
+            let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default, handler: okHandler)
+            alert.addAction(okay)
+            break
+        case .twoButton:
+            let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default, handler: okHandler)
+            let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel, handler: cancelHandler)
+            alert.addAction(okay)
+            alert.addAction(cancel)
+            break
+        }
         
         present(alert, animated: true, completion: nil)
     }
+    
 }

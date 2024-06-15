@@ -44,14 +44,14 @@ func getValidationResult(_ nickname: String) -> Array<Any> {
 
 
 /**
- 오늘 날짜를 YYYY. mm. DD 형식으로 변환
+ 오늘 날짜를 원하는 포맷 형식으로 변환
  */
-func getTodayString() -> String {
+func getTodayString(formatType: String) -> String {
     let today = Date()
     
     let dateFormatter = DateFormatter()
     dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-    dateFormatter.dateFormat = "yyyy. MM. dd"
+    dateFormatter.dateFormat = formatType
     
     let convertedToday = dateFormatter.string(from: today)
     

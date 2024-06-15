@@ -14,14 +14,28 @@ import SnapKit
 class SettingViewController: UIViewController {
     
     let settingTableView = UITableView()
+    
+    var nickname = UserDefaultsManager.nickname {
+        didSet {
+            settingTableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("원래 닉네임", nickname)
+        
         configureView()
         configureHierarchy()
         configureLayout()
-        configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        nickname = UserDefaultsManager.nickname
+        settingTableView.reloadData()
     }
     
     private func configureView() {
@@ -44,10 +58,6 @@ class SettingViewController: UIViewController {
         }
     }
     
-    private func configureUI() {
-        
-    }
-
 }
 
 
@@ -80,6 +90,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id, for: indexPath) as! SettingProfileTableViewCell
+ 
+            cell.configureCellData()
             
             return cell
             
@@ -87,11 +99,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as! SettingMenuTableViewCell
             
             let menu = Constants.SettingOptions.allCases[section].menuOptions[idx]
-         
-            cell.configureCellHierarchy()
-            cell.configureCellLayout()
-            cell.configureCellUI()
-            
+          
             if indexPath.row == 0 {
                 cell.configureCartCellData(data: menu)
             } else {
@@ -116,6 +124,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             showAlert(
                 title: Constants.Alert.Cancelation.title.rawValue,
                 message: Constants.Alert.Cancelation.message.rawValue,
+                type: .twoButton,
                 okHandler: alertOkayClicked,
                 cancelHandler: alertCancelClicked
             )
@@ -128,8 +137,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: Alert Action 알럿 액션 함수
 extension SettingViewController {
     func alertOkayClicked(action: UIAlertAction) {
-        print("Alert 확인 클릭")
-        
+        // UserDefaults에 저장된 모든 데이터 삭제
         UserDefaultsManager.deleteAllUserDefaults()
         
         // 온보딩 화면으로 전환
@@ -144,7 +152,6 @@ extension SettingViewController {
     }
     
     func alertCancelClicked(action: UIAlertAction) {
-        print("Alert 취소 클릭")
         return
     }
 }

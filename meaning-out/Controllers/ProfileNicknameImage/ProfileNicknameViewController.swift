@@ -21,7 +21,7 @@ class ProfileNicknameViewController: UIViewController {
     let nicknameField = HoshiTextField()
     let invalidMessage = UILabel()
     
-    let doneButton = PointButton(title: Constants.Text.Button.done.rawValue)
+    let doneButton = PointButton(title: Constants.Button.done.rawValue)
     
     // 닉네임 유효성 검사 여부
     var isValidate = false
@@ -29,7 +29,7 @@ class ProfileNicknameViewController: UIViewController {
     // 프로필 이미지 선택값 (임시)
     var isUser = UserDefaults.standard.bool(forKey: "isUser")
     
-    var profileNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue) {
+    var profileNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue) {
         didSet {
             profileImage.image = Resource.Images.profiles[profileNum]
         }
@@ -54,12 +54,12 @@ class ProfileNicknameViewController: UIViewController {
         print("화면 전환 후 다시 돌아왔을 때", profileNum)
         
         // 화면 전환 시 저장됐던 프로필 이미지 가져오기
-        profileNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue)
+        profileNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue)
     }
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = Constants.Text.Title.profile.rawValue
+        navigationItem.title = Constants.Title.profile.rawValue
         
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonClicked), type: .left)
     }
@@ -134,7 +134,7 @@ class ProfileNicknameViewController: UIViewController {
         cameraImage.contentMode = .scaleAspectFit
         cameraImage.tintColor = Resource.Colors.white
         
-        nicknameField.setTextFieldUI(Constants.Text.Placeholder.nickname.rawValue)
+        nicknameField.setTextFieldUI(Constants.Placeholder.nickname.rawValue)
         nicknameField.returnKeyType = .done
         
         invalidMessage.textColor = Resource.Colors.primary
@@ -147,7 +147,7 @@ class ProfileNicknameViewController: UIViewController {
             profileNum = Int.random(in: 0...11)
         }
         
-        UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
+        UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
         profileImage.image = Resource.Images.profiles[profileNum]
     }
     
@@ -171,9 +171,8 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func profileTapped() {
-        let VC = ProfileImageViewController()
-//        VC.isSelectedProfileNumber = isSelectedProfileNumber
-        navigationController?.pushViewController(VC, animated: true)
+        let profileImageVC = ProfileImageViewController()
+        navigationController?.pushViewController(profileImageVC, animated: true)
     }
     
     @objc func validateNickname() {
@@ -193,24 +192,47 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func doneButtonClicked() {
-        // 유효성 검사 통과 시 프로필 사진/닉네임 저장
-        if isValidate {
-            print(isUser)
-            UserDefaults.standard.set(nicknameField.text, forKey: Constants.Text.UserDefaults.nickname.rawValue)
-            UserDefaults.standard.set(profileNum, forKey: Constants.Text.UserDefaults.profile.rawValue)
-            UserDefaults.standard.set(true, forKey: "isUser")
-        
-            // rootViewController 변경
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            let sceneDeleagate = windowScene?.delegate as? SceneDelegate
-                
-            let rootViewController = UINavigationController(rootViewController: MainViewController())
-                
-            sceneDeleagate?.window?.rootViewController = rootViewController
-            sceneDeleagate?.window?.makeKeyAndVisible()
-        } else {
+        // 유효성 검사 미통과 시 실패 처리 - 추후 수정
+        if !isValidate {
             print("유효성 검사 실패")
+            return
         }
+        
+        // 유효성 검사 통과 시 프로필 사진/닉네임 저장
+        print(isUser)
+        UserDefaults.standard.set(nicknameField.text, forKey: Constants.UserDefaults.nickname.rawValue)
+        UserDefaults.standard.set(profileNum, forKey: Constants.UserDefaults.profile.rawValue)
+        UserDefaults.standard.set(true, forKey: "isUser")
+    
+        // rootViewController 변경
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+        
+        var rootViewController: UIViewController?
+        
+        let tabBarController = UITabBarController()
+        tabBarController.view.backgroundColor = Resource.Colors.white
+        tabBarController.tabBar.tintColor = Resource.Colors.primary
+        
+        let mainVC = UINavigationController(rootViewController: MainViewController())
+        let settingVC = UINavigationController(rootViewController: SettingViewController())
+        
+        let controllers = [mainVC, settingVC]
+        tabBarController.setViewControllers(controllers, animated: true)
+        tabBarController.setTabBarUI()
+        
+        if let items = tabBarController.tabBar.items {
+            items[0].title = Constants.Tab.search.rawValue
+            items[0].image = Resource.SystemImages.search
+            
+            items[1].title = Constants.Tab.setting.rawValue
+            items[1].image = Resource.SystemImages.person
+        }
+        
+        rootViewController = tabBarController
+            
+        sceneDeleagate?.window?.rootViewController = rootViewController
+        sceneDeleagate?.window?.makeKeyAndVisible()
     }
 
 }

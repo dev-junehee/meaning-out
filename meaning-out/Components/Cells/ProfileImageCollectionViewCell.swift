@@ -16,7 +16,7 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     let profileImage = UIImageView()
     
     var itemNum: Int?
-    let profileNum = UserDefaults.standard.integer(forKey: Constants.Text.UserDefaults.profile.rawValue)
+    let profileNum = UserDefaults.standard.integer(forKey: Constants.UserDefaults.profile.rawValue)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

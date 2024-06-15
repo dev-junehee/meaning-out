@@ -40,4 +40,19 @@ extension UIViewController {
             navigationItem.rightBarButtonItem = barButton
         }
     }
+    
+    func showAlert(title: String?, message: String?, okHandler: ((UIAlertAction) -> Void)?, cancelHandler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        
+        let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default, handler: okHandler)
+        let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel, handler: cancelHandler)
+
+        alert.addAction(okay)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }

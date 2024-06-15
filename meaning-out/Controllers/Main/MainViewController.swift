@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    let nickname = UserDefaults.standard.string(forKey: Constants.Text.UserDefaults.nickname.rawValue) ?? "손님"
+    let nickname = UserDefaults.standard.string(forKey: Constants.UserDefaults.nickname.rawValue) ?? "손님"
 
     override func viewDidLoad() {
         super.viewDidLoad()

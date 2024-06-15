@@ -30,6 +30,10 @@
 		C48B9A4D2C1C2A3A00A3EC84 /* ReuseableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A4C2C1C2A3A00A3EC84 /* ReuseableProtocol.swift */; };
 		C48B9A502C1C5AA800A3EC84 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */; };
 		C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A522C1C671200A3EC84 /* SettingViewController.swift */; };
+		C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */; };
+		C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */; };
+		C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */; };
+		C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,10 @@
 		C48B9A4C2C1C2A3A00A3EC84 /* ReuseableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseableProtocol.swift; sourceTree = "<group>"; };
 		C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C48B9A522C1C671200A3EC84 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
+		C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
+		C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuTableViewCell.swift; sourceTree = "<group>"; };
+		C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 				C48B9A2A2C1B4FC800A3EC84 /* UIColor+Extension.swift */,
 				C48B9A362C1B616800A3EC84 /* UIViewController+Extension.swift */,
 				C48B9A3F2C1C016F00A3EC84 /* TextFieldEffects+Extension.swift */,
+				C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -141,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A302C1B5EE000A3EC84 /* Onboarding */,
-				C48B9A312C1B5F6100A3EC84 /* ProfileNickname */,
+				C48B9A312C1B5F6100A3EC84 /* ProfileNicknameImage */,
 				C48B9A4E2C1C5A8A00A3EC84 /* Main */,
 				C48B9A512C1C649600A3EC84 /* Setting */,
 			);
@@ -156,13 +165,13 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		C48B9A312C1B5F6100A3EC84 /* ProfileNickname */ = {
+		C48B9A312C1B5F6100A3EC84 /* ProfileNicknameImage */ = {
 			isa = PBXGroup;
 			children = (
 				C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */,
 				C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */,
 			);
-			path = ProfileNickname;
+			path = ProfileNicknameImage;
 			sourceTree = "<group>";
 		};
 		C48B9A412C1C1C1E00A3EC84 /* Utils */ = {
@@ -194,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A492C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift */,
+				C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */,
+				C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -218,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A522C1C671200A3EC84 /* SettingViewController.swift */,
+				C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -303,13 +315,17 @@
 			files = (
 				C48B99E42C1AEE5300A3EC84 /* ViewController.swift in Sources */,
 				C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */,
+				C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */,
 				C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */,
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
+				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,
+				C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */,
 				C48B9A502C1C5AA800A3EC84 /* MainViewController.swift in Sources */,
+				C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,

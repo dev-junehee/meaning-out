@@ -31,6 +31,10 @@ struct UserDefaultsManager {
     @UserDefaultsWrapper (key: .isUser, defaultValue: false)
     static var isUser: Bool
     
+    static func getJoinDateLabel() -> String {
+        return "\(UserDefaultsManager.joinDate) 가입"
+    }
+    
     static func deleteAllUserDefaults() {
         _nickname.delete()
         _profile.delete()

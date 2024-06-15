@@ -35,7 +35,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCellHierarchy() {
+    private func configureCellHierarchy() {
         let labelViews = [nicknameLabel, joinDateLabel]
         labelViews.forEach {
             profileInfoStack.addArrangedSubview($0)
@@ -49,7 +49,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         contentView.addSubview(profileStack)
     }
     
-    func configureCellLayout() {
+    private func configureCellLayout() {
         profileStack.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView).inset(16)
             $0.horizontalEdges.equalTo(contentView).inset(16)
@@ -86,7 +86,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCellUI() {
+    private func configureCellUI() {
         profileImage.layer.cornerRadius = 45
         profileImage.clipsToBounds = true
         profileImage.contentMode = .scaleAspectFill
@@ -104,7 +104,8 @@ class SettingProfileTableViewCell: UITableViewCell {
         profileImage.image = Resource.Images.profiles[imageNum]
        
         nicknameLabel.text = UserDefaultsManager.nickname
-        joinDateLabel.text = "\(UserDefaultsManager.joinDate) 가입"
+//        joinDateLabel.text = "\(UserDefaultsManager.joinDate) 가입"
+        joinDateLabel.text = UserDefaultsManager.getJoinDateLabel()
         
         rightButton.setImage(Resource.SystemImages.right, for: .normal)
     }

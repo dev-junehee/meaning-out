@@ -34,7 +34,7 @@ class SettingMenuTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCellHierarchy() {
+    private func configureCellHierarchy() {
         let cartSubViews = [cartImage, cartCount, cartLabel]
         cartSubViews.forEach {
             menuSubTitle.addArrangedSubview($0)
@@ -48,7 +48,7 @@ class SettingMenuTableViewCell: UITableViewCell {
         contentView.addSubview(menuStack)
     }
     
-    func configureCellLayout() {
+    private func configureCellLayout() {
         menuStack.snp.makeConstraints {
             $0.edges.equalTo(contentView)
         }
@@ -66,7 +66,7 @@ class SettingMenuTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCellUI() {
+    private func configureCellUI() {
         menuTitle.font = Resource.Fonts.regular14
         cartImage.tintColor = Resource.Colors.black
         cartImage.contentMode = .scaleAspectFit
@@ -83,6 +83,8 @@ class SettingMenuTableViewCell: UITableViewCell {
     
     func configureCellData(data: String) {
         menuTitle.text = data
+        cartImage.image = nil
+        cartCount.text = ""
         cartLabel.text = ""
     }
     

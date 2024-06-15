@@ -44,6 +44,20 @@ enum Constants {
     }
     
     enum Alert {
+        enum SameNickname: String {
+            case title = "새로운 닉네임을 입력해 주세요!"
+            case message = "이미 사용 중인 닉네임이에요."
+        }
+        
+        enum FailValidation: String {
+            case title = "유효한 닉네임을 입력해 주세요!"
+        }
+        
+        enum EditNickname: String {
+            case title = "닉네임 수정 완료!"
+            case message = "닉네임이 성공적으로 수정되었어요.\n이전 화면으로 돌아갈게요."
+        }
+        
         enum Cancelation: String {
             case title = "탈퇴하기"
             case message = "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?"

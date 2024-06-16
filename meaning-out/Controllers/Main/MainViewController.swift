@@ -19,7 +19,11 @@ class MainViewController: UIViewController {
     let emptyView = EmptyView()
     
     let nickname = UserDefaultsManager.nickname
-    let searchList = UserDefaultsManager.search
+    var searchList = UserDefaultsManager.search {
+        didSet {
+            shoppingTableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +51,8 @@ class MainViewController: UIViewController {
         shoppingTableView.delegate = self
         shoppingTableView.dataSource = self
         shoppingTableView.register(
-            SearchItemTitleTableViewCell.self,
-            forCellReuseIdentifier: SearchItemTitleTableViewCell.id
+            SearchItemHeaderTableViewCell.self,
+            forCellReuseIdentifier: SearchItemHeaderTableViewCell.id
         )
         shoppingTableView.register(
             SearchItemTableViewCell.self,
@@ -83,6 +87,8 @@ class MainViewController: UIViewController {
     }
 
     private func test() {
+        UserDefaultsManager.search = ["맥북 거치대", "레오폴드 저소음 적축", "아이패드 m4 256G", "나이키 러닝화", "nike", "나잌", "뉴발란스", "카드지갑"]
+        
         emptyView.isHidden = !searchList.isEmpty
         shoppingTableView.isHidden = searchList.isEmpty
    }
@@ -93,53 +99,39 @@ class MainViewController: UIViewController {
 // MARK: MainViewContoller 익스텐션
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return searchList.count
-        }
+        return searchList.count
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = indexPath.section
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemHeaderTableViewCell.id) as! SearchItemHeaderTableViewCell
         
-        if section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTitleTableViewCell.id, for: indexPath) as! SearchItemTitleTableViewCell
-            
-            cell.selectionStyle = .none
-//            cell.isUserInteractionEnabled = false
-            
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as! SearchItemTableViewCell
-            
-            cell.selectionStyle = .none
-            cell.configureCellHierarchy()
-            cell.configureCellLayout()
-            cell.configureCellUI()
-            
-            return cell
-        }
+        cell.selectionStyle = .none
+        
+        return cell
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as! SearchItemTableViewCell
+        
+        cell.selectionStyle = .none
+        cell.configureCellHierarchy()
+        cell.configureCellLayout()
+        cell.configureCellUI()
+        
+        return cell
+    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = indexPath.section
-        
-        if section == 0 {
-            print("전체삭제")
-        } else {
-            print("최근 검색들")
-        }
+        print("최근 검색 클릭")
     }
-    
 }

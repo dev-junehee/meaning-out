@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-class SearchItemTitleTableViewCell: UITableViewCell {
+class SearchItemHeaderTableViewCell: UITableViewCell {
     
     let titleStack = UIStackView()
     
     let recentTitle = UILabel()
-    let removeTitle = UILabel()
+    let removeTitle = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,6 +21,7 @@ class SearchItemTitleTableViewCell: UITableViewCell {
         configureCellHierarchy()
         configureCellLayout()
         cofigureCellUI()
+        configureHandler()
     }
     
     required init?(coder: NSCoder) {
@@ -34,8 +35,6 @@ class SearchItemTitleTableViewCell: UITableViewCell {
         }
         
         contentView.addSubview(titleStack)
-        
-//        recentTitle.isUserInteractionEnabled = false
     }
     
     private func configureCellLayout() {
@@ -62,9 +61,17 @@ class SearchItemTitleTableViewCell: UITableViewCell {
         recentTitle.font = Resource.Fonts.bold16
         recentTitle.text = "최근 검색"
         
-        removeTitle.font = Resource.Fonts.bold13
-        removeTitle.text = "전체 삭제"
-        removeTitle.textColor = Resource.Colors.primary
+        removeTitle.setTitle("전체 삭제", for: .normal)
+        removeTitle.setTitleColor(Resource.Colors.primary, for: .normal)
+        removeTitle.titleLabel?.font = Resource.Fonts.bold13
+
+    }
+    
+    private func configureHandler() {
+        removeTitle.addTarget(self, action: #selector(removeAllSearchList), for: .touchUpInside)
     }
 
+    @objc func removeAllSearchList() {
+        print("전체삭제 버튼 클릭")
+    }
 }

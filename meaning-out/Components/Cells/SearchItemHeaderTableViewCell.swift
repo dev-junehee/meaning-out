@@ -21,7 +21,6 @@ class SearchItemHeaderTableViewCell: UITableViewCell {
         configureCellHierarchy()
         configureCellLayout()
         cofigureCellUI()
-        configureHandler()
     }
     
     required init?(coder: NSCoder) {
@@ -67,11 +66,4 @@ class SearchItemHeaderTableViewCell: UITableViewCell {
 
     }
     
-    private func configureHandler() {
-        removeTitle.addTarget(self, action: #selector(removeAllSearchList), for: .touchUpInside)
-    }
-
-    @objc func removeAllSearchList() {
-        print("전체삭제 버튼 클릭")
-    }
 }

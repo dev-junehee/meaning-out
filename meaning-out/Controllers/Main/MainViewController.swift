@@ -99,10 +99,6 @@ class MainViewController: UIViewController {
 // MARK: MainViewContoller 익스텐션
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchList.count
     }
@@ -116,6 +112,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.selectionStyle = .none
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeAllSearchList))
+        cell.removeTitle.addGestureRecognizer(tapGesture)
+        
         return cell
     }
     
@@ -126,12 +125,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureCellHierarchy()
         cell.configureCellLayout()
         cell.configureCellUI()
+        cell.configureCellData(data: searchList[indexPath.row])
         
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("최근 검색 클릭")
+    @objc func removeAllSearchList() {
+        print("전체삭제 버튼 클릭")
+        UserDefaultsManager.search.removeAll()
+        searchList = UserDefaultsManager.search
+        shoppingTableView.reloadData()
     }
 }

@@ -13,8 +13,8 @@ class SearchItemTableViewCell: UITableViewCell {
     let searchItemStack = UIStackView()
     
     let clockImage = UIImageView()
-    let itemLabel = UILabel()
-    let xmark = UIImageView()
+    let itemLabel = UIButton()
+    let xmark = UIButton()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,6 +22,7 @@ class SearchItemTableViewCell: UITableViewCell {
         configureCellHierarchy()
         configureCellLayout()
         configureCellUI()
+        configureHandler()
     }
     
     required init?(coder: NSCoder) {
@@ -68,13 +69,35 @@ class SearchItemTableViewCell: UITableViewCell {
         clockImage.contentMode = .scaleAspectFit
         clockImage.tintColor = Resource.Colors.black
         
-        itemLabel.font = Resource.Fonts.regular13
+        itemLabel.setTitleColor(Resource.Colors.black, for: .normal)
+        itemLabel.titleLabel?.font = Resource.Fonts.regular13
+        itemLabel.titleLabel?.textAlignment = .left
+        itemLabel.contentHorizontalAlignment = .left
         
-        xmark.image = Resource.SystemImages.xmark
+        xmark.setImage(Resource.SystemImages.xmark, for: .normal)
         xmark.contentMode = .scaleAspectFit
         xmark.tintColor = Resource.Colors.gray
         
         // 임시 확인용
-        itemLabel.text = "맥북 M4 에어 2024"
+//        itemLabel.setTitle("맥북 M4 에어 2024", for: .normal)
+    }
+    
+    func configureCellData(data: String) {
+        itemLabel.setTitle(data, for: .normal)
+    }
+    
+    func configureHandler() {
+        itemLabel.addTarget(self, action: #selector(searchItemClicked), for: .touchUpInside)
+        xmark.addTarget(self, action: #selector(xmarkClicked), for: .touchUpInside)
+    }
+    
+    @objc func searchItemClicked() {
+        // 해당 검색어로 구성된 검색 결과 화면 연결
+        print("아이템 클릭!!!!!!")
+    }
+    
+    @objc func xmarkClicked() {
+        // 검색 리스트에서 해당 검색어 삭제
+        print("X버튼 클릭!!!!")
     }
 }

@@ -42,6 +42,7 @@ class EmptyView: UIView {
             $0.center.equalToSuperview()
         }
         emptyView.axis = .vertical
+        emptyView.spacing = 8
     }
     
     private func configureUI() {

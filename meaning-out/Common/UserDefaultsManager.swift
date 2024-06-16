@@ -12,6 +12,7 @@ enum UserDefaultsKey: String {
     case profile
     case joinDate
     case cart
+    case search
     case isUser
 }
 
@@ -27,6 +28,9 @@ struct UserDefaultsManager {
     
     @UserDefaultsWrapper (key: .cart, defaultValue: 0)
     static var cart: Int
+    
+    @UserDefaultsWrapper (key: .search, defaultValue: [])
+    static var search: [String]
     
     @UserDefaultsWrapper (key: .isUser, defaultValue: false)
     static var isUser: Bool

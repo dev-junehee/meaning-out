@@ -206,6 +206,7 @@ class ProfileNicknameViewController: UIViewController {
         UserDefaultsManager.profile = profileNum
         UserDefaultsManager.joinDate = getTodayString(formatType: "yyyy. MM. dd")
         UserDefaultsManager.cart = 0
+        UserDefaultsManager.search = []
         UserDefaultsManager.isUser = true
     
         // rootViewController 변경

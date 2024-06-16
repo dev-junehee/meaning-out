@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13B2C1F2232001CE395 /* EmptyView.swift */; };
+		C423D13E2C1F3178001CE395 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13D2C1F3178001CE395 /* SearchItem.swift */; };
+		C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */; };
+		C423D1422C1F3FA5001CE395 /* SearchItemTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D1412C1F3FA5001CE395 /* SearchItemTitleTableViewCell.swift */; };
 		C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */; };
 		C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */; };
 		C48B99E42C1AEE5300A3EC84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E32C1AEE5300A3EC84 /* ViewController.swift */; };
@@ -41,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		C423D13B2C1F2232001CE395 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		C423D13D2C1F3178001CE395 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
+		C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTableViewCell.swift; sourceTree = "<group>"; };
+		C423D1412C1F3FA5001CE395 /* SearchItemTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTitleTableViewCell.swift; sourceTree = "<group>"; };
 		C48B99DC2C1AEE5300A3EC84 /* meaning-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "meaning-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A452C1C206600A3EC84 /* User.swift */,
+				C423D13D2C1F3178001CE395 /* SearchItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +220,8 @@
 				C48B9A492C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift */,
 				C48B9A562C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift */,
 				C48B9A582C1C771000A3EC84 /* SettingMenuTableViewCell.swift */,
+				C423D1412C1F3FA5001CE395 /* SearchItemTitleTableViewCell.swift */,
+				C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -324,10 +333,12 @@
 			files = (
 				C48B99E42C1AEE5300A3EC84 /* ViewController.swift in Sources */,
 				C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */,
+				C423D13E2C1F3178001CE395 /* SearchItem.swift in Sources */,
 				C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */,
 				C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */,
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
+				C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */,
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
 				C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
@@ -343,6 +354,7 @@
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,
 				C48B9A402C1C016F00A3EC84 /* TextFieldEffects+Extension.swift in Sources */,
 				C48B9A4D2C1C2A3A00A3EC84 /* ReuseableProtocol.swift in Sources */,
+				C423D1422C1F3FA5001CE395 /* SearchItemTitleTableViewCell.swift in Sources */,
 				C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */,
 				C48B9A4A2C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift in Sources */,
 				C48B9A252C1B4EC100A3EC84 /* Constants.swift in Sources */,

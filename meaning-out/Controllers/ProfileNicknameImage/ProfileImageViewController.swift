@@ -16,6 +16,8 @@ class ProfileImageViewController: UIViewController {
     let cameraImageView = UIView()
     let cameraImage = UIImageView()
     
+    private var isDefaultSelected = true
+    
     // 사용자가 선택한 프로필 이미지
     var profileNum: Int = UserDefaultsManager.profile {
         didSet {
@@ -23,6 +25,7 @@ class ProfileImageViewController: UIViewController {
         }
     }
     
+    // 프로필 이미지 컬렉션 뷰
     lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionviewLayout())
     
     // 프로필 이미지 컬렉션 뷰 레이아웃 구성
@@ -53,6 +56,12 @@ class ProfileImageViewController: UIViewController {
         configureLayout()
         configureUI()
         configureData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        profileNum = UserDefaultsManager.profile
     }
     
     private func configureView() {
@@ -148,17 +157,27 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         
         cell.configureCellHierarchy()
         cell.configureCellLayout()
-        profileNum == idx ? cell.configureSelectedCellUI() : cell.configureCellUI()
+        
+        print("여기확인", profileNum, idx)
+        
+        if idx == profileNum && isDefaultSelected {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            cell.configureSelectedCellUI()
+        } else {
+            cell.configureCellUI()
+        }
+        
         cell.configureCellData(data: image)
-        cell.isSelected = true
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("프로필 이미지를 선택했을 때", indexPath.item)
-        profileNum = indexPath.item
         
+        profileNum = indexPath.item
+        isDefaultSelected = false
         UserDefaultsManager.profile = profileNum
         
         print("선택한 값으로 저장한 값 맞는지 확인",  UserDefaultsManager.profile)

@@ -23,10 +23,11 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         configureCellHierarchy()
         configureCellLayout()
-        configureSelectedCellUI()
-        configureCellUI()
+//        configureSelectedCellUI()
+//        configureCellUI()
     }
     
     required init?(coder: NSCoder) {
@@ -72,16 +73,10 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         profileImage.clipsToBounds = true
         profileImage.layer.cornerRadius = 35  // 추후 상수화 하기
         profileImage.contentMode = .scaleAspectFit
-
-//        if isActive {
-//            profileImageView.alpha = 1.0
-//            profileImage.layer.borderColor = Resource.Colors.primary.cgColor
-//            profileImage.layer.borderWidth = CGFloat(Constants.Integer.borderWidth.rawValue)
-//        } else {
-            profileImageView.alpha = 0.5
-            profileImage.layer.borderColor = Resource.Colors.lightGray.cgColor
-            profileImage.layer.borderWidth = CGFloat(Constants.Integer.borderWidthEnabled.rawValue)
-//        }
+        
+        profileImageView.alpha = 0.5
+        profileImage.layer.borderColor = Resource.Colors.lightGray.cgColor
+        profileImage.layer.borderWidth = CGFloat(Constants.Integer.borderWidthEnabled.rawValue)
     }
     
     func configureSelectedCellUI() {

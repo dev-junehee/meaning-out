@@ -27,6 +27,7 @@ class EditNicknameViewController: UIViewController {
     var isValidate = false
     
     let isUser = UserDefaultsManager.isUser
+    
     var nickname = UserDefaultsManager.nickname {
         didSet {
             UserDefaultsManager.nickname = nickname
@@ -47,6 +48,12 @@ class EditNicknameViewController: UIViewController {
         configureUI()
         configureData()
         configureHandler()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        profileNum = UserDefaultsManager.profile
     }
     
     private func configureView() {

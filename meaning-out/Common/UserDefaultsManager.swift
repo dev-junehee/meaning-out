@@ -35,6 +35,10 @@ struct UserDefaultsManager {
         return "\(UserDefaultsManager.joinDate) 가입"
     }
     
+    static func getCartLabel() -> String {
+        return "\(String(UserDefaultsManager.cart))개"
+    }
+    
     static func deleteAllUserDefaults() {
         _nickname.delete()
         _profile.delete()

@@ -64,6 +64,10 @@ enum Constants {
         }
     }
     
+    enum Main: String {
+        case empty = "최근 검색어가 없어요"
+    }
+    
     enum SettingOptions: CaseIterable {
         case profile
         case menu
@@ -75,6 +79,7 @@ enum Constants {
     
     enum Placeholder: String {
         case nickname = "닉네임 NICKNAME"
+        case searchBar = "브랜드, 상품 등을 입력하세요."
     }
     
     enum Integer: Int {

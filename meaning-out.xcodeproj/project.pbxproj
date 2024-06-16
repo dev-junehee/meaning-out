@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13B2C1F2232001CE395 /* EmptyView.swift */; };
 		C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */; };
 		C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */; };
 		C48B99E42C1AEE5300A3EC84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E32C1AEE5300A3EC84 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C423D13B2C1F2232001CE395 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		C48B99DC2C1AEE5300A3EC84 /* meaning-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "meaning-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A212C1B4E7400A3EC84 /* PointButton.swift */,
+				C423D13B2C1F2232001CE395 /* EmptyView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,
 				C48B9A402C1C016F00A3EC84 /* TextFieldEffects+Extension.swift in Sources */,
 				C48B9A4D2C1C2A3A00A3EC84 /* ReuseableProtocol.swift in Sources */,
+				C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */,
 				C48B9A4A2C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift in Sources */,
 				C48B9A252C1B4EC100A3EC84 /* Constants.swift in Sources */,
 				C48B9A2B2C1B4FC800A3EC84 /* UIColor+Extension.swift in Sources */,

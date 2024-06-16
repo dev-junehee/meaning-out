@@ -45,7 +45,10 @@ enum Resource {
             .profile6, .profile7, .profile8, .profile9, .profile10, .profile11
         ]
         
+        static let empty: UIImage = .empty
         static let launch: UIImage = .launch
+        static let likeSelected: UIImage = .likeSelected
+        static let likeUnselected: UIImage = .likeUnselected
     }
     
     enum SystemImages {

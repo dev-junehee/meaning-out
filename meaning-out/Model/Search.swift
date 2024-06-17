@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct SearchResult {
+struct SearchResult: Codable {
     let total: Int
+    let start: Int
     let items: [SearchItem]
 }
 
-struct SearchItem {
+struct SearchItem: Codable {
     let title: String
     let lprice: String
     let mallName: String

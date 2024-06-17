@@ -23,10 +23,12 @@ class MainViewController: UIViewController {
     let nickname = UserDefaultsManager.nickname
     var searchList = UserDefaultsManager.search {
         didSet {
-            test()
+            viewToggle()
             shoppingTableView.reloadData()
         }
     }
+    
+    var start = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +37,7 @@ class MainViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
-        
-        // 임시
-        test()
+        viewToggle()
     }
     
     private func configureView() {
@@ -91,9 +91,7 @@ class MainViewController: UIViewController {
         shoppingTableView.backgroundColor = .white
     }
 
-    private func test() {
-        UserDefaultsManager.search = ["맥북 거치대", "레오폴드 저소음 적축", "아이패드 m4 256G", "나이키 러닝화", "nike", "나잌", "뉴발란스", "카드지갑"]
-        
+    private func viewToggle() {
         emptyView.isHidden = !searchList.isEmpty
         shoppingTableView.isHidden = searchList.isEmpty
    }
@@ -117,17 +115,15 @@ extension MainViewController: UISearchBarDelegate {
             return
         }
         
-//        AF.request(API.Shopping.URL).responseDecodable(of: 클래스나 구조체) { res in
-//            switch res.result {
-//            case .success(let value):
-//                print(value)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+        // UserDefaults 저장
+//        var searches = UserDefaultsManager.search
+        searchList.insert(searchText, at: 0)
+        UserDefaultsManager.search = searchList
+        print(UserDefaultsManager.search)
         
         // 검색 결과 화면으로 push
         let searchResultVC = SearchResultViewController()
+        searchResultVC.searchText = searchText
         navigationController?.pushViewController(searchResultVC, animated: true)
     }
 }

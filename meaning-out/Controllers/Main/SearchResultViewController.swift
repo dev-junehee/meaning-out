@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import Alamofire
 import SnapKit
 
 class SearchResultViewController: UIViewController {
@@ -29,8 +31,6 @@ class SearchResultViewController: UIViewController {
         let sectionSpaciing: CGFloat = 16
         let cellSpacing: CGFloat = 16
         
-        // itemsize 셀 자체의 크기 (디바이스마다 너비가 다르기 때문에 계산해야함)
-        // (디바이스 크기) - (총 여백 크기) / 셀의 개수
         let width = UIScreen.main.bounds.width - (sectionSpaciing * 2) - (cellSpacing * 2)
         layout.itemSize = CGSize(width: width/2, height: width/1.3)
         layout.scrollDirection = .vertical
@@ -43,12 +43,17 @@ class SearchResultViewController: UIViewController {
         return layout
     }
     
-    // 임시 데이터
-    let itemTitle = "기계식 키보드"
+    // 검색 관련 데이터
+    var searchText = ""
+    
+    var start = 1
+    var display = 30
+    var sort = "sim"
+    
+    var searchResult: SearchResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("검색 결과 화면 진입")
         
         configureView()
         configureHierarchy()
@@ -56,11 +61,12 @@ class SearchResultViewController: UIViewController {
         configureUI()
         configureData()
         configureHandler()
+        callRequest()
     }
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = itemTitle
+        navigationItem.title = searchText
         
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backButtonClicked), type: .left)
     }
@@ -143,13 +149,11 @@ class SearchResultViewController: UIViewController {
         // 정확도 버튼 선택된 상태 기본 세팅
         setClickedButtonUI(simButton)
         setUnclickedButtonUI([dateButton, ascButton, dscButton])
-        
-//        resultCollectionView.backgroundColor = .lightGray
     }
     
     func configureData() {
         // 임시 데이터
-        totalLabel.text = "\(235449.formatted())개의 검색 결과"
+        totalLabel.text = "\(235499.formatted())개의 검색 결과"
     }
     
     func configureHandler() {
@@ -158,6 +162,27 @@ class SearchResultViewController: UIViewController {
         ascButton.addTarget(self, action: #selector(ascButtonClicked), for: .touchUpInside)
         dscButton.addTarget(self, action: #selector(dscButtonClicked), for: .touchUpInside)
     }
+    
+    func callRequest() {
+        let headers: HTTPHeaders = [
+            API.Shopping.ID_KEY_NAME: API.Shopping.ID_KEY,
+            API.Shopping.SECRET_KEY_NAME: API.Shopping.SECRET_KEY
+        ]
+
+        let URL = "\(API.Shopping.URL)query=\(searchText)&start=\(start)&display=\(display)&sort=\(sort)"
+
+        AF.request(URL, method: .get, headers: headers)
+            .responseDecodable(of: SearchResult.self) { res in
+            switch res.result {
+            case .success(let value):
+                print(value)
+                self.searchResult = value
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 
     // MARK: 버튼 핸들러
     @objc func backButtonClicked() {

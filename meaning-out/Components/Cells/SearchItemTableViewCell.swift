@@ -77,9 +77,6 @@ class SearchItemTableViewCell: UITableViewCell {
         xmark.setImage(Resource.SystemImages.xmark, for: .normal)
         xmark.contentMode = .scaleAspectFit
         xmark.tintColor = Resource.Colors.gray
-        
-        // 임시 확인용
-//        itemLabel.setTitle("맥북 M4 에어 2024", for: .normal)
     }
     
     func configureCellData(data: String) {

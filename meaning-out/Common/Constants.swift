@@ -35,12 +35,16 @@ enum Constants {
         case setting = "설정"
     }
     
-    enum Button: String {
+    enum Button: String, CaseIterable {
         case start = "시작하기"
         case done = "완료"
         case save = "저장"
         case okay = "확인"
         case cancel = "취소"
+        
+        static var sorting: [String] {
+            return ["정확도", "날짜순", "가격높은순", "가격낮은순"]
+        }
     }
     
     enum Alert {

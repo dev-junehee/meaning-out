@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import Alamofire
 import SnapKit
 
 /**
@@ -21,6 +23,7 @@ class MainViewController: UIViewController {
     let nickname = UserDefaultsManager.nickname
     var searchList = UserDefaultsManager.search {
         didSet {
+            test()
             shoppingTableView.reloadData()
         }
     }
@@ -47,6 +50,8 @@ class MainViewController: UIViewController {
         subViews.forEach {
             view.addSubview($0)
         }
+        
+        searchBar.delegate = self
         
         shoppingTableView.delegate = self
         shoppingTableView.dataSource = self
@@ -97,7 +102,38 @@ class MainViewController: UIViewController {
 
 
 // MARK: MainViewContoller 익스텐션
+// SearchBar
+extension MainViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else {
+            print("검색어 입력 오류")
+            return
+        }
+        
+        // 공백값 예외처리
+        if searchText.trimmingCharacters(in: [" "]).count == 0 {
+            showAlert(title: "공백이에요!", message: "올바른 검색어를 입력해 주세요.", type: .oneButton, okHandler: nil, cancelHandler: nil)
+            searchBar.text = ""
+            return
+        }
+        
+//        AF.request(API.Shopping.URL).responseDecodable(of: 클래스나 구조체) { res in
+//            switch res.result {
+//            case .success(let value):
+//                print(value)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        
+        // 검색 결과 화면으로 push
+        let searchResultVC = SearchResultViewController()
+        navigationController?.pushViewController(searchResultVC, animated: true)
+    }
+}
 
+
+// TableView
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchList.count
@@ -129,7 +165,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
     
     @objc func removeAllSearchList() {
         print("전체삭제 버튼 클릭")

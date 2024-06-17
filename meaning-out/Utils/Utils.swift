@@ -5,7 +5,7 @@
 //  Created by junehee on 6/14/24.
 //
 
-import Foundation
+import UIKit
 
 /**
  텍스트 필드 입력값 유효성 검사
@@ -56,4 +56,22 @@ func getTodayString(formatType: String) -> String {
     let convertedToday = dateFormatter.string(from: today)
     
     return convertedToday
+}
+
+
+/**
+ 
+ */
+func setClickedButtonUI(_ button: UIButton) {
+    button.backgroundColor = Resource.Colors.darkGray
+    button.setTitleColor(Resource.Colors.white, for: .normal)
+    button.layer.borderWidth = 0
+}
+
+func setUnclickedButtonUI(_ buttons: [UIButton]) {
+    buttons.forEach {
+        $0.backgroundColor = Resource.Colors.white
+        $0.setTitleColor(Resource.Colors.black, for: .normal)
+        $0.layer.borderWidth = 1
+    }
 }

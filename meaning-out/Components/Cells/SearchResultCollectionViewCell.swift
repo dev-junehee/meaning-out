@@ -24,6 +24,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     let likeButton = UIButton()
     
+    var cartList = UserDefaultsManager.cart
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,6 +32,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         configureCellHierarchy()
         configureCellLayout()
         configureCellUI()
+        configureHandler()
     }
     
     required init?(coder: NSCoder) {
@@ -104,9 +106,9 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
         
-        likeButton.backgroundColor = data.isLike ? Resource.Colors.white : Resource.Colors.transparentBlack
+        likeButton.backgroundColor = data.isLike || UserDefaultsManager.cart.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
         
-        let likeImage = data.isLike ? Resource.Images.likeSelected : Resource.Images.likeUnselected
+        let likeImage = data.isLike || UserDefaultsManager.cart.contains(data.title) ? Resource.Images.likeSelected : Resource.Images.likeUnselected
         likeButton.setImage(likeImage, for: .normal)
         
         itemMallName.text = data.mallName
@@ -114,4 +116,14 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemPrice.text = data.lprice
     }
     
+    func configureHandler() {
+        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func likeButtonClicked() {
+        guard let itemTitle = itemTitle.text else { return }
+        // UserDefaults에 좋아요 상품명 저장
+        cartList.append(itemTitle)
+        UserDefaultsManager.cart = cartList
+    }
 }

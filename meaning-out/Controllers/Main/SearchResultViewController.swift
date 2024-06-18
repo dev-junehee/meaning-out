@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 import SnapKit
 
+/**
+ 메인 - 검색 결과 화면
+ */
 class SearchResultViewController: UIViewController {
     
     let totalLabel = UILabel()
@@ -173,7 +176,6 @@ class SearchResultViewController: UIViewController {
             API.Shopping.SECRET_KEY_NAME: API.Shopping.SECRET_KEY
         ]
 
-        print("정렬확인", sort)
         let URL = "\(API.Shopping.URL)query=\(searchText)&start=\(start)&display=\(display)&sort=\(sort)"
 
         AF.request(URL, method: .get, headers: headers)
@@ -185,11 +187,11 @@ class SearchResultViewController: UIViewController {
                     self.searchResultItem.removeAll()
                     self.searchTotal = value.total
                     self.searchResultItem = value.items
-                    self.configureData()
                 } else {
                     self.searchTotal = value.total
                     self.searchResultItem.append(contentsOf: value.items)
                 }
+                self.configureData()
                 self.resultCollectionView.reloadData()
                 
                 if self.display == 1 {

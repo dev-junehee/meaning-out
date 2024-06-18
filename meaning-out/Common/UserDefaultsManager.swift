@@ -26,8 +26,8 @@ struct UserDefaultsManager {
     @UserDefaultsWrapper (key: .joinDate, defaultValue: "0000. 00. 00")
     static var joinDate: String
     
-    @UserDefaultsWrapper (key: .cart, defaultValue: 0)
-    static var cart: Int
+    @UserDefaultsWrapper (key: .cart, defaultValue: [])
+    static var cart: [String]
     
     @UserDefaultsWrapper (key: .search, defaultValue: [])
     static var search: [String]
@@ -40,7 +40,7 @@ struct UserDefaultsManager {
     }
     
     static func getCartLabel() -> String {
-        return "\(String(UserDefaultsManager.cart))개"
+        return "\(String(UserDefaultsManager.cart.count))개"
     }
     
     static func deleteAllUserDefaults() {

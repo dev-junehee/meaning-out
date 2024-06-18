@@ -110,7 +110,13 @@ extension MainViewController: UISearchBarDelegate {
         
         // 공백값 예외처리
         if searchText.trimmingCharacters(in: [" "]).count == 0 {
-            showAlert(title: "공백이에요!", message: "올바른 검색어를 입력해 주세요.", type: .oneButton, okHandler: nil, cancelHandler: nil)
+            showAlert(
+                title: Constants.Alert.EmptyString.title.rawValue,
+                message: Constants.Alert.EmptyString.message.rawValue,
+                type: .oneButton,
+                okHandler: nil,
+                cancelHandler: nil
+            )
             searchBar.text = ""
             return
         }
@@ -132,6 +138,10 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchList.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -161,8 +171,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 기존 저장된 검색어
+        let itemName = searchList[indexPath.row]
+        // 검색 결과 화면으로 push
+        let searchResultVC = SearchResultViewController()
+        searchResultVC.searchText = itemName
+        navigationController?.pushViewController(searchResultVC, animated: true)
+    }
+    
+    
     @objc func removeAllSearchList() {
-        print("전체삭제 버튼 클릭")
+        // 전체 삭제 버튼 핸들러
         UserDefaultsManager.search.removeAll()
         searchList = UserDefaultsManager.search
         shoppingTableView.reloadData()

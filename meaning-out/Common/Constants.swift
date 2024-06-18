@@ -66,6 +66,11 @@ enum Constants {
             case title = "탈퇴하기"
             case message = "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?"
         }
+        
+        enum EmptyString: String {
+            case title = "공백이에요!"
+            case message = "올바른 검색어를 입력해 주세요."
+        }
     }
     
     enum Main: String {

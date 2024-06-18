@@ -56,7 +56,7 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("searchText", searchText)
         callRequest()
         
         configureView()
@@ -91,6 +91,7 @@ class SearchResultViewController: UIViewController {
             SearchResultCollectionViewCell.self,
             forCellWithReuseIdentifier: SearchResultCollectionViewCell.id
         )
+//        resultCollectionView.prefetchDataSource = self
     }
     
     private func configureLayout() {
@@ -124,7 +125,7 @@ class SearchResultViewController: UIViewController {
         }
         
         resultCollectionView.snp.makeConstraints {
-            $0.top.equalTo(buttonStack.snp.bottom).offset(8)
+            $0.top.equalTo(buttonStack.snp.bottom).offset(16)
             $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -257,3 +258,11 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
 }
+//
+//extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        <#code#>
+//    }
+//    
+//    
+//}

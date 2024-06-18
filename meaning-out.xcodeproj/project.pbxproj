@@ -16,6 +16,7 @@
 		C423D1732C207E5B001CE395 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D1722C207E5B001CE395 /* SearchResultViewController.swift */; };
 		C423D1752C2096C5001CE395 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D1742C2096C5001CE395 /* SearchResultCollectionViewCell.swift */; };
 		C423D1782C209E3D001CE395 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C423D1772C209E3D001CE395 /* Kingfisher */; };
+		C423D17A2C21085C001CE395 /* SearchResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */; };
 		C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */; };
 		C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */; };
 		C48B99E42C1AEE5300A3EC84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E32C1AEE5300A3EC84 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		C423D16D2C207C04001CE395 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		C423D1722C207E5B001CE395 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		C423D1742C2096C5001CE395 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewController.swift; sourceTree = "<group>"; };
 		C48B99DC2C1AEE5300A3EC84 /* meaning-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "meaning-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			children = (
 				C48B9A4F2C1C5AA800A3EC84 /* MainViewController.swift */,
 				C423D1722C207E5B001CE395 /* SearchResultViewController.swift */,
+				C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */,
+				C423D17A2C21085C001CE395 /* SearchResultDetailViewController.swift in Sources */,
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
 				C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,

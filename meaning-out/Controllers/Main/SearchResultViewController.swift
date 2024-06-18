@@ -50,18 +50,21 @@ class SearchResultViewController: UIViewController {
     var display = 30
     var sort = "sim"
     
-    var searchResult: SearchResult?
+    var searchTotal = 0
+    var searchStart = 1
+    var searchResultItem: [SearchItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        callRequest()
         
         configureView()
         configureHierarchy()
         configureLayout()
         configureUI()
-        configureData()
         configureHandler()
-        callRequest()
+        configureData()
     }
     
     private func configureView() {
@@ -152,8 +155,8 @@ class SearchResultViewController: UIViewController {
     }
     
     func configureData() {
-        // 임시 데이터
-        totalLabel.text = "\(235499.formatted())개의 검색 결과"
+        // 총 검색 결과 데이터 바인딩
+        totalLabel.text = "\(searchTotal.formatted())개의 검색 결과"
     }
     
     func configureHandler() {
@@ -175,10 +178,13 @@ class SearchResultViewController: UIViewController {
             .responseDecodable(of: SearchResult.self) { res in
             switch res.result {
             case .success(let value):
-                print(value)
-                self.searchResult = value
+                print("성공", value)
+                self.searchTotal = value.total
+                self.searchResultItem = value.items
+                self.configureData()
+                self.resultCollectionView.reloadData()
             case .failure(let error):
-                print(error)
+                print("실패", error)
             }
         }
     }
@@ -224,15 +230,30 @@ class SearchResultViewController: UIViewController {
 // CollectionView
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // 임시
-        return 30
+        return searchResultItem.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as! SearchResultCollectionViewCell
         
+        let idx = indexPath.item
+        let data = searchResultItem[idx]
+        
+        print(indexPath)
+        print(data)
+        
+        cell.configureCellData(data: data)
+        
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = indexPath.item
+        
+        let searchResultDetailVC = SearchResultDetailViewController()
+        searchResultDetailVC.itemTitle = searchResultItem[item].title
+        searchResultDetailVC.itemLink = searchResultItem[item].link
+        navigationController?.pushViewController(searchResultDetailVC, animated: true)
+    }
     
 }

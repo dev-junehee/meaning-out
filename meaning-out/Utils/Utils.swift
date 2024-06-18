@@ -60,7 +60,7 @@ func getTodayString(formatType: String) -> String {
 
 
 /**
- 
+ 검색 결과 화면 버튼 UI
  */
 func setClickedButtonUI(_ button: UIButton) {
     button.backgroundColor = Resource.Colors.darkGray
@@ -74,4 +74,12 @@ func setUnclickedButtonUI(_ buttons: [UIButton]) {
         $0.setTitleColor(Resource.Colors.black, for: .normal)
         $0.layer.borderWidth = 1
     }
+}
+
+
+/**
+ 
+ */
+func getRemoveBackslashStr(_ string: String) -> String {
+    return string.replacingOccurrences(of: "\\", with: "")
 }

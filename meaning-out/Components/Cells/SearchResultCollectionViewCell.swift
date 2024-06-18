@@ -26,12 +26,9 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        contentView.backgroundColor = .yellow
-        
         configureCellHierarchy()
         configureCellLayout()
         configureCellUI()
-        configureCellData()
     }
     
     required init?(coder: NSCoder) {
@@ -92,13 +89,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemPrice.font = Resource.Fonts.bold16
     }
     
-    func configureCellData() {
-        // 임시
-        let IMG_URL = URL(string: "https://shopping-phinf.pstatic.net/main_8693139/86931391148.1.jpg")
+    func configureCellData(data: SearchItem) {
+        let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
-        itemMallName.text = "네이버"
-        itemTitle.text = "아이폰 15 프로 256G [자급제]"
-        itemPrice.text = "1,564,000원"
+        itemMallName.text = data.mallName
+        itemTitle.text = data.title
+        itemPrice.text = data.lprice
     }
     
 }

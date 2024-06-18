@@ -173,6 +173,7 @@ class SearchResultViewController: UIViewController {
             API.Shopping.SECRET_KEY_NAME: API.Shopping.SECRET_KEY
         ]
 
+        print("정렬확인", sort)
         let URL = "\(API.Shopping.URL)query=\(searchText)&start=\(start)&display=\(display)&sort=\(sort)"
 
         AF.request(URL, method: .get, headers: headers)
@@ -218,6 +219,9 @@ class SearchResultViewController: UIViewController {
         print("정확도 클릭")
         setClickedButtonUI(simButton)
         setUnclickedButtonUI([dateButton, ascButton, dscButton])
+        sort = "sim"
+        callRequest()
+        resultCollectionView.reloadData()
     }
     
     @objc func dateButtonClicked() {
@@ -225,6 +229,9 @@ class SearchResultViewController: UIViewController {
         print("날짜순 순서 클릭")
         setClickedButtonUI(dateButton)
         setUnclickedButtonUI([simButton, ascButton, dscButton])
+        sort = "date"
+        callRequest()
+        resultCollectionView.reloadData()
     }
     
     @objc func ascButtonClicked() {
@@ -232,6 +239,9 @@ class SearchResultViewController: UIViewController {
         print("가격높은순 클릭")
         setClickedButtonUI(ascButton)
         setUnclickedButtonUI([simButton, dateButton, dscButton])
+        sort = "asc"
+        callRequest()
+        resultCollectionView.reloadData()
     }
     
     @objc func dscButtonClicked() {
@@ -239,6 +249,9 @@ class SearchResultViewController: UIViewController {
         print("가격 낮은순 클릭")
         setClickedButtonUI(dscButton)
         setUnclickedButtonUI([simButton, dateButton, ascButton])
+        sort = "dsc"
+        callRequest()
+        resultCollectionView.reloadData()
     }
     
 }
@@ -271,6 +284,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let searchResultDetailVC = SearchResultDetailViewController()
         searchResultDetailVC.itemTitle = searchResultItem[item].title
         searchResultDetailVC.itemLink = searchResultItem[item].link
+        searchResultDetailVC.itemIsLike = searchResultItem[item].isLike
         navigationController?.pushViewController(searchResultDetailVC, animated: true)
     }
     

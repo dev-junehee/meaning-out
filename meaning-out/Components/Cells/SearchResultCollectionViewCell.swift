@@ -22,6 +22,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     let itemTitle = UILabel()
     let itemPrice = UILabel()
     
+    let likeButton = UIButton()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +44,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         }
         
         contentView.addSubview(itemView)
+        contentView.addSubview(likeButton)
     }
     
     func configureCellLayout() {
@@ -54,6 +57,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(itemView.snp.top)
             $0.horizontalEdges.equalTo(itemView)
             $0.height.equalTo(itemImage.snp.width).multipliedBy(4.0/3.0)
+        }
+        
+        likeButton.snp.makeConstraints {
+            $0.trailing.equalTo(itemImage.snp.trailing).inset(16)
+            $0.bottom.equalTo(itemImage.snp.bottom).inset(16)
+            $0.size.equalTo(36)
         }
         
         itemMallName.snp.makeConstraints {
@@ -80,6 +89,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemImage.layer.cornerRadius = 10
         itemImage.contentMode = .scaleAspectFill
         
+        likeButton.layer.cornerRadius = 10
+        
         itemMallName.textColor = Resource.Colors.lightGray
         itemMallName.font = Resource.Fonts.regular13
         
@@ -92,6 +103,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     func configureCellData(data: SearchItem) {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
+        
+        likeButton.backgroundColor = data.isLike ? Resource.Colors.white : Resource.Colors.transparentBlack
+        
+        let likeImage = data.isLike ? Resource.Images.likeSelected : Resource.Images.likeUnselected
+        likeButton.setImage(likeImage, for: .normal)
+        
         itemMallName.text = data.mallName
         itemTitle.text = data.title
         itemPrice.text = data.lprice

@@ -14,7 +14,7 @@ import SnapKit
  메인 - 검색 탭
  */
 class MainViewController: UIViewController {
-
+    
     let searchBar = UISearchBar()
     let shoppingTableView = UITableView()
     
@@ -163,6 +163,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as! SearchItemTableViewCell
         
         cell.selectionStyle = .none
+        cell.tableView = shoppingTableView
         cell.configureCellHierarchy()
         cell.configureCellLayout()
         cell.configureCellUI()

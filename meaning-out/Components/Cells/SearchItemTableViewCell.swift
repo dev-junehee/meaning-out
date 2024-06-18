@@ -10,6 +10,14 @@ import SnapKit
 
 class SearchItemTableViewCell: UITableViewCell {
     
+    var tableView: UITableView?
+
+    var searchList = UserDefaultsManager.search {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
+    
     let clockImage = UIImageView()
     let itemLabel = UILabel()
     let xmark = UIButton()
@@ -78,13 +86,24 @@ class SearchItemTableViewCell: UITableViewCell {
     @objc func xmarkClicked() {
         // 검색 리스트에서 해당 검색어 삭제
         print("X버튼 클릭!!!!")
-//        var searchList = UserDefaultsManager.search
-//        
-//        guard let searchText = self.itemLabel.titleLabel?.text else {
-//            print("X버튼 클릭 오류")
-//            return
-//        }
+        
+        guard let searchText = itemLabel.text else {
+            print("X버튼 클릭 오류")
+            return
+        }
 //        let findIdx = searchList.firstIndex(of: searchText)!
-//        UserDefaultsManager.search = searchList.remove(at: findIdx)
+//        searchList.remove(at: findIdx)
+//        print(searchList)
+//        UserDefaultsManager.search = searchList
+        
+        guard let tableView = tableView else {
+            print("X버튼: 테이블뷰 오류")
+            return
+        }
+        let findIdx = searchList.firstIndex(of: searchText)!
+        searchList.remove(at: findIdx)
+        print(searchList)
+        UserDefaultsManager.search = searchList
+        tableView.reloadData()
     }
 }

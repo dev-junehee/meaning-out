@@ -71,6 +71,11 @@ enum Constants {
             case title = "공백이에요!"
             case message = "올바른 검색어를 입력해 주세요."
         }
+        
+        enum FailSearch: String {
+            case title = "검색 실패😭"
+            case message = "검색 결과에 오류가 생겼어요."
+        }
     }
     
     enum Main: String {

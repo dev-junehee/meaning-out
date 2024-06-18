@@ -91,7 +91,7 @@ class SearchResultViewController: UIViewController {
             SearchResultCollectionViewCell.self,
             forCellWithReuseIdentifier: SearchResultCollectionViewCell.id
         )
-//        resultCollectionView.prefetchDataSource = self
+        resultCollectionView.prefetchDataSource = self
     }
     
     private func configureLayout() {
@@ -179,13 +179,30 @@ class SearchResultViewController: UIViewController {
             .responseDecodable(of: SearchResult.self) { res in
             switch res.result {
             case .success(let value):
-                print("성공", value)
-                self.searchTotal = value.total
-                self.searchResultItem = value.items
-                self.configureData()
+                // if-새로운 검색일 때 / else-기존 검색어
+                if self.display == 1 {
+                    self.searchResultItem.removeAll()
+                    self.searchTotal = value.total
+                    self.searchResultItem = value.items
+                    self.configureData()
+                } else {
+                    self.searchTotal = value.total
+                    self.searchResultItem.append(contentsOf: value.items)
+                }
                 self.resultCollectionView.reloadData()
+                
+                if self.display == 1 {
+                    self.resultCollectionView.scrollsToTop = true
+                }
+                
             case .failure(let error):
-                print("실패", error)
+                self.showAlert(
+                    title: Constants.Alert.FailSearch.title.rawValue,
+                    message: Constants.Alert.FailSearch.message.rawValue,
+                    type: .oneButton,
+                    okHandler: nil,
+                    cancelHandler: nil
+                )
             }
         }
     }
@@ -258,11 +275,15 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
 }
-//
-//extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
-//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-//        <#code#>
-//    }
-//    
-//    
-//}
+
+// Refetching (Pagenation)
+extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if searchResultItem.count - 2 == indexPath.item {
+                display += 1
+                callRequest()
+            }
+        }
+    }
+}

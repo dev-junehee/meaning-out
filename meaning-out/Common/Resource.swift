@@ -16,6 +16,7 @@ enum Resource {
     enum Colors {
         static let primary: UIColor = .init(rgb: 0xef8947)
         static let black: UIColor = .init(rgb: 0x000000)
+        static let transparentBlack: UIColor = .init(rgb: 0x000000, alpha: 0.3)
         static let darkGray: UIColor = .init(rgb: 0x4c4c4c)
         static let gray: UIColor = .init(rgb: 0x828282)
         static let lightGray: UIColor = .init(rgb: 0xcdcdcd)
@@ -45,17 +46,19 @@ enum Resource {
             .profile6, .profile7, .profile8, .profile9, .profile10, .profile11
         ]
         
+        static let empty: UIImage = .empty
         static let launch: UIImage = .launch
+        static let likeSelected: UIImage = .likeSelected
+        static let likeUnselected: UIImage = .likeUnselected
     }
     
     enum SystemImages {
         static let search = UIImage(systemName: "magnifyingglass")!
         static let clock = UIImage(systemName: "clock")!
         static let person = UIImage(systemName: "person")!
-        static let exit = UIImage(systemName: "xmark")!
+        static let xmark = UIImage(systemName: "xmark")!
         static let left = UIImage(systemName: "chevron.left")!
         static let right = UIImage(systemName: "chevron.right")!
         static let camara = UIImage(systemName: "camera.fill")!
-        static let cart = UIImage(systemName: "handbag.fill")
     }
 }

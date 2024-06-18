@@ -35,12 +35,16 @@ enum Constants {
         case setting = "설정"
     }
     
-    enum Button: String {
+    enum Button: String, CaseIterable {
         case start = "시작하기"
         case done = "완료"
         case save = "저장"
         case okay = "확인"
         case cancel = "취소"
+        
+        static var sorting: [String] {
+            return ["정확도", "날짜순", "가격높은순", "가격낮은순"]
+        }
     }
     
     enum Alert {
@@ -62,19 +66,36 @@ enum Constants {
             case title = "탈퇴하기"
             case message = "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?"
         }
+        
+        enum EmptyString: String {
+            case title = "공백이에요!"
+            case message = "올바른 검색어를 입력해 주세요."
+        }
+        
+        enum FailSearch: String {
+            case title = "검색 실패😭"
+            case message = "검색 결과에 오류가 생겼어요."
+        }
     }
     
-    enum SettingOptions: CaseIterable {
+    enum Main: String {
+        case empty = "최근 검색어가 없어요"
+    }
+    
+    enum SettingOptions: String, CaseIterable {
         case profile
         case menu
         
         var menuOptions: [String] {
             return ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
         }
+        
+        static let cart = "의 상품"
     }
     
     enum Placeholder: String {
         case nickname = "닉네임 NICKNAME"
+        case searchBar = "브랜드, 상품 등을 입력하세요."
     }
     
     enum Integer: Int {

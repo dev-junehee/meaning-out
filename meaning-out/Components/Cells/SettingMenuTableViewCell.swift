@@ -76,9 +76,9 @@ class SettingMenuTableViewCell: UITableViewCell {
     
     func configureCartCellData(data: String) {
         menuTitle.text = data
-        cartImage.image = Resource.SystemImages.cart
-        cartCount.text = "\(String(UserDefaultsManager.cart))개"
-        cartLabel.text = "의 상품"
+        cartImage.image = Resource.Images.likeSelected
+        cartCount.text = UserDefaultsManager.getCartLabel()
+        cartLabel.text = Constants.SettingOptions.cart
     }
     
     func configureCellData(data: String) {

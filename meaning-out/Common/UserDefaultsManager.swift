@@ -12,6 +12,7 @@ enum UserDefaultsKey: String {
     case profile
     case joinDate
     case cart
+    case search
     case isUser
 }
 
@@ -25,14 +26,21 @@ struct UserDefaultsManager {
     @UserDefaultsWrapper (key: .joinDate, defaultValue: "0000. 00. 00")
     static var joinDate: String
     
-    @UserDefaultsWrapper (key: .cart, defaultValue: 0)
-    static var cart: Int
+    @UserDefaultsWrapper (key: .cart, defaultValue: [])
+    static var cart: [String]
+    
+    @UserDefaultsWrapper (key: .search, defaultValue: [])
+    static var search: [String]
     
     @UserDefaultsWrapper (key: .isUser, defaultValue: false)
     static var isUser: Bool
     
     static func getJoinDateLabel() -> String {
         return "\(UserDefaultsManager.joinDate) 가입"
+    }
+    
+    static func getCartLabel() -> String {
+        return "\(String(UserDefaultsManager.cart.count))개"
     }
     
     static func deleteAllUserDefaults() {

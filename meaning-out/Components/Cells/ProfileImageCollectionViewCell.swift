@@ -12,8 +12,6 @@ import SnapKit
  프로필 이미지 설정 화면 - 프로필 이미지 셀
  */
 class ProfileImageCollectionViewCell: UICollectionViewCell {
-
-    var isActive = false // 사용자가 이미 선택한 값
     
     let profileImageView = UIView()
     let profileImage = UIImageView()

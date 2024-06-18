@@ -104,7 +104,6 @@ class SettingProfileTableViewCell: UITableViewCell {
         profileImage.image = Resource.Images.profiles[imageNum]
        
         nicknameLabel.text = UserDefaultsManager.nickname
-//        joinDateLabel.text = "\(UserDefaultsManager.joinDate) 가입"
         joinDateLabel.text = UserDefaultsManager.getJoinDateLabel()
         
         rightButton.setImage(Resource.SystemImages.right, for: .normal)

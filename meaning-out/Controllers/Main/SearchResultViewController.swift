@@ -51,7 +51,7 @@ class SearchResultViewController: UIViewController {
     
     var start = 1
     var display = 30
-    var sort = "sim"
+    var nowSort = "sim"
     
     var searchTotal = 0
     var searchStart = 1
@@ -60,7 +60,7 @@ class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("searchText", searchText)
-        callRequest()
+        callRequest(sort: nowSort)
         
         configureView()
         configureHierarchy()
@@ -170,7 +170,7 @@ class SearchResultViewController: UIViewController {
         dscButton.addTarget(self, action: #selector(dscButtonClicked), for: .touchUpInside)
     }
     
-    func callRequest() {
+    func callRequest(sort: String) {
         let headers: HTTPHeaders = [
             API.Shopping.ID_KEY_NAME: API.Shopping.ID_KEY,
             API.Shopping.SECRET_KEY_NAME: API.Shopping.SECRET_KEY
@@ -182,8 +182,9 @@ class SearchResultViewController: UIViewController {
             .responseDecodable(of: SearchResult.self) { res in
             switch res.result {
             case .success(let value):
+
                 // if-새로운 검색일 때 / else-기존 검색어
-                if self.display == 1 {
+                if self.start == 1 {
                     self.searchResultItem.removeAll()
                     self.searchTotal = value.total
                     self.searchResultItem = value.items
@@ -194,7 +195,7 @@ class SearchResultViewController: UIViewController {
                 self.configureData()
                 self.resultCollectionView.reloadData()
                 
-                if self.display == 1 {
+                if self.start == 1 {
                     self.resultCollectionView.scrollsToTop = true
                 }
                 
@@ -221,8 +222,8 @@ class SearchResultViewController: UIViewController {
         print("정확도 클릭")
         setClickedButtonUI(simButton)
         setUnclickedButtonUI([dateButton, ascButton, dscButton])
-        sort = "sim"
-        callRequest()
+        nowSort = "sim"
+        callRequest(sort: "sim")
         resultCollectionView.reloadData()
     }
     
@@ -231,8 +232,8 @@ class SearchResultViewController: UIViewController {
         print("날짜순 순서 클릭")
         setClickedButtonUI(dateButton)
         setUnclickedButtonUI([simButton, ascButton, dscButton])
-        sort = "date"
-        callRequest()
+        nowSort = "date"
+        callRequest(sort: "date")
         resultCollectionView.reloadData()
     }
     
@@ -241,8 +242,8 @@ class SearchResultViewController: UIViewController {
         print("가격높은순 클릭")
         setClickedButtonUI(ascButton)
         setUnclickedButtonUI([simButton, dateButton, dscButton])
-        sort = "asc"
-        callRequest()
+        nowSort = "dsc"
+        callRequest(sort: "dsc")
         resultCollectionView.reloadData()
     }
     
@@ -251,8 +252,8 @@ class SearchResultViewController: UIViewController {
         print("가격 낮은순 클릭")
         setClickedButtonUI(dscButton)
         setUnclickedButtonUI([simButton, dateButton, ascButton])
-        sort = "dsc"
-        callRequest()
+        nowSort = "asc"
+        callRequest(sort: "asc")
         resultCollectionView.reloadData()
     }
     
@@ -271,10 +272,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         let idx = indexPath.item
         let data = searchResultItem[idx]
-        
-        print(indexPath)
-        print(data)
-        
+
         cell.configureCellData(data: data)
         
         return cell
@@ -297,8 +295,8 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if searchResultItem.count - 2 == indexPath.item {
-                display += 1
-                callRequest()
+                start += 1
+                callRequest(sort: nowSort)
             }
         }
     }

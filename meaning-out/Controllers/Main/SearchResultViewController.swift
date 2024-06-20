@@ -213,43 +213,44 @@ class SearchResultViewController: UIViewController {
     
 
     // MARK: 버튼 핸들러
+    // 뒤로가기 버튼
     @objc func backButtonClicked() {
         navigationController?.popViewController(animated: true)
     }
     
+    // 정확도 버튼
     @objc func simButtonClicked() {
-        // 정확도 순서로 정렬 (기본)
         setClickedButtonUI(simButton)
         setUnclickedButtonUI([dateButton, ascButton, dscButton])
-        nowSort = "sim"
-        callRequest(sort: "sim")
+        nowSort = Constants.Main.sortSim.rawValue
+        callRequest(sort: Constants.Main.sortSim.rawValue)
         resultCollectionView.reloadData()
     }
     
+    // 날짜순 버튼
     @objc func dateButtonClicked() {
-        // 정확도 순서로 정렬 (기본)
         setClickedButtonUI(dateButton)
         setUnclickedButtonUI([simButton, ascButton, dscButton])
-        nowSort = "date"
-        callRequest(sort: "date")
+        nowSort = Constants.Main.sortDate.rawValue
+        callRequest(sort: Constants.Main.sortDate.rawValue)
         resultCollectionView.reloadData()
     }
     
+    // 가격높은순 버튼
     @objc func ascButtonClicked() {
-        // 정확도 순서로 정렬 (기본)
         setClickedButtonUI(ascButton)
         setUnclickedButtonUI([simButton, dateButton, dscButton])
-        nowSort = "dsc"
-        callRequest(sort: "dsc")
+        nowSort = Constants.Main.sortDsc.rawValue
+        callRequest(sort: Constants.Main.sortDsc.rawValue)
         resultCollectionView.reloadData()
     }
     
+    // 가격낮은순 버튼
     @objc func dscButtonClicked() {
-        // 정확도 순서로 정렬 (기본)
         setClickedButtonUI(dscButton)
         setUnclickedButtonUI([simButton, dateButton, ascButton])
-        nowSort = "asc"
-        callRequest(sort: "asc")
+        nowSort = Constants.Main.sortAsc.rawValue
+        callRequest(sort: Constants.Main.sortAsc.rawValue)
         resultCollectionView.reloadData()
     }
     

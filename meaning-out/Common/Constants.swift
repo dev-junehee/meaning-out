@@ -82,6 +82,10 @@ enum Constants {
         case empty = "최근 검색어가 없어요"
         case recent = "최근 검색"
         case remove = "전체 삭제"
+        case sortSim = "sim"
+        case sortDate = "date"
+        case sortDsc = "dsc"
+        case sortAsc = "asc"
     }
     
     enum SettingOptions: String, CaseIterable {

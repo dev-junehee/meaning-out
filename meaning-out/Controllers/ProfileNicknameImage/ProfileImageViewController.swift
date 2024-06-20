@@ -49,8 +49,6 @@ class ProfileImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("이미지 설정 화면에 들어오는 값", profileNum)
-        
         configureView()
         configureHierarchy()
         configureLayout()

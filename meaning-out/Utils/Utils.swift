@@ -78,8 +78,10 @@ func setUnclickedButtonUI(_ buttons: [UIButton]) {
 
 
 /**
- 
+ 상품명에서 <b>, </b> 삭제한 문자열 반환
  */
-func getRemoveBackslashStr(_ string: String) -> String {
-    return string.replacingOccurrences(of: "\\", with: "")
+func getItemTitle(_ itemTitle: String) -> String {
+    return itemTitle
+        .replacingOccurrences(of: "<b>", with: "")
+        .replacingOccurrences(of: "</b>", with: "")
 }

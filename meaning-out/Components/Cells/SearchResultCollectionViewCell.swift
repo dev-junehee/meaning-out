@@ -112,8 +112,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         likeButton.setImage(likeImage, for: .normal)
         
         itemMallName.text = data.mallName
-        itemTitle.text = data.title
-        itemPrice.text = data.lprice
+        itemTitle.text = getItemTitle(data.title)
+        itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
     }
     
     func configureHandler() {

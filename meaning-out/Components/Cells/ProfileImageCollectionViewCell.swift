@@ -24,8 +24,8 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         
         configureCellHierarchy()
         configureCellLayout()
-//        configureSelectedCellUI()
-//        configureCellUI()
+        configureSelectedCellUI()
+        configureCellUI()
     }
     
     required init?(coder: NSCoder) {

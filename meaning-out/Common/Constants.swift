@@ -80,6 +80,8 @@ enum Constants {
     
     enum Main: String {
         case empty = "최근 검색어가 없어요"
+        case recent = "최근 검색"
+        case remove = "전체 삭제"
     }
     
     enum SettingOptions: String, CaseIterable {

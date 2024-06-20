@@ -59,7 +59,7 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("searchText", searchText)
+        
         callRequest(sort: nowSort)
         
         configureView()
@@ -199,7 +199,7 @@ class SearchResultViewController: UIViewController {
                     self.resultCollectionView.scrollsToTop = true
                 }
                 
-            case .failure(let error):
+            case .failure(_):
                 self.showAlert(
                     title: Constants.Alert.FailSearch.title.rawValue,
                     message: Constants.Alert.FailSearch.message.rawValue,
@@ -219,7 +219,6 @@ class SearchResultViewController: UIViewController {
     
     @objc func simButtonClicked() {
         // 정확도 순서로 정렬 (기본)
-        print("정확도 클릭")
         setClickedButtonUI(simButton)
         setUnclickedButtonUI([dateButton, ascButton, dscButton])
         nowSort = "sim"
@@ -229,7 +228,6 @@ class SearchResultViewController: UIViewController {
     
     @objc func dateButtonClicked() {
         // 정확도 순서로 정렬 (기본)
-        print("날짜순 순서 클릭")
         setClickedButtonUI(dateButton)
         setUnclickedButtonUI([simButton, ascButton, dscButton])
         nowSort = "date"
@@ -239,7 +237,6 @@ class SearchResultViewController: UIViewController {
     
     @objc func ascButtonClicked() {
         // 정확도 순서로 정렬 (기본)
-        print("가격높은순 클릭")
         setClickedButtonUI(ascButton)
         setUnclickedButtonUI([simButton, dateButton, dscButton])
         nowSort = "dsc"
@@ -249,7 +246,6 @@ class SearchResultViewController: UIViewController {
     
     @objc func dscButtonClicked() {
         // 정확도 순서로 정렬 (기본)
-        print("가격 낮은순 클릭")
         setClickedButtonUI(dscButton)
         setUnclickedButtonUI([simButton, dateButton, ascButton])
         nowSort = "asc"

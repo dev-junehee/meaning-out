@@ -50,8 +50,6 @@ class EditProfileImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("프로필 이미지 수정 화면 진입")
-        
         configureView()
         configureHierarchy()
         configureLayout()
@@ -164,14 +162,9 @@ extension EditProfileImageViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("프로필 이미지를 선택했을 때", indexPath.item)
-        
         profileNum = indexPath.item
         UserDefaultsManager.profile = profileNum
         isDefaultSelected = false
-        
-        print("선택한 값으로 저장한 값 맞는지 확인",  UserDefaultsManager.profile)
-        
         profileImage.image = Resource.Images.profiles[profileNum]
     }
 }

@@ -24,8 +24,6 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("원래 닉네임", nickname)
-        
         configureView()
         configureHierarchy()
         configureLayout()

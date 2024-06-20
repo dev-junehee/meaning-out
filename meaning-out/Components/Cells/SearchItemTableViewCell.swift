@@ -91,15 +91,12 @@ class SearchItemTableViewCell: UITableViewCell {
             print("X버튼 클릭 오류")
             return
         }
-//        let findIdx = searchList.firstIndex(of: searchText)!
-//        searchList.remove(at: findIdx)
-//        print(searchList)
-//        UserDefaultsManager.search = searchList
         
         guard let tableView = tableView else {
             print("X버튼: 테이블뷰 오류")
             return
         }
+        
         let findIdx = searchList.firstIndex(of: searchText)!
         searchList.remove(at: findIdx)
         print(searchList)

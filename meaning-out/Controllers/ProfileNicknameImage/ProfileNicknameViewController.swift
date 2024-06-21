@@ -37,8 +37,6 @@ class ProfileNicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("맨 처음 찍히는", profileNum)
-        
         configureView()
         configureHierarchy()
         configureLayout()
@@ -47,12 +45,11 @@ class ProfileNicknameViewController: UIViewController {
         configureHandler()
     }
     
+    // 화면 전환 후 다시 돌아왔을 때 필요한 부분 처리
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("화면 전환 후 다시 돌아왔을 때", profileNum)
-        
-        // 화면 전환 시 저장됐던 프로필 이미지 가져오기
+        // 저장됐던 프로필 이미지 가져오기
         profileNum = UserDefaultsManager.profile
     }
     

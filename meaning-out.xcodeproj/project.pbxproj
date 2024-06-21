@@ -525,7 +525,7 @@
 				DEVELOPMENT_TEAM = 95Z2W8U6PK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "meaning-out/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "김준희";
+				INFOPLIST_KEY_CFBundleDisplayName = "미닝아웃";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -558,7 +558,7 @@
 				DEVELOPMENT_TEAM = 95Z2W8U6PK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "meaning-out/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "김준희";
+				INFOPLIST_KEY_CFBundleDisplayName = "미닝아웃";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

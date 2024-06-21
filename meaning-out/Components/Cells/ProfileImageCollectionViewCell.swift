@@ -24,12 +24,20 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         
         configureCellHierarchy()
         configureCellLayout()
-//        configureSelectedCellUI()
-//        configureCellUI()
+        configureSelectedCellUI()
+        configureCellUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        profileImage.layoutIfNeeded()
+        profileImage.clipsToBounds = true
+        profileImage.layer.cornerRadius = profileImage.frame.width / 2
     }
     
     // 선택한 Cell에 대한 UI
@@ -68,8 +76,6 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     func configureCellUI() {
         profileImage.backgroundColor = Resource.Colors.white
-        profileImage.clipsToBounds = true
-        profileImage.layer.cornerRadius = 35  // 추후 상수화 하기
         profileImage.contentMode = .scaleAspectFit
         
         profileImageView.alpha = 0.5
@@ -79,8 +85,6 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     func configureSelectedCellUI() {
         profileImage.backgroundColor = Resource.Colors.white
-        profileImage.clipsToBounds = true
-        profileImage.layer.cornerRadius = 35  // 추후 상수화 하기
         profileImage.contentMode = .scaleAspectFit
         
         profileImageView.alpha = 1.0

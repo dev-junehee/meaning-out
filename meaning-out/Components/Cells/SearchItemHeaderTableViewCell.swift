@@ -58,9 +58,9 @@ class SearchItemHeaderTableViewCell: UITableViewCell {
     
     private func cofigureCellUI() {
         recentTitle.font = Resource.Fonts.bold16
-        recentTitle.text = "최근 검색"
+        recentTitle.text = Constants.Main.recent.rawValue
         
-        removeTitle.setTitle("전체 삭제", for: .normal)
+        removeTitle.setTitle(Constants.Main.remove.rawValue, for: .normal)
         removeTitle.setTitleColor(Resource.Colors.primary, for: .normal)
         removeTitle.titleLabel?.font = Resource.Fonts.bold13
 

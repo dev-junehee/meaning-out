@@ -49,8 +49,6 @@ class ProfileImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("이미지 설정 화면에 들어오는 값", profileNum)
-        
         configureView()
         configureHierarchy()
         configureLayout()
@@ -158,8 +156,6 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         cell.configureCellHierarchy()
         cell.configureCellLayout()
         
-        print("여기확인", profileNum, idx)
-        
         if idx == profileNum && isDefaultSelected {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
@@ -174,14 +170,9 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("프로필 이미지를 선택했을 때", indexPath.item)
-        
         profileNum = indexPath.item
         isDefaultSelected = false
         UserDefaultsManager.profile = profileNum
-        
-        print("선택한 값으로 저장한 값 맞는지 확인",  UserDefaultsManager.profile)
-        
         profileImage.image = Resource.Images.profiles[profileNum]
     }
 }

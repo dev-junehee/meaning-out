@@ -103,24 +103,6 @@ func getTodayString(formatType: String) -> String {
 
 
 /**
- 검색 결과 화면 버튼 UI
- */
-func setClickedButtonUI(_ button: UIButton) {
-    button.backgroundColor = Resource.Colors.darkGray
-    button.setTitleColor(Resource.Colors.white, for: .normal)
-    button.layer.borderWidth = 0
-}
-
-func setUnclickedButtonUI(_ buttons: [UIButton]) {
-    buttons.forEach {
-        $0.backgroundColor = Resource.Colors.white
-        $0.setTitleColor(Resource.Colors.black, for: .normal)
-        $0.layer.borderWidth = 1
-    }
-}
-
-
-/**
  상품명에서 <b>, </b> 삭제한 문자열 반환
  */
 func getItemTitle(_ itemTitle: String) -> String {

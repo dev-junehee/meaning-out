@@ -58,8 +58,13 @@ class EditNicknameViewController: UIViewController {
     
     private func configureView() {
         if !isUser {
-            print("유효한 유저가 아닙니다.")
-            // Onboarding 화면으로 돌리기
+            showAlert(title: "유효한 유저가 아니에요!", 
+                      message: "온보딩 화면으로 돌아갑니다.",
+                      type: .oneButton,
+                      okHandler: backOnboardingController,
+                      cancelHandler: nil
+            )
+            return
         }
         
         view.backgroundColor = Resource.Colors.white
@@ -168,15 +173,30 @@ class EditNicknameViewController: UIViewController {
     }
     
     @objc func validateNickname() {
-        guard let nickname = nicknameField.text else {
-            print(#function, "닉네임 입력값 오류")
-            return
+        guard let nickname = nicknameField.text else { return }
+        
+        do {
+            let result = try getValidationResult(nickname)
+            if result {
+                isValidate = true
+                invalidMessage.text = Constants.Validation.Nickname.success.rawValue
+            }
+        } catch ValidationError.empty {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
+        } catch ValidationError.hasSpecialChar{
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
+        } catch ValidationError.hasNumber {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
+        } catch ValidationError.invalidLength {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
+        } catch {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
         }
-        
-        let result = getValidationResult(nickname)
-        
-        isValidate = result[0] as! Bool
-        invalidMessage.text = result[1] as? String
     }
     
     @objc func keyboardDismiss() {
@@ -220,13 +240,30 @@ class EditNicknameViewController: UIViewController {
 }
 
 
-// MARK: Alert Action 알럿 액션 함수
+// MARK: EditNicknameViewController 익스텐션
 extension EditNicknameViewController {
+    // Alert Action 알럿 액션 함수
     func alertReturn(action: UIAlertAction) {
         return
     }
     
     func alertPopViewController(action: UIAlertAction) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    // 온보딩으로 root 바꾸기
+    func backOnboardingController(action: UIAlertAction) {
+        // UserDefaults에 저장된 모든 데이터 삭제
+        UserDefaultsManager.deleteAllUserDefaults()
+        
+        // 온보딩 화면으로 전환
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+        
+        let onboardingVC = UINavigationController(rootViewController: OnboardingViewController())
+        let rootViewController = onboardingVC
+        
+        sceneDeleagate?.window?.rootViewController = rootViewController
+        sceneDeleagate?.window?.makeKeyAndVisible()
     }
 }

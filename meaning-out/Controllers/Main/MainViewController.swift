@@ -124,7 +124,6 @@ extension MainViewController: UISearchBarDelegate {
         // UserDefaults 저장
         searchList.insert(searchText, at: 0)
         UserDefaultsManager.search = searchList
-        print(UserDefaultsManager.search)
         
         // 검색 결과 화면으로 push
         let searchResultVC = SearchResultViewController()

@@ -29,8 +29,7 @@ class SearchResultDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(itemTitle)
-        print(itemLink)
+
         configureView()
         configureHierarchy()
         configureLayout()
@@ -39,7 +38,7 @@ class SearchResultDetailViewController: UIViewController {
     
     func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = itemTitle
+        navigationItem.title = getItemTitle(itemTitle)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonclicked), type: .left)
         
         // UserDefaults 좋아요 상품 리스트에 해당 상품명이 있으면 like, 없으면 unlike
@@ -68,9 +67,6 @@ class SearchResultDetailViewController: UIViewController {
     }
     
     @objc func likeBarButtonClicked() {
-        print("좋아요 버튼 클릭")
-        print(self.itemTitle)
-        
         // like -> unLike
         if cartList.contains(itemTitle) {
             cartList.append(itemTitle)

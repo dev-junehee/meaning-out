@@ -171,15 +171,30 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func validateNickname() {
-        guard let nickname = nicknameField.text else {
-            print(#function, "닉네임 입력값 오류")
-            return
+        guard let nickname = nicknameField.text else { return }
+        
+        do {
+            let result = try getValidationResult(nickname)
+            if result {
+                isValidate = true
+                invalidMessage.text = Constants.Validation.Nickname.success.rawValue
+            }
+        } catch ValidationError.empty {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
+        } catch ValidationError.hasSpecialChar{
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
+        } catch ValidationError.hasNumber {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
+        } catch ValidationError.invalidLength {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
+        } catch {
+            isValidate = false
+            invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
         }
-        
-        let result = getValidationResult(nickname)
-        
-        isValidate = result[0] as! Bool
-        invalidMessage.text = result[1] as? String
     }
     
     @objc func keyboardDismiss() {
@@ -189,16 +204,16 @@ class ProfileNicknameViewController: UIViewController {
     @objc func doneButtonClicked() {
         // 유효성 검사 미통과 시 실패 처리 - 추후 수정
         if !isValidate {
-            print("유효성 검사 실패")
+            showAlert(title: "닉네임 오류",
+                      message: "닉네임 입력값에 오류가 발생했어요.\n다시 확인해 주세요.",
+                      type: .oneButton,
+                      okHandler: nil,
+                      cancelHandler: nil)
             return
         }
         
         // 유효성 검사 통과 시 프로필 사진/닉네임 저장
-        print(isUser)
-        
-        guard let nickname = nicknameField.text else {
-            return
-        }
+        guard let nickname = nicknameField.text else { return }
         UserDefaultsManager.nickname = nickname
         UserDefaultsManager.profile = profileNum
         UserDefaultsManager.joinDate = getTodayString(formatType: "yyyy. MM. dd")

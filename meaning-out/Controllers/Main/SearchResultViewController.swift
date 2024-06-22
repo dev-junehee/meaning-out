@@ -154,8 +154,8 @@ class SearchResultViewController: UIViewController {
         }
         
         // 정확도 버튼 선택된 상태 기본 세팅
-        setClickedButtonUI(simButton)
-        setUnclickedButtonUI([dateButton, ascButton, dscButton])
+        simButton.setClickedButtonUI()
+        setUnclickedButtons(buttons: [dateButton, ascButton, dscButton])
     }
     
     func configureData() {
@@ -172,6 +172,15 @@ class SearchResultViewController: UIViewController {
     
     func callRequest(sort: String) {
         NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
+            if res.total == 0 {
+                self.showAlert(title: "검색 결과가 없어요.", 
+                               message: "다른 검색어를 입력해 주세요!",
+                               type: .oneButton,
+                               okHandler: self.alertPopViewController,
+                               cancelHandler: nil)
+                return
+            }
+            
             if self.start == 1 {
                 self.searchResultItem.removeAll()
                 self.searchTotal = res.total
@@ -198,8 +207,8 @@ class SearchResultViewController: UIViewController {
     
     // 정확도 버튼
     @objc func simButtonClicked() {
-        setClickedButtonUI(simButton)
-        setUnclickedButtonUI([dateButton, ascButton, dscButton])
+        simButton.setClickedButtonUI()
+        setUnclickedButtons(buttons: [dateButton, ascButton, dscButton])
         nowSort = Constants.Main.sortSim.rawValue
         callRequest(sort: Constants.Main.sortSim.rawValue)
         resultCollectionView.reloadData()
@@ -207,8 +216,8 @@ class SearchResultViewController: UIViewController {
     
     // 날짜순 버튼
     @objc func dateButtonClicked() {
-        setClickedButtonUI(dateButton)
-        setUnclickedButtonUI([simButton, ascButton, dscButton])
+        dateButton.setClickedButtonUI()
+        setUnclickedButtons(buttons: [simButton, ascButton, dscButton])
         nowSort = Constants.Main.sortDate.rawValue
         callRequest(sort: Constants.Main.sortDate.rawValue)
         resultCollectionView.reloadData()
@@ -216,8 +225,8 @@ class SearchResultViewController: UIViewController {
     
     // 가격높은순 버튼
     @objc func ascButtonClicked() {
-        setClickedButtonUI(ascButton)
-        setUnclickedButtonUI([simButton, dateButton, dscButton])
+        ascButton.setClickedButtonUI()
+        setUnclickedButtons(buttons: [simButton, dateButton, dscButton])
         nowSort = Constants.Main.sortDsc.rawValue
         callRequest(sort: Constants.Main.sortDsc.rawValue)
         resultCollectionView.reloadData()
@@ -225,13 +234,27 @@ class SearchResultViewController: UIViewController {
     
     // 가격낮은순 버튼
     @objc func dscButtonClicked() {
-        setClickedButtonUI(dscButton)
-        setUnclickedButtonUI([simButton, dateButton, ascButton])
+        dscButton.setClickedButtonUI()
+        setUnclickedButtons(buttons: [simButton, dateButton, ascButton])
         nowSort = Constants.Main.sortAsc.rawValue
         callRequest(sort: Constants.Main.sortAsc.rawValue)
         resultCollectionView.reloadData()
     }
     
+}
+
+extension SearchResultViewController {
+    // 정렬 버튼 한 번에 UI 수정
+    func setUnclickedButtons(buttons: [UIButton]) {
+        buttons.forEach {
+            $0.setUnclickedButtonUI()
+        }
+    }
+    
+    // 검색 결과 없을 때 뒤로가기
+    func alertPopViewController(action: UIAlertAction) {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 

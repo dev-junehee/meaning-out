@@ -72,7 +72,7 @@ func getValidationResult(_ nickname: String) throws -> Bool {
         }
     }
     
-    if nickname.isEmpty {
+    if nickname.isEmpty || nickname.trimmingCharacters(in: .whitespaces).isEmpty {
         throw ValidationError.empty
     } else if hasSpecialChar {
         throw ValidationError.hasSpecialChar

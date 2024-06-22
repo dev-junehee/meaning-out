@@ -172,6 +172,15 @@ class SearchResultViewController: UIViewController {
     
     func callRequest(sort: String) {
         NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
+            if res.total == 0 {
+                self.showAlert(title: "검색 결과가 없어요.", 
+                               message: "다른 검색어를 입력해 주세요!",
+                               type: .oneButton,
+                               okHandler: self.alertPopViewController,
+                               cancelHandler: nil)
+                return
+            }
+            
             if self.start == 1 {
                 self.searchResultItem.removeAll()
                 self.searchTotal = res.total
@@ -235,10 +244,16 @@ class SearchResultViewController: UIViewController {
 }
 
 extension SearchResultViewController {
+    // 정렬 버튼 한 번에 UI 수정
     func setUnclickedButtons(buttons: [UIButton]) {
         buttons.forEach {
             $0.setUnclickedButtonUI()
         }
+    }
+    
+    // 검색 결과 없을 때 뒤로가기
+    func alertPopViewController(action: UIAlertAction) {
+        navigationController?.popViewController(animated: true)
     }
 }
 

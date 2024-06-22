@@ -171,10 +171,7 @@ class ProfileNicknameViewController: UIViewController {
     }
     
     @objc func validateNickname() {
-        guard let nickname = nicknameField.text else {
-            print(#function, "닉네임 입력값 오류")
-            return
-        }
+        guard let nickname = nicknameField.text else { return }
         
         do {
             let result = try getValidationResult(nickname)
@@ -207,7 +204,11 @@ class ProfileNicknameViewController: UIViewController {
     @objc func doneButtonClicked() {
         // 유효성 검사 미통과 시 실패 처리 - 추후 수정
         if !isValidate {
-            print("유효성 검사 실패")
+            showAlert(title: "닉네임 오류",
+                      message: "닉네임 입력값에 오류가 발생했어요.\n다시 확인해 주세요.",
+                      type: .oneButton,
+                      okHandler: nil,
+                      cancelHandler: nil)
             return
         }
         

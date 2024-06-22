@@ -213,11 +213,7 @@ class ProfileNicknameViewController: UIViewController {
         }
         
         // 유효성 검사 통과 시 프로필 사진/닉네임 저장
-        print(isUser)
-        
-        guard let nickname = nicknameField.text else {
-            return
-        }
+        guard let nickname = nicknameField.text else { return }
         UserDefaultsManager.nickname = nickname
         UserDefaultsManager.profile = profileNum
         UserDefaultsManager.joinDate = getTodayString(formatType: "yyyy. MM. dd")

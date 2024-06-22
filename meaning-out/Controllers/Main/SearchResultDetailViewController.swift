@@ -29,8 +29,7 @@ class SearchResultDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(itemTitle)
-        print(itemLink)
+
         configureView()
         configureHierarchy()
         configureLayout()
@@ -68,9 +67,6 @@ class SearchResultDetailViewController: UIViewController {
     }
     
     @objc func likeBarButtonClicked() {
-        print("좋아요 버튼 클릭")
-        print(self.itemTitle)
-        
         // like -> unLike
         if cartList.contains(itemTitle) {
             cartList.append(itemTitle)

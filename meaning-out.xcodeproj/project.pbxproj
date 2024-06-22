@@ -45,6 +45,7 @@
 		C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */; };
 		C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */; };
 		C48B9A612C1DFD5A00A3EC84 /* EditProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */; };
+		C4A52AD62C26E6D50013BCDF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A52AD52C26E6D50013BCDF /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewController.swift; sourceTree = "<group>"; };
 		C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageViewController.swift; sourceTree = "<group>"; };
+		C4A52AD52C26E6D50013BCDF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		C48B99DE2C1AEE5300A3EC84 /* meaning-out */ = {
 			isa = PBXGroup;
 			children = (
+				C4A52AD42C26E6C50013BCDF /* Managers */,
 				C48B9A442C1C202400A3EC84 /* Model */,
 				C48B9A262C1B4F1700A3EC84 /* Common */,
 				C48B9A4B2C1C2A1400A3EC84 /* Protocol */,
@@ -154,7 +157,6 @@
 			children = (
 				C48B9A242C1B4EC100A3EC84 /* Constants.swift */,
 				C48B9A272C1B4F6200A3EC84 /* Resource.swift */,
-				C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -265,6 +267,15 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		C4A52AD42C26E6C50013BCDF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C4A52AD52C26E6D50013BCDF /* NetworkManager.swift */,
+				C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -368,6 +379,7 @@
 				C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
+				C4A52AD62C26E6D50013BCDF /* NetworkManager.swift in Sources */,
 				C48B9A612C1DFD5A00A3EC84 /* EditProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,

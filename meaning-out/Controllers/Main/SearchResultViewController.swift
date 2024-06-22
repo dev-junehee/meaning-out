@@ -171,46 +171,24 @@ class SearchResultViewController: UIViewController {
     }
     
     func callRequest(sort: String) {
-        let headers: HTTPHeaders = [
-            API.Shopping.ID_KEY_NAME: API.Shopping.ID_KEY,
-            API.Shopping.SECRET_KEY_NAME: API.Shopping.SECRET_KEY
-        ]
-
-        let URL = "\(API.Shopping.URL)query=\(searchText)&start=\(start)&display=\(display)&sort=\(sort)"
-
-        AF.request(URL, method: .get, headers: headers)
-            .responseDecodable(of: SearchResult.self) { res in
-            switch res.result {
-            case .success(let value):
-
-                // if-새로운 검색일 때 / else-기존 검색어
-                if self.start == 1 {
-                    self.searchResultItem.removeAll()
-                    self.searchTotal = value.total
-                    self.searchResultItem = value.items
-                } else {
-                    self.searchTotal = value.total
-                    self.searchResultItem.append(contentsOf: value.items)
-                }
-                self.configureData()
-                self.resultCollectionView.reloadData()
-                
-                if self.start == 1 {
-                    self.resultCollectionView.scrollsToTop = true
-                }
-                
-            case .failure(_):
-                self.showAlert(
-                    title: Constants.Alert.FailSearch.title.rawValue,
-                    message: Constants.Alert.FailSearch.message.rawValue,
-                    type: .oneButton,
-                    okHandler: nil,
-                    cancelHandler: nil
-                )
+        NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
+            if self.start == 1 {
+                self.searchResultItem.removeAll()
+                self.searchTotal = res.total
+                self.searchResultItem = res.items
+            } else {
+                self.searchTotal = res.total
+                self.searchResultItem.append(contentsOf: res.items)
+            }
+            self.configureData()
+            self.resultCollectionView.reloadData()
+            
+            if self.start == 1 {
+                self.resultCollectionView.scrollsToTop = true
             }
         }
     }
-    
+
 
     // MARK: 버튼 핸들러
     // 뒤로가기 버튼

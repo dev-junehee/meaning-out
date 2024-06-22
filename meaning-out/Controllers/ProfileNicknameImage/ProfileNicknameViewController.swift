@@ -176,10 +176,28 @@ class ProfileNicknameViewController: UIViewController {
             return
         }
         
-        let result = getValidationResult(nickname)
-        
-        isValidate = result[0] as! Bool
-        invalidMessage.text = result[1] as? String
+        do {
+            let result = try getValidationResult(nickname)
+            if result {
+                isValidate = true
+                invalidMessage.text = "사용할 수 있는 닉네임이에요."
+            }
+        } catch ValidationError.empty {
+            isValidate = false
+            invalidMessage.text = "닉네임을 입력해 주세요."
+        } catch ValidationError.hasSpecialChar{
+            isValidate = false
+            invalidMessage.text = "닉네임에 @, #, $, %할 포함될 수 없어요."
+        } catch ValidationError.hasNumber {
+            isValidate = false
+            invalidMessage.text = "닉네임에 숫자는 포함할 수 없어요."
+        } catch ValidationError.invalidLength {
+            isValidate = false
+            invalidMessage.text = "2글자 이상 10글자 미만으로 설정해 주세요."
+        } catch {
+            isValidate = false
+            invalidMessage.text = "알수없는오류......."
+        }
     }
     
     @objc func keyboardDismiss() {

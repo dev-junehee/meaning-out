@@ -125,6 +125,7 @@
 		C48B99DE2C1AEE5300A3EC84 /* meaning-out */ = {
 			isa = PBXGroup;
 			children = (
+				C4A52AD72C26FD500013BCDF /* API */,
 				C4A52AD42C26E6C50013BCDF /* Managers */,
 				C48B9A442C1C202400A3EC84 /* Model */,
 				C48B9A262C1B4F1700A3EC84 /* Common */,
@@ -138,7 +139,6 @@
 				C48B99E82C1AEE5400A3EC84 /* Assets.xcassets */,
 				C48B99EA2C1AEE5400A3EC84 /* LaunchScreen.storyboard */,
 				C48B99ED2C1AEE5400A3EC84 /* Info.plist */,
-				C423D16D2C207C04001CE395 /* API.swift */,
 			);
 			path = "meaning-out";
 			sourceTree = "<group>";
@@ -274,6 +274,14 @@
 				C48B9A5C2C1DAEA300A3EC84 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		C4A52AD72C26FD500013BCDF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C423D16D2C207C04001CE395 /* API.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -123,8 +123,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 title: Constants.Alert.Cancelation.title.rawValue,
                 message: Constants.Alert.Cancelation.message.rawValue,
                 type: .twoButton,
-                okHandler: alertOkayClicked,
-                cancelHandler: alertCancelClicked
+                okHandler: alertOkayClicked
             )
         }
     }
@@ -147,9 +146,5 @@ extension SettingViewController {
         
         sceneDeleagate?.window?.rootViewController = rootViewController
         sceneDeleagate?.window?.makeKeyAndVisible()
-    }
-    
-    func alertCancelClicked(action: UIAlertAction) {
-        return
     }
 }

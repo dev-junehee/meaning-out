@@ -114,8 +114,7 @@ extension MainViewController: UISearchBarDelegate {
                 title: Constants.Alert.EmptyString.title.rawValue,
                 message: Constants.Alert.EmptyString.message.rawValue,
                 type: .oneButton,
-                okHandler: nil,
-                cancelHandler: nil
+                okHandler: nil
             )
             searchBar.text = ""
             return

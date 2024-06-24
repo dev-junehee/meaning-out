@@ -46,7 +46,7 @@ extension UIViewController {
         }
     }
     
-    func showAlert(title: String?, message: String?, type: AlertType, okHandler: ((UIAlertAction) -> Void)?, cancelHandler: ((UIAlertAction) -> Void)?) {
+    func showAlert(title: String?, message: String?, type: AlertType, okHandler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(
             title: title,
             message: message,
@@ -59,7 +59,7 @@ extension UIViewController {
             break
         case .twoButton:
             let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default, handler: okHandler)
-            let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel, handler: cancelHandler)
+            let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel)
             alert.addAction(okay)
             alert.addAction(cancel)
             break

@@ -61,8 +61,7 @@ class EditNicknameViewController: UIViewController {
             showAlert(title: "유효한 유저가 아니에요!", 
                       message: "온보딩 화면으로 돌아갑니다.",
                       type: .oneButton,
-                      okHandler: backOnboardingController,
-                      cancelHandler: nil
+                      okHandler: backOnboardingController
             )
             return
         }
@@ -209,8 +208,8 @@ class EditNicknameViewController: UIViewController {
             showAlert(title: Constants.Alert.SameNickname.title.rawValue,
                       message: Constants.Alert.SameNickname.message.rawValue,
                       type: .oneButton,
-                      okHandler: alertReturn,
-                      cancelHandler: nil)
+                      okHandler: alertReturn
+            )
             return
         }
         
@@ -219,8 +218,7 @@ class EditNicknameViewController: UIViewController {
             showAlert(title: Constants.Alert.FailValidation.title.rawValue,
                       message: invalidMessage.text,
                       type: .oneButton,
-                      okHandler: alertReturn,
-                      cancelHandler: nil
+                      okHandler: alertReturn
             )
             return
         }
@@ -234,8 +232,7 @@ class EditNicknameViewController: UIViewController {
         showAlert(title: Constants.Alert.EditNickname.title.rawValue,
                   message: Constants.Alert.EditNickname.message.rawValue,
                   type: .oneButton,
-                  okHandler: alertPopViewController,
-                  cancelHandler: nil)
+                  okHandler: alertPopViewController)
     }
 }
 

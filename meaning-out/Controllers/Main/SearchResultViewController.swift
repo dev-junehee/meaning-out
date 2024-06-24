@@ -176,8 +176,8 @@ class SearchResultViewController: UIViewController {
                 self.showAlert(title: "검색 결과가 없어요.", 
                                message: "다른 검색어를 입력해 주세요!",
                                type: .oneButton,
-                               okHandler: self.alertPopViewController,
-                               cancelHandler: nil)
+                               okHandler: self.alertPopViewController
+                )
                 return
             }
             

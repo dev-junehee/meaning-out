@@ -207,8 +207,7 @@ class ProfileNicknameViewController: UIViewController {
             showAlert(title: "닉네임 오류",
                       message: "닉네임 입력값에 오류가 발생했어요.\n다시 확인해 주세요.",
                       type: .oneButton,
-                      okHandler: nil,
-                      cancelHandler: nil)
+                      okHandler: nil)
             return
         }
         

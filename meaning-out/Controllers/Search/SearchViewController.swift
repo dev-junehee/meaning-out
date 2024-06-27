@@ -29,6 +29,11 @@ class SearchViewController: UIViewController {
     }
     
     var start = 1
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = UserDefaultsManager.getSearchMainTitle()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +47,6 @@ class SearchViewController: UIViewController {
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = Constants.Title.main
     }
     
     private func configureHierarchy() {

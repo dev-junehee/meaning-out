@@ -230,7 +230,7 @@ class ProfileNicknameViewController: UIViewController {
         tabBarController.view.backgroundColor = Resource.Colors.white
         tabBarController.tabBar.tintColor = Resource.Colors.primary
         
-        let mainVC = UINavigationController(rootViewController: MainViewController())
+        let mainVC = UINavigationController(rootViewController: SearchViewController())
         let settingVC = UINavigationController(rootViewController: SettingViewController())
         
         let controllers = [mainVC, settingVC]

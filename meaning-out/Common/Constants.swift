@@ -24,10 +24,6 @@ enum Constants {
         case profile = "PROFILE SETTING"
         case setting = "SETTING"
         case edit = "EDIT PROFILE"
- 
-        static var main: String {
-            return "\(UserDefaultsManager.nickname)'s MEANING OUT"
-        }
     }
     
     enum Tab: String {

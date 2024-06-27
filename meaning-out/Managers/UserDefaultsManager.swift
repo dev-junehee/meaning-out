@@ -35,6 +35,10 @@ struct UserDefaultsManager {
     @UserDefaultsWrapper (key: .isUser, defaultValue: false)
     static var isUser: Bool
     
+    static func getSearchMainTitle() -> String {
+        return "\(UserDefaultsManager.nickname)'s MEANING OUT"
+    }
+    
     static func getJoinDateLabel() -> String {
         return "\(UserDefaultsManager.joinDate) 가입"
     }

@@ -13,7 +13,7 @@ import SnapKit
 /**
  메인 - 검색 탭
  */
-class MainViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     let searchBar = UISearchBar()
     let shoppingTableView = UITableView()
@@ -29,6 +29,11 @@ class MainViewController: UIViewController {
     }
     
     var start = 1
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = UserDefaultsManager.getSearchMainTitle()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +47,6 @@ class MainViewController: UIViewController {
     
     private func configureView() {
         view.backgroundColor = Resource.Colors.white
-        navigationItem.title = Constants.Title.main
     }
     
     private func configureHierarchy() {
@@ -101,7 +105,7 @@ class MainViewController: UIViewController {
 
 // MARK: MainViewContoller 익스텐션
 // SearchBar
-extension MainViewController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else {
             print("검색어 입력 오류")
@@ -133,7 +137,7 @@ extension MainViewController: UISearchBarDelegate {
 
 
 // TableView
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchList.count
     }

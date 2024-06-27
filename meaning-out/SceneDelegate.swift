@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.view.backgroundColor = Resource.Colors.white
             tabBarController.tabBar.tintColor = Resource.Colors.primary
             
-            let main = UINavigationController(rootViewController: MainViewController())
+            let main = UINavigationController(rootViewController: SearchViewController())
             let setting = UINavigationController(rootViewController: SettingViewController())
             
             let controllers = [main, setting]

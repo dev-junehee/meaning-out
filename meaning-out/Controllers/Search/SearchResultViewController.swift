@@ -172,6 +172,8 @@ class SearchResultViewController: UIViewController {
     
     func callRequest(sort: String) {
         NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
+            print(#function, res)
+            
             if res.total == 0 {
                 self.showAlert(title: "검색 결과가 없어요.", 
                                message: "다른 검색어를 입력해 주세요!",
@@ -193,7 +195,7 @@ class SearchResultViewController: UIViewController {
             self.resultCollectionView.reloadData()
             
             if self.start == 1 {
-                self.resultCollectionView.scrollsToTop = true
+                self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
     }
@@ -210,6 +212,7 @@ class SearchResultViewController: UIViewController {
         simButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [dateButton, ascButton, dscButton])
         nowSort = Constants.Main.sortSim.rawValue
+        start = 1
         callRequest(sort: Constants.Main.sortSim.rawValue)
         resultCollectionView.reloadData()
     }
@@ -219,6 +222,7 @@ class SearchResultViewController: UIViewController {
         dateButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [simButton, ascButton, dscButton])
         nowSort = Constants.Main.sortDate.rawValue
+        start = 1
         callRequest(sort: Constants.Main.sortDate.rawValue)
         resultCollectionView.reloadData()
     }
@@ -228,6 +232,7 @@ class SearchResultViewController: UIViewController {
         ascButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [simButton, dateButton, dscButton])
         nowSort = Constants.Main.sortDsc.rawValue
+        start = 1
         callRequest(sort: Constants.Main.sortDsc.rawValue)
         resultCollectionView.reloadData()
     }
@@ -237,6 +242,7 @@ class SearchResultViewController: UIViewController {
         dscButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [simButton, dateButton, ascButton])
         nowSort = Constants.Main.sortAsc.rawValue
+        start = 1
         callRequest(sort: Constants.Main.sortAsc.rawValue)
         resultCollectionView.reloadData()
     }

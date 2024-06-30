@@ -20,6 +20,8 @@
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
+		C47C46AB2C319E3800665A7A /* ProfileNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46AA2C319E3800665A7A /* ProfileNicknameView.swift */; };
+		C47C46AD2C31A1CA00665A7A /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46AC2C31A1CA00665A7A /* ProfileImageView.swift */; };
 		C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */; };
 		C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */; };
 		C48B99E92C1AEE5400A3EC84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C48B99E82C1AEE5400A3EC84 /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		C47C46AA2C319E3800665A7A /* ProfileNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameView.swift; sourceTree = "<group>"; };
+		C47C46AC2C31A1CA00665A7A /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		C48B99DC2C1AEE5300A3EC84 /* meaning-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "meaning-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -215,7 +219,9 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */,
+				C47C46AA2C319E3800665A7A /* ProfileNicknameView.swift */,
 				C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */,
+				C47C46AC2C31A1CA00665A7A /* ProfileImageView.swift */,
 			);
 			path = ProfileNicknameImage;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 				C48B9A332C1B601000A3EC84 /* ProfileNicknameViewController.swift in Sources */,
 				C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */,
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
+				C47C46AB2C319E3800665A7A /* ProfileNicknameView.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */,
 				C423D17A2C21085C001CE395 /* SearchResultDetailViewController.swift in Sources */,
@@ -412,6 +419,7 @@
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
 				C4A52AD62C26E6D50013BCDF /* NetworkManager.swift in Sources */,
+				C47C46AD2C31A1CA00665A7A /* ProfileImageView.swift in Sources */,
 				C48B9A612C1DFD5A00A3EC84 /* EditProfileImageViewController.swift in Sources */,
 				C48B9A222C1B4E7400A3EC84 /* PointButton.swift in Sources */,
 				C48B9A372C1B616800A3EC84 /* UIViewController+Extension.swift in Sources */,

@@ -14,11 +14,11 @@ class OnboardingView: BaseView {
     let onboardingImage = UIImageView()
     let startButton = PointButton(title: Constants.Button.start.rawValue)
     
-    
     override func configureViewHierarchy() {
-        self.addSubview(titleLabel)
-        self.addSubview(onboardingImage)
-        self.addSubview(startButton)
+        let subViews = [titleLabel, onboardingImage, startButton]
+        subViews.forEach {
+            self.addSubview($0)
+        }
     }
     
     override func configureViewLayout() {

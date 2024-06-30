@@ -6,54 +6,39 @@
 //
 
 import UIKit
-import SnapKit
 
 /**
  메인 - 설정 탭
  */
-class SettingViewController: UIViewController {
+class SettingViewController: BaseViewController {
     
-    let settingTableView = UITableView()
+    let settingView = SettingView()
     
     var nickname = UserDefaultsManager.nickname {
         didSet {
-            settingTableView.reloadData()
+            settingView.tableView.reloadData()
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureView()
-        configureHierarchy()
-        configureLayout()
+    override func loadView() {
+        self.view = settingView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         nickname = UserDefaultsManager.nickname
-        settingTableView.reloadData()
+        settingView.tableView.reloadData()
     }
     
-    private func configureView() {
-        view.backgroundColor = Resource.Colors.white
+    override func configureViewController() {
         navigationItem.title = Constants.Title.setting.rawValue
     }
     
-    private func configureHierarchy() {
-        view.addSubview(settingTableView)
-        
-        settingTableView.delegate = self
-        settingTableView.dataSource = self
-        settingTableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.id)
-        settingTableView.register(SettingMenuTableViewCell.self, forCellReuseIdentifier: SettingMenuTableViewCell.id)
-    }
-    
-    private func configureLayout() {
-        settingTableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+    override func configureHierarchy() {
+        settingView.tableView.delegate = self
+        settingView.tableView.dataSource = self
+        settingView.tableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.id)
+        settingView.tableView.register(SettingMenuTableViewCell.self, forCellReuseIdentifier: SettingMenuTableViewCell.id)
     }
     
 }
@@ -61,7 +46,6 @@ class SettingViewController: UIViewController {
 
 // MARK: SettingViewController 익스텐션
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return Constants.SettingOptions.allCases.count
     }
@@ -127,7 +111,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             )
         }
     }
-    
 }
 
 

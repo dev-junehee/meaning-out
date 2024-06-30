@@ -7,97 +7,56 @@
 
 import UIKit
 
-import Alamofire
-import SnapKit
-
 /**
  메인 - 검색 탭
  */
-class SearchViewController: UIViewController {
-    
-    let searchBar = UISearchBar()
-    let shoppingTableView = UITableView()
-    
-    let emptyView = EmptyView()
+class SearchViewController: BaseViewController {
+
+    let searchView = SearchView()
     
     let nickname = UserDefaultsManager.nickname
     var searchList = UserDefaultsManager.search {
         didSet {
             viewToggle()
-            shoppingTableView.reloadData()
+            searchView.shoppingTableView.reloadData()
         }
     }
     
     var start = 1
     
+    override func loadView() {
+        self.view = searchView
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = UserDefaultsManager.getSearchMainTitle()
+        navigationItem.title = UserDefaultsManager.getSearchMainTitle()  // 닉네임 바뀔 때마다 리로드
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureView()
-        configureHierarchy()
-        configureLayout()
-        configureUI()
         viewToggle()
     }
     
-    private func configureView() {
-        view.backgroundColor = Resource.Colors.white
-    }
-    
-    private func configureHierarchy() {
-        let subViews = [searchBar, shoppingTableView, emptyView]
-        subViews.forEach {
-            view.addSubview($0)
-        }
+    override func configureHierarchy() {
+        searchView.searchBar.delegate = self
         
-        searchBar.delegate = self
-        
-        shoppingTableView.delegate = self
-        shoppingTableView.dataSource = self
-        shoppingTableView.register(
+        searchView.shoppingTableView.delegate = self
+        searchView.shoppingTableView.dataSource = self
+        searchView.shoppingTableView.register(
             SearchItemHeaderTableViewCell.self,
             forCellReuseIdentifier: SearchItemHeaderTableViewCell.id
         )
-        shoppingTableView.register(
+        searchView.shoppingTableView.register(
             SearchItemTableViewCell.self,
             forCellReuseIdentifier: SearchItemTableViewCell.id
         )
-        shoppingTableView.separatorStyle = .none
-    }
-    
-    private func configureLayout() {
-        searchBar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            $0.height.equalTo(44)
-        }
-        
-        emptyView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(8)
-            $0.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        shoppingTableView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(8)
-            $0.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
-    private func configureUI() {
-        searchBar.searchBarStyle = .minimal
-        searchBar.placeholder = Constants.Placeholder.searchBar.rawValue
-        
-        shoppingTableView.backgroundColor = .white
+        searchView.shoppingTableView.separatorStyle = .none
     }
 
     private func viewToggle() {
-        emptyView.isHidden = !searchList.isEmpty
-        shoppingTableView.isHidden = searchList.isEmpty
+        searchView.emptyView.isHidden = !searchList.isEmpty
+        searchView.shoppingTableView.isHidden = searchList.isEmpty
    }
     
 }
@@ -165,7 +124,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as! SearchItemTableViewCell
         
         cell.selectionStyle = .none
-        cell.tableView = shoppingTableView
+        cell.tableView = searchView.shoppingTableView
         cell.configureCellHierarchy()
         cell.configureCellLayout()
         cell.configureCellUI()
@@ -183,11 +142,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(searchResultVC, animated: true)
     }
     
-    
     @objc func removeAllSearchList() {
         // 전체 삭제 버튼 핸들러
         UserDefaultsManager.search.removeAll()
         searchList = UserDefaultsManager.search
-        shoppingTableView.reloadData()
+        searchView.shoppingTableView.reloadData()
     }
 }

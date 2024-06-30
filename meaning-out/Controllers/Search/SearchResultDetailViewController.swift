@@ -13,7 +13,7 @@ import WebKit
 /**
  메인 - 검색 결과 상세 화면
  */
-class SearchResultDetailViewController: UIViewController {
+class SearchResultDetailViewController: BaseViewController {
     
     let webView = WKWebView()
     
@@ -23,21 +23,21 @@ class SearchResultDetailViewController: UIViewController {
     
     var cartList = UserDefaultsManager.cart {
         didSet {
-            configureView()
+            configureViewController()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureView()
+//        configureView()
         configureHierarchy()
         configureLayout()
         configureData()
     }
     
-    func configureView() {
-        view.backgroundColor = Resource.Colors.white
+    override func configureViewController() {
+//        view.backgroundColor = Resource.Colors.white
         navigationItem.title = getItemTitle(itemTitle)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonclicked), type: .left)
         
@@ -46,11 +46,11 @@ class SearchResultDetailViewController: UIViewController {
         addImgBarBtn(image: likeButton, style: .plain, target: self, action: #selector(likeBarButtonClicked), type: .right)
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(webView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         webView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -79,7 +79,7 @@ class SearchResultDetailViewController: UIViewController {
             cartList.remove(at: idx)
             UserDefaultsManager.cart = cartList
         }
-        configureView()
+        configureViewController()
     }
 
 }

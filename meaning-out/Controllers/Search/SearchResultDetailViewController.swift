@@ -29,15 +29,10 @@ class SearchResultDetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        configureView()
-        configureHierarchy()
-        configureLayout()
         configureData()
     }
     
     override func configureViewController() {
-//        view.backgroundColor = Resource.Colors.white
         navigationItem.title = getItemTitle(itemTitle)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonclicked), type: .left)
         

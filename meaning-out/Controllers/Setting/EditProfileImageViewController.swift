@@ -7,9 +7,7 @@
 
 import UIKit
 
-import UIKit
-
-class EditProfileImageViewController: UIViewController {
+final class EditProfileImageViewController: UIViewController {
     
     let profileImageView = UIView()
     let profileImage = UIImageView()
@@ -61,7 +59,7 @@ class EditProfileImageViewController: UIViewController {
         view.backgroundColor = Resource.Colors.white
         navigationItem.title = Constants.Title.edit.rawValue
         
-        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonClicked), type: .left)
+        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
     }
     
     private func configureHierarchy() {
@@ -130,9 +128,6 @@ class EditProfileImageViewController: UIViewController {
         profileImage.image = Resource.Images.profiles[profileNum]
     }
 
-    @objc func backBarButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 

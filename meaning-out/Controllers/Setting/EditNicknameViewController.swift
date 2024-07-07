@@ -13,7 +13,7 @@ import TextFieldEffects
 /**
  메인 - 설정 탭 - 프로필 수정 화면
  */
-class EditNicknameViewController: UIViewController {
+final class EditNicknameViewController: UIViewController {
     
     let profileImageView = UIView()
     let profileImage = UIImageView()
@@ -69,7 +69,7 @@ class EditNicknameViewController: UIViewController {
         view.backgroundColor = Resource.Colors.white
         navigationItem.title = Constants.Title.edit.rawValue
         
-        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonClicked), type: .left)
+        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
         addTextBarBtn(title: Constants.Button.save.rawValue, style: .plain, target: self, action: #selector(saveButtonClicked), type: .right)
     }
     
@@ -158,12 +158,6 @@ class EditNicknameViewController: UIViewController {
         // 닉네임 유효성 검사, 키보드 내리기
         nicknameField.addTarget(self, action: #selector(validateNickname), for: .editingChanged)
         nicknameField.addTarget(self, action: #selector(keyboardDismiss), for: .editingDidEndOnExit)
-    }
-    
-    
-    // MARK: @objc 함수
-    @objc func backBarButtonClicked() {
-        navigationController?.popViewController(animated: true)
     }
     
     @objc func profileTapped() {

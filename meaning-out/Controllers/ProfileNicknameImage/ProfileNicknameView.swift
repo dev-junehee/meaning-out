@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import TextFieldEffects
 
-class ProfileNicknameView: BaseView {
+final class ProfileNicknameView: BaseView {
     
     let profileImageView = UIView()
     let profileImage = UIImageView()

@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import SnapKit
 
-class OnboardingViewController: BaseViewController {
+final class OnboardingViewController: BaseViewController {
     
-    let onboardingView = OnboardingView()
+    private let onboardingView = OnboardingView()
     
     override func loadView() {
         self.view = onboardingView
@@ -31,7 +30,7 @@ class OnboardingViewController: BaseViewController {
         onboardingView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
     }
 
-    @objc func startButtonClicked() {
+    @objc private func startButtonClicked() {
         let profileNicknameVC = ProfileNicknameViewController()
         navigationController?.pushViewController(profileNicknameVC, animated: true)
     }

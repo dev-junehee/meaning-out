@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SearchResultView: BaseView {
+final class SearchResultView: BaseView {
     
     let totalLabel = UILabel()
     

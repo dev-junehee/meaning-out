@@ -46,6 +46,7 @@ extension UIViewController {
         }
     }
     
+    // Alert
     func showAlert(title: String?, message: String?, type: AlertType, okHandler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(
             title: title,
@@ -68,4 +69,7 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    @objc func popViewController() {
+        navigationController?.popViewController(animated: true)
+    }
 }

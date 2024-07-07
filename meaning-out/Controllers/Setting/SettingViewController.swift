@@ -10,9 +10,9 @@ import UIKit
 /**
  메인 - 설정 탭
  */
-class SettingViewController: BaseViewController {
+final class SettingViewController: BaseViewController {
     
-    let settingView = SettingView()
+    private let settingView = SettingView()
     
     var nickname = UserDefaultsManager.nickname {
         didSet {

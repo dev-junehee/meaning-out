@@ -8,26 +8,14 @@
 import UIKit
 import SnapKit
 
-class SearchItemHeaderTableViewCell: UITableViewCell {
+final class SearchItemHeaderTableViewCell: BaseTableViewCell {
     
     let titleStack = UIStackView()
     
     let recentTitle = UILabel()
     let removeTitle = UIButton()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        cofigureCellUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         let titleViews = [recentTitle, removeTitle]
         titleViews.forEach {
             titleStack.addArrangedSubview($0)
@@ -36,7 +24,7 @@ class SearchItemHeaderTableViewCell: UITableViewCell {
         contentView.addSubview(titleStack)
     }
     
-    private func configureCellLayout() {
+    override func configureCellLayout() {
         titleStack.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView)
             $0.horizontalEdges.equalTo(contentView).inset(16)
@@ -56,14 +44,13 @@ class SearchItemHeaderTableViewCell: UITableViewCell {
         }
     }
     
-    private func cofigureCellUI() {
+    override func configureCellUI() {
         recentTitle.font = Resource.Fonts.bold16
         recentTitle.text = Constants.Main.recent.rawValue
         
         removeTitle.setTitle(Constants.Main.remove.rawValue, for: .normal)
         removeTitle.setTitleColor(Resource.Colors.primary, for: .normal)
         removeTitle.titleLabel?.font = Resource.Fonts.bold13
-
     }
     
 }

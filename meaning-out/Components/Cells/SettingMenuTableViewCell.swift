@@ -11,7 +11,7 @@ import SnapKit
 /**
  설정 탭 - 메뉴 셀
  */
-class SettingMenuTableViewCell: UITableViewCell {
+final class SettingMenuTableViewCell: BaseTableViewCell {
     
     let menuStack = UIStackView()
     
@@ -21,20 +21,8 @@ class SettingMenuTableViewCell: UITableViewCell {
     let likeImage = UIImageView()
     let likeCount = UILabel()
     let likeLabel = UILabel()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        configureCellUI()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         let likeSubViews = [likeImage, likeCount, likeLabel]
         likeSubViews.forEach {
             menuSubTitle.addArrangedSubview($0)
@@ -48,7 +36,7 @@ class SettingMenuTableViewCell: UITableViewCell {
         contentView.addSubview(menuStack)
     }
     
-    private func configureCellLayout() {
+    override func configureCellLayout() {
         menuStack.snp.makeConstraints {
             $0.edges.equalTo(contentView)
         }
@@ -66,7 +54,7 @@ class SettingMenuTableViewCell: UITableViewCell {
         }
     }
     
-    private func configureCellUI() {
+    override func configureCellUI() {
         menuTitle.font = Resource.Fonts.regular14
         likeImage.tintColor = Resource.Colors.black
         likeImage.contentMode = .scaleAspectFit

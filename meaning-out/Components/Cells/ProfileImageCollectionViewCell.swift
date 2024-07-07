@@ -11,30 +11,16 @@ import SnapKit
 /**
  프로필 이미지 설정 화면 - 프로필 이미지 셀
  */
-class ProfileImageCollectionViewCell: UICollectionViewCell {
+final class ProfileImageCollectionViewCell: BaseCollectionViewCell {
     
     let profileImageView = UIView()
     let profileImage = UIImageView()
     
     var itemNum: Int?
     let profileNum = UserDefaultsManager.profile
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        configureSelectedCellUI()
-        configureCellUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         profileImage.layoutIfNeeded()
         profileImage.clipsToBounds = true
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
@@ -55,12 +41,12 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         profileImageView.addSubview(profileImage)
         contentView.addSubview(profileImageView)
     }
     
-    func configureCellLayout() {
+    override func configureCellLayout() {
         profileImageView.snp.makeConstraints {
             $0.top.equalTo(contentView).inset(16)
             $0.size.equalTo(70)
@@ -74,7 +60,7 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCellUI() {
+    override func configureCellUI() {
         profileImage.backgroundColor = Resource.Colors.white
         profileImage.contentMode = .scaleAspectFit
         

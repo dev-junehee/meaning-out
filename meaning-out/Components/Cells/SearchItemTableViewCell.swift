@@ -8,40 +8,21 @@
 import UIKit
 import SnapKit
 
-class SearchItemTableViewCell: UITableViewCell {
-    
-    var tableView: UITableView?
-
-    var searchList = UserDefaultsManager.search {
-        didSet {
-            tableView?.reloadData()
-        }
-    }
+final class SearchItemTableViewCell: BaseTableViewCell {
     
     let clockImage = UIImageView()
     let itemLabel = UILabel()
     let xmark = UIButton()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        configureCellUI()
-        configureHandler()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var searchList = UserDefaultsManager.search
     
-    func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         contentView.addSubview(clockImage)
         contentView.addSubview(itemLabel)
         contentView.addSubview(xmark)
     }
     
-    func configureCellLayout() {
+    override func configureCellLayout() {
         clockImage.snp.makeConstraints {
             $0.leading.equalTo(contentView).offset(16)
             $0.verticalEdges.equalTo(contentView)
@@ -61,7 +42,7 @@ class SearchItemTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCellUI() {
+    override func configureCellUI() {
         clockImage.image = Resource.SystemImages.clock
         clockImage.contentMode = .scaleAspectFit
         clockImage.tintColor = Resource.Colors.black
@@ -79,28 +60,4 @@ class SearchItemTableViewCell: UITableViewCell {
         itemLabel.text = data
     }
     
-    func configureHandler() {
-        xmark.addTarget(self, action: #selector(xmarkClicked), for: .touchUpInside)
-    }
-    
-    @objc func xmarkClicked() {
-        // 검색 리스트에서 해당 검색어 삭제
-        print("X버튼 클릭!!!!")
-        
-        guard let searchText = itemLabel.text else {
-            print("X버튼 클릭 오류")
-            return
-        }
-        
-        guard let tableView = tableView else {
-            print("X버튼: 테이블뷰 오류")
-            return
-        }
-        
-        let findIdx = searchList.firstIndex(of: searchText)!
-        searchList.remove(at: findIdx)
-        print(searchList)
-        UserDefaultsManager.search = searchList
-        tableView.reloadData()
-    }
 }

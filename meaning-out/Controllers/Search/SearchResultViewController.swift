@@ -144,6 +144,12 @@ class SearchResultViewController: BaseViewController {
         resultView.resultCollectionView.reloadData()
     }
     
+    // 검색 결과 - 장바구니 버튼
+    @objc func likeButtonClicked(_ sender: UIButton) {
+        searchResultItem[sender.tag].isLike.toggle()
+        resultView.resultCollectionView.reloadItems(at: [IndexPath(row: 0, section: sender.tag)])
+    }
+    
 }
 
 extension SearchResultViewController {
@@ -170,22 +176,23 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as! SearchResultCollectionViewCell
-        
+       
         let idx = indexPath.item
         let data = searchResultItem[idx]
-
+        
+        cell.likeButton.tag = indexPath.item
+        cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         cell.configureCellData(data: data)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let item = indexPath.item
         
         let searchResultDetailVC = SearchResultDetailViewController()
-        searchResultDetailVC.itemTitle = searchResultItem[item].title
-        searchResultDetailVC.itemLink = searchResultItem[item].link
-        searchResultDetailVC.itemIsLike = searchResultItem[item].isLike
+        searchResultDetailVC.searchItem = searchResultItem[item]
         navigationController?.pushViewController(searchResultDetailVC, animated: true)
     }
     

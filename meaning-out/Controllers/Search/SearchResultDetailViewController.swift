@@ -16,10 +16,10 @@ import WebKit
 class SearchResultDetailViewController: BaseViewController {
     
     let webView = WKWebView()
-    
-    var itemTitle: String = ""
-    var itemLink: String = ""
-    var itemIsLike: Bool = false
+    var searchItem: SearchItem?
+//    var itemTitle: String = ""
+//    var itemLink: String = ""
+//    var itemIsLike: Bool = false
     
     var cartList = UserDefaultsManager.cart {
         didSet {
@@ -33,10 +33,12 @@ class SearchResultDetailViewController: BaseViewController {
     }
     
     override func configureViewController() {
+        guard let itemTitle = searchItem?.title else { return }
         navigationItem.title = getItemTitle(itemTitle)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonclicked), type: .left)
         
         // UserDefaults 좋아요 상품 리스트에 해당 상품명이 있으면 like, 없으면 unlike
+        
         let likeButton = UserDefaultsManager.cart.contains(itemTitle) ? Resource.Images.likeSelected : Resource.Images.likeUnselected
         addImgBarBtn(image: likeButton, style: .plain, target: self, action: #selector(likeBarButtonClicked), type: .right)
     }
@@ -52,6 +54,7 @@ class SearchResultDetailViewController: BaseViewController {
     }
     
     func configureData() {
+        guard let itemLink = searchItem?.link else { return }
         let URL = URL(string: itemLink)!
         let request = URLRequest(url: URL)
         webView.load(request)
@@ -63,6 +66,7 @@ class SearchResultDetailViewController: BaseViewController {
     
     @objc func likeBarButtonClicked() {
         // like -> unLike
+        guard let itemTitle = searchItem?.title else { return }
         if cartList.contains(itemTitle) {
             cartList.append(itemTitle)
             UserDefaultsManager.cart = cartList

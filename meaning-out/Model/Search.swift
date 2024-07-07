@@ -19,7 +19,7 @@ struct SearchItem: Decodable {
     let mallName: String
     let image: String
     let link: String
-    let isLike: Bool
+    var isLike: Bool
     
     enum CodingKeys: CodingKey {
         case title

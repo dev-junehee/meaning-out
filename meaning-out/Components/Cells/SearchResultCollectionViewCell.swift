@@ -13,7 +13,7 @@ import SnapKit
 /**
  검색 결과 화면 - 검색 아이템 셀
  */
-class SearchResultCollectionViewCell: UICollectionViewCell {
+class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     let itemView = UIStackView()
     
@@ -26,20 +26,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     var likeList = UserDefaultsManager.like
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        configureCellUI()
-//        configureHandler()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         let items = [itemImage, itemMallName, itemTitle, itemPrice]
         items.forEach {
             itemView.addArrangedSubview($0)
@@ -49,7 +36,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(likeButton)
     }
     
-    func configureCellLayout() {
+    override func configureCellLayout() {
         itemView.snp.makeConstraints {
             $0.edges.equalTo(contentView)
         }
@@ -86,7 +73,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCellUI() {
+    override func configureCellUI() {
         itemImage.clipsToBounds = true
         itemImage.layer.cornerRadius = 10
         itemImage.contentMode = .scaleAspectFill
@@ -102,6 +89,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemPrice.font = Resource.Fonts.bold16
     }
     
+    // 검색 결과 셀
     func configureCellData(data: SearchItem) {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
@@ -116,7 +104,6 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         } else {
             likeButton.tintColor = Resource.Colors.white
         }
-        
         
         itemMallName.text = data.mallName
         itemTitle.text = getItemTitle(data.title)
@@ -145,14 +132,4 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
     }
     
-//    func configureHandler() {
-//        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
-//    }
-    
-//    @objc func likeButtonClicked() {
-//        guard let itemTitle = itemTitle.text else { return }
-//        // UserDefaults에 좋아요 상품명 저장
-//        likeList.append(itemTitle)
-//        UserDefaultsManager.like = likeList
-//    }
 }

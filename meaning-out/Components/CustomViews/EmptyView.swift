@@ -8,36 +8,19 @@
 import UIKit
 import SnapKit
 
-class EmptyView: UIView {
+class EmptyView: BaseView {
     
     let emptyView = UIStackView()
     let emptyImage = UIImageView()
     let emptyLabel = UILabel()
 
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        
-        configureView()
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureView() {
-        backgroundColor = Resource.Colors.white
-    }
-    
-    private func configureHierarchy() {
+    override func configureViewHierarchy() {
         emptyView.addArrangedSubview(emptyImage)
         emptyView.addArrangedSubview(emptyLabel)
         addSubview(emptyView)
     }
     
-    private func configureLayout() {
+    override func configureViewLayout() {
         emptyView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
@@ -45,10 +28,12 @@ class EmptyView: UIView {
         emptyView.spacing = 8
     }
     
-    private func configureUI() {
+    override func configureViewUI() {
+        backgroundColor = Resource.Colors.white
         emptyImage.image = Resource.Images.empty
         emptyLabel.font = Resource.Fonts.bold16
         emptyLabel.text = Constants.Main.empty.rawValue
         emptyLabel.textAlignment = .center
     }
+    
 }

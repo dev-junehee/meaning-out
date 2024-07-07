@@ -83,7 +83,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let menu = Constants.SettingOptions.allCases[section].menuOptions[idx]
           
             if indexPath.row == 0 {
-                cell.configureCartCellData(data: menu)
+                cell.configureLikeCellData(data: menu)
             } else {
                 cell.configureCellData(data: menu)
             }
@@ -99,6 +99,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             let editNicknameVC = EditNicknameViewController()
             navigationController?.pushViewController(editNicknameVC, animated: true)
+            return
+        }
+        
+        if row == 0 {
+            let likeVC = LikeViewController()
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 1  // 찜 탭으로 연결
+            }
             return
         }
         

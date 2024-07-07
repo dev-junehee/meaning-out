@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="100" id="5ld-qE-Jak"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="42"/>
-                                <color key="textColor" red="0.93725490196078431" green="0.53725490196078429" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.73333333333333328" green="0.14901960784313725" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="Wmi-MW-k3D">
@@ -32,29 +32,17 @@
                                     <constraint firstAttribute="height" constant="250" id="POd-jW-hFK"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김준희" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeC-pC-CsE">
-                                <rect key="frame" x="16" y="544" width="361" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="H0q-ed-KIZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="28"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.53725490200000003" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Wmi-MW-k3D" secondAttribute="trailing" constant="16" id="9VH-2z-KaB"/>
                             <constraint firstItem="Wmi-MW-k3D" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Aly-Hq-bY1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xeC-pC-CsE" secondAttribute="trailing" constant="16" id="CKg-06-ngb"/>
-                            <constraint firstItem="xeC-pC-CsE" firstAttribute="top" secondItem="Wmi-MW-k3D" secondAttribute="bottom" constant="30" id="E3y-Rh-cux"/>
                             <constraint firstItem="xxo-Bp-j6A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="GFh-Ot-fkj"/>
                             <constraint firstItem="Wmi-MW-k3D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="JR6-PA-Y34"/>
                             <constraint firstItem="xxo-Bp-j6A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Tck-6p-UMu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xxo-Bp-j6A" secondAttribute="trailing" constant="16" id="Was-ZR-HCf"/>
                             <constraint firstItem="Wmi-MW-k3D" firstAttribute="top" secondItem="xxo-Bp-j6A" secondAttribute="bottom" constant="50" id="qAk-fj-oZN"/>
-                            <constraint firstItem="xeC-pC-CsE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="t9X-a3-rmB"/>
                         </constraints>
                     </view>
                 </viewController>

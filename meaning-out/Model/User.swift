@@ -11,6 +11,6 @@ struct User {
     var nickname: String
     var profile: Int
     var joinDate: String
-    var cart: Int
+    var like: Int
     var isUser: Bool
 }

@@ -18,9 +18,9 @@ class SettingMenuTableViewCell: UITableViewCell {
     let menuTitle = UILabel()
     
     let menuSubTitle = UIStackView()
-    let cartImage = UIImageView()
-    let cartCount = UILabel()
-    let cartLabel = UILabel()
+    let likeImage = UIImageView()
+    let likeCount = UILabel()
+    let likeLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,8 +35,8 @@ class SettingMenuTableViewCell: UITableViewCell {
     }
     
     private func configureCellHierarchy() {
-        let cartSubViews = [cartImage, cartCount, cartLabel]
-        cartSubViews.forEach {
+        let likeSubViews = [likeImage, likeCount, likeLabel]
+        likeSubViews.forEach {
             menuSubTitle.addArrangedSubview($0)
         }
         
@@ -68,24 +68,24 @@ class SettingMenuTableViewCell: UITableViewCell {
     
     private func configureCellUI() {
         menuTitle.font = Resource.Fonts.regular14
-        cartImage.tintColor = Resource.Colors.black
-        cartImage.contentMode = .scaleAspectFit
-        cartCount.font = Resource.Fonts.bold13
-        cartLabel.font = Resource.Fonts.regular16
+        likeImage.tintColor = Resource.Colors.black
+        likeImage.contentMode = .scaleAspectFit
+        likeCount.font = Resource.Fonts.bold13
+        likeLabel.font = Resource.Fonts.regular16
     }
     
-    func configureCartCellData(data: String) {
+    func configureLikeCellData(data: String) {
         menuTitle.text = data
-        cartImage.image = Resource.Images.likeSelected
-        cartCount.text = UserDefaultsManager.getCartLabel()
-        cartLabel.text = Constants.SettingOptions.cart
+        likeImage.image = Resource.SystemImages.likeSelected
+        likeCount.text = UserDefaultsManager.getLikeLabel()
+        likeLabel.text = Constants.SettingOptions.like
     }
     
     func configureCellData(data: String) {
         menuTitle.text = data
-        cartImage.image = nil
-        cartCount.text = ""
-        cartLabel.text = ""
+        likeImage.image = nil
+        likeCount.text = ""
+        likeLabel.text = ""
     }
     
 }

@@ -22,12 +22,14 @@ enum Constants {
     enum Title: String {
         case meaningout = "MeaningOut"
         case profile = "PROFILE SETTING"
+        case like = "내가 찜한 상품"
         case setting = "SETTING"
         case edit = "EDIT PROFILE"
     }
     
     enum Tab: String {
         case search = "검색"
+        case like = "찜"
         case setting = "설정"
     }
     
@@ -100,10 +102,10 @@ enum Constants {
         case menu
         
         var menuOptions: [String] {
-            return ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
+            return ["내가 찜한 상품", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
         }
         
-        static let cart = "의 상품"
+        static let like = "의 상품"
     }
     
     enum Placeholder: String {
@@ -112,7 +114,7 @@ enum Constants {
     }
     
     enum Integer: Int {
-        case buttonRadius = 25
+        case buttonRadius = 20
         case borderWidth = 3
         case borderWidthEnabled = 1
     }

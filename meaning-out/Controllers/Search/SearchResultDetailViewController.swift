@@ -16,12 +16,9 @@ import WebKit
 class SearchResultDetailViewController: BaseViewController {
     
     let webView = WKWebView()
+    var searchItem: SearchItem?
     
-    var itemTitle: String = ""
-    var itemLink: String = ""
-    var itemIsLike: Bool = false
-    
-    var cartList = UserDefaultsManager.cart {
+    var likeList = UserDefaultsManager.like {
         didSet {
             configureViewController()
         }
@@ -33,11 +30,12 @@ class SearchResultDetailViewController: BaseViewController {
     }
     
     override func configureViewController() {
+        guard let itemTitle = searchItem?.title else { return }
         navigationItem.title = getItemTitle(itemTitle)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonclicked), type: .left)
         
         // UserDefaults 좋아요 상품 리스트에 해당 상품명이 있으면 like, 없으면 unlike
-        let likeButton = UserDefaultsManager.cart.contains(itemTitle) ? Resource.Images.likeSelected : Resource.Images.likeUnselected
+        let likeButton = UserDefaultsManager.like.contains(itemTitle) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
         addImgBarBtn(image: likeButton, style: .plain, target: self, action: #selector(likeBarButtonClicked), type: .right)
     }
     
@@ -52,6 +50,7 @@ class SearchResultDetailViewController: BaseViewController {
     }
     
     func configureData() {
+        guard let itemLink = searchItem?.link else { return }
         let URL = URL(string: itemLink)!
         let request = URLRequest(url: URL)
         webView.load(request)
@@ -63,16 +62,17 @@ class SearchResultDetailViewController: BaseViewController {
     
     @objc func likeBarButtonClicked() {
         // like -> unLike
-        if cartList.contains(itemTitle) {
-            cartList.append(itemTitle)
-            UserDefaultsManager.cart = cartList
+        guard let itemTitle = searchItem?.title else { return }
+        if likeList.contains(itemTitle) {
+            likeList.append(itemTitle)
+            UserDefaultsManager.like = likeList
         } else {
-            guard let idx = cartList.firstIndex(of: itemTitle) else {
+            guard let idx = likeList.firstIndex(of: itemTitle) else {
                 print("좋아요 리스트에 해당 상품이 없어요~!")
                 return
             }
-            cartList.remove(at: idx)
-            UserDefaultsManager.cart = cartList
+            likeList.remove(at: idx)
+            UserDefaultsManager.like = likeList
         }
         configureViewController()
     }

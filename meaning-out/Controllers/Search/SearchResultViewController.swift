@@ -28,6 +28,8 @@ class SearchResultViewController: BaseViewController {
     var searchStart = 1
     var searchResultItem: [SearchItem] = []
     
+    let repository = LikeItemRepository()
+    
     override func loadView() {
         self.view = resultView
     }
@@ -69,13 +71,12 @@ class SearchResultViewController: BaseViewController {
     
     func callRequest(sort: String) {
         NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
-            print(#function, res)
-            
             if res.total == 0 {
-                self.showAlert(title: "검색 결과가 없어요.", 
-                               message: "다른 검색어를 입력해 주세요!",
-                               type: .oneButton,
-                               okHandler: self.alertPopViewController
+                self.showAlert(
+                    title: "검색 결과가 없어요.",
+                    message: "다른 검색어를 입력해 주세요!",
+                    type: .oneButton,
+                    okHandler: self.alertPopViewController
                 )
                 return
             }
@@ -144,6 +145,29 @@ class SearchResultViewController: BaseViewController {
         resultView.resultCollectionView.reloadData()
     }
     
+    // 검색 결과 - 좋아요 버튼 - 좋아요 저장
+    @objc func likeButtonClicked(_ sender: UIButton) {
+        repository.getFileURL()
+        print(searchResultItem[sender.tag].isLike)
+        
+        if !searchResultItem[sender.tag].isLike {
+            // 찜 안했을 때 - 찜 하기
+            let likeItem = LikeItemTable(item: searchResultItem[sender.tag])
+            print(likeItem)
+            repository.saveLikeItem(likeItem)
+        } else {
+            // 찜했을 때 - 찜 취소
+            let id = searchResultItem[sender.tag].productId
+            let target = repository.findLikeItem(id: id)
+            print(target)
+            repository.deleteLikeItem(target)
+        }
+        
+        
+        searchResultItem[sender.tag].isLike.toggle()
+        resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
+    }
+    
 }
 
 extension SearchResultViewController {
@@ -169,11 +193,13 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as! SearchResultCollectionViewCell
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell else { return SearchResultCollectionViewCell() }
+       
         let idx = indexPath.item
         let data = searchResultItem[idx]
-
+        
+        cell.likeButton.tag = indexPath.item
+        cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         cell.configureCellData(data: data)
         
         return cell
@@ -181,11 +207,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = indexPath.item
-        
         let searchResultDetailVC = SearchResultDetailViewController()
-        searchResultDetailVC.itemTitle = searchResultItem[item].title
-        searchResultDetailVC.itemLink = searchResultItem[item].link
-        searchResultDetailVC.itemIsLike = searchResultItem[item].isLike
+        searchResultDetailVC.searchItem = searchResultItem[item]
         navigationController?.pushViewController(searchResultDetailVC, animated: true)
     }
     

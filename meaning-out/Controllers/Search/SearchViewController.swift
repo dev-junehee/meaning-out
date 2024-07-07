@@ -57,7 +57,7 @@ class SearchViewController: BaseViewController {
     private func viewToggle() {
         searchView.emptyView.isHidden = !searchList.isEmpty
         searchView.shoppingTableView.isHidden = searchList.isEmpty
-   }
+    }
     
 }
 

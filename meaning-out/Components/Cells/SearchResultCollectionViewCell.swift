@@ -24,7 +24,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     let likeButton = UIButton()
     
-    var cartList = UserDefaultsManager.cart
+    var likeList = UserDefaultsManager.like
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +32,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         configureCellHierarchy()
         configureCellLayout()
         configureCellUI()
-        configureHandler()
+//        configureHandler()
     }
     
     required init?(coder: NSCoder) {
@@ -106,24 +106,53 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
         
-        likeButton.backgroundColor = data.isLike || UserDefaultsManager.cart.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
+        likeButton.backgroundColor = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
         
-        let likeImage = data.isLike || UserDefaultsManager.cart.contains(data.title) ? Resource.Images.likeSelected : Resource.Images.likeUnselected
+        let likeImage = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
         likeButton.setImage(likeImage, for: .normal)
+        
+        if data.isLike {
+            likeButton.tintColor = Resource.Colors.primary
+        } else {
+            likeButton.tintColor = Resource.Colors.white
+        }
+        
         
         itemMallName.text = data.mallName
         itemTitle.text = getItemTitle(data.title)
         itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
     }
     
-    func configureHandler() {
-        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+    // 찜한 목록 셀
+    func configureLikeCellData(data: LikeItemTable) {
+        let IMG_URL = URL(string: data.image)
+        itemImage.kf.setImage(with: IMG_URL)
+        
+        likeButton.backgroundColor = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
+        
+        let likeImage = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
+        likeButton.setImage(likeImage, for: .normal)
+        
+        if data.isLike {
+            likeButton.tintColor = Resource.Colors.primary
+        } else {
+            likeButton.tintColor = Resource.Colors.white
+        }
+        
+        
+        itemMallName.text = data.mallName
+        itemTitle.text = getItemTitle(data.title)
+        itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
     }
     
-    @objc func likeButtonClicked() {
-        guard let itemTitle = itemTitle.text else { return }
-        // UserDefaults에 좋아요 상품명 저장
-        cartList.append(itemTitle)
-        UserDefaultsManager.cart = cartList
-    }
+//    func configureHandler() {
+//        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+//    }
+    
+//    @objc func likeButtonClicked() {
+//        guard let itemTitle = itemTitle.text else { return }
+//        // UserDefaults에 좋아요 상품명 저장
+//        likeList.append(itemTitle)
+//        UserDefaultsManager.like = likeList
+//    }
 }

@@ -127,7 +127,7 @@ class ProfileNicknameViewController: BaseViewController {
         UserDefaultsManager.nickname = nickname
         UserDefaultsManager.profile = profileNum
         UserDefaultsManager.joinDate = getTodayString(formatType: "yyyy. MM. dd")
-        UserDefaultsManager.cart = []
+        UserDefaultsManager.like = []
         UserDefaultsManager.search = []
         UserDefaultsManager.isUser = true
     
@@ -142,9 +142,10 @@ class ProfileNicknameViewController: BaseViewController {
         tabBarController.tabBar.tintColor = Resource.Colors.primary
         
         let mainVC = UINavigationController(rootViewController: SearchViewController())
+        let likeVC = UINavigationController(rootViewController: LikeViewController())
         let settingVC = UINavigationController(rootViewController: SettingViewController())
         
-        let controllers = [mainVC, settingVC]
+        let controllers = [mainVC, likeVC, settingVC]
         tabBarController.setViewControllers(controllers, animated: true)
         tabBarController.setTabBarUI()
         
@@ -152,8 +153,11 @@ class ProfileNicknameViewController: BaseViewController {
             items[0].title = Constants.Tab.search.rawValue
             items[0].image = Resource.SystemImages.search
             
-            items[1].title = Constants.Tab.setting.rawValue
-            items[1].image = Resource.SystemImages.person
+            items[1].title = Constants.Tab.like.rawValue
+            items[1].image = Resource.SystemImages.like
+            
+            items[2].title = Constants.Tab.setting.rawValue
+            items[2].image = Resource.SystemImages.person
         }
         
         rootViewController = tabBarController

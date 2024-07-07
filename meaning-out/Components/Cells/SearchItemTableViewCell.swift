@@ -8,33 +8,21 @@
 import UIKit
 import SnapKit
 
-class SearchItemTableViewCell: UITableViewCell {
+final class SearchItemTableViewCell: BaseTableViewCell {
     
     let clockImage = UIImageView()
     let itemLabel = UILabel()
     let xmark = UIButton()
     
     var searchList = UserDefaultsManager.search
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        configureCellUI()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         contentView.addSubview(clockImage)
         contentView.addSubview(itemLabel)
         contentView.addSubview(xmark)
     }
     
-    func configureCellLayout() {
+    override func configureCellLayout() {
         clockImage.snp.makeConstraints {
             $0.leading.equalTo(contentView).offset(16)
             $0.verticalEdges.equalTo(contentView)
@@ -54,7 +42,7 @@ class SearchItemTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCellUI() {
+    override func configureCellUI() {
         clockImage.image = Resource.SystemImages.clock
         clockImage.contentMode = .scaleAspectFit
         clockImage.tintColor = Resource.Colors.black

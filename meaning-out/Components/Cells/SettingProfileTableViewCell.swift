@@ -10,7 +10,7 @@ import UIKit
 /**
  설정 탭 - 프로필 정보 셀
  */
-class SettingProfileTableViewCell: UITableViewCell {
+final class SettingProfileTableViewCell: BaseTableViewCell {
     
     let profileStack = UIStackView()
     
@@ -22,20 +22,7 @@ class SettingProfileTableViewCell: UITableViewCell {
     
     let rightButton = UIButton()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureCellHierarchy()
-        configureCellLayout()
-        configureCellUI()
-        configureCellData()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureCellHierarchy() {
+    override func configureCellHierarchy() {
         let labelViews = [nicknameLabel, joinDateLabel]
         labelViews.forEach {
             profileInfoStack.addArrangedSubview($0)
@@ -49,7 +36,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         contentView.addSubview(profileStack)
     }
     
-    private func configureCellLayout() {
+    override func configureCellLayout() {
         profileStack.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView).inset(16)
             $0.horizontalEdges.equalTo(contentView).inset(16)
@@ -86,7 +73,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         }
     }
     
-    private func configureCellUI() {
+    override func configureCellUI() {
         profileImage.layer.cornerRadius = 45
         profileImage.clipsToBounds = true
         profileImage.contentMode = .scaleAspectFill

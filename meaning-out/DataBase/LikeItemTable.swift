@@ -25,6 +25,6 @@ class LikeItemTable: Object {
         self.mallName = item.mallName
         self.image = item.image
         self.link = item.link
-        self.isLike = item.isLike
+        self.isLike = true
     }
 }

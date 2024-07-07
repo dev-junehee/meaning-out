@@ -26,6 +26,9 @@ class LikeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         likeList = repository.getAllLikeItem()
         print("==========", likeList)
         viewToggle()
@@ -62,6 +65,5 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
-    
     
 }

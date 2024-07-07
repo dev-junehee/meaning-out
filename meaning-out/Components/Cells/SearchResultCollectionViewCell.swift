@@ -108,8 +108,15 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         likeButton.backgroundColor = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
         
-        let likeImage = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.Images.likeSelected : Resource.Images.likeUnselected
+        let likeImage = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
         likeButton.setImage(likeImage, for: .normal)
+        
+        if data.isLike {
+            likeButton.tintColor = Resource.Colors.primary
+        } else {
+            likeButton.tintColor = Resource.Colors.white
+        }
+        
         
         itemMallName.text = data.mallName
         itemTitle.text = getItemTitle(data.title)

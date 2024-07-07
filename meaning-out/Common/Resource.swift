@@ -14,7 +14,8 @@ import UIKit
 
 enum Resource {
     enum Colors {
-        static let primary: UIColor = .init(rgb: 0xef8947)
+//        static let primary: UIColor = .init(rgb: 0xef8947)
+        static let primary: UIColor = .init(rgb: 0xbb2649)
         static let black: UIColor = .init(rgb: 0x000000)
         static let transparentBlack: UIColor = .init(rgb: 0x000000, alpha: 0.3)
         static let darkGray: UIColor = .init(rgb: 0x4c4c4c)
@@ -48,8 +49,8 @@ enum Resource {
         
         static let empty: UIImage = .empty
         static let launch: UIImage = .launch
-        static let likeSelected: UIImage = .likeSelected
-        static let likeUnselected: UIImage = .likeUnselected
+//        static let likeSelected: UIImage = .likeSelected
+//        static let likeUnselected: UIImage = .likeUnselected
     }
     
     enum SystemImages {
@@ -60,6 +61,8 @@ enum Resource {
         static let left = UIImage(systemName: "chevron.left")!
         static let right = UIImage(systemName: "chevron.right")!
         static let camara = UIImage(systemName: "camera.fill")!
-        static let like = UIImage(systemName: "heart")
+        static let like = UIImage(systemName: "heart")!
+        static let likeSelected = UIImage(systemName: "arrow.down.heart.fill")!
+        static let likeUnselected = UIImage(systemName: "arrow.down.heart")!
     }
 }

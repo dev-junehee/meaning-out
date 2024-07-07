@@ -39,7 +39,7 @@ class SearchResultDetailViewController: BaseViewController {
         
         // UserDefaults 좋아요 상품 리스트에 해당 상품명이 있으면 like, 없으면 unlike
         
-        let likeButton = UserDefaultsManager.like.contains(itemTitle) ? Resource.Images.likeSelected : Resource.Images.likeUnselected
+        let likeButton = UserDefaultsManager.like.contains(itemTitle) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
         addImgBarBtn(image: likeButton, style: .plain, target: self, action: #selector(likeBarButtonClicked), type: .right)
     }
     

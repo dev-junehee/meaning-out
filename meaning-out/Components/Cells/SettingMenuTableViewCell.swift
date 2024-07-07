@@ -76,7 +76,7 @@ class SettingMenuTableViewCell: UITableViewCell {
     
     func configureLikeCellData(data: String) {
         menuTitle.text = data
-        likeImage.image = Resource.Images.likeSelected
+        likeImage.image = Resource.SystemImages.likeSelected
         likeCount.text = UserDefaultsManager.getLikeLabel()
         likeLabel.text = Constants.SettingOptions.like
     }

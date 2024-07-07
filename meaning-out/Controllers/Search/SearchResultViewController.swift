@@ -144,7 +144,7 @@ class SearchResultViewController: BaseViewController {
         resultView.resultCollectionView.reloadData()
     }
     
-    // 검색 결과 - 장바구니 버튼
+    // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
         searchResultItem[sender.tag].isLike.toggle()
         resultView.resultCollectionView.reloadItems(at: [IndexPath(row: 0, section: sender.tag)])

@@ -100,10 +100,10 @@ enum Constants {
         case menu
         
         var menuOptions: [String] {
-            return ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
+            return ["내가 좋아요한 상품", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
         }
         
-        static let cart = "의 상품"
+        static let like = "의 상품"
     }
     
     enum Placeholder: String {

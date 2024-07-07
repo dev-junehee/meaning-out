@@ -83,7 +83,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let menu = Constants.SettingOptions.allCases[section].menuOptions[idx]
           
             if indexPath.row == 0 {
-                cell.configureCartCellData(data: menu)
+                cell.configureLikeCellData(data: menu)
             } else {
                 cell.configureCellData(data: menu)
             }

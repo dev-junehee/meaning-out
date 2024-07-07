@@ -13,7 +13,12 @@ class LikeViewController: BaseViewController {
     let likeView = LikeView()
     
     let repository = LikeItemRepository()
-    var likeList: Results<LikeItemTable>?
+    var likeList: Results<LikeItemTable>? {
+        didSet {
+            viewToggle()
+            likeView.likeCollectionView.reloadData()
+        }
+    }
     
     override func loadView() {
         self.view = likeView
@@ -22,7 +27,8 @@ class LikeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         likeList = repository.getAllLikeItem()
-        print(likeList)
+        print("==========", likeList)
+        viewToggle()
     }
     
     override func configureViewController() {
@@ -32,16 +38,27 @@ class LikeViewController: BaseViewController {
         likeView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
     }
     
+    private func viewToggle() {
+        guard let likeList = likeList else { return }
+        likeView.emptyView.isHidden = !likeList.isEmpty
+        likeView.likeCollectionView.isHidden = likeList.isEmpty
+    }
+    
 }
 
 
 extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return likeList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell else { return SearchResultCollectionViewCell() }
+        
+        if let likeList = likeList {
+            let item = likeList[indexPath.item]
+            cell.configureLikeCellData(data: item)
+        }
         
         return cell
     }

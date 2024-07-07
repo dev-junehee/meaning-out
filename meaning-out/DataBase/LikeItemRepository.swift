@@ -27,23 +27,33 @@ final class LikeItemRepository {
         do {
             try realm.write {
                 realm.add(item)
-                print("좋아요 저장 성공")
-                print(realm.configuration.fileURL)
+                print("찜한 상품 저장 성공")
+                getFileURL()
             }
         } catch {
-            print(#function, "좋아요 저장 실패", error)
+            print(#function, "찜한 상품 저장 실패", error)
         }
     }
     
-    // 좋아요한 상품 불러오기
+    // 찜한 상품 불러오기
     func getAllLikeItem() -> Results<LikeItemTable> {
         return realm.objects(LikeItemTable.self)
     }
     
-    // 좋아요한 상품 삭제하기
+    // 찜한 상품 찾기
+    func findLikeItem(id: String) -> LikeItemTable {
+        return realm.object(ofType: LikeItemTable.self, forPrimaryKey: id)!
+    }
+    
+    // 찜한 상품 삭제하기
     func deleteLikeItem(_ item: LikeItemTable) {
-        try! realm.write {
-            realm.delete(item)
+        do {
+            try realm.write {
+                realm.delete(item)
+                print("찜한 상품 삭제 성공")
+            }
+        } catch {
+            print(#function, "찜한 상품 삭제 실패", error)
         }
     }
 }

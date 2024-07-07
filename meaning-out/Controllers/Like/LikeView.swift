@@ -31,19 +31,23 @@ class LikeView: BaseView {
         return layout
     }
     
+    let emptyView = EmptyView()
+    
     override func configureViewHierarchy() {
         self.addSubview(likeCollectionView)
+        self.addSubview(emptyView)
     }
     
     override func configureViewLayout() {
-        likeCollectionView.snp.makeConstraints {
+        emptyView.snp.makeConstraints {
             $0.edges.equalTo(self.safeAreaLayoutGuide)
         }
-    }
-    
-    override func configureViewUI() {
-        // 임시
-        likeCollectionView.backgroundColor = .lightGray
+        
+        likeCollectionView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(16)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(24)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
     }
     
 }

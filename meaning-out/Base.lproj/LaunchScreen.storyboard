@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="100" id="5ld-qE-Jak"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="42"/>
-                                <color key="textColor" red="0.93725490196078431" green="0.53725490196078429" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.73333333333333328" green="0.14901960784313725" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="Wmi-MW-k3D">

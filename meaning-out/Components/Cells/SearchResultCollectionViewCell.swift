@@ -123,6 +123,28 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
     }
     
+    // 찜한 목록 셀
+    func configureLikeCellData(data: LikeItemTable) {
+        let IMG_URL = URL(string: data.image)
+        itemImage.kf.setImage(with: IMG_URL)
+        
+        likeButton.backgroundColor = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
+        
+        let likeImage = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
+        likeButton.setImage(likeImage, for: .normal)
+        
+        if data.isLike {
+            likeButton.tintColor = Resource.Colors.primary
+        } else {
+            likeButton.tintColor = Resource.Colors.white
+        }
+        
+        
+        itemMallName.text = data.mallName
+        itemTitle.text = getItemTitle(data.title)
+        itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
+    }
+    
 //    func configureHandler() {
 //        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
 //    }

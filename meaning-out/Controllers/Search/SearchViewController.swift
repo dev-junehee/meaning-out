@@ -110,7 +110,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemHeaderTableViewCell.id) as! SearchItemHeaderTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemHeaderTableViewCell.id) as? SearchItemHeaderTableViewCell else { return SearchItemHeaderTableViewCell() }
         
         cell.selectionStyle = .none
         
@@ -121,13 +121,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as! SearchItemTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as? SearchItemTableViewCell else { return SearchItemTableViewCell() }
         
         cell.selectionStyle = .none
-        cell.tableView = searchView.shoppingTableView
-        cell.configureCellHierarchy()
-        cell.configureCellLayout()
-        cell.configureCellUI()
+        cell.tag = indexPath.row
+        cell.xmark.addTarget(self, action: #selector(removeSearchList), for: .touchUpInside)
         cell.configureCellData(data: searchList[indexPath.row])
         
         return cell
@@ -142,8 +140,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(searchResultVC, animated: true)
     }
     
+    // 특정 검색어 삭제
+    @objc func removeSearchList(_ sender: UIButton) {
+        UserDefaultsManager.search.remove(at: sender.tag)
+        searchList = UserDefaultsManager.search
+        searchView.shoppingTableView.reloadData()
+    }
+    
+    // 검색 리스트 전체 삭제
     @objc func removeAllSearchList() {
-        // 전체 삭제 버튼 핸들러
         UserDefaultsManager.search.removeAll()
         searchList = UserDefaultsManager.search
         searchView.shoppingTableView.reloadData()

@@ -11,6 +11,7 @@
 		C413D2832C3A9E5000676D26 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C413D2822C3A9E5000676D26 /* RealmSwift */; };
 		C413D2852C3AA03A00676D26 /* LikeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2842C3AA03A00676D26 /* LikeItemRepository.swift */; };
 		C413D2882C3AA6CA00676D26 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2872C3AA6CA00676D26 /* LikeViewController.swift */; };
+		C413D28A2C3AAF5A00676D26 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2892C3AAF5A00676D26 /* LikeView.swift */; };
 		C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13B2C1F2232001CE395 /* EmptyView.swift */; };
 		C423D13E2C1F3178001CE395 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13D2C1F3178001CE395 /* Search.swift */; };
 		C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */; };
@@ -65,6 +66,7 @@
 		C413D27F2C3A9E3100676D26 /* LikeItemTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeItemTable.swift; sourceTree = "<group>"; };
 		C413D2842C3AA03A00676D26 /* LikeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeItemRepository.swift; sourceTree = "<group>"; };
 		C413D2872C3AA6CA00676D26 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		C413D2892C3AAF5A00676D26 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		C423D13B2C1F2232001CE395 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		C423D13D2C1F3178001CE395 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				C413D2872C3AA6CA00676D26 /* LikeViewController.swift */,
+				C413D2892C3AAF5A00676D26 /* LikeView.swift */,
 			);
 			path = Like;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				C48B9A502C1C5AA800A3EC84 /* SearchViewController.swift in Sources */,
 				C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */,
 				C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */,
+				C413D28A2C3AAF5A00676D26 /* LikeView.swift in Sources */,
 				C48B9A1F2C1B4A3D00A3EC84 /* OnboardingViewController.swift in Sources */,
 				C48B9A3C2C1BF77300A3EC84 /* ProfileImageViewController.swift in Sources */,
 				C4A52AD62C26E6D50013BCDF /* NetworkManager.swift in Sources */,

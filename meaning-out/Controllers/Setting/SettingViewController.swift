@@ -102,6 +102,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
+        if row == 0 {
+            let likeVC = LikeViewController()
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 1  // 찜 탭으로 연결
+            }
+            return
+        }
+        
         if row == 4 {
             showAlert(
                 title: Constants.Alert.Cancelation.title.rawValue,

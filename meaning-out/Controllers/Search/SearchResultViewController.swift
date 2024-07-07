@@ -147,7 +147,7 @@ class SearchResultViewController: BaseViewController {
     // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
         searchResultItem[sender.tag].isLike.toggle()
-        resultView.resultCollectionView.reloadItems(at: [IndexPath(row: 0, section: sender.tag)])
+        resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
     }
     
 }
@@ -175,7 +175,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as! SearchResultCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell else { return SearchResultCollectionViewCell() }
        
         let idx = indexPath.item
         let data = searchResultItem[idx]
@@ -188,9 +188,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let item = indexPath.item
-        
         let searchResultDetailVC = SearchResultDetailViewController()
         searchResultDetailVC.searchItem = searchResultItem[item]
         navigationController?.pushViewController(searchResultDetailVC, animated: true)

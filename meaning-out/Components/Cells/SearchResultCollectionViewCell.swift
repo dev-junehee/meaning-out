@@ -32,7 +32,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         configureCellHierarchy()
         configureCellLayout()
         configureCellUI()
-        configureHandler()
+//        configureHandler()
     }
     
     required init?(coder: NSCoder) {
@@ -123,14 +123,14 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"
     }
     
-    func configureHandler() {
-        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
-    }
+//    func configureHandler() {
+//        likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+//    }
     
-    @objc func likeButtonClicked() {
-        guard let itemTitle = itemTitle.text else { return }
-        // UserDefaults에 좋아요 상품명 저장
-        likeList.append(itemTitle)
-        UserDefaultsManager.like = likeList
-    }
+//    @objc func likeButtonClicked() {
+//        guard let itemTitle = itemTitle.text else { return }
+//        // UserDefaults에 좋아요 상품명 저장
+//        likeList.append(itemTitle)
+//        UserDefaultsManager.like = likeList
+//    }
 }

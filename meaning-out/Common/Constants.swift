@@ -28,6 +28,7 @@ enum Constants {
     
     enum Tab: String {
         case search = "검색"
+        case like = "좋아요"
         case setting = "설정"
     }
     

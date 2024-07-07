@@ -60,5 +60,6 @@ enum Resource {
         static let left = UIImage(systemName: "chevron.left")!
         static let right = UIImage(systemName: "chevron.right")!
         static let camara = UIImage(systemName: "camera.fill")!
+        static let like = UIImage(systemName: "heart")
     }
 }

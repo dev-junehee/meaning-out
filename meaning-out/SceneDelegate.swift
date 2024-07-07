@@ -28,9 +28,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.tabBar.tintColor = Resource.Colors.primary
             
             let main = UINavigationController(rootViewController: SearchViewController())
+            let like = UINavigationController(rootViewController: LikeViewController())
             let setting = UINavigationController(rootViewController: SettingViewController())
             
-            let controllers = [main, setting]
+            let controllers = [main, like, setting]
             tabBarController.setViewControllers(controllers, animated: true)
             tabBarController.setTabBarUI()
             
@@ -38,8 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 items[0].title = Constants.Tab.search.rawValue
                 items[0].image = Resource.SystemImages.search
                 
-                items[1].title = Constants.Tab.setting.rawValue
-                items[1].image = Resource.SystemImages.person
+                items[1].title = Constants.Tab.like.rawValue
+                items[1].image = Resource.SystemImages.like
+                
+                items[2].title = Constants.Tab.setting.rawValue
+                items[2].image = Resource.SystemImages.person
             }
             
             rootViewController = tabBarController

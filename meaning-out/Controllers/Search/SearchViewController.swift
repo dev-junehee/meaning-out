@@ -124,8 +124,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.id, for: indexPath) as? SearchItemTableViewCell else { return SearchItemTableViewCell() }
         
         cell.selectionStyle = .none
-        cell.tag = indexPath.row
-        cell.xmark.addTarget(self, action: #selector(removeSearchList), for: .touchUpInside)
+        cell.xmark.tag = indexPath.row
+        cell.xmark.addTarget(self, action: #selector(removeSearchList(_:)), for: .touchUpInside)
         cell.configureCellData(data: searchList[indexPath.row])
         
         return cell
@@ -142,6 +142,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     // 특정 검색어 삭제
     @objc func removeSearchList(_ sender: UIButton) {
+        print(sender.tag)
         UserDefaultsManager.search.remove(at: sender.tag)
         searchList = UserDefaultsManager.search
         searchView.shoppingTableView.reloadData()

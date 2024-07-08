@@ -44,7 +44,7 @@ final class LikeDetailViewController: BaseViewController {
     @objc private func likeButtonClicked(_ sender: UIButton) {
         showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
             if let category = self.repository.findLikeCategory(title: self.navigationItem.title ?? "") {
-                self.repository.deleteLikeItem(item: category.detailData[sender.tag], category: category, at: sender.tag)
+                self.repository.deleteLikeItemInCategory(item: category.detailData[sender.tag], category: category, at: sender.tag)
                 if category.detailData.isEmpty {
                     self.navigationController?.popViewController(animated: true)
                 } else {

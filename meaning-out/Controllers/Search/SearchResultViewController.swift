@@ -152,10 +152,13 @@ final class SearchResultViewController: BaseViewController {
             }
         } else {
             // 찜했을 때 - 찜 취소
-            let id = searchResultItem[sender.tag].productId
-            let target = repository.findLikeItem(id: id)
-            print("삭제할 대상 확인", target)
-//            repository.deleteLikeItem(target)
+            showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+                let item = self.searchResultItem[sender.tag]
+                let target = self.repository.findLikeItem(id: item.productId)
+                if let target {
+                    self.repository.deleteLikeItem(item: target)
+                }
+            }
         }
         
         searchResultItem[sender.tag].isLike.toggle()

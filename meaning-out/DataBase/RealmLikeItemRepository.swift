@@ -85,16 +85,19 @@ final class RealmLikeItemRepository {
     }
     
     // 찜한 상품 삭제하기
-    func deleteLikeItem(item: LikeItem, category: LikeCategory, at: Int) {
-//        do {
-//            try realm.write {
-//                realm.delete(item)
-//                print("찜한 상품 삭제 성공")
-//            }
-//        } catch {
-//            print(#function, "찜한 상품 삭제 실패", error)
-//        }
-        
+    func deleteLikeItem(item: LikeItem) {
+        do {
+            try realm.write {
+                realm.delete(item)
+                print("찜한 상품 삭제 성공")
+            }
+        } catch {
+            print("찜한 상품 삭제 실패", error)
+        }
+    }
+    
+    // 찜 카테고리 안에 있는 찜한 상품 삭제하기
+    func deleteLikeItemInCategory(item: LikeItem, category: LikeCategory, at: Int) {
         do {
             try realm.write {
                 category.detailData.remove(at: at)

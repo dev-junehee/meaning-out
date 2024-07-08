@@ -30,6 +30,6 @@ final class LikeCategoryView: BaseView {
     }
     
     override func configureViewUI() {
-        emptyView.emptyViewType = .like
+        emptyView.emptyText = Constants.Like.empty.rawValue
     }
 }

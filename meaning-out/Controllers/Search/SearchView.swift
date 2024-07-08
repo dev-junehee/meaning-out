@@ -43,6 +43,7 @@ class SearchView: BaseView {
     override func configureViewUI() {
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = Constants.Placeholder.searchBar.rawValue
+        emptyView.emptyText = Constants.Search.empty.rawValue
     }
     
 }

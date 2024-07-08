@@ -8,18 +8,17 @@
 import UIKit
 import SnapKit
 
-enum EmptyViewType {
-    case search
-    case like
-}
-
 final class EmptyView: BaseView {
     
     private let emptyView = UIStackView()
     private let emptyImage = UIImageView()
     private let emptyLabel = UILabel()
     
-    var emptyViewType: EmptyViewType = .search
+    var emptyText: String? {
+        didSet {
+            emptyLabel.text = emptyText
+        }
+    }
 
     override func configureViewHierarchy() {
         emptyView.addArrangedSubview(emptyImage)
@@ -39,14 +38,8 @@ final class EmptyView: BaseView {
         backgroundColor = Resource.Colors.white
         emptyImage.image = Resource.Images.empty
         emptyLabel.font = Resource.Fonts.bold16
+        emptyLabel.text = emptyText
         emptyLabel.textAlignment = .center
-        
-        switch emptyViewType {
-        case .search:
-            emptyLabel.text = Constants.Search.empty.rawValue
-        case .like:
-            emptyLabel.text = Constants.Like.empty.rawValue
-        }
     }
     
 }

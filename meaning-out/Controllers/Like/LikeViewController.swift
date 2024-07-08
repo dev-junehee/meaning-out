@@ -12,8 +12,8 @@ final class LikeViewController: BaseViewController {
     
     private let likeView = LikeView()
     
-    private let repository = LikeItemRepository()
-    var likeList: Results<LikeItemTable>? {
+    private let repository = RealmLikeItemRepository()
+    var likeList: Results<LikeItem>? {
         didSet {
             viewToggle()
             likeView.likeCollectionView.reloadData()
@@ -35,7 +35,7 @@ final class LikeViewController: BaseViewController {
     }
     
     override func configureViewController() {
-        navigationItem.title = Constants.Title.like.rawValue
+//        navigationItem.title = Constants.Title.like.rawValue
         likeView.likeCollectionView.delegate = self
         likeView.likeCollectionView.dataSource = self
         likeView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)

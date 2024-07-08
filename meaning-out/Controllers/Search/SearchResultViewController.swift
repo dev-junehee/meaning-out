@@ -25,7 +25,7 @@ final class SearchResultViewController: BaseViewController {
     var searchStart = 1
     var searchResultItem: [Shopping] = []
     
-    let repository = LikeItemRepository()
+    let repository = RealmLikeItemRepository()
     
     override func loadView() {
         self.view = resultView
@@ -143,7 +143,7 @@ final class SearchResultViewController: BaseViewController {
         
         if !searchResultItem[sender.tag].isLike {
             // 찜 안했을 때 - 찜 하기
-            let likeItem = LikeItemTable(item: searchResultItem[sender.tag])
+            let likeItem = LikeItem(item: searchResultItem[sender.tag])
             print(likeItem)
             repository.saveLikeItem(likeItem)
         } else {

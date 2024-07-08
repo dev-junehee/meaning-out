@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class LikeItemRepository {
+final class RealmLikeItemRepository {
     
     private let realm = try! Realm()
     
@@ -19,11 +19,17 @@ final class LikeItemRepository {
     
     // 저장 루트 확인하기
     func getFileURL() {
-        print(realm.configuration.fileURL)
+        print(realm.configuration.fileURL ?? "fileURL 없음")
     }
     
-    // 좋아요 상품 저장하기
-    func saveLikeItem(_ item: LikeItemTable) {
+    // 찜 카테고리 가져오기
+    func getAllLikeCategory() -> [LikeCategory] {
+        let category = realm.objects(LikeCategory.self)
+        return Array(category)
+    }
+    
+    // 찜한 상품 저장하기
+    func saveLikeItem(_ item: LikeItem) {
         do {
             try realm.write {
                 realm.add(item)
@@ -36,17 +42,17 @@ final class LikeItemRepository {
     }
     
     // 찜한 상품 불러오기
-    func getAllLikeItem() -> Results<LikeItemTable> {
-        return realm.objects(LikeItemTable.self)
+    func getAllLikeItem() -> Results<LikeItem> {
+        return realm.objects(LikeItem.self)
     }
     
     // 찜한 상품 찾기
-    func findLikeItem(id: String) -> LikeItemTable {
-        return realm.object(ofType: LikeItemTable.self, forPrimaryKey: id)!
+    func findLikeItem(id: String) -> LikeItem {
+        return realm.object(ofType: LikeItem.self, forPrimaryKey: id)!
     }
     
     // 찜한 상품 삭제하기
-    func deleteLikeItem(_ item: LikeItemTable) {
+    func deleteLikeItem(_ item: LikeItem) {
         do {
             try realm.write {
                 realm.delete(item)

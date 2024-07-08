@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C413D2802C3A9E3100676D26 /* LikeItemTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D27F2C3A9E3100676D26 /* LikeItemTable.swift */; };
+		C413D2802C3A9E3100676D26 /* RealmTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D27F2C3A9E3100676D26 /* RealmTable.swift */; };
 		C413D2832C3A9E5000676D26 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C413D2822C3A9E5000676D26 /* RealmSwift */; };
-		C413D2852C3AA03A00676D26 /* LikeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2842C3AA03A00676D26 /* LikeItemRepository.swift */; };
+		C413D2852C3AA03A00676D26 /* RealmLikeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2842C3AA03A00676D26 /* RealmLikeItemRepository.swift */; };
 		C413D2882C3AA6CA00676D26 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2872C3AA6CA00676D26 /* LikeViewController.swift */; };
 		C413D28A2C3AAF5A00676D26 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2892C3AAF5A00676D26 /* LikeView.swift */; };
 		C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13B2C1F2232001CE395 /* EmptyView.swift */; };
@@ -24,6 +24,8 @@
 		C423D17A2C21085C001CE395 /* SearchResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */; };
 		C44DDC062C3AE8DC0019E549 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC052C3AE8DC0019E549 /* BaseTableViewCell.swift */; };
 		C44DDC082C3AEAB50019E549 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC072C3AEAB50019E549 /* BaseCollectionViewCell.swift */; };
+		C44DDC0C2C3BDC730019E549 /* LikeCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC0B2C3BDC730019E549 /* LikeCategoryViewController.swift */; };
+		C44DDC0E2C3BDC8C0019E549 /* LikeCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC0D2C3BDC8C0019E549 /* LikeCategoryView.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
@@ -65,8 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C413D27F2C3A9E3100676D26 /* LikeItemTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeItemTable.swift; sourceTree = "<group>"; };
-		C413D2842C3AA03A00676D26 /* LikeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeItemRepository.swift; sourceTree = "<group>"; };
+		C413D27F2C3A9E3100676D26 /* RealmTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTable.swift; sourceTree = "<group>"; };
+		C413D2842C3AA03A00676D26 /* RealmLikeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLikeItemRepository.swift; sourceTree = "<group>"; };
 		C413D2872C3AA6CA00676D26 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		C413D2892C3AAF5A00676D26 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		C423D13B2C1F2232001CE395 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,8 @@
 		C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewController.swift; sourceTree = "<group>"; };
 		C44DDC052C3AE8DC0019E549 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		C44DDC072C3AEAB50019E549 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		C44DDC0B2C3BDC730019E549 /* LikeCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCategoryViewController.swift; sourceTree = "<group>"; };
+		C44DDC0D2C3BDC8C0019E549 /* LikeCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCategoryView.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -139,8 +143,8 @@
 		C413D27E2C3A9D8F00676D26 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				C413D27F2C3A9E3100676D26 /* LikeItemTable.swift */,
-				C413D2842C3AA03A00676D26 /* LikeItemRepository.swift */,
+				C413D27F2C3A9E3100676D26 /* RealmTable.swift */,
+				C413D2842C3AA03A00676D26 /* RealmLikeItemRepository.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -148,6 +152,8 @@
 		C413D2862C3AA6BC00676D26 /* Like */ = {
 			isa = PBXGroup;
 			children = (
+				C44DDC0B2C3BDC730019E549 /* LikeCategoryViewController.swift */,
+				C44DDC0D2C3BDC8C0019E549 /* LikeCategoryView.swift */,
 				C413D2872C3AA6CA00676D26 /* LikeViewController.swift */,
 				C413D2892C3AAF5A00676D26 /* LikeView.swift */,
 			);
@@ -440,7 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C413D2852C3AA03A00676D26 /* LikeItemRepository.swift in Sources */,
+				C413D2852C3AA03A00676D26 /* RealmLikeItemRepository.swift in Sources */,
 				C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */,
 				C423D13E2C1F3178001CE395 /* Shopping.swift in Sources */,
 				C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */,
@@ -456,9 +462,10 @@
 				C423D17A2C21085C001CE395 /* SearchResultDetailViewController.swift in Sources */,
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
 				C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */,
+				C44DDC0E2C3BDC8C0019E549 /* LikeCategoryView.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
-				C413D2802C3A9E3100676D26 /* LikeItemTable.swift in Sources */,
+				C413D2802C3A9E3100676D26 /* RealmTable.swift in Sources */,
 				C423D1752C2096C5001CE395 /* SearchResultCollectionViewCell.swift in Sources */,
 				C44DDC062C3AE8DC0019E549 /* BaseTableViewCell.swift in Sources */,
 				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,
@@ -482,6 +489,7 @@
 				C48B9A4D2C1C2A3A00A3EC84 /* ReuseableProtocol.swift in Sources */,
 				C44DDC082C3AEAB50019E549 /* BaseCollectionViewCell.swift in Sources */,
 				C423D1422C1F3FA5001CE395 /* SearchItemHeaderTableViewCell.swift in Sources */,
+				C44DDC0C2C3BDC730019E549 /* LikeCategoryViewController.swift in Sources */,
 				C47C46AF2C31A5E600665A7A /* SearchView.swift in Sources */,
 				C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */,
 				C48B9A4A2C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift in Sources */,

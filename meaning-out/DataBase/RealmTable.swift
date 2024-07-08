@@ -8,7 +8,22 @@
 import Foundation
 import RealmSwift
 
-class LikeItemTable: Object {
+// 찜한 아이템 카테고리
+class LikeCategory: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var title: String
+    @Persisted var regDate: Date
+    @Persisted var detailData: List<LikeItem>
+    
+    convenience init(name: String, regDate: Date) {
+        self.init()
+        self.title = name
+        self.regDate = regDate
+    }
+}
+
+// 찜한 아이템
+class LikeItem: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var title: String
     @Persisted var lprice: String

@@ -111,7 +111,7 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     // 찜한 목록 셀
-    func configureLikeCellData(data: LikeItemTable) {
+    func configureLikeCellData(data: LikeItem) {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
         

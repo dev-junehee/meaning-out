@@ -14,6 +14,7 @@ final class LikeCategoryViewController: BaseViewController {
     private let repository = RealmLikeItemRepository()
     private var categoryList: [LikeCategory]? {
         didSet {
+            viewToggle()
             categoryView.tableView.reloadData()
         }
     }
@@ -47,6 +48,12 @@ final class LikeCategoryViewController: BaseViewController {
     
     private func viewToggle() {
         guard let categoryList = categoryList else { return }
+        if #available(iOS 16.0, *) {
+            navigationItem.leftBarButtonItem?.isHidden = categoryList.isEmpty
+        } else {
+            navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
+        }
+        navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
         categoryView.emptyView.isHidden = !categoryList.isEmpty
         categoryView.tableView.isHidden = categoryList.isEmpty
     }

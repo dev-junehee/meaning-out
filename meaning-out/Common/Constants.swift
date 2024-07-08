@@ -22,7 +22,7 @@ enum Constants {
     enum Title: String {
         case meaningout = "MeaningOut"
         case profile = "PROFILE SETTING"
-        case like = "내가 찜한 상품"
+        case likeCategory = "찜 카테고리"
         case setting = "SETTING"
         case edit = "EDIT PROFILE"
     }

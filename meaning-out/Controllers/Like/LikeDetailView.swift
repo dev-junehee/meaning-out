@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LikeView: BaseView {
+final class LikeDetailView: BaseView {
     
     lazy var likeCollectionView = UICollectionView(
         frame: .zero,

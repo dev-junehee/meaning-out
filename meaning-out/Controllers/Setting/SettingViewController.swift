@@ -103,7 +103,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if row == 0 {
-            let likeVC = LikeViewController()
+            let likeVC = LikeDetailViewController()
             if let tabBarController = self.tabBarController {
                 tabBarController.selectedIndex = 1  // 찜 탭으로 연결
             }

@@ -133,7 +133,7 @@ final class ProfileNicknameViewController: BaseViewController {
         tabBarController.tabBar.tintColor = Resource.Colors.primary
         
         let mainVC = UINavigationController(rootViewController: SearchViewController())
-        let likeVC = UINavigationController(rootViewController: LikeViewController())
+        let likeVC = UINavigationController(rootViewController: LikeDetailViewController())
         let settingVC = UINavigationController(rootViewController: SettingViewController())
         
         let controllers = [mainVC, likeVC, settingVC]

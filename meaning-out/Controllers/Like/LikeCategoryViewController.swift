@@ -30,7 +30,7 @@ final class LikeCategoryViewController: BaseViewController {
     }
     
     override func configureViewController() {
-        navigationItem.title = Constants.Title.like.rawValue
+        navigationItem.title = Constants.Title.likeCategory.rawValue
     }
     
 }
@@ -53,4 +53,10 @@ extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let likeDetailVC = LikeDetailViewController()
+        guard let categoryList = categoryList else { return }
+        likeDetailVC.category = categoryList[indexPath.row]
+        navigationController?.pushViewController(likeDetailVC, animated: true)
+    }
 }

@@ -8,11 +8,14 @@
 import UIKit
 import RealmSwift
 
-final class LikeViewController: BaseViewController {
+final class LikeDetailViewController: BaseViewController {
     
-    private let likeView = LikeView()
+    private let likeView = LikeDetailView()
     
     private let repository = RealmLikeItemRepository()
+    
+    var category: LikeCategory?
+    
     var likeList: Results<LikeItem>? {
         didSet {
             viewToggle()
@@ -35,10 +38,8 @@ final class LikeViewController: BaseViewController {
     }
     
     override func configureViewController() {
-//        navigationItem.title = Constants.Title.like.rawValue
-        likeView.likeCollectionView.delegate = self
-        likeView.likeCollectionView.dataSource = self
-        likeView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
+        setNavigationItemTitle()
+        setTableViewDelegate()
     }
     
     private func viewToggle() {
@@ -47,10 +48,20 @@ final class LikeViewController: BaseViewController {
         likeView.likeCollectionView.isHidden = likeList.isEmpty
     }
     
+    private func setNavigationItemTitle() {
+        navigationItem.title = category?.title
+        navigationController?.navigationBar.tintColor = Resource.Colors.primary
+    }
+    
+    private func setTableViewDelegate() {
+        likeView.likeCollectionView.delegate = self
+        likeView.likeCollectionView.dataSource = self
+        likeView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
+    }
 }
 
 
-extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension LikeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return likeList?.count ?? 0
     }
@@ -65,5 +76,4 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
-    
 }

@@ -36,12 +36,19 @@ final class LikeCategoryViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         categoryView.tableView.reloadData()
+        viewToggle()
     }
     
     override func configureViewController() {
         navigationItem.title = Constants.Title.likeCategory.rawValue
         addTextBarBtn(title: "Edit", style: .plain, target: self, action: #selector(editButtonClicked), type: .left)
         addImgBarBtn(image: Resource.SystemImages.plus, style: .plain, target: self, action: #selector(addLikeCategoryButtonClicked), type: .right)
+    }
+    
+    private func viewToggle() {
+        guard let categoryList = categoryList else { return }
+        categoryView.emptyView.isHidden = !categoryList.isEmpty
+        categoryView.tableView.isHidden = categoryList.isEmpty
     }
     
     @objc private func editButtonClicked() {

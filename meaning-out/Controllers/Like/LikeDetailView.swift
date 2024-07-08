@@ -31,17 +31,17 @@ final class LikeDetailView: BaseView {
         return layout
     }
     
-    let emptyView = EmptyView()
+//    let emptyView = EmptyView()
     
     override func configureViewHierarchy() {
         self.addSubview(likeCollectionView)
-        self.addSubview(emptyView)
+//        self.addSubview(emptyView)
     }
     
     override func configureViewLayout() {
-        emptyView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
-        }
+//        emptyView.snp.makeConstraints {
+//            $0.edges.equalTo(self.safeAreaLayoutGuide)
+//        }
         
         likeCollectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(16)

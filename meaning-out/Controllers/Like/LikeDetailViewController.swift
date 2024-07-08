@@ -23,19 +23,9 @@ final class LikeDetailViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        viewToggle()
-    }
-    
     override func configureViewController() {
         setNavigationItemTitle()
         setTableViewDelegate()
-    }
-    
-    private func viewToggle() {
-        guard let likeList = category?.detailData else { return }
-        likeView.emptyView.isHidden = !likeList.isEmpty
-        likeView.likeCollectionView.isHidden = likeList.isEmpty
     }
     
     private func setNavigationItemTitle() {
@@ -53,7 +43,6 @@ final class LikeDetailViewController: BaseViewController {
 
 extension LikeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return likeList?.count ?? 0
         return category?.detailData.count ?? 0
     }
     

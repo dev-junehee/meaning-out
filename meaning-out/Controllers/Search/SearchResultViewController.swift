@@ -183,7 +183,7 @@ extension SearchResultViewController {
     // 찜 상품 저장 시 카테고리 선택창
     func showCategoryActionSheet(_ actionList: [LikeCategory], completion: ((String?) -> Void)?) {
         let alert = UIAlertController(
-            title: Constants.Alert.selectLikeCategory.title.rawValue,
+            title: Constants.Alert.SelectLikeCategory.title.rawValue,
             message: nil,
             preferredStyle: .actionSheet)
         

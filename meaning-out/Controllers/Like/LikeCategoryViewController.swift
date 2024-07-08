@@ -42,20 +42,20 @@ final class LikeCategoryViewController: BaseViewController {
     
     override func configureViewController() {
         navigationItem.title = Constants.Title.likeCategory.rawValue
-        addTextBarBtn(title: "Edit", style: .plain, target: self, action: #selector(editButtonClicked), type: .left)
+        addTextBarBtn(title: Constants.Button.edit.rawValue, style: .plain, target: self, action: #selector(editButtonClicked), type: .left)
         addImgBarBtn(image: Resource.SystemImages.plus, style: .plain, target: self, action: #selector(addLikeCategoryButtonClicked), type: .right)
     }
     
     private func viewToggle() {
         guard let categoryList = categoryList else { return }
+        categoryView.emptyView.isHidden = !categoryList.isEmpty
+        categoryView.tableView.isHidden = categoryList.isEmpty
+        
         if #available(iOS 16.0, *) {
             navigationItem.leftBarButtonItem?.isHidden = categoryList.isEmpty
         } else {
             navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
         }
-        navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
-        categoryView.emptyView.isHidden = !categoryList.isEmpty
-        categoryView.tableView.isHidden = categoryList.isEmpty
     }
     
     @objc private func editButtonClicked() {
@@ -66,8 +66,8 @@ final class LikeCategoryViewController: BaseViewController {
     
     @objc private func addLikeCategoryButtonClicked() {
         showTextFieldAlert(
-            title: Constants.Alert.createLikeCategory.title.rawValue,
-            message: Constants.Alert.createLikeCategory.message.rawValue) { textFieldText in
+            title: Constants.Alert.CreateLikeCategory.title.rawValue,
+            message: Constants.Alert.CreateLikeCategory.message.rawValue) { textFieldText in
             guard let textFieldText = textFieldText else { return }
             let likeCategory = LikeCategory(name: textFieldText)
             self.repository.createLikeCategory(likeCategory)
@@ -101,7 +101,9 @@ extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource
         
         let category = categoryList[indexPath.row]
         if category.detailData.isEmpty {
-            showAlert(title: "해당 카테고리가 비어있어요", message: "원하는 상품을 찾아 찜해보세요!", type: .oneButton) { _ in return }
+            showAlert(
+                title: Constants.Alert.EmptyLikeCategory.title.rawValue, 
+                message: Constants.Alert.EmptyLikeCategory.message.rawValue, type: .oneButton) { _ in return }
         } else {
             let likeDetailVC = LikeDetailViewController()
             likeDetailVC.category = categoryList[indexPath.row]
@@ -111,7 +113,9 @@ extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource
     
     // 찜 카테고리 밀어서 삭제
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        showAlert(title: "찜 카테고리 삭제", message: "카테고리에 포함된 모든 찜 상품도 함께 삭제됩니다.", type: .twoButton) { _ in
+        showAlert(
+            title: Constants.Alert.DeleteLikeCategory.title.rawValue,
+            message: Constants.Alert.DeleteLikeCategory.message.rawValue, type: .twoButton) { _ in
             guard let categoryList = self.categoryList else { return }
             let category = categoryList[indexPath.row]
             self.repository.deleteLikeCategory(category)

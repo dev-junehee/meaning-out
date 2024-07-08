@@ -39,6 +39,7 @@ enum Constants {
         case save = "저장"
         case okay = "확인"
         case cancel = "취소"
+        case edit = "Edit"
         
         static var sorting: [String] {
             return ["정확도", "날짜순", "가격높은순", "가격낮은순"]
@@ -75,13 +76,23 @@ enum Constants {
             case message = "검색 결과에 오류가 생겼어요."
         }
         
-        enum createLikeCategory: String {
+        enum CreateLikeCategory: String {
             case title = "찜 카테고리 생성"
             case message = "찜 카테고리명을 작성해 주세요!"
         }
         
-        enum selectLikeCategory: String {
+        enum EmptyLikeCategory: String {
+            case title = "해당 카테고리가 비어있어요!"
+            case message = "원하는 상품을 찾아 찜 해보세요."
+        }
+        
+        enum SelectLikeCategory: String {
             case title = "찜 상품을 저장할 카테고리를 선택해 주세요!"
+        }
+        
+        enum DeleteLikeCategory: String {
+            case title = "찜 카테고리를 삭제합니다."
+            case message = "카테고리에 포함된 모든 찜 상품도 함께 삭제됩니다."
         }
     }
     

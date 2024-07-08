@@ -13,16 +13,8 @@ final class LikeDetailViewController: BaseViewController {
     private let likeView = LikeDetailView()
     
     private let repository = RealmLikeItemRepository()
-    
     var category: LikeCategory?
-    
-    var likeList: Results<LikeItem>? {
-        didSet {
-            viewToggle()
-            likeView.likeCollectionView.reloadData()
-        }
-    }
-    
+
     override func loadView() {
         self.view = likeView
     }
@@ -32,8 +24,6 @@ final class LikeDetailViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        likeList = repository.getAllLikeItem()
-        print("==========", likeList)
         viewToggle()
     }
     
@@ -43,7 +33,7 @@ final class LikeDetailViewController: BaseViewController {
     }
     
     private func viewToggle() {
-        guard let likeList = likeList else { return }
+        guard let likeList = category?.detailData else { return }
         likeView.emptyView.isHidden = !likeList.isEmpty
         likeView.likeCollectionView.isHidden = likeList.isEmpty
     }
@@ -63,13 +53,14 @@ final class LikeDetailViewController: BaseViewController {
 
 extension LikeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return likeList?.count ?? 0
+//        return likeList?.count ?? 0
+        return category?.detailData.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell else { return SearchResultCollectionViewCell() }
         
-        if let likeList = likeList {
+        if let likeList = category?.detailData {
             let item = likeList[indexPath.item]
             cell.configureLikeCellData(data: item)
         }

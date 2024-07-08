@@ -33,6 +33,11 @@ final class LikeCategoryViewController: BaseViewController {
         categoryView.tableView.rowHeight = 60
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        categoryView.tableView.reloadData()
+    }
+    
     override func configureViewController() {
         navigationItem.title = Constants.Title.likeCategory.rawValue
         addTextBarBtn(title: "Edit", style: .plain, target: self, action: #selector(editButtonClicked), type: .left)

@@ -7,15 +7,12 @@
 
 import UIKit
 
-import Alamofire
-import SnapKit
-
 /**
  메인 - 검색 결과 화면
  */
-class SearchResultViewController: BaseViewController {
+final class SearchResultViewController: BaseViewController {
     
-    let resultView = SearchResultView()
+    private let resultView = SearchResultView()
     
     // 검색 관련 데이터
     var searchText = ""
@@ -44,7 +41,7 @@ class SearchResultViewController: BaseViewController {
     
     override func configureViewController() {
         navigationItem.title = searchText
-        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backButtonClicked), type: .left)
+        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
     }
     
     override func configureHierarchy() {
@@ -57,19 +54,19 @@ class SearchResultViewController: BaseViewController {
         resultView.resultCollectionView.prefetchDataSource = self
     }
     
-    func configureData() {
+    private func configureData() {
         // 총 검색 결과 데이터 바인딩
         resultView.totalLabel.text = "\(searchTotal.formatted())개의 검색 결과"
     }
     
-    func configureHandler() {
+    private func configureHandler() {
         resultView.simButton.addTarget(self, action: #selector(simButtonClicked), for: .touchUpInside)
         resultView.dateButton.addTarget(self, action: #selector(dateButtonClicked), for: .touchUpInside)
         resultView.ascButton.addTarget(self, action: #selector(ascButtonClicked), for: .touchUpInside)
         resultView.dscButton.addTarget(self, action: #selector(dscButtonClicked), for: .touchUpInside)
     }
     
-    func callRequest(sort: String) {
+    private func callRequest(sort: String) {
         NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
             if res.total == 0 {
                 self.showAlert(
@@ -98,15 +95,9 @@ class SearchResultViewController: BaseViewController {
         }
     }
 
-
     // MARK: 버튼 핸들러
-    // 뒤로가기 버튼
-    @objc func backButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     // 정확도 버튼
-    @objc func simButtonClicked() {
+    @objc private func simButtonClicked() {
         resultView.simButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
         nowSort = Constants.Main.sortSim.rawValue
@@ -116,7 +107,7 @@ class SearchResultViewController: BaseViewController {
     }
     
     // 날짜순 버튼
-    @objc func dateButtonClicked() {
+    @objc private func dateButtonClicked() {
         resultView.dateButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
         nowSort = Constants.Main.sortDate.rawValue
@@ -126,7 +117,7 @@ class SearchResultViewController: BaseViewController {
     }
     
     // 가격높은순 버튼
-    @objc func ascButtonClicked() {
+    @objc private func ascButtonClicked() {
         resultView.ascButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
         nowSort = Constants.Main.sortDsc.rawValue
@@ -136,7 +127,7 @@ class SearchResultViewController: BaseViewController {
     }
     
     // 가격낮은순 버튼
-    @objc func dscButtonClicked() {
+    @objc private func dscButtonClicked() {
         resultView.dscButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
         nowSort = Constants.Main.sortAsc.rawValue
@@ -162,7 +153,6 @@ class SearchResultViewController: BaseViewController {
             print(target)
             repository.deleteLikeItem(target)
         }
-        
         
         searchResultItem[sender.tag].isLike.toggle()
         resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])

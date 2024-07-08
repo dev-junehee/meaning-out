@@ -6,13 +6,11 @@
 //
 
 import UIKit
-
-import SnapKit
 import TextFieldEffects
 
-class ProfileNicknameViewController: BaseViewController {
+final class ProfileNicknameViewController: BaseViewController {
     
-    let nicknameView = ProfileNicknameView()
+    private let nicknameView = ProfileNicknameView()
     
     // 닉네임 유효성 검사 여부
     var isValidate = false
@@ -31,7 +29,6 @@ class ProfileNicknameViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         configureData()
         configureHandler()
     }
@@ -39,14 +36,13 @@ class ProfileNicknameViewController: BaseViewController {
     // 화면 전환 후 다시 돌아왔을 때 필요한 부분 처리
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         // 저장됐던 프로필 이미지 가져오기
         profileNum = UserDefaultsManager.profile
     }
     
     override func configureViewController() {
         navigationItem.title = Constants.Title.profile.rawValue
-        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonClicked), type: .left)
+        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
     }
     
     private func configureData() {
@@ -71,17 +67,12 @@ class ProfileNicknameViewController: BaseViewController {
         nicknameView.doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
     
-    // MARK: @objc 함수
-    @objc func backBarButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func profileTapped() {
+    @objc private func profileTapped() {
         let profileImageVC = ProfileImageViewController()
         navigationController?.pushViewController(profileImageVC, animated: true)
     }
     
-    @objc func validateNickname() {
+    @objc private func validateNickname() {
         guard let nickname = nicknameView.nicknameField.text else { return }
         
         do {
@@ -108,11 +99,11 @@ class ProfileNicknameViewController: BaseViewController {
         }
     }
     
-    @objc func keyboardDismiss() {
+    @objc private func keyboardDismiss() {
         view.endEditing(true)
     }
     
-    @objc func doneButtonClicked() {
+    @objc private func doneButtonClicked() {
         // 유효성 검사 미통과 시 실패 처리 - 추후 수정
         if !isValidate {
             showAlert(title: "닉네임 오류",

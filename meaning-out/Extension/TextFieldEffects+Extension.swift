@@ -8,7 +8,6 @@
 import TextFieldEffects
 
 extension HoshiTextField {
-    
     func setTextFieldUI(_ placeholder: String) {
         self.placeholder = placeholder
         self.placeholderColor = Resource.Colors.lightGray
@@ -16,5 +15,4 @@ extension HoshiTextField {
         self.borderActiveColor = Resource.Colors.primary
         self.tintColor = Resource.Colors.primary
     }
-    
 }

@@ -13,9 +13,9 @@ import WebKit
 /**
  메인 - 검색 결과 상세 화면
  */
-class SearchResultDetailViewController: BaseViewController {
+final class SearchResultDetailViewController: BaseViewController {
     
-    let webView = WKWebView()
+    private let webView = WKWebView()
     var searchItem: SearchItem?
     
     var likeList = UserDefaultsManager.like {
@@ -32,7 +32,7 @@ class SearchResultDetailViewController: BaseViewController {
     override func configureViewController() {
         guard let itemTitle = searchItem?.title else { return }
         navigationItem.title = getItemTitle(itemTitle)
-        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backBarButtonclicked), type: .left)
+        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
         
         // UserDefaults 좋아요 상품 리스트에 해당 상품명이 있으면 like, 없으면 unlike
         let likeButton = UserDefaultsManager.like.contains(itemTitle) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
@@ -49,18 +49,14 @@ class SearchResultDetailViewController: BaseViewController {
         }
     }
     
-    func configureData() {
+    private func configureData() {
         guard let itemLink = searchItem?.link else { return }
         let URL = URL(string: itemLink)!
         let request = URLRequest(url: URL)
         webView.load(request)
     }
     
-    @objc func backBarButtonclicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func likeBarButtonClicked() {
+    @objc private func likeBarButtonClicked() {
         // like -> unLike
         guard let itemTitle = searchItem?.title else { return }
         if likeList.contains(itemTitle) {

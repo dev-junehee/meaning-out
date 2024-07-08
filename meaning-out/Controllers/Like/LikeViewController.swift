@@ -8,11 +8,11 @@
 import UIKit
 import RealmSwift
 
-class LikeViewController: BaseViewController {
+final class LikeViewController: BaseViewController {
     
-    let likeView = LikeView()
+    private let likeView = LikeView()
     
-    let repository = LikeItemRepository()
+    private let repository = LikeItemRepository()
     var likeList: Results<LikeItemTable>? {
         didSet {
             viewToggle()

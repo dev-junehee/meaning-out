@@ -7,14 +7,14 @@
 
 import UIKit
 
-class LikeView: BaseView {
+final class LikeView: BaseView {
     
     lazy var likeCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: collectionViewLayout()
     )
     
-    func collectionViewLayout() -> UICollectionViewLayout {
+    private func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout() // 테이블뷰의 rowHeight와 같음
         
         let sectionSpaciing: CGFloat = 16

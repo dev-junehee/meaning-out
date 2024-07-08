@@ -10,9 +10,9 @@ import UIKit
 /**
  메인 - 검색 탭
  */
-class SearchViewController: BaseViewController {
+final class SearchViewController: BaseViewController {
 
-    let searchView = SearchView()
+    private let searchView = SearchView()
     
     let nickname = UserDefaultsManager.nickname
     var searchList = UserDefaultsManager.search {
@@ -57,6 +57,21 @@ class SearchViewController: BaseViewController {
     private func viewToggle() {
         searchView.emptyView.isHidden = !searchList.isEmpty
         searchView.shoppingTableView.isHidden = searchList.isEmpty
+    }
+    
+    // 특정 검색어 삭제
+    @objc private func removeSearchList(_ sender: UIButton) {
+        print(sender.tag)
+        UserDefaultsManager.search.remove(at: sender.tag)
+        searchList = UserDefaultsManager.search
+        searchView.shoppingTableView.reloadData()
+    }
+    
+    // 검색 리스트 전체 삭제
+    @objc private func removeAllSearchList() {
+        UserDefaultsManager.search.removeAll()
+        searchList = UserDefaultsManager.search
+        searchView.shoppingTableView.reloadData()
     }
     
 }
@@ -140,18 +155,4 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(searchResultVC, animated: true)
     }
     
-    // 특정 검색어 삭제
-    @objc func removeSearchList(_ sender: UIButton) {
-        print(sender.tag)
-        UserDefaultsManager.search.remove(at: sender.tag)
-        searchList = UserDefaultsManager.search
-        searchView.shoppingTableView.reloadData()
-    }
-    
-    // 검색 리스트 전체 삭제
-    @objc func removeAllSearchList() {
-        UserDefaultsManager.search.removeAll()
-        searchList = UserDefaultsManager.search
-        searchView.shoppingTableView.reloadData()
-    }
 }

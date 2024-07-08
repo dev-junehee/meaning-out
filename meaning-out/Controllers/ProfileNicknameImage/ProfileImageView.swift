@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SnapKit
 
-class ProfileImageView: BaseView {
+final class ProfileImageView: BaseView {
     
     let profileImageView = UIView()
     let profileImage = UIImageView()

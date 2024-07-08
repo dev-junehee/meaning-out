@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import SnapKit
 
-class ProfileImageViewController: BaseViewController {
+final class ProfileImageViewController: BaseViewController {
     
-    let imageView = ProfileImageView()
+    private let imageView = ProfileImageView()
     
     private var isDefaultSelected = true
     
@@ -27,7 +26,6 @@ class ProfileImageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureData()
     }
     
@@ -38,7 +36,7 @@ class ProfileImageViewController: BaseViewController {
     
     override func configureViewController() {
         navigationItem.title = Constants.Title.profile.rawValue
-        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(backButtonClicked), type: .left)
+        addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector( popViewController), type: .left)
     }
     
     override func configureHierarchy() {
@@ -52,9 +50,6 @@ class ProfileImageViewController: BaseViewController {
         imageView.profileImage.image = Resource.Images.profiles[profileNum]
     }
     
-    @objc func backButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 

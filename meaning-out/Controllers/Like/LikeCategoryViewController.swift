@@ -90,10 +90,16 @@ extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let likeDetailVC = LikeDetailViewController()
         guard let categoryList = categoryList else { return }
-        likeDetailVC.category = categoryList[indexPath.row]
-        navigationController?.pushViewController(likeDetailVC, animated: true)
+        
+        let category = categoryList[indexPath.row]
+        if category.detailData.isEmpty {
+            showAlert(title: "해당 카테고리가 비어있어요", message: "원하는 상품을 찾아 찜해보세요!", type: .oneButton) { _ in return }
+        } else {
+            let likeDetailVC = LikeDetailViewController()
+            likeDetailVC.category = categoryList[indexPath.row]
+            navigationController?.pushViewController(likeDetailVC, animated: true)
+        }
     }
     
     // 찜 카테고리 밀어서 삭제

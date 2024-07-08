@@ -80,19 +80,30 @@ final class RealmLikeItemRepository {
     }
     
     // 찜한 상품 찾기
-    func findLikeItem(id: String) -> LikeItem {
-        return realm.object(ofType: LikeItem.self, forPrimaryKey: id)!
+    func findLikeItem(id: String) -> LikeItem? {
+        return realm.object(ofType: LikeItem.self, forPrimaryKey: id)
     }
     
     // 찜한 상품 삭제하기
-    func deleteLikeItem(_ item: LikeItem) {
+    func deleteLikeItem(item: LikeItem, category: LikeCategory, at: Int) {
+//        do {
+//            try realm.write {
+//                realm.delete(item)
+//                print("찜한 상품 삭제 성공")
+//            }
+//        } catch {
+//            print(#function, "찜한 상품 삭제 실패", error)
+//        }
+        
         do {
             try realm.write {
+                category.detailData.remove(at: at)
                 realm.delete(item)
-                print("찜한 상품 삭제 성공")
+                print("찜 카테고리에서 해당 상품 삭제 성공")
             }
         } catch {
-            print(#function, "찜한 상품 삭제 실패", error)
+            print("찜 카테고리에서 해당 상품 삭제 실패", error)
         }
     }
+    
 }

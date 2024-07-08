@@ -19,9 +19,10 @@ final class LikeDetailViewController: BaseViewController {
         self.view = likeView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        print(category?.detailData)
+//    }
     
     override func configureViewController() {
         setNavigationItemTitle()
@@ -37,6 +38,18 @@ final class LikeDetailViewController: BaseViewController {
         likeView.likeCollectionView.delegate = self
         likeView.likeCollectionView.dataSource = self
         likeView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
+    }
+    
+    // 찜 버튼 클릭하면 찜 해제 처리
+    @objc private func likeButtonClicked(_ sender: UIButton) {
+        showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+            if let category = self.repository.findLikeCategory(title: self.navigationItem.title ?? "") {
+                print(category)
+                self.repository.deleteLikeItem(item: category.detailData[sender.tag], category: category, at: sender.tag)
+                print(category)
+                self.likeView.likeCollectionView.reloadData()
+            }
+        }
     }
 }
 
@@ -54,6 +67,15 @@ extension LikeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
             cell.configureLikeCellData(data: item)
         }
         
+        cell.likeButton.tag = indexPath.item
+        cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 셀 클릭하면 상품 상세화면으로 이동
+        
+        
     }
 }

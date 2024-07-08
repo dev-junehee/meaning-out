@@ -29,4 +29,7 @@ final class LikeCategoryView: BaseView {
         }
     }
     
+    override func configureViewUI() {
+        emptyView.emptyViewType = .like
+    }
 }

@@ -65,8 +65,10 @@ final class LikeCategoryViewController: BaseViewController {
             let likeCategory = LikeCategory(name: textFieldText)
             self.repository.createLikeCategory(likeCategory)
             self.categoryList = self.repository.getAllLikeCategory()
+            self.categoryView.tableView.reloadData()
         }
     }
+    
 }
 
 extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource {

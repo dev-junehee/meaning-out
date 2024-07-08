@@ -100,9 +100,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func simButtonClicked() {
         resultView.simButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
-        nowSort = Constants.Main.sortSim.rawValue
+        nowSort = Constants.Search.sortSim.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortSim.rawValue)
+        callRequest(sort: Constants.Search.sortSim.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -110,9 +110,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func dateButtonClicked() {
         resultView.dateButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
-        nowSort = Constants.Main.sortDate.rawValue
+        nowSort = Constants.Search.sortDate.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortDate.rawValue)
+        callRequest(sort: Constants.Search.sortDate.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -120,9 +120,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func ascButtonClicked() {
         resultView.ascButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
-        nowSort = Constants.Main.sortDsc.rawValue
+        nowSort = Constants.Search.sortDsc.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortDsc.rawValue)
+        callRequest(sort: Constants.Search.sortDsc.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -130,9 +130,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func dscButtonClicked() {
         resultView.dscButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
-        nowSort = Constants.Main.sortAsc.rawValue
+        nowSort = Constants.Search.sortAsc.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortAsc.rawValue)
+        callRequest(sort: Constants.Search.sortAsc.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -154,8 +154,8 @@ final class SearchResultViewController: BaseViewController {
             // 찜했을 때 - 찜 취소
             let id = searchResultItem[sender.tag].productId
             let target = repository.findLikeItem(id: id)
-            print(target)
-            repository.deleteLikeItem(target)
+            print("삭제할 대상 확인", target)
+//            repository.deleteLikeItem(target)
         }
         
         searchResultItem[sender.tag].isLike.toggle()

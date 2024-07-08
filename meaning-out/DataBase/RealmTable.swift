@@ -37,7 +37,7 @@ class LikeItem: Object {
         self.init()
         self.id = item.productId
         self.title = item.title
-        self.title = item.category1
+        self.category1 = item.category1
         self.lprice = item.lprice
         self.mallName = item.mallName
         self.image = item.image

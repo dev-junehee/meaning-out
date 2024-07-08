@@ -144,8 +144,12 @@ final class SearchResultViewController: BaseViewController {
         if !searchResultItem[sender.tag].isLike {
             // 찜 안했을 때 - 찜 하기
             let likeItem = LikeItem(item: searchResultItem[sender.tag])
-            print(likeItem)
-//            repository.saveLikeItem(likeItem, category: )
+            showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
+                guard let selected else { return print("선택한 카테고리 없음") }
+                if let category = self.repository.findLikeCategory(title: selected) {
+                    self.repository.createLikeItem(likeItem, category: category)
+                }
+            }
         } else {
             // 찜했을 때 - 찜 취소
             let id = searchResultItem[sender.tag].productId
@@ -172,6 +176,26 @@ extension SearchResultViewController {
     func alertPopViewController(action: UIAlertAction) {
         navigationController?.popViewController(animated: true)
     }
+    
+    // 찜 상품 저장 시 카테고리 선택창
+    func showCategoryActionSheet(_ actionList: [LikeCategory], completion: ((String?) -> Void)?) {
+        let alert = UIAlertController(
+            title: Constants.Alert.selectLikeCategory.title.rawValue,
+            message: nil,
+            preferredStyle: .actionSheet)
+        
+        actionList.forEach {
+            alert.addAction(UIAlertAction(title: $0.title, style: .default, handler: { action in
+                completion?(action.title)
+            }))
+        }
+        
+        let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel)
+        alert.addAction(cancel)
+
+        present(alert, animated: true)
+    }
+    
 }
 
 

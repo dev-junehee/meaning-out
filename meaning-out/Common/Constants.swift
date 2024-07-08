@@ -79,6 +79,10 @@ enum Constants {
             case title = "찜 카테고리 생성"
             case message = "찜 카테고리명을 작성해 주세요!"
         }
+        
+        enum selectLikeCategory: String {
+            case title = "찜 상품을 저장할 카테고리를 선택해 주세요!"
+        }
     }
     
     enum Validation {

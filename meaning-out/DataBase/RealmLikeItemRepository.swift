@@ -40,6 +40,13 @@ final class RealmLikeItemRepository {
         return Array(category)
     }
     
+    // 찜 카테고리 찾기
+    func findLikeCategory(title: String) -> LikeCategory? {
+        return realm.objects(LikeCategory.self).where {
+            $0.title == title
+        }.first
+    }
+    
     
     // 찜 카테고리 지우기
     func deleteLikeCategory(_ category: LikeCategory) {

@@ -23,7 +23,7 @@ final class SearchResultViewController: BaseViewController {
     
     var searchTotal = 0
     var searchStart = 1
-    var searchResultItem: [SearchItem] = []
+    var searchResultItem: [Shopping] = []
     
     let repository = LikeItemRepository()
     

@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct SearchResult: Decodable {
+struct ShoppingResults: Decodable {
     let total: Int
     let start: Int
-    let items: [SearchItem]
+    let items: [Shopping]
 }
 
-struct SearchItem: Decodable {
+struct Shopping: Decodable {
     let productId: String
     let title: String
     let lprice: String

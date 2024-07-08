@@ -17,7 +17,7 @@ class LikeItemTable: Object {
     @Persisted var link: String
     @Persisted var isLike: Bool
     
-    convenience init(item: SearchItem) {
+    convenience init(item: Shopping) {
         self.init()
         self.id = item.productId
         self.title = item.title

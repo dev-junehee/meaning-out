@@ -90,7 +90,7 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     // 검색 결과 셀
-    func configureCellData(data: SearchItem) {
+    func configureCellData(data: Shopping) {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
         

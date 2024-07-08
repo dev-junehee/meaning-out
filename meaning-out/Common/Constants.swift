@@ -74,6 +74,11 @@ enum Constants {
             case title = "검색 실패😭"
             case message = "검색 결과에 오류가 생겼어요."
         }
+        
+        enum createLikeCategory: String {
+            case title = "찜 카테고리 생성"
+            case message = "찜 카테고리명을 작성해 주세요!"
+        }
     }
     
     enum Validation {

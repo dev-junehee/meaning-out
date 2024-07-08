@@ -19,7 +19,7 @@ final class LikeCategoryView: BaseView {
     override func configureViewLayout() {
         tableView.snp.makeConstraints {
             $0.verticalEdges.equalTo(self.safeAreaLayoutGuide)
-            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(24)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
     }
     

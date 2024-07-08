@@ -145,7 +145,7 @@ final class SearchResultViewController: BaseViewController {
             // 찜 안했을 때 - 찜 하기
             let likeItem = LikeItem(item: searchResultItem[sender.tag])
             print(likeItem)
-            repository.saveLikeItem(likeItem)
+//            repository.saveLikeItem(likeItem, category: )
         } else {
             // 찜했을 때 - 찜 취소
             let id = searchResultItem[sender.tag].productId

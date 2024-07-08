@@ -31,7 +31,7 @@ extension UIViewController {
             navigationItem.rightBarButtonItem = barButton
         }
     }
-        
+    
     // BarButton - image
     func addImgBarBtn(image: UIImage, style: UIBarButtonItem.Style, target: AnyObject?, action: Selector?, type: BarButtonType) {
         let barButton = UIBarButtonItem(image: image, style: style, target: target, action: action)
@@ -67,6 +67,24 @@ extension UIViewController {
         }
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    // Alert - TextField
+    func showTextFieldAlert(title: String, message: String? = nil, okHandler: ((String?) -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "e.g. 영화DVD"
+        }
+        
+        let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default) { ok in
+            let textFieldText = alert.textFields?.first?.text
+            okHandler?(textFieldText)
+        }
+        let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel)
+        alert.addAction(okay)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true)
     }
     
     @objc func popViewController() {

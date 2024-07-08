@@ -15,10 +15,10 @@ class LikeCategory: Object {
     @Persisted var regDate: Date
     @Persisted var detailData: List<LikeItem>
     
-    convenience init(name: String, regDate: Date) {
+    convenience init(name: String) {
         self.init()
         self.title = name
-        self.regDate = regDate
+        self.regDate = Date()
     }
 }
 
@@ -26,6 +26,7 @@ class LikeCategory: Object {
 class LikeItem: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var title: String
+    @Persisted var category1: String
     @Persisted var lprice: String
     @Persisted var mallName: String
     @Persisted var image: String
@@ -36,6 +37,7 @@ class LikeItem: Object {
         self.init()
         self.id = item.productId
         self.title = item.title
+        self.title = item.category1
         self.lprice = item.lprice
         self.mallName = item.mallName
         self.image = item.image

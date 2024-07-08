@@ -49,8 +49,6 @@ enum Resource {
         
         static let empty: UIImage = .empty
         static let launch: UIImage = .launch
-//        static let likeSelected: UIImage = .likeSelected
-//        static let likeUnselected: UIImage = .likeUnselected
     }
     
     enum SystemImages {
@@ -64,5 +62,6 @@ enum Resource {
         static let like = UIImage(systemName: "heart")!
         static let likeSelected = UIImage(systemName: "arrow.down.heart.fill")!
         static let likeUnselected = UIImage(systemName: "arrow.down.heart")!
+        static let plus = UIImage(systemName: "plus.app")!
     }
 }

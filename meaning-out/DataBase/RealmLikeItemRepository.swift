@@ -22,17 +22,43 @@ final class RealmLikeItemRepository {
         print(realm.configuration.fileURL ?? "fileURL 없음")
     }
     
+    // 찜 카테고리 만들기
+    func createLikeCategory(_ category: LikeCategory) {
+        do {
+            try realm.write {
+                realm.add(category)
+                print("카테고리 생성 성공")
+            }
+        } catch {
+            print("카테고리 생성 실패")
+        }
+    }
+    
     // 찜 카테고리 가져오기
     func getAllLikeCategory() -> [LikeCategory] {
         let category = realm.objects(LikeCategory.self)
         return Array(category)
     }
     
-    // 찜한 상품 저장하기
-    func saveLikeItem(_ item: LikeItem) {
+    
+    // 찜 카테고리 지우기
+    func deleteLikeCategory(_ category: LikeCategory) {
         do {
             try realm.write {
-                realm.add(item)
+                realm.delete(category.detailData)
+                realm.delete(category)
+                print("폴더 삭제 성공")
+            }
+        } catch {
+            print("폴더 삭제 실패", error)
+        }
+    }
+    
+    // 찜한 상품 저장하기
+    func createLikeItem(_ item: LikeItem, category: LikeCategory) {
+        do {
+            try realm.write {
+                category.detailData.append(item)
                 print("찜한 상품 저장 성공")
                 getFileURL()
             }

@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.tabBar.tintColor = Resource.Colors.primary
             
             let main = UINavigationController(rootViewController: SearchViewController())
-            let like = UINavigationController(rootViewController: LikeViewController())
+            let like = UINavigationController(rootViewController: LikeCategoryViewController())
             let setting = UINavigationController(rootViewController: SettingViewController())
             
             let controllers = [main, like, setting]

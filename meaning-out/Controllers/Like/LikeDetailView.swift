@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LikeView: BaseView {
+final class LikeDetailView: BaseView {
     
     lazy var likeCollectionView = UICollectionView(
         frame: .zero,
@@ -31,18 +31,11 @@ final class LikeView: BaseView {
         return layout
     }
     
-    let emptyView = EmptyView()
-    
     override func configureViewHierarchy() {
         self.addSubview(likeCollectionView)
-        self.addSubview(emptyView)
     }
     
     override func configureViewLayout() {
-        emptyView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
-        }
-        
         likeCollectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(16)
             $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(24)

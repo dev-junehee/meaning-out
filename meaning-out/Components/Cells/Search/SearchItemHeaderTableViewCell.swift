@@ -46,9 +46,9 @@ final class SearchItemHeaderTableViewCell: BaseTableViewCell {
     
     override func configureCellUI() {
         recentTitle.font = Resource.Fonts.bold16
-        recentTitle.text = Constants.Main.recent.rawValue
+        recentTitle.text = Constants.Search.recent.rawValue
         
-        removeTitle.setTitle(Constants.Main.remove.rawValue, for: .normal)
+        removeTitle.setTitle(Constants.Search.remove.rawValue, for: .normal)
         removeTitle.setTitleColor(Resource.Colors.primary, for: .normal)
         removeTitle.titleLabel?.font = Resource.Fonts.bold13
     }

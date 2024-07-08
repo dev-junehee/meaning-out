@@ -23,9 +23,9 @@ final class SearchResultViewController: BaseViewController {
     
     var searchTotal = 0
     var searchStart = 1
-    var searchResultItem: [SearchItem] = []
+    var searchResultItem: [Shopping] = []
     
-    let repository = LikeItemRepository()
+    let repository = RealmLikeItemRepository()
     
     override func loadView() {
         self.view = resultView
@@ -100,9 +100,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func simButtonClicked() {
         resultView.simButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
-        nowSort = Constants.Main.sortSim.rawValue
+        nowSort = Constants.Search.sortSim.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortSim.rawValue)
+        callRequest(sort: Constants.Search.sortSim.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -110,9 +110,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func dateButtonClicked() {
         resultView.dateButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
-        nowSort = Constants.Main.sortDate.rawValue
+        nowSort = Constants.Search.sortDate.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortDate.rawValue)
+        callRequest(sort: Constants.Search.sortDate.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -120,9 +120,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func ascButtonClicked() {
         resultView.ascButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
-        nowSort = Constants.Main.sortDsc.rawValue
+        nowSort = Constants.Search.sortDsc.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortDsc.rawValue)
+        callRequest(sort: Constants.Search.sortDsc.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -130,9 +130,9 @@ final class SearchResultViewController: BaseViewController {
     @objc private func dscButtonClicked() {
         resultView.dscButton.setClickedButtonUI()
         setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
-        nowSort = Constants.Main.sortAsc.rawValue
+        nowSort = Constants.Search.sortAsc.rawValue
         start = 1
-        callRequest(sort: Constants.Main.sortAsc.rawValue)
+        callRequest(sort: Constants.Search.sortAsc.rawValue)
         resultView.resultCollectionView.reloadData()
     }
     
@@ -143,15 +143,22 @@ final class SearchResultViewController: BaseViewController {
         
         if !searchResultItem[sender.tag].isLike {
             // 찜 안했을 때 - 찜 하기
-            let likeItem = LikeItemTable(item: searchResultItem[sender.tag])
-            print(likeItem)
-            repository.saveLikeItem(likeItem)
+            let likeItem = LikeItem(item: searchResultItem[sender.tag])
+            showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
+                guard let selected else { return print("선택한 카테고리 없음") }
+                if let category = self.repository.findLikeCategory(title: selected) {
+                    self.repository.createLikeItem(likeItem, category: category)
+                }
+            }
         } else {
             // 찜했을 때 - 찜 취소
-            let id = searchResultItem[sender.tag].productId
-            let target = repository.findLikeItem(id: id)
-            print(target)
-            repository.deleteLikeItem(target)
+            showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+                let item = self.searchResultItem[sender.tag]
+                let target = self.repository.findLikeItem(id: item.productId)
+                if let target {
+                    self.repository.deleteLikeItem(item: target)
+                }
+            }
         }
         
         searchResultItem[sender.tag].isLike.toggle()
@@ -172,6 +179,26 @@ extension SearchResultViewController {
     func alertPopViewController(action: UIAlertAction) {
         navigationController?.popViewController(animated: true)
     }
+    
+    // 찜 상품 저장 시 카테고리 선택창
+    func showCategoryActionSheet(_ actionList: [LikeCategory], completion: ((String?) -> Void)?) {
+        let alert = UIAlertController(
+            title: Constants.Alert.SelectLikeCategory.title.rawValue,
+            message: nil,
+            preferredStyle: .actionSheet)
+        
+        actionList.forEach {
+            alert.addAction(UIAlertAction(title: $0.title, style: .default, handler: { action in
+                completion?(action.title)
+            }))
+        }
+        
+        let cancel = UIAlertAction(title: Constants.Button.cancel.rawValue, style: .cancel)
+        alert.addAction(cancel)
+
+        present(alert, animated: true)
+    }
+    
 }
 
 

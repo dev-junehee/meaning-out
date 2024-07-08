@@ -8,11 +8,17 @@
 import UIKit
 import SnapKit
 
-class EmptyView: BaseView {
+final class EmptyView: BaseView {
     
-    let emptyView = UIStackView()
-    let emptyImage = UIImageView()
-    let emptyLabel = UILabel()
+    private let emptyView = UIStackView()
+    private let emptyImage = UIImageView()
+    private let emptyLabel = UILabel()
+    
+    var emptyText: String? {
+        didSet {
+            emptyLabel.text = emptyText
+        }
+    }
 
     override func configureViewHierarchy() {
         emptyView.addArrangedSubview(emptyImage)
@@ -32,7 +38,7 @@ class EmptyView: BaseView {
         backgroundColor = Resource.Colors.white
         emptyImage.image = Resource.Images.empty
         emptyLabel.font = Resource.Fonts.bold16
-        emptyLabel.text = Constants.Main.empty.rawValue
+        emptyLabel.text = emptyText
         emptyLabel.textAlignment = .center
     }
     

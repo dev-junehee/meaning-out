@@ -16,7 +16,7 @@ import WebKit
 final class SearchResultDetailViewController: BaseViewController {
     
     private let webView = WKWebView()
-    var searchItem: SearchItem?
+    var searchItem: Shopping?
     
     var likeList = UserDefaultsManager.like {
         didSet {

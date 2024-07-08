@@ -13,6 +13,8 @@ import UIKit
 final class SettingViewController: BaseViewController {
     
     private let settingView = SettingView()
+
+    private let repository = RealmLikeItemRepository()
     
     var nickname = UserDefaultsManager.nickname {
         didSet {
@@ -103,7 +105,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if row == 0 {
-            let likeVC = LikeViewController()
+            let likeVC = LikeDetailViewController()
             if let tabBarController = self.tabBarController {
                 tabBarController.selectedIndex = 1  // 찜 탭으로 연결
             }
@@ -126,6 +128,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingViewController {
     func alertOkayClicked(action: UIAlertAction) {
         // UserDefaults에 저장된 모든 데이터 삭제
+//        repository.deleteLikeCategory(<#T##category: LikeCategory##LikeCategory#>)
         UserDefaultsManager.deleteAllUserDefaults()
         
         // 온보딩 화면으로 전환

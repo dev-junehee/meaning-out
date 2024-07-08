@@ -17,7 +17,7 @@ class NetworkManager {
         query: String,
         start: Int,
         sort: String,
-        completionHandler: @escaping (SearchResult) -> Void
+        completionHandler: @escaping (ShoppingResults) -> Void
     ) {
         let headers: HTTPHeaders = [
             API.Shopping.ID_KEY_NAME: API.Shopping.ID_KEY,
@@ -27,7 +27,7 @@ class NetworkManager {
         let URL = "\(API.Shopping.URL)query=\(query)&start=\(start)&sort=\(sort)"
 
         AF.request(URL, method: .get, headers: headers)
-            .responseDecodable(of: SearchResult.self) { res in
+            .responseDecodable(of: ShoppingResults.self) { res in
             switch res.result {
             case .success(let value):
                 completionHandler(value)

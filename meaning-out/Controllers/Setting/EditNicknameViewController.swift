@@ -67,6 +67,20 @@ final class EditNicknameViewController: UIViewController {
         viewModel.outputInvalidMessage.bind { message in
             self.invalidMessage.text = message
         }
+        
+        viewModel.outputAlertText.bind { (isValid, title, message) in
+            if isValid {
+                self.showAlert(
+                    title: Constants.Alert.EditNickname.title.rawValue,
+                    message: Constants.Alert.EditNickname.message.rawValue,
+                    type: .oneButton,
+                    okHandler: self.alertPopViewController)
+            } else {
+                self.showAlert(title: title, message: message, type: .oneButton) { _ in
+                    return
+                }
+            }
+        }
     }
     
     private func configureView() {
@@ -169,7 +183,7 @@ final class EditNicknameViewController: UIViewController {
         profileImageView.isUserInteractionEnabled = true
         
         // 닉네임 유효성 검사, 키보드 내리기
-        nicknameField.addTarget(self, action: #selector(validateNickname), for: .editingChanged)
+        nicknameField.addTarget(self, action: #selector(nicknameFieldChanged), for: .editingChanged)
         nicknameField.addTarget(self, action: #selector(keyboardDismiss), for: .editingDidEndOnExit)
     }
     
@@ -178,36 +192,8 @@ final class EditNicknameViewController: UIViewController {
         navigationController?.pushViewController(editProfileImageeVC, animated: true)
     }
     
-    @objc func validateNickname() {
+    @objc func nicknameFieldChanged() {
         viewModel.inputNickname.value = nicknameField.text
-        
-        
-        
-        
-//        guard let nickname = nicknameField.text else { return }
-//        
-//        do {
-//            let result = try getValidationResult(nickname)
-//            if result {
-//                isValidate = true
-//                invalidMessage.text = Constants.Validation.Nickname.success.rawValue
-//            }
-//        } catch ValidationError.empty {
-//            isValidate = false
-//            invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
-//        } catch ValidationError.hasSpecialChar{
-//            isValidate = false
-//            invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
-//        } catch ValidationError.hasNumber {
-//            isValidate = false
-//            invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
-//        } catch ValidationError.invalidLength {
-//            isValidate = false
-//            invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
-//        } catch {
-//            isValidate = false
-//            invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
-//        }
     }
     
     @objc func keyboardDismiss() {
@@ -215,36 +201,9 @@ final class EditNicknameViewController: UIViewController {
     }
     
     @objc func saveButtonClicked() {
-        // UserDefaults에 저장된 값과 nicknameField 값이 같을 경우
-        if nickname == nicknameField.text {
-            showAlert(title: Constants.Alert.SameNickname.title.rawValue,
-                      message: Constants.Alert.SameNickname.message.rawValue,
-                      type: .oneButton,
-                      okHandler: alertReturn
-            )
-            return
-        }
-        
-        // 유효성 결과 미통과일 경우
-        if !isValidate {
-            showAlert(title: Constants.Alert.FailValidation.title.rawValue,
-                      message: invalidMessage.text,
-                      type: .oneButton,
-                      okHandler: alertReturn
-            )
-            return
-        }
-        
-        // 유효성 검사 통과한 경우
-        // 입력값 닉네임에 저장 - didSet으로 UserDefaults에 자동 저장
-        guard let newNickname = nicknameField.text else { return }
-        nickname = newNickname
-        
-        // 저장 완료되면 이전 화면으로 전환
-        showAlert(title: Constants.Alert.EditNickname.title.rawValue,
-                  message: Constants.Alert.EditNickname.message.rawValue,
-                  type: .oneButton,
-                  okHandler: alertPopViewController)
+        viewModel.inputNickname.value = nicknameField.text
+        viewModel.inputOriginNickname.value = nickname
+        viewModel.inputSaveButtonClicked.value = ()
     }
 }
 

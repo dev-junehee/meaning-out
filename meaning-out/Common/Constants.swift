@@ -103,6 +103,7 @@ enum Constants {
             case hasSpecialChar = "닉네임에 @, #, $, %할 포함될 수 없어요."
             case hasNumber = "닉네임에 숫자는 포함할 수 없어요."
             case invalidLength = "2글자 이상 10글자 미만으로 설정해 주세요."
+            case same = "이미 사용 중인 닉네임이에요."
             case etc = "알 수 없는 오류에요🥲"
         }
     }

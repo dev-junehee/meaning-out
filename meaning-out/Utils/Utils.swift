@@ -52,6 +52,7 @@ enum ValidationError: Error {
     case hasSpecialChar
     case hasNumber
     case invalidLength
+    case same
 }
 
 func getValidationResult(_ nickname: String) throws -> Bool {
@@ -80,6 +81,8 @@ func getValidationResult(_ nickname: String) throws -> Bool {
         throw ValidationError.hasNumber
     } else if nickname.count < 2 || nickname.count >= 10 {
         throw ValidationError.invalidLength
+    } else if nickname == UserDefaultsManager.nickname {
+        throw ValidationError.same
     } else {
         return true
     }

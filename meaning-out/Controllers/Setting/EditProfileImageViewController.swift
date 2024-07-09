@@ -11,14 +11,10 @@ final class EditProfileImageViewController: BaseViewController {
     
     private let editProfileImageView = EditProfileImageView()
     
-    private var isDefaultSelected = true
-    
     // 사용자가 선택한 프로필 이미지
-    var profileNum: Int = UserDefaultsManager.profile {
-        didSet {
-            UserDefaultsManager.profile = profileNum
-        }
-    }
+    var profileNum: Int = UserDefaultsManager.profile
+    
+    let viewModel = EditProfileImageViewModel()
     
     override func loadView() {
         self.view = editProfileImageView
@@ -27,6 +23,14 @@ final class EditProfileImageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureData()
+        bindData()
+    }
+    
+    private func bindData() {
+        viewModel.outputProfileNum.bind { num in
+            self.profileNum = num
+            self.editProfileImageView.profileImage.image = Resource.Images.profiles[self.profileNum]
+        }
     }
     
     override func configureViewController() {
@@ -53,12 +57,12 @@ extension EditProfileImageViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as! ProfileImageCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as? ProfileImageCollectionViewCell else { return ProfileImageCollectionViewCell() }
 
         let idx = indexPath.item
         let image = Resource.Images.profiles[idx]
         
-        if idx == profileNum && isDefaultSelected {
+        if idx == profileNum {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
             cell.configureSelectedCellUI()
@@ -72,9 +76,6 @@ extension EditProfileImageViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        profileNum = indexPath.item
-        UserDefaultsManager.profile = profileNum
-        isDefaultSelected = false
-        editProfileImageView.profileImage.image = Resource.Images.profiles[profileNum]
+        viewModel.inputProfileNum.value = indexPath.item
     }
 }

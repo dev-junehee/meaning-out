@@ -228,6 +228,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = searchResultItem[indexPath.item]
         let searchResultDetailVC = SearchResultDetailViewController()
+        searchResultDetailVC.itemId = item.productId
         searchResultDetailVC.itemTitle = item.title
         searchResultDetailVC.itemLink = item.link
         navigationController?.pushViewController(searchResultDetailVC, animated: true)

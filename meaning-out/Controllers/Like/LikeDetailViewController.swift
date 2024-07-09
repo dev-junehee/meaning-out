@@ -79,6 +79,7 @@ extension LikeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         // 셀 클릭하면 상품 상세화면으로 이동
         guard let item = category?.detailData[indexPath.item] else { return }
         let searchResultDetailVC = SearchResultDetailViewController()
+        searchResultDetailVC.itemId = item.id
         searchResultDetailVC.itemTitle = item.title
         searchResultDetailVC.itemLink = item.link
         navigationController?.pushViewController(searchResultDetailVC, animated: true)

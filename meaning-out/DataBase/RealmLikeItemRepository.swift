@@ -84,9 +84,19 @@ final class RealmLikeItemRepository {
         return "\(realm.objects(LikeItem.self).count)개"
     }
     
+    
     // 찜한 상품 찾기
     func findLikeItem(id: String) -> LikeItem? {
         return realm.object(ofType: LikeItem.self, forPrimaryKey: id)
+    }
+    
+    // 찜한 상품 여부
+    func isLikeItem(id: String) -> Bool {
+        if findLikeItem(id: id) != nil {
+            return true
+        } else {
+            return false
+        }
     }
     
     // 찜한 상품 삭제하기
@@ -114,4 +124,15 @@ final class RealmLikeItemRepository {
         }
     }
     
+    // 전체 삭제
+    func deleteAll() {
+        do {
+            try realm.write {
+                realm.deleteAll()
+                print("전체 삭제 성공")
+            }
+        } catch {
+            print("전체 삭제 실패", error)
+        }
+    }
 }

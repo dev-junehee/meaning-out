@@ -16,7 +16,9 @@ import WebKit
 final class SearchResultDetailViewController: BaseViewController {
     
     private let webView = WKWebView()
-    var searchItem: Shopping?
+    
+    var itemTitle: String?
+    var itemLink: String?
     
     var likeList = UserDefaultsManager.like {
         didSet {
@@ -30,7 +32,7 @@ final class SearchResultDetailViewController: BaseViewController {
     }
     
     override func configureViewController() {
-        guard let itemTitle = searchItem?.title else { return }
+        guard let itemTitle = itemTitle else { return }
         navigationItem.title = getItemTitle(itemTitle)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
         
@@ -50,7 +52,7 @@ final class SearchResultDetailViewController: BaseViewController {
     }
     
     private func configureData() {
-        guard let itemLink = searchItem?.link else { return }
+        guard let itemLink else { return }
         let URL = URL(string: itemLink)!
         let request = URLRequest(url: URL)
         webView.load(request)
@@ -58,7 +60,7 @@ final class SearchResultDetailViewController: BaseViewController {
     
     @objc private func likeBarButtonClicked() {
         // like -> unLike
-        guard let itemTitle = searchItem?.title else { return }
+        guard let itemTitle = itemTitle else { return }
         if likeList.contains(itemTitle) {
             likeList.append(itemTitle)
             UserDefaultsManager.like = likeList

@@ -24,7 +24,7 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     let likeButton = UIButton()
     
-    var likeList = UserDefaultsManager.like
+    let repository = RealmLikeItemRepository()
     
     override func configureCellHierarchy() {
         let items = [itemImage, itemMallName, itemTitle, itemPrice]
@@ -94,17 +94,14 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
         let IMG_URL = URL(string: data.image)
         itemImage.kf.setImage(with: IMG_URL)
         
-        likeButton.backgroundColor = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.Colors.white : Resource.Colors.transparentBlack
+        // 찜 상품에 상품 id 포함 여부에 따라 다른 UI 구성
+        let bgColor = repository.findLikeItem(id: data.productId) != nil ? Resource.Colors.white : Resource.Colors.transparentBlack
+        let likeImage = repository.findLikeItem(id: data.productId) != nil ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
         
-        let likeImage = data.isLike || UserDefaultsManager.like.contains(data.title) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
+        likeButton.backgroundColor = bgColor
         likeButton.setImage(likeImage, for: .normal)
-        
-        if data.isLike {
-            likeButton.tintColor = Resource.Colors.primary
-        } else {
-            likeButton.tintColor = Resource.Colors.white
-        }
-        
+        likeButton.tintColor = repository.findLikeItem(id: data.productId) != nil ? Resource.Colors.primary : Resource.Colors.white
+     
         itemMallName.text = data.mallName
         itemTitle.text = getItemTitle(data.title)
         itemPrice.text = "\(Int(data.lprice)?.formatted() ?? "-")원"

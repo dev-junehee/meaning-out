@@ -51,10 +51,13 @@ final class LikeCategoryViewController: BaseViewController {
         categoryView.emptyView.isHidden = !categoryList.isEmpty
         categoryView.tableView.isHidden = categoryList.isEmpty
         
+        // 찜 카테고리 없을 때 Edit 버튼 숨기고, 편집 모드 해지
         if #available(iOS 16.0, *) {
             navigationItem.leftBarButtonItem?.isHidden = categoryList.isEmpty
+            categoryView.tableView.isEditing = false
         } else {
             navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
+            categoryView.tableView.isEditing = false
         }
     }
     

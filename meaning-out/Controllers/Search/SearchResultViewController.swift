@@ -39,6 +39,10 @@ final class SearchResultViewController: BaseViewController {
         configureData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        resultView.resultCollectionView.reloadData()
+    }
+    
     override func configureViewController() {
         navigationItem.title = searchText
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
@@ -139,15 +143,16 @@ final class SearchResultViewController: BaseViewController {
     // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
         repository.getFileURL()
-        print(searchResultItem[sender.tag].isLike)
+        let id = searchResultItem[sender.tag].productId
         
-        if !searchResultItem[sender.tag].isLike {
+        if !repository.isLikeItem(id: id) {
             // 찜 안했을 때 - 찜 하기
             let likeItem = LikeItem(item: searchResultItem[sender.tag])
             showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
                 guard let selected else { return print("선택한 카테고리 없음") }
                 if let category = self.repository.findLikeCategory(title: selected) {
                     self.repository.createLikeItem(likeItem, category: category)
+                    self.resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
                 }
             }
         } else {
@@ -157,12 +162,10 @@ final class SearchResultViewController: BaseViewController {
                 let target = self.repository.findLikeItem(id: item.productId)
                 if let target {
                     self.repository.deleteLikeItem(item: target)
+                    self.resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
                 }
             }
         }
-        
-        searchResultItem[sender.tag].isLike.toggle()
-        resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
     }
     
 }
@@ -223,9 +226,10 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = indexPath.item
+        let item = searchResultItem[indexPath.item]
         let searchResultDetailVC = SearchResultDetailViewController()
-        searchResultDetailVC.searchItem = searchResultItem[item]
+        searchResultDetailVC.itemTitle = item.title
+        searchResultDetailVC.itemLink = item.link
         navigationController?.pushViewController(searchResultDetailVC, animated: true)
     }
     

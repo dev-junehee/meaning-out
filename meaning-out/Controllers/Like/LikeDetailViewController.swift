@@ -18,11 +18,11 @@ final class LikeDetailViewController: BaseViewController {
     override func loadView() {
         self.view = likeView
     }
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        print(category?.detailData)
-//    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        likeView.likeCollectionView.reloadData()
+    }
     
     override func configureViewController() {
         setNavigationItemTitle()
@@ -77,7 +77,11 @@ extension LikeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 클릭하면 상품 상세화면으로 이동
-        
-        
+        guard let item = category?.detailData[indexPath.item] else { return }
+        let searchResultDetailVC = SearchResultDetailViewController()
+        searchResultDetailVC.itemTitle = item.title
+        searchResultDetailVC.itemLink = item.link
+        navigationController?.pushViewController(searchResultDetailVC, animated: true)
     }
+    
 }

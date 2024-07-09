@@ -79,6 +79,11 @@ final class RealmLikeItemRepository {
         return realm.objects(LikeItem.self)
     }
     
+    // 찜한 상품 개수 (문자열) 불러오기
+    func getAllLikeItemString() -> String {
+        return "\(realm.objects(LikeItem.self).count)개"
+    }
+    
     // 찜한 상품 찾기
     func findLikeItem(id: String) -> LikeItem? {
         return realm.object(ofType: LikeItem.self, forPrimaryKey: id)

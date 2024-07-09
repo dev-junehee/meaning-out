@@ -127,8 +127,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: Alert Action 알럿 액션 함수
 extension SettingViewController {
     func alertOkayClicked(action: UIAlertAction) {
-        // UserDefaults에 저장된 모든 데이터 삭제
-//        repository.deleteLikeCategory(<#T##category: LikeCategory##LikeCategory#>)
+        // Realm & UserDefaults에 저장된 모든 데이터 삭제
+        repository.deleteAll()
         UserDefaultsManager.deleteAllUserDefaults()
         
         // 온보딩 화면으로 전환

@@ -22,6 +22,8 @@ final class SettingMenuTableViewCell: BaseTableViewCell {
     let likeCount = UILabel()
     let likeLabel = UILabel()
     
+    private let repository = RealmLikeItemRepository()
+    
     override func configureCellHierarchy() {
         let likeSubViews = [likeImage, likeCount, likeLabel]
         likeSubViews.forEach {
@@ -65,7 +67,7 @@ final class SettingMenuTableViewCell: BaseTableViewCell {
     func configureLikeCellData(data: String) {
         menuTitle.text = data
         likeImage.image = Resource.SystemImages.likeSelected
-        likeCount.text = UserDefaultsManager.getLikeLabel()
+        likeCount.text = repository.getAllLikeItemString()
         likeLabel.text = Constants.SettingOptions.like
     }
     

@@ -51,10 +51,13 @@ final class LikeCategoryViewController: BaseViewController {
         categoryView.emptyView.isHidden = !categoryList.isEmpty
         categoryView.tableView.isHidden = categoryList.isEmpty
         
+        // 찜 카테고리 없을 때 Edit 버튼 숨기고, 편집 모드 해지
         if #available(iOS 16.0, *) {
             navigationItem.leftBarButtonItem?.isHidden = categoryList.isEmpty
+            categoryView.tableView.isEditing = false
         } else {
             navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
+            categoryView.tableView.isEditing = false
         }
     }
     
@@ -113,13 +116,18 @@ extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource
     
     // 찜 카테고리 밀어서 삭제
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        showAlert(
-            title: Constants.Alert.DeleteLikeCategory.title.rawValue,
-            message: Constants.Alert.DeleteLikeCategory.message.rawValue, type: .twoButton) { _ in
-            guard let categoryList = self.categoryList else { return }
-            let category = categoryList[indexPath.row]
+        guard let categoryList = self.categoryList else { return }
+        let category = categoryList[indexPath.row]
+        
+        if category.detailData.isEmpty {
             self.repository.deleteLikeCategory(category)
-            self.categoryList = self.repository.getAllLikeCategory()
+        } else {
+            showAlert(
+                title: Constants.Alert.DeleteLikeCategory.title.rawValue,
+                message: Constants.Alert.DeleteLikeCategory.message.rawValue, type: .twoButton) { _ in
+                self.repository.deleteLikeCategory(category)
+            }
         }
+        self.categoryList = self.repository.getAllLikeCategory()
     }
 }

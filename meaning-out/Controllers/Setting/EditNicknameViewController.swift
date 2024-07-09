@@ -17,7 +17,6 @@ final class EditNicknameViewController: BaseViewController {
     var isValidate = false
     
     let isUser = UserDefaultsManager.isUser
-    
     var nickname = UserDefaultsManager.nickname {
         didSet {
             UserDefaultsManager.nickname = nickname
@@ -44,7 +43,6 @@ final class EditNicknameViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         profileNum = UserDefaultsManager.profile
     }
     
@@ -74,11 +72,11 @@ final class EditNicknameViewController: BaseViewController {
     
     override func configureViewController() {
         if !isUser {
-            showAlert(title: "유효한 유저가 아니에요!", 
-                      message: "온보딩 화면으로 돌아갑니다.",
-                      type: .oneButton,
-                      okHandler: backOnboardingController
-            )
+            showAlert(
+                title: Constants.Alert.InvalidUser.title.rawValue,
+                message: Constants.Alert.InvalidUser.message.rawValue,
+                type: .oneButton,
+                okHandler: backOnboardingController)
             return
         }
         

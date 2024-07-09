@@ -94,6 +94,11 @@ enum Constants {
             case title = "찜 카테고리를 삭제합니다."
             case message = "카테고리에 포함된 모든 찜 상품도 함께 삭제됩니다."
         }
+        
+        enum InvalidUser: String {
+            case title = "유효한 유저가 아니에요!"
+            case message = "온보딩 화면으로 돌아갑니다."
+        }
     }
     
     enum Validation {

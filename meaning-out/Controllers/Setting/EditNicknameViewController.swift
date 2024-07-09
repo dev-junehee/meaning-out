@@ -39,6 +39,8 @@ final class EditNicknameViewController: UIViewController {
         }
     }
     
+    let viewModel = EditNicknameViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,12 +50,23 @@ final class EditNicknameViewController: UIViewController {
         configureUI()
         configureData()
         configureHandler()
+        bindData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         profileNum = UserDefaultsManager.profile
+    }
+    
+    private func bindData() {
+        viewModel.outputIsValid.bind { value in
+            self.isValidate = value
+        }
+        
+        viewModel.outputInvalidMessage.bind { message in
+            self.invalidMessage.text = message
+        }
     }
     
     private func configureView() {
@@ -166,30 +179,35 @@ final class EditNicknameViewController: UIViewController {
     }
     
     @objc func validateNickname() {
-        guard let nickname = nicknameField.text else { return }
+        viewModel.inputNickname.value = nicknameField.text
         
-        do {
-            let result = try getValidationResult(nickname)
-            if result {
-                isValidate = true
-                invalidMessage.text = Constants.Validation.Nickname.success.rawValue
-            }
-        } catch ValidationError.empty {
-            isValidate = false
-            invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
-        } catch ValidationError.hasSpecialChar{
-            isValidate = false
-            invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
-        } catch ValidationError.hasNumber {
-            isValidate = false
-            invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
-        } catch ValidationError.invalidLength {
-            isValidate = false
-            invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
-        } catch {
-            isValidate = false
-            invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
-        }
+        
+        
+        
+//        guard let nickname = nicknameField.text else { return }
+//        
+//        do {
+//            let result = try getValidationResult(nickname)
+//            if result {
+//                isValidate = true
+//                invalidMessage.text = Constants.Validation.Nickname.success.rawValue
+//            }
+//        } catch ValidationError.empty {
+//            isValidate = false
+//            invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
+//        } catch ValidationError.hasSpecialChar{
+//            isValidate = false
+//            invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
+//        } catch ValidationError.hasNumber {
+//            isValidate = false
+//            invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
+//        } catch ValidationError.invalidLength {
+//            isValidate = false
+//            invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
+//        } catch {
+//            isValidate = false
+//            invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
+//        }
     }
     
     @objc func keyboardDismiss() {

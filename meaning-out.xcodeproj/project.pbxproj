@@ -28,7 +28,6 @@
 		C44DDC0E2C3BDC8C0019E549 /* LikeCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC0D2C3BDC8C0019E549 /* LikeCategoryView.swift */; };
 		C44DDC1E2C3D59070019E549 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC1D2C3D59070019E549 /* Observable.swift */; };
 		C44DDC202C3D594C0019E549 /* EditNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */; };
-		C44DDC242C3D774E0019E549 /* EditProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC232C3D774E0019E549 /* EditProfileImageView.swift */; };
 		C44DDC262C3D79620019E549 /* EditProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
@@ -89,7 +88,6 @@
 		C44DDC0D2C3BDC8C0019E549 /* LikeCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCategoryView.swift; sourceTree = "<group>"; };
 		C44DDC1D2C3D59070019E549 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewModel.swift; sourceTree = "<group>"; };
-		C44DDC232C3D774E0019E549 /* EditProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageView.swift; sourceTree = "<group>"; };
 		C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageViewModel.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -391,7 +389,6 @@
 				C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */,
 				C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */,
 				C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */,
-				C44DDC232C3D774E0019E549 /* EditProfileImageView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -501,7 +498,6 @@
 				C413D2852C3AA03A00676D26 /* RealmLikeItemRepository.swift in Sources */,
 				C48B99E02C1AEE5300A3EC84 /* AppDelegate.swift in Sources */,
 				C44DDC262C3D79620019E549 /* EditProfileImageViewModel.swift in Sources */,
-				C44DDC242C3D774E0019E549 /* EditProfileImageView.swift in Sources */,
 				C423D13E2C1F3178001CE395 /* Shopping.swift in Sources */,
 				C48B9A5B2C1CAE2800A3EC84 /* EditNicknameViewController.swift in Sources */,
 				C47C46A52C31988400665A7A /* BaseView.swift in Sources */,

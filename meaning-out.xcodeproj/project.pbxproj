@@ -30,6 +30,7 @@
 		C44DDC202C3D594C0019E549 /* EditNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */; };
 		C44DDC262C3D79620019E549 /* EditProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */; };
 		C44DDC442C3EC0F90019E549 /* ProfileNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */; };
+		C44DDC462C3ED5B60019E549 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC452C3ED5B60019E549 /* ProfileImageViewModel.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
@@ -91,6 +92,7 @@
 		C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewModel.swift; sourceTree = "<group>"; };
 		C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageViewModel.swift; sourceTree = "<group>"; };
 		C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameViewModel.swift; sourceTree = "<group>"; };
+		C44DDC452C3ED5B60019E549 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */,
 				C47C46AA2C319E3800665A7A /* ProfileNicknameView.swift */,
 				C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */,
+				C44DDC452C3ED5B60019E549 /* ProfileImageViewModel.swift */,
 				C47C46AC2C31A1CA00665A7A /* ProfileImageView.swift */,
 			);
 			path = ProfileNicknameImage;
@@ -514,6 +517,7 @@
 				C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */,
 				C423D17A2C21085C001CE395 /* SearchResultDetailViewController.swift in Sources */,
 				C48B9A532C1C671200A3EC84 /* SettingViewController.swift in Sources */,
+				C44DDC462C3ED5B60019E549 /* ProfileImageViewModel.swift in Sources */,
 				C48B9A5D2C1DAEA300A3EC84 /* UserDefaultsManager.swift in Sources */,
 				C44DDC0E2C3BDC8C0019E549 /* LikeCategoryView.swift in Sources */,
 				C48B9A432C1C1C2C00A3EC84 /* Utils.swift in Sources */,

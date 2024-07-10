@@ -9,29 +9,41 @@ import UIKit
 
 final class ProfileImageViewController: BaseViewController {
     
-    private let imageView = ProfileImageView()
+    private let mainView = ProfileImageView()
+    private let viewModel = ProfileImageViewModel()
     
     private var isDefaultSelected = true
     
     // 사용자가 선택한 프로필 이미지
-    var profileNum: Int = UserDefaultsManager.profile {
-        didSet {
-            UserDefaultsManager.profile = profileNum
-        }
-    }
-
+//    var profileNum: Int = UserDefaultsManager.profile {
+//        didSet {
+//            UserDefaultsManager.profile = profileNum
+//        }
+//    }
+    var profileNum: Int?
+    
     override func loadView() {
-        self.view = imageView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureData()
+        bindData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        viewModel.inputViewWillAppear.value = ()
         profileNum = UserDefaultsManager.profile
+    }
+    
+    private func bindData() {
+        viewModel.outputProfileNum.bind { num in
+            self.profileNum = num
+            self.configureData()
+        }
     }
     
     override func configureViewController() {
@@ -40,14 +52,15 @@ final class ProfileImageViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        imageView.profileCollectionView.delegate = self
-        imageView.profileCollectionView.dataSource = self
-        imageView.profileCollectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.id)
+        mainView.profileCollectionView.delegate = self
+        mainView.profileCollectionView.dataSource = self
+        mainView.profileCollectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.id)
     }
 
     private func configureData() {
         // 프로필 랜덤 노출 -> 가입 시 고정값으로 수정
-        imageView.profileImage.image = Resource.Images.profiles[profileNum]
+        guard let profileNum = profileNum else { return }
+        mainView.profileImage.image = Resource.Images.profiles[profileNum]
     }
     
 }
@@ -82,9 +95,8 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        profileNum = indexPath.item
         isDefaultSelected = false
-        UserDefaultsManager.profile = profileNum
-        imageView.profileImage.image = Resource.Images.profiles[profileNum]
+        
+        viewModel.inputImageSelected.value = indexPath.item
     }
 }

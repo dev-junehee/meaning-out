@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfileNicknameViewModel {
+final class ProfileNicknameViewModel {
     
     // 트리거
     var inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)

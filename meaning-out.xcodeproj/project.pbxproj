@@ -29,6 +29,7 @@
 		C44DDC1E2C3D59070019E549 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC1D2C3D59070019E549 /* Observable.swift */; };
 		C44DDC202C3D594C0019E549 /* EditNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */; };
 		C44DDC262C3D79620019E549 /* EditProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */; };
+		C44DDC442C3EC0F90019E549 /* ProfileNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
@@ -89,6 +90,7 @@
 		C44DDC1D2C3D59070019E549 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewModel.swift; sourceTree = "<group>"; };
 		C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageViewModel.swift; sourceTree = "<group>"; };
+		C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameViewModel.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				C48B9A322C1B601000A3EC84 /* ProfileNicknameViewController.swift */,
+				C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */,
 				C47C46AA2C319E3800665A7A /* ProfileNicknameView.swift */,
 				C48B9A3B2C1BF77300A3EC84 /* ProfileImageViewController.swift */,
 				C47C46AC2C31A1CA00665A7A /* ProfileImageView.swift */,
@@ -544,6 +547,7 @@
 				C44DDC0C2C3BDC730019E549 /* LikeCategoryViewController.swift in Sources */,
 				C47C46AF2C31A5E600665A7A /* SearchView.swift in Sources */,
 				C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */,
+				C44DDC442C3EC0F90019E549 /* ProfileNicknameViewModel.swift in Sources */,
 				C48B9A4A2C1C29FE00A3EC84 /* ProfileImageCollectionViewCell.swift in Sources */,
 				C48B9A252C1B4EC100A3EC84 /* Constants.swift in Sources */,
 				C48B9A2B2C1B4FC800A3EC84 /* UIColor+Extension.swift in Sources */,

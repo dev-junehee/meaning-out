@@ -87,6 +87,41 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
+    func changeRootViewController() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+        
+        var rootViewController: UIViewController?
+        
+        let tabBarController = UITabBarController()
+        tabBarController.view.backgroundColor = Resource.Colors.white
+        tabBarController.tabBar.tintColor = Resource.Colors.primary
+        
+        let mainVC = UINavigationController(rootViewController: SearchViewController())
+        let likeVC = UINavigationController(rootViewController: LikeCategoryViewController())
+        let settingVC = UINavigationController(rootViewController: SettingViewController())
+        
+        let controllers = [mainVC, likeVC, settingVC]
+        tabBarController.setViewControllers(controllers, animated: true)
+        tabBarController.setTabBarUI()
+        
+        if let items = tabBarController.tabBar.items {
+            items[0].title = Constants.Tab.search.rawValue
+            items[0].image = Resource.SystemImages.search
+            
+            items[1].title = Constants.Tab.like.rawValue
+            items[1].image = Resource.SystemImages.like
+            
+            items[2].title = Constants.Tab.setting.rawValue
+            items[2].image = Resource.SystemImages.person
+        }
+        
+        rootViewController = tabBarController
+            
+        sceneDeleagate?.window?.rootViewController = rootViewController
+        sceneDeleagate?.window?.makeKeyAndVisible()
+    }
+    
     func changeRootViewControllerToOnboarding() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDeleagate = windowScene?.delegate as? SceneDelegate

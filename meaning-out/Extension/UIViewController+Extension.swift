@@ -87,6 +87,17 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
+    func changeRootViewControllerToOnboarding() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
+        
+        let onboardingVC = UINavigationController(rootViewController: OnboardingViewController())
+        let rootViewController = onboardingVC
+        
+        sceneDeleagate?.window?.rootViewController = rootViewController
+        sceneDeleagate?.window?.makeKeyAndVisible()
+    }
+    
     @objc func popViewController() {
         navigationController?.popViewController(animated: true)
     }

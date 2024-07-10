@@ -139,13 +139,6 @@ extension EditNicknameViewController {
         UserDefaultsManager.deleteAllUserDefaults()
         
         // 온보딩 화면으로 전환
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
-        
-        let onboardingVC = UINavigationController(rootViewController: OnboardingViewController())
-        let rootViewController = onboardingVC
-        
-        sceneDeleagate?.window?.rootViewController = rootViewController
-        sceneDeleagate?.window?.makeKeyAndVisible()
+        changeRootViewControllerToOnboarding()
     }
 }

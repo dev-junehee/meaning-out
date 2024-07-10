@@ -47,7 +47,6 @@ final class ProfileImageViewController: BaseViewController {
     }
 
     private func configureData() {
-        // 프로필 랜덤 노출 -> 가입 시 고정값으로 수정
         guard let profileNum = profileNum else { return }
         mainView.profileImage.image = Resource.Images.profiles[profileNum]
     }
@@ -62,22 +61,16 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as! ProfileImageCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as? ProfileImageCollectionViewCell else { return ProfileImageCollectionViewCell() }
 
         let idx = indexPath.item
         let image = Resource.Images.profiles[idx]
         
-        cell.configureCellHierarchy()
-        cell.configureCellLayout()
-        
         if idx == profileNum {
             cell.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .init())
             cell.configureSelectedCellUI()
-        } else {
-            cell.configureCellUI()
         }
-        
         cell.configureCellData(data: image)
         
         return cell

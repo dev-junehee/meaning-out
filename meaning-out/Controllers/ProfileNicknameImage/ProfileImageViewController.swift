@@ -12,15 +12,7 @@ final class ProfileImageViewController: BaseViewController {
     private let mainView = ProfileImageView()
     private let viewModel = ProfileImageViewModel()
     
-    private var isDefaultSelected = true
-    
-    // 사용자가 선택한 프로필 이미지
-//    var profileNum: Int = UserDefaultsManager.profile {
-//        didSet {
-//            UserDefaultsManager.profile = profileNum
-//        }
-//    }
-    var profileNum: Int?
+    private var profileNum: Int?
     
     override func loadView() {
         self.view = mainView
@@ -28,15 +20,12 @@ final class ProfileImageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureData()
         bindData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         viewModel.inputViewWillAppear.value = ()
-        profileNum = UserDefaultsManager.profile
     }
     
     private func bindData() {
@@ -81,7 +70,7 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         cell.configureCellHierarchy()
         cell.configureCellLayout()
         
-        if idx == profileNum && isDefaultSelected {
+        if idx == profileNum {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
             cell.configureSelectedCellUI()
@@ -95,8 +84,6 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        isDefaultSelected = false
-        
         viewModel.inputImageSelected.value = indexPath.item
     }
 }

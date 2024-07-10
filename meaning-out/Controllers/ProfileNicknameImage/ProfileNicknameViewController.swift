@@ -10,7 +10,7 @@ import TextFieldEffects
 
 final class ProfileNicknameViewController: BaseViewController {
     
-    private let nicknameView = ProfileNicknameView()
+    private let mainView = ProfileNicknameView()
     
     // 닉네임 유효성 검사 여부
     var isValidate = false
@@ -19,12 +19,12 @@ final class ProfileNicknameViewController: BaseViewController {
     var isUser = UserDefaultsManager.isUser
     var profileNum = UserDefaultsManager.profile {
         didSet {
-            nicknameView.profileImage.image = Resource.Images.profiles[profileNum]
+            mainView.profileImage.image = Resource.Images.profiles[profileNum]
         }
     }
     
     override func loadView() {
-        self.view = nicknameView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
@@ -52,19 +52,19 @@ final class ProfileNicknameViewController: BaseViewController {
         }
         
         UserDefaultsManager.profile = profileNum
-        nicknameView.profileImage.image = Resource.Images.profiles[profileNum]
+        mainView.profileImage.image = Resource.Images.profiles[profileNum]
     }
     
     private func configureHandler() {
         // 프로필 이미지 탭
         let profileTapped = UITapGestureRecognizer(target: self, action: #selector(profileTapped))
-        nicknameView.profileImageView.addGestureRecognizer(profileTapped)
-        nicknameView.profileImageView.isUserInteractionEnabled = true
+        mainView.profileImageView.addGestureRecognizer(profileTapped)
+        mainView.profileImageView.isUserInteractionEnabled = true
         
         // 닉네임 유효성 검사, 키보드 내리기
-        nicknameView.nicknameField.addTarget(self, action: #selector(validateNickname), for: .editingChanged)
-        nicknameView.nicknameField.addTarget(self, action: #selector(keyboardDismiss), for: .editingDidEndOnExit)
-        nicknameView.doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+        mainView.nicknameField.addTarget(self, action: #selector(validateNickname), for: .editingChanged)
+        mainView.nicknameField.addTarget(self, action: #selector(keyboardDismiss), for: .editingDidEndOnExit)
+        mainView.doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
     
     @objc private func profileTapped() {
@@ -73,29 +73,29 @@ final class ProfileNicknameViewController: BaseViewController {
     }
     
     @objc private func validateNickname() {
-        guard let nickname = nicknameView.nicknameField.text else { return }
+        guard let nickname = mainView.nicknameField.text else { return }
         
         do {
             let result = try getValidationResult(nickname)
             if result {
                 isValidate = true
-                nicknameView.invalidMessage.text = Constants.Validation.Nickname.success.rawValue
+                mainView.invalidMessage.text = Constants.Validation.Nickname.success.rawValue
             }
         } catch ValidationError.empty {
             isValidate = false
-            nicknameView.invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
+            mainView.invalidMessage.text = Constants.Validation.Nickname.empty.rawValue
         } catch ValidationError.hasSpecialChar{
             isValidate = false
-            nicknameView.invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
+            mainView.invalidMessage.text = Constants.Validation.Nickname.hasSpecialChar.rawValue
         } catch ValidationError.hasNumber {
             isValidate = false
-            nicknameView.invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
+            mainView.invalidMessage.text = Constants.Validation.Nickname.hasNumber.rawValue
         } catch ValidationError.invalidLength {
             isValidate = false
-            nicknameView.invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
+            mainView.invalidMessage.text = Constants.Validation.Nickname.invalidLength.rawValue
         } catch {
             isValidate = false
-            nicknameView.invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
+            mainView.invalidMessage.text = Constants.Validation.Nickname.etc.rawValue
         }
     }
     
@@ -114,7 +114,7 @@ final class ProfileNicknameViewController: BaseViewController {
         }
         
         // 유효성 검사 통과 시 프로필 사진/닉네임 저장
-        guard let nickname = nicknameView.nicknameField.text else { return }
+        guard let nickname = mainView.nicknameField.text else { return }
         UserDefaultsManager.nickname = nickname
         UserDefaultsManager.profile = profileNum
         UserDefaultsManager.joinDate = getTodayString(formatType: "yyyy. MM. dd")

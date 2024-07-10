@@ -5,7 +5,7 @@
 //  Created by junehee on 6/14/24.
 //
 
-import UIKit
+import Foundation
 
 final class OnboardingViewController: BaseViewController {
     
@@ -17,11 +17,11 @@ final class OnboardingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureData()
         configureHandler()
     }
     
-    private func configureData() {
+    override func configureUI() {
+        super.configureUI()
         onboardingView.titleLabel.text = Constants.Title.meaningout.rawValue
         onboardingView.onboardingImage.image = Resource.Images.launch
     }

@@ -42,7 +42,7 @@ enum Constants {
         case edit = "Edit"
         
         static var sorting: [String] {
-            return ["정확도", "날짜순", "가격높은순", "가격낮은순"]
+            return ["정확도", "날짜순", "가격낮은순", "가격높은순"]
         }
     }
     

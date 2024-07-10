@@ -12,6 +12,13 @@ import UIKit
  */
 final class SearchResultViewController: BaseViewController {
     
+    enum SortType: String {
+        case sim
+        case date
+        case asc
+        case dsc
+    }
+
     private let resultView = SearchResultView()
     
     // 검색 관련 데이터
@@ -19,11 +26,15 @@ final class SearchResultViewController: BaseViewController {
     
     var start = 1
     var display = 30
-    var nowSort = "sim"
+    var nowSort: SortType = .sim
     
     var searchTotal = 0
     var searchStart = 1
-    var searchResultItem: [Shopping] = []
+    var searchResultItem: [Shopping] = [] {
+        didSet {
+            resultView.resultCollectionView.reloadData()
+        }
+    }
     
     let repository = RealmLikeItemRepository()
     
@@ -34,13 +45,9 @@ final class SearchResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        callRequest(sort: nowSort)
+        callRequest()
         configureHandler()
         configureData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        resultView.resultCollectionView.reloadData()
     }
     
     override func configureViewController() {
@@ -64,14 +71,14 @@ final class SearchResultViewController: BaseViewController {
     }
     
     private func configureHandler() {
-        resultView.simButton.addTarget(self, action: #selector(simButtonClicked), for: .touchUpInside)
-        resultView.dateButton.addTarget(self, action: #selector(dateButtonClicked), for: .touchUpInside)
-        resultView.ascButton.addTarget(self, action: #selector(ascButtonClicked), for: .touchUpInside)
-        resultView.dscButton.addTarget(self, action: #selector(dscButtonClicked), for: .touchUpInside)
+        let buttons = [resultView.simButton, resultView.dateButton, resultView.ascButton, resultView.dscButton]
+        buttons.forEach {
+            $0.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
+        }
     }
     
-    private func callRequest(sort: String) {
-        NetworkManager.shared.getShopping(query: searchText, start: start, sort: sort) { res in
+    private func callRequest() {
+        NetworkManager.shared.getShopping(query: searchText, start: start, sort: nowSort.rawValue) { res in
             if res.total == 0 {
                 self.showAlert(
                     title: "검색 결과가 없어요.",
@@ -100,49 +107,14 @@ final class SearchResultViewController: BaseViewController {
     }
 
     // MARK: 버튼 핸들러
-    // 정확도 버튼
-    @objc private func simButtonClicked() {
-        resultView.simButton.setClickedButtonUI()
-        setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
-        nowSort = Constants.Search.sortSim.rawValue
+    @objc private func sortButtonClicked(_ sender: UIButton) {
+        setSorting(tag: sender.tag)
         start = 1
-        callRequest(sort: Constants.Search.sortSim.rawValue)
-        resultView.resultCollectionView.reloadData()
+        callRequest()
     }
-    
-    // 날짜순 버튼
-    @objc private func dateButtonClicked() {
-        resultView.dateButton.setClickedButtonUI()
-        setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
-        nowSort = Constants.Search.sortDate.rawValue
-        start = 1
-        callRequest(sort: Constants.Search.sortDate.rawValue)
-        resultView.resultCollectionView.reloadData()
-    }
-    
-    // 가격높은순 버튼
-    @objc private func ascButtonClicked() {
-        resultView.ascButton.setClickedButtonUI()
-        setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
-        nowSort = Constants.Search.sortDsc.rawValue
-        start = 1
-        callRequest(sort: Constants.Search.sortDsc.rawValue)
-        resultView.resultCollectionView.reloadData()
-    }
-    
-    // 가격낮은순 버튼
-    @objc private func dscButtonClicked() {
-        resultView.dscButton.setClickedButtonUI()
-        setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
-        nowSort = Constants.Search.sortAsc.rawValue
-        start = 1
-        callRequest(sort: Constants.Search.sortAsc.rawValue)
-        resultView.resultCollectionView.reloadData()
-    }
-    
+
     // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
-        repository.getFileURL()
         let id = searchResultItem[sender.tag].productId
         
         if !repository.isLikeItem(id: id) {
@@ -172,19 +144,40 @@ final class SearchResultViewController: BaseViewController {
 
 extension SearchResultViewController {
     // 정렬 버튼 한 번에 UI 수정
-    func setUnclickedButtons(buttons: [UIButton]) {
+    private func setUnclickedButtons(buttons: [UIButton]) {
         buttons.forEach {
             $0.setUnclickedButtonUI()
         }
     }
     
+    // 정렬 타입 설정
+    private func setSorting(tag: Int) {
+        if tag == 0 {
+            resultView.simButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
+            nowSort = .sim
+        } else if tag == 1 {
+            resultView.dateButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
+            nowSort = .date
+        } else if tag == 2 {
+            resultView.ascButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
+            nowSort = .asc
+        } else {
+            resultView.dscButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
+            nowSort = .dsc
+        }
+    }
+    
     // 검색 결과 없을 때 뒤로가기
-    func alertPopViewController(action: UIAlertAction) {
+    private func alertPopViewController(action: UIAlertAction) {
         navigationController?.popViewController(animated: true)
     }
     
     // 찜 상품 저장 시 카테고리 선택창
-    func showCategoryActionSheet(_ actionList: [LikeCategory], completion: ((String?) -> Void)?) {
+    private func showCategoryActionSheet(_ actionList: [LikeCategory], completion: ((String?) -> Void)?) {
         let alert = UIAlertController(
             title: Constants.Alert.SelectLikeCategory.title.rawValue,
             message: nil,
@@ -242,7 +235,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         for indexPath in indexPaths {
             if searchResultItem.count - 2 == indexPath.item {
                 start += 1
-                callRequest(sort: nowSort)
+                callRequest()
             }
         }
     }

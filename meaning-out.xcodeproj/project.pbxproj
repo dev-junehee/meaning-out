@@ -205,6 +205,15 @@
 			path = Observable;
 			sourceTree = "<group>";
 		};
+		C44DDC3E2C3E9A470019E549 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */,
+				C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		C47C46A32C31987200665A7A /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +246,7 @@
 		C48B99DE2C1AEE5300A3EC84 /* meaning-out */ = {
 			isa = PBXGroup;
 			children = (
+				C44DDC3E2C3E9A470019E549 /* Application */,
 				C44DDC1C2C3D58FC0019E549 /* Observable */,
 				C4A52AD72C26FD500013BCDF /* API */,
 				C48B9A442C1C202400A3EC84 /* Model */,
@@ -249,8 +259,6 @@
 				C48B9A472C1C29C900A3EC84 /* Components */,
 				C48B9A2F2C1B5EC500A3EC84 /* Controllers */,
 				C48B9A412C1C1C1E00A3EC84 /* Utils */,
-				C48B99DF2C1AEE5300A3EC84 /* AppDelegate.swift */,
-				C48B99E12C1AEE5300A3EC84 /* SceneDelegate.swift */,
 				C48B99E82C1AEE5400A3EC84 /* Assets.xcassets */,
 				C48B99EA2C1AEE5400A3EC84 /* LaunchScreen.storyboard */,
 				C48B99ED2C1AEE5400A3EC84 /* Info.plist */,

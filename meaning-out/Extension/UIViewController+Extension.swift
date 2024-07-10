@@ -70,10 +70,10 @@ extension UIViewController {
     }
     
     // Alert - TextField
-    func showTextFieldAlert(title: String, message: String? = nil, okHandler: ((String?) -> Void)?) {
+    func showTextFieldAlert(title: String, message: String? = nil, placeholder: String? = nil,  okHandler: ((String?) -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addTextField { textField in
-            textField.placeholder = "e.g. 영화DVD"
+            textField.placeholder = placeholder
         }
         
         let okay = UIAlertAction(title: Constants.Button.okay.rawValue, style: .default) { ok in

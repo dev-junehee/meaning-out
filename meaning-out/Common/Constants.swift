@@ -42,7 +42,7 @@ enum Constants {
         case edit = "Edit"
         
         static var sorting: [String] {
-            return ["정확도", "날짜순", "가격높은순", "가격낮은순"]
+            return ["정확도", "날짜순", "가격낮은순", "가격높은순"]
         }
     }
     
@@ -125,6 +125,7 @@ enum Constants {
     
     enum Like: String {
         case empty = "찜 카테고리가 없어요"
+        case placeholder = "e.g. 영화DVD"
     }
     
     enum SettingOptions: String, CaseIterable {

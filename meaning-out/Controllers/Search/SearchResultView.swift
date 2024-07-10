@@ -106,6 +106,7 @@ final class SearchResultView: BaseView {
             button.layer.borderColor = Resource.Colors.gray.cgColor
             button.layer.borderWidth = 1
             button.layer.cornerRadius = 20
+            button.tag = i
         }
         
         // 정확도 버튼 선택된 상태 기본 세팅

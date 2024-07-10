@@ -5,7 +5,7 @@
 //  Created by junehee on 6/14/24.
 //
 
-import UIKit
+import Foundation
 
 struct User {
     var nickname: String

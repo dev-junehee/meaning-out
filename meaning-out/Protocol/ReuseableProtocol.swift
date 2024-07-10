@@ -11,19 +11,7 @@ protocol ReuseableProtocol: AnyObject {
     static var id: String { get }
 }
 
-extension UIViewController: ReuseableProtocol {
-    static var id: String {
-        return String(describing: self)
-    }
-}
-
-extension UITableViewCell: ReuseableProtocol {
-    static var id: String {
-        return String(describing: self)
-    }
-}
-
-extension UICollectionViewCell: ReuseableProtocol {
+extension UIView: ReuseableProtocol {
     static var id: String {
         return String(describing: self)
     }

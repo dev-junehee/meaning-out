@@ -23,6 +23,12 @@ final class ProfileNicknameView: BaseView {
     
     let doneButton = PointButton(title: Constants.Button.done.rawValue)
     
+    var isEditmode = false {
+        didSet {
+            doneButton.isHidden = isEditmode
+        }
+    }
+    
     override func configureViewHierarchy() {
         cameraImageView.addSubview(cameraImage)
         profileImageView.addSubview(profileImage)
@@ -80,13 +86,13 @@ final class ProfileNicknameView: BaseView {
     override func configureViewUI() {
         profileImage.backgroundColor = Resource.Colors.white
         profileImage.clipsToBounds = true
-        profileImage.layer.cornerRadius = 50  // 추후 상수화 하기
+        profileImage.layer.cornerRadius = 50
         profileImage.layer.borderColor = Resource.Colors.primary.cgColor
         profileImage.layer.borderWidth = CGFloat(Constants.Integer.borderWidth.rawValue)
         profileImage.contentMode = .scaleAspectFit
         
         cameraImageView.backgroundColor = Resource.Colors.primary
-        cameraImageView.layer.cornerRadius = 12  // 추후 상수화 하기
+        cameraImageView.layer.cornerRadius = 12
         
         cameraImage.image = Resource.SystemImages.camara
         cameraImage.contentMode = .scaleAspectFit

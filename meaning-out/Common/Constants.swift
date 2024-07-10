@@ -125,6 +125,7 @@ enum Constants {
     
     enum Like: String {
         case empty = "찜 카테고리가 없어요"
+        case placeholder = "e.g. 영화DVD"
     }
     
     enum SettingOptions: String, CaseIterable {

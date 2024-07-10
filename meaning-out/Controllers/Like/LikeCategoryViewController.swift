@@ -70,7 +70,8 @@ final class LikeCategoryViewController: BaseViewController {
     @objc private func addLikeCategoryButtonClicked() {
         showTextFieldAlert(
             title: Constants.Alert.CreateLikeCategory.title.rawValue,
-            message: Constants.Alert.CreateLikeCategory.message.rawValue) { textFieldText in
+            message: Constants.Alert.CreateLikeCategory.message.rawValue,
+            placeholder: Constants.Like.placeholder.rawValue) { textFieldText in
             guard let textFieldText = textFieldText else { return }
             let likeCategory = LikeCategory(name: textFieldText)
             self.repository.createLikeCategory(likeCategory)

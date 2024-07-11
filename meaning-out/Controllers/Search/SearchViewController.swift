@@ -55,6 +55,11 @@ final class SearchViewController: BaseViewController {
                 self.navigationController?.pushViewController(searchResultVC, animated: true)
             }
         }
+        viewModel.outputSearchListValue.bind { item in
+            let searchResultVC = SearchResultViewController()
+            searchResultVC.searchText = item ?? ""
+            self.navigationController?.pushViewController(searchResultVC, animated: true)
+        }
     }
     
     override func configureViewController() {
@@ -138,12 +143,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 기존 저장된 검색어
-        let itemName = viewModel.outputSearchList.value[indexPath.row]
+//        let itemName = viewModel.outputSearchList.value[indexPath.row]
+        viewModel.inputSearchListClicked.value = indexPath.row
         
         // 검색 결과 화면으로 push
-        let searchResultVC = SearchResultViewController()
-        searchResultVC.searchText = itemName
-        navigationController?.pushViewController(searchResultVC, animated: true)
+//        let searchResultVC = SearchResultViewController()
+//        searchResultVC.searchText = itemName
+//        navigationController?.pushViewController(searchResultVC, animated: true)
     }
     
 }

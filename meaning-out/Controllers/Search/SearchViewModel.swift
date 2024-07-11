@@ -15,13 +15,17 @@ final class SearchViewModel {
     var inputRemoveSearchList: Observable<Int?> = Observable(nil)
     var inputRemoveAllSearchList: Observable<Void?> = Observable(nil)
     
+    var outputNavigationTitle: Observable<String> = Observable("")
+    var outputSearchList: Observable<[String]> = Observable([])
+    
     // 검색
     var inputSearchButtonClicked: Observable<String?> = Observable(nil)
     var outputSearchAlert: Observable<(title: String, message: String)> = Observable(("", ""))
     var outputSearchValid: Observable<Bool> = Observable(false)
     
-    var outputNavigationTitle: Observable<String> = Observable("")
-    var outputSearchList: Observable<[String]> = Observable([])
+    // 검색 리스트 클릭
+    var inputSearchListClicked: Observable<Int?> = Observable(nil)
+    var outputSearchListValue: Observable<String?> = Observable(nil)
     
     init() {
         transform()
@@ -51,6 +55,7 @@ final class SearchViewModel {
             self.outputSearchList.value = UserDefaultsManager.search
         }
         
+        // 상품 검색
         inputSearchButtonClicked.bind { searchText in
             guard let searchText = searchText else { return }
             
@@ -64,6 +69,13 @@ final class SearchViewModel {
                 self.outputSearchList.value = UserDefaultsManager.search
                 self.outputSearchValid.value = true
             }
+        }
+        
+        // 기존 검색어 리스트 클릭
+        inputSearchListClicked.bind { idx in
+            guard let idx else { return }
+            let item = self.outputSearchList.value[idx]
+            self.outputSearchListValue.value = item
         }
     }
     

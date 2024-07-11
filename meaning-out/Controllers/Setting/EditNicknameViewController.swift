@@ -12,7 +12,7 @@ import UIKit
  */
 final class EditNicknameViewController: BaseViewController {
     
-    private var editNicknameView = EditNicknameView()
+    private let mainView = ProfileNicknameView()
     
     var isValidate = false
     
@@ -24,18 +24,21 @@ final class EditNicknameViewController: BaseViewController {
     }
     var profileNum = UserDefaultsManager.profile {
         didSet {
-            editNicknameView.profileImage.image = Resource.Images.profiles[profileNum]
+            mainView.profileImage.image = Resource.Images.profiles[profileNum]
         }
     }
     
     let viewModel = EditNicknameViewModel()
     
     override func loadView() {
-        self.view = editNicknameView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainView.isEditmode = true
+        
         configureData()
         configureHandler()
         bindData()
@@ -52,7 +55,7 @@ final class EditNicknameViewController: BaseViewController {
         }
         
         viewModel.outputInvalidMessage.bind { message in
-            self.editNicknameView.invalidMessage.text = message
+            self.mainView.invalidMessage.text = message
         }
         
         viewModel.outputAlertText.bind { (isValid, title, message) in
@@ -86,19 +89,19 @@ final class EditNicknameViewController: BaseViewController {
     }
     
     private func configureData() {
-        editNicknameView.profileImage.image = Resource.Images.profiles[profileNum]
-        editNicknameView.nicknameField.text = nickname
+        mainView.profileImage.image = Resource.Images.profiles[profileNum]
+        mainView.nicknameField.text = nickname
     }
     
     private func configureHandler() {
         // 프로필 이미지 탭
         let profileTapped = UITapGestureRecognizer(target: self, action: #selector(profileTapped))
-        editNicknameView.profileImageView.addGestureRecognizer(profileTapped)
-        editNicknameView.profileImageView.isUserInteractionEnabled = true
+        mainView.profileImageView.addGestureRecognizer(profileTapped)
+        mainView.profileImageView.isUserInteractionEnabled = true
         
         // 닉네임 유효성 검사, 키보드 내리기
-        editNicknameView.nicknameField.addTarget(self, action: #selector(nicknameFieldChanged), for: .editingChanged)
-        editNicknameView.nicknameField.addTarget(self, action: #selector(keyboardDismiss), for: .editingDidEndOnExit)
+        mainView.nicknameField.addTarget(self, action: #selector(nicknameFieldChanged), for: .editingChanged)
+        mainView.nicknameField.addTarget(self, action: #selector(keyboardDismiss), for: .editingDidEndOnExit)
     }
     
     @objc func profileTapped() {
@@ -107,7 +110,7 @@ final class EditNicknameViewController: BaseViewController {
     }
     
     @objc func nicknameFieldChanged() {
-        viewModel.inputNickname.value = editNicknameView.nicknameField.text
+        viewModel.inputNickname.value = mainView.nicknameField.text
     }
     
     @objc func keyboardDismiss() {
@@ -115,7 +118,7 @@ final class EditNicknameViewController: BaseViewController {
     }
     
     @objc func saveButtonClicked() {
-        viewModel.inputNickname.value = editNicknameView.nicknameField.text
+        viewModel.inputNickname.value = mainView.nicknameField.text
         viewModel.inputOriginNickname.value = nickname
         viewModel.inputSaveButtonClicked.value = ()
     }
@@ -139,13 +142,6 @@ extension EditNicknameViewController {
         UserDefaultsManager.deleteAllUserDefaults()
         
         // 온보딩 화면으로 전환
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let sceneDeleagate = windowScene?.delegate as? SceneDelegate
-        
-        let onboardingVC = UINavigationController(rootViewController: OnboardingViewController())
-        let rootViewController = onboardingVC
-        
-        sceneDeleagate?.window?.rootViewController = rootViewController
-        sceneDeleagate?.window?.makeKeyAndVisible()
+        changeRootViewControllerToOnboarding()
     }
 }

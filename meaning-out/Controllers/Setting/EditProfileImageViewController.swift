@@ -9,7 +9,7 @@ import UIKit
 
 final class EditProfileImageViewController: BaseViewController {
     
-    private let editProfileImageView = EditProfileImageView()
+    private let editProfileImageView = ProfileImageView()
     
     // 사용자가 선택한 프로필 이미지
     var profileNum: Int = UserDefaultsManager.profile

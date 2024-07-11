@@ -12,51 +12,58 @@ import UIKit
  */
 final class SearchViewController: BaseViewController {
 
-    private let searchView = SearchView()
+    private let mainView = SearchView()
+    private let viewModel = SearchViewModel()
     
-    let nickname = UserDefaultsManager.nickname
     var searchList = UserDefaultsManager.search {
         didSet {
             viewToggle()
-            searchView.shoppingTableView.reloadData()
+            mainView.shoppingTableView.reloadData()
         }
     }
     
     var start = 1
     
     override func loadView() {
-        self.view = searchView
+        self.view = mainView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = UserDefaultsManager.getSearchMainTitle()  // 닉네임 바뀔 때마다 리로드
+        viewModel.inputViewWillAppear.value = () // 닉네임 바뀔 때마다 리로드
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewToggle()
+        bindData()
     }
     
-    override func configureHierarchy() {
-        searchView.searchBar.delegate = self
+    private func bindData() {
+        viewModel.outputNavigationTitle.bind { title in
+            self.navigationItem.title = title
+        }
+    }
+    
+    override func configureViewController() {
+        mainView.searchBar.delegate = self
         
-        searchView.shoppingTableView.delegate = self
-        searchView.shoppingTableView.dataSource = self
-        searchView.shoppingTableView.register(
+        mainView.shoppingTableView.delegate = self
+        mainView.shoppingTableView.dataSource = self
+        mainView.shoppingTableView.register(
             SearchItemHeaderTableViewCell.self,
             forCellReuseIdentifier: SearchItemHeaderTableViewCell.id
         )
-        searchView.shoppingTableView.register(
+        mainView.shoppingTableView.register(
             SearchItemTableViewCell.self,
             forCellReuseIdentifier: SearchItemTableViewCell.id
         )
-        searchView.shoppingTableView.separatorStyle = .none
+        mainView.shoppingTableView.separatorStyle = .none
     }
 
     private func viewToggle() {
-        searchView.emptyView.isHidden = !searchList.isEmpty
-        searchView.shoppingTableView.isHidden = searchList.isEmpty
+        mainView.emptyView.isHidden = !searchList.isEmpty
+        mainView.shoppingTableView.isHidden = searchList.isEmpty
     }
     
     // 특정 검색어 삭제
@@ -64,14 +71,14 @@ final class SearchViewController: BaseViewController {
         print(sender.tag)
         UserDefaultsManager.search.remove(at: sender.tag)
         searchList = UserDefaultsManager.search
-        searchView.shoppingTableView.reloadData()
+        mainView.shoppingTableView.reloadData()
     }
     
     // 검색 리스트 전체 삭제
     @objc private func removeAllSearchList() {
         UserDefaultsManager.search.removeAll()
         searchList = UserDefaultsManager.search
-        searchView.shoppingTableView.reloadData()
+        mainView.shoppingTableView.reloadData()
     }
     
 }

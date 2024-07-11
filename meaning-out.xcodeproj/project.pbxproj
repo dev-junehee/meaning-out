@@ -31,6 +31,7 @@
 		C44DDC262C3D79620019E549 /* EditProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */; };
 		C44DDC442C3EC0F90019E549 /* ProfileNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */; };
 		C44DDC462C3ED5B60019E549 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC452C3ED5B60019E549 /* ProfileImageViewModel.swift */; };
+		C44DDC4A2C3F5C5E0019E549 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC492C3F5C5E0019E549 /* SearchViewModel.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
@@ -93,6 +94,7 @@
 		C44DDC252C3D79620019E549 /* EditProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageViewModel.swift; sourceTree = "<group>"; };
 		C44DDC432C3EC0F90019E549 /* ProfileNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameViewModel.swift; sourceTree = "<group>"; };
 		C44DDC452C3ED5B60019E549 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
+		C44DDC492C3F5C5E0019E549 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			children = (
 				C48B9A4F2C1C5AA800A3EC84 /* SearchViewController.swift */,
 				C47C46AE2C31A5E600665A7A /* SearchView.swift */,
+				C44DDC492C3F5C5E0019E549 /* SearchViewModel.swift */,
 				C423D1722C207E5B001CE395 /* SearchResultViewController.swift */,
 				C47C46B02C31A81000665A7A /* SearchResultView.swift */,
 				C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */,
@@ -512,6 +515,7 @@
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C47C46B32C31ACBD00665A7A /* SettingView.swift in Sources */,
 				C47C46AB2C319E3800665A7A /* ProfileNicknameView.swift in Sources */,
+				C44DDC4A2C3F5C5E0019E549 /* SearchViewModel.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
 				C47C46B12C31A81000665A7A /* SearchResultView.swift in Sources */,
 				C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */,

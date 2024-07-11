@@ -19,7 +19,8 @@ final class SearchResultViewController: BaseViewController {
         case dsc
     }
 
-    private let resultView = SearchResultView()
+    private let mainView = SearchResultView()
+    
     
     // 검색 관련 데이터
     var searchText = ""
@@ -32,14 +33,14 @@ final class SearchResultViewController: BaseViewController {
     var searchStart = 1
     var searchResultItem: [Shopping] = [] {
         didSet {
-            resultView.resultCollectionView.reloadData()
+            mainView.resultCollectionView.reloadData()
         }
     }
     
     let repository = RealmLikeItemRepository()
     
     override func loadView() {
-        self.view = resultView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
@@ -56,22 +57,22 @@ final class SearchResultViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        resultView.resultCollectionView.delegate = self
-        resultView.resultCollectionView.dataSource = self
-        resultView.resultCollectionView.register(
+        mainView.resultCollectionView.delegate = self
+        mainView.resultCollectionView.dataSource = self
+        mainView.resultCollectionView.register(
             SearchResultCollectionViewCell.self,
             forCellWithReuseIdentifier: SearchResultCollectionViewCell.id
         )
-        resultView.resultCollectionView.prefetchDataSource = self
+        mainView.resultCollectionView.prefetchDataSource = self
     }
     
     private func configureData() {
         // 총 검색 결과 데이터 바인딩
-        resultView.totalLabel.text = "\(searchTotal.formatted())개의 검색 결과"
+        mainView.totalLabel.text = "\(searchTotal.formatted())개의 검색 결과"
     }
     
     private func configureHandler() {
-        let buttons = [resultView.simButton, resultView.dateButton, resultView.ascButton, resultView.dscButton]
+        let buttons = [mainView.simButton, mainView.dateButton, mainView.ascButton, mainView.dscButton]
         buttons.forEach {
             $0.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
         }
@@ -98,10 +99,10 @@ final class SearchResultViewController: BaseViewController {
                 self.searchResultItem.append(contentsOf: res.items)
             }
             self.configureData()
-            self.resultView.resultCollectionView.reloadData()
+            self.mainView.resultCollectionView.reloadData()
             
             if self.start == 1 {
-                self.resultView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
     }
@@ -124,7 +125,7 @@ final class SearchResultViewController: BaseViewController {
                 guard let selected else { return print("선택한 카테고리 없음") }
                 if let category = self.repository.findLikeCategory(title: selected) {
                     self.repository.createLikeItem(likeItem, category: category)
-                    self.resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
+                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
                 }
             }
         } else {
@@ -134,7 +135,7 @@ final class SearchResultViewController: BaseViewController {
                 let target = self.repository.findLikeItem(id: item.productId)
                 if let target {
                     self.repository.deleteLikeItem(item: target)
-                    self.resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
+                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
                 }
             }
         }
@@ -153,20 +154,20 @@ extension SearchResultViewController {
     // 정렬 타입 설정
     private func setSorting(tag: Int) {
         if tag == 0 {
-            resultView.simButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
+            mainView.simButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.dateButton, mainView.ascButton, mainView.dscButton])
             nowSort = .sim
         } else if tag == 1 {
-            resultView.dateButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
+            mainView.dateButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.simButton, mainView.ascButton, mainView.dscButton])
             nowSort = .date
         } else if tag == 2 {
-            resultView.ascButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
+            mainView.ascButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.simButton, mainView.dateButton, mainView.dscButton])
             nowSort = .asc
         } else {
-            resultView.dscButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
+            mainView.dscButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.simButton, mainView.dateButton, mainView.ascButton])
             nowSort = .dsc
         }
     }

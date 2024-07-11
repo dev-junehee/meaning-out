@@ -48,6 +48,13 @@ final class SearchViewController: BaseViewController {
             self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
             self.mainView.searchBar.text = ""
         }
+        viewModel.outputSearchValid.bind { value in
+            if value {
+                let searchResultVC = SearchResultViewController()
+                searchResultVC.searchText = self.viewModel.outputSearchList.value.first ?? ""
+                self.navigationController?.pushViewController(searchResultVC, animated: true)
+            }
+        }
     }
     
     override func configureViewController() {

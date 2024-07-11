@@ -15,13 +15,6 @@ final class SearchViewController: BaseViewController {
     private let mainView = SearchView()
     private let viewModel = SearchViewModel()
     
-    var searchList = UserDefaultsManager.search {
-        didSet {
-            viewToggle()
-            mainView.shoppingTableView.reloadData()
-        }
-    }
-    
     var start = 1
     
     override func loadView() {
@@ -30,11 +23,14 @@ final class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.inputViewWillAppear.value = () // 닉네임 바뀔 때마다 리로드
+        viewModel.inputViewWillAppearTrigger.value = () // 닉네임 바뀔 때마다 리로드
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.inputViewDidLoadTrigger.value = () // 뷰 로드될 때 searchList 가져오기
+        
         viewToggle()
         bindData()
     }
@@ -42,6 +38,15 @@ final class SearchViewController: BaseViewController {
     private func bindData() {
         viewModel.outputNavigationTitle.bind { title in
             self.navigationItem.title = title
+        }
+        viewModel.outputSearchList.bind { _ in
+            self.viewToggle()
+            self.mainView.shoppingTableView.reloadData()
+            self.mainView.searchBar.text = ""
+        }
+        viewModel.outputSearchAlert.bind { title, message in
+            self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
+            self.mainView.searchBar.text = ""
         }
     }
     
@@ -62,23 +67,18 @@ final class SearchViewController: BaseViewController {
     }
 
     private func viewToggle() {
-        mainView.emptyView.isHidden = !searchList.isEmpty
-        mainView.shoppingTableView.isHidden = searchList.isEmpty
+        mainView.emptyView.isHidden = !viewModel.outputSearchList.value.isEmpty
+        mainView.shoppingTableView.isHidden = viewModel.outputSearchList.value.isEmpty
     }
     
     // 특정 검색어 삭제
     @objc private func removeSearchList(_ sender: UIButton) {
-        print(sender.tag)
-        UserDefaultsManager.search.remove(at: sender.tag)
-        searchList = UserDefaultsManager.search
-        mainView.shoppingTableView.reloadData()
+        viewModel.inputRemoveSearchList.value = sender.tag
     }
     
     // 검색 리스트 전체 삭제
     @objc private func removeAllSearchList() {
-        UserDefaultsManager.search.removeAll()
-        searchList = UserDefaultsManager.search
-        mainView.shoppingTableView.reloadData()
+        viewModel.inputRemoveAllSearchList.value = ()
     }
     
 }
@@ -88,31 +88,7 @@ final class SearchViewController: BaseViewController {
 // SearchBar
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else {
-            print("검색어 입력 오류")
-            return
-        }
-        
-        // 공백값 예외처리
-        if searchText.trimmingCharacters(in: [" "]).count == 0 {
-            showAlert(
-                title: Constants.Alert.EmptyString.title.rawValue,
-                message: Constants.Alert.EmptyString.message.rawValue,
-                type: .oneButton,
-                okHandler: nil
-            )
-            searchBar.text = ""
-            return
-        }
-        
-        // UserDefaults 저장
-        searchList.insert(searchText, at: 0)
-        UserDefaultsManager.search = searchList
-        
-        // 검색 결과 화면으로 push
-        let searchResultVC = SearchResultViewController()
-        searchResultVC.searchText = searchText
-        navigationController?.pushViewController(searchResultVC, animated: true)
+        viewModel.inputSearchButtonClicked.value = searchBar.text
     }
 }
 
@@ -120,7 +96,7 @@ extension SearchViewController: UISearchBarDelegate {
 // TableView
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchList.count
+        return viewModel.outputSearchList.value.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -148,14 +124,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         cell.xmark.tag = indexPath.row
         cell.xmark.addTarget(self, action: #selector(removeSearchList(_:)), for: .touchUpInside)
-        cell.configureCellData(data: searchList[indexPath.row])
+        cell.configureCellData(data: viewModel.outputSearchList.value[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 기존 저장된 검색어
-        let itemName = searchList[indexPath.row]
+        let itemName = viewModel.outputSearchList.value[indexPath.row]
+        
         // 검색 결과 화면으로 push
         let searchResultVC = SearchResultViewController()
         searchResultVC.searchText = itemName

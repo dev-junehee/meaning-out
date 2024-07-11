@@ -21,7 +21,7 @@ final class SearchViewModel {
     // 검색
     var inputSearchButtonClicked: Observable<String?> = Observable(nil)
     var outputSearchAlert: Observable<(title: String, message: String)> = Observable(("", ""))
-    var outputSearchValid: Observable<Bool> = Observable(false)
+    var outputSearchIsValid: Observable<Bool> = Observable(false)
     
     // 검색 리스트 클릭
     var inputSearchListClicked: Observable<Int?> = Observable(nil)
@@ -67,7 +67,7 @@ final class SearchViewModel {
             } else {
                 UserDefaultsManager.search.insert(searchText, at: 0)
                 self.outputSearchList.value = UserDefaultsManager.search
-                self.outputSearchValid.value = true
+                self.outputSearchIsValid.value = true
             }
         }
         

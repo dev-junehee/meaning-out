@@ -26,9 +26,7 @@ final class SearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewModel.inputViewDidLoadTrigger.value = () // 뷰 로드될 때 searchList 가져오기
-        
         viewToggle()
         bindData()
     }
@@ -46,7 +44,7 @@ final class SearchViewController: BaseViewController {
             self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
             self.mainView.searchBar.text = ""
         }
-        viewModel.outputSearchValid.bind { value in
+        viewModel.outputSearchIsValid.bind { value in
             if value {
                 let searchResultVC = SearchResultViewController()
                 searchResultVC.searchText = self.viewModel.outputSearchList.value.first ?? ""

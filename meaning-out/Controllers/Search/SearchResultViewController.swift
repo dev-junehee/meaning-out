@@ -7,47 +7,90 @@
 
 import UIKit
 
+enum SortType: String {
+    case sim
+    case date
+    case asc
+    case dsc
+}
+
 /**
  메인 - 검색 결과 화면
  */
 final class SearchResultViewController: BaseViewController {
-    
-    enum SortType: String {
-        case sim
-        case date
-        case asc
-        case dsc
-    }
 
-    private let resultView = SearchResultView()
+    private let mainView = SearchResultView()
+    private let viewModel = SearchResultViewModel()
+    private let repository = RealmLikeItemRepository()
     
     // 검색 관련 데이터
     var searchText = ""
-    
     var start = 1
-    var display = 30
     var nowSort: SortType = .sim
-    
-    var searchTotal = 0
-    var searchStart = 1
-    var searchResultItem: [Shopping] = [] {
-        didSet {
-            resultView.resultCollectionView.reloadData()
-        }
-    }
-    
-    let repository = RealmLikeItemRepository()
-    
+
     override func loadView() {
-        self.view = resultView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        callRequest()
+        bindData()
+        viewModel.inputCallRequest.value = (query: searchText, start: start, sort: nowSort)
+        
         configureHandler()
         configureData()
+    }
+    
+    private func bindData() {
+        viewModel.outputNoResultAlert.bind { title, message in
+            self.showAlert(title: title, message: message, type: .oneButton, okHandler: self.alertPopViewController(action:))
+        }
+        
+        viewModel.outputShoppingResultIsValid.bind { isValid in
+            if isValid {
+                self.configureData()
+                self.mainView.resultCollectionView.reloadData()
+            }
+            if self.start == 1 {
+                self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            }
+        }
+        
+        viewModel.outputTransitionToDetail.bind { item in
+            let searchResultDetailVC = SearchResultDetailViewController()
+//            searchResultDetailVC.itemId = item.productId
+//            searchResultDetailVC.itemTitle = item.title
+//            searchResultDetailVC.itemLink = item.link
+            searchResultDetailVC.item = item
+            self.navigationController?.pushViewController(searchResultDetailVC, animated: true)
+        }
+        
+        viewModel.outputLikeItemIsValid.bind { isValid, categoryList, likeItem in
+//            print("=======", isValid, categoryList, likeItem)
+            if !isValid {
+                guard let categoryList else { return }
+                self.showCategoryActionSheet(categoryList) { selected in
+                    self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
+                }
+            } else {
+                self.showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+                    self.viewModel.inputDeleteLikeItem.value = likeItem
+                }
+            }
+        }
+        
+        viewModel.outputSaveLikeItemIsSucceed.bind { isSucceed in
+            if isSucceed {
+                self.mainView.resultCollectionView.reloadData()
+            }
+        }
+        
+        viewModel.outputDeleteLikeItemIsSucceed.bind { isSucceed in
+            if isSucceed {
+                self.mainView.resultCollectionView.reloadData()
+            }
+        }
     }
     
     override func configureViewController() {
@@ -56,53 +99,24 @@ final class SearchResultViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        resultView.resultCollectionView.delegate = self
-        resultView.resultCollectionView.dataSource = self
-        resultView.resultCollectionView.register(
+        mainView.resultCollectionView.delegate = self
+        mainView.resultCollectionView.dataSource = self
+        mainView.resultCollectionView.register(
             SearchResultCollectionViewCell.self,
             forCellWithReuseIdentifier: SearchResultCollectionViewCell.id
         )
-        resultView.resultCollectionView.prefetchDataSource = self
+        mainView.resultCollectionView.prefetchDataSource = self
     }
     
     private func configureData() {
         // 총 검색 결과 데이터 바인딩
-        resultView.totalLabel.text = "\(searchTotal.formatted())개의 검색 결과"
+        mainView.totalLabel.text = "\(viewModel.outputShoppingTotal.value.formatted())개의 검색 결과"
     }
     
     private func configureHandler() {
-        let buttons = [resultView.simButton, resultView.dateButton, resultView.ascButton, resultView.dscButton]
+        let buttons = [mainView.simButton, mainView.dateButton, mainView.ascButton, mainView.dscButton]
         buttons.forEach {
             $0.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
-        }
-    }
-    
-    private func callRequest() {
-        NetworkManager.shared.getShopping(query: searchText, start: start, sort: nowSort.rawValue) { res in
-            if res.total == 0 {
-                self.showAlert(
-                    title: "검색 결과가 없어요.",
-                    message: "다른 검색어를 입력해 주세요!",
-                    type: .oneButton,
-                    okHandler: self.alertPopViewController
-                )
-                return
-            }
-            
-            if self.start == 1 {
-                self.searchResultItem.removeAll()
-                self.searchTotal = res.total
-                self.searchResultItem = res.items
-            } else {
-                self.searchTotal = res.total
-                self.searchResultItem.append(contentsOf: res.items)
-            }
-            self.configureData()
-            self.resultView.resultCollectionView.reloadData()
-            
-            if self.start == 1 {
-                self.resultView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-            }
         }
     }
 
@@ -110,34 +124,12 @@ final class SearchResultViewController: BaseViewController {
     @objc private func sortButtonClicked(_ sender: UIButton) {
         setSorting(tag: sender.tag)
         start = 1
-        callRequest()
+        viewModel.inputCallRequest.value = (query: searchText, start: start, sort: nowSort)
     }
 
     // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
-        let id = searchResultItem[sender.tag].productId
-        
-        if !repository.isLikeItem(id: id) {
-            // 찜 안했을 때 - 찜 하기
-            let likeItem = LikeItem(item: searchResultItem[sender.tag])
-            showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
-                guard let selected else { return print("선택한 카테고리 없음") }
-                if let category = self.repository.findLikeCategory(title: selected) {
-                    self.repository.createLikeItem(likeItem, category: category)
-                    self.resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
-                }
-            }
-        } else {
-            // 찜했을 때 - 찜 취소
-            showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
-                let item = self.searchResultItem[sender.tag]
-                let target = self.repository.findLikeItem(id: item.productId)
-                if let target {
-                    self.repository.deleteLikeItem(item: target)
-                    self.resultView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
-                }
-            }
-        }
+        viewModel.inputSearchItemLikeButtonClicked.value = sender.tag
     }
     
 }
@@ -153,20 +145,20 @@ extension SearchResultViewController {
     // 정렬 타입 설정
     private func setSorting(tag: Int) {
         if tag == 0 {
-            resultView.simButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.dateButton, resultView.ascButton, resultView.dscButton])
+            mainView.simButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.dateButton, mainView.ascButton, mainView.dscButton])
             nowSort = .sim
         } else if tag == 1 {
-            resultView.dateButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.simButton, resultView.ascButton, resultView.dscButton])
+            mainView.dateButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.simButton, mainView.ascButton, mainView.dscButton])
             nowSort = .date
         } else if tag == 2 {
-            resultView.ascButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.dscButton])
+            mainView.ascButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.simButton, mainView.dateButton, mainView.dscButton])
             nowSort = .asc
         } else {
-            resultView.dscButton.setClickedButtonUI()
-            setUnclickedButtons(buttons: [resultView.simButton, resultView.dateButton, resultView.ascButton])
+            mainView.dscButton.setClickedButtonUI()
+            setUnclickedButtons(buttons: [mainView.simButton, mainView.dateButton, mainView.ascButton])
             nowSort = .dsc
         }
     }
@@ -202,14 +194,14 @@ extension SearchResultViewController {
 // CollectionView
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResultItem.count
+        return viewModel.outputShoppingResult.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell else { return SearchResultCollectionViewCell() }
        
         let idx = indexPath.item
-        let data = searchResultItem[idx]
+        let data = viewModel.outputShoppingResult.value[idx]
         
         cell.likeButton.tag = indexPath.item
         cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
@@ -219,12 +211,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = searchResultItem[indexPath.item]
-        let searchResultDetailVC = SearchResultDetailViewController()
-        searchResultDetailVC.itemId = item.productId
-        searchResultDetailVC.itemTitle = item.title
-        searchResultDetailVC.itemLink = item.link
-        navigationController?.pushViewController(searchResultDetailVC, animated: true)
+        viewModel.inputSearchItemClicked.value = indexPath.item
     }
     
 }
@@ -233,9 +220,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if searchResultItem.count - 2 == indexPath.item {
+            if viewModel.outputShoppingResult.value.count - 2 == indexPath.item {
                 start += 1
-                callRequest()
+                viewModel.inputCallRequest.value = (query: searchText, start: start, sort: nowSort)
             }
         }
     }

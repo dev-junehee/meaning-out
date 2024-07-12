@@ -56,6 +56,37 @@ final class SearchResultViewController: BaseViewController {
                 self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
+        
+        viewModel.outputTransitionToDetail.bind { item in
+            let searchResultDetailVC = SearchResultDetailViewController()
+//            searchResultDetailVC.itemId = item.productId
+//            searchResultDetailVC.itemTitle = item.title
+//            searchResultDetailVC.itemLink = item.link
+            searchResultDetailVC.item = item
+            self.navigationController?.pushViewController(searchResultDetailVC, animated: true)
+        }
+        
+        viewModel.outputLikeItemIsValid.bind { isValid, categoryList in
+            if !isValid {
+                guard let categoryList else { return }
+                self.showCategoryActionSheet(categoryList) { selected in
+                    self.viewModel.inputSelectedLikeCategory.value = selected
+                }
+            } else {
+                self.showAlert(
+                    title: "찜을 해제할까요?",
+                    message: "해당 상품이 찜에서 사라져요!",
+                    type: .twoButton) { test in
+                    print("취소했을 때", test)
+                }
+            }
+        }
+        
+        viewModel.outputSaveLikeItemIsSucceed.bind { isSucceed in
+            if isSucceed {
+                self.mainView.resultCollectionView.reloadData()
+            }
+        }
     }
     
     override func configureViewController() {
@@ -94,30 +125,31 @@ final class SearchResultViewController: BaseViewController {
 
     // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
-        let id = viewModel.outputShoppingResult.value[sender.tag].productId
+        viewModel.inputSearchItemLikeButtonClicked.value = sender.tag
         
+//        let id = viewModel.outputShoppingResult.value[sender.tag].productId
         
-        if !repository.isLikeItem(id: id) {
-            // 찜 안했을 때 - 찜 하기
-            let likeItem = LikeItem(item: viewModel.outputShoppingResult.value[sender.tag])
-            showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
-                guard let selected else { return print("선택한 카테고리 없음") }
-                if let category = self.repository.findLikeCategory(title: selected) {
-                    self.repository.createLikeItem(likeItem, category: category)
-                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
-                }
-            }
-        } else {
-            // 찜했을 때 - 찜 취소
-            showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
-                let item = self.viewModel.outputShoppingResult.value[sender.tag]
-                let target = self.repository.findLikeItem(id: item.productId)
-                if let target {
-                    self.repository.deleteLikeItem(item: target)
-                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
-                }
-            }
-        }
+//        if !repository.isLikeItem(id: id) {
+//            // 찜 안했을 때 - 찜 하기
+//            let likeItem = LikeItem(item: viewModel.outputShoppingResult.value[sender.tag])
+//            showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
+//                guard let selected else { return print("선택한 카테고리 없음") }
+//                if let category = self.repository.findLikeCategory(title: selected) {
+//                    self.repository.createLikeItem(likeItem, category: category)
+//                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
+//                }
+//            }
+//        } else {
+//            // 찜했을 때 - 찜 취소
+//            showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+//                let item = self.viewModel.outputShoppingResult.value[sender.tag]
+//                let target = self.repository.findLikeItem(id: item.productId)
+//                if let target {
+//                    self.repository.deleteLikeItem(item: target)
+//                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
+//                }
+//            }
+//        }
     }
     
 }
@@ -199,12 +231,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.outputShoppingResult.value[indexPath.item]
-        let searchResultDetailVC = SearchResultDetailViewController()
-        searchResultDetailVC.itemId = item.productId
-        searchResultDetailVC.itemTitle = item.title
-        searchResultDetailVC.itemLink = item.link
-        navigationController?.pushViewController(searchResultDetailVC, animated: true)
+        viewModel.inputSearchItemClicked.value = indexPath.item
     }
     
 }

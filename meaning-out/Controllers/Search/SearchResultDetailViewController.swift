@@ -16,28 +16,28 @@ import WebKit
 final class SearchResultDetailViewController: BaseViewController {
     
     private let webView = WKWebView()
-    
-    var itemId: String?
-    var itemTitle: String?
-    var itemLink: String?
-    
-    var repository = RealmLikeItemRepository()
+    private let viewModel = SearchResultViewModel()
+    private var repository = RealmLikeItemRepository()
 
+//    var itemId: String?
+//    var itemTitle: String?
+//    var itemLink: String?
+    var item: Shopping?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureData()
     }
     
     override func configureViewController() {
-        guard let itemTitle = itemTitle else { return }
-        navigationItem.title = getItemTitle(itemTitle)
+        guard let item else { return }
+        navigationItem.title = getItemTitle(item.title)
         addImgBarBtn(image: Resource.SystemImages.left, style: .plain, target: self, action: #selector(popViewController), type: .left)
         
         // 찜한 상품 리스트에 해당 상품이 있으면 like, 없으면 unlike
-        guard let itemId = itemId else { return }
-        let likeButton = repository.isLikeItem(id: itemId) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
+        let likeButton = repository.isLikeItem(id: item.productId) ? Resource.SystemImages.likeSelected : Resource.SystemImages.likeUnselected
         addImgBarBtn(image: likeButton, style: .plain, target: self, action: #selector(likeBarButtonClicked), type: .right)
-        if repository.isLikeItem(id: itemId) {
+        if repository.isLikeItem(id: item.productId) {
             navigationItem.rightBarButtonItem?.tintColor = Resource.Colors.primary
         }
     }
@@ -53,13 +53,14 @@ final class SearchResultDetailViewController: BaseViewController {
     }
     
     private func configureData() {
-        guard let itemLink else { return }
-        let URL = URL(string: itemLink)!
+        guard let item else { return }
+        let URL = URL(string: item.link)!
         let request = URLRequest(url: URL)
         webView.load(request)
     }
     
     @objc private func likeBarButtonClicked() {
+        print("여기에용")
 //        // like -> unLike
 //        guard let itemTitle = itemTitle else { return }
 //        if likeList.contains(itemTitle) {

@@ -66,23 +66,27 @@ final class SearchResultViewController: BaseViewController {
             self.navigationController?.pushViewController(searchResultDetailVC, animated: true)
         }
         
-        viewModel.outputLikeItemIsValid.bind { isValid, categoryList in
+        viewModel.outputLikeItemIsValid.bind { isValid, categoryList, likeItem in
+            print("=======", isValid, categoryList, likeItem)
             if !isValid {
                 guard let categoryList else { return }
                 self.showCategoryActionSheet(categoryList) { selected in
-                    self.viewModel.inputSelectedLikeCategory.value = selected
+                    self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
                 }
             } else {
-                self.showAlert(
-                    title: "찜을 해제할까요?",
-                    message: "해당 상품이 찜에서 사라져요!",
-                    type: .twoButton) { test in
-                    print("취소했을 때", test)
+                self.showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+                    self.viewModel.inputDeleteLikeItem.value = likeItem
                 }
             }
         }
         
         viewModel.outputSaveLikeItemIsSucceed.bind { isSucceed in
+            if isSucceed {
+                self.mainView.resultCollectionView.reloadData()
+            }
+        }
+        
+        viewModel.outputDeleteLikeItemIsSucceed.bind { isSucceed in
             if isSucceed {
                 self.mainView.resultCollectionView.reloadData()
             }
@@ -126,30 +130,6 @@ final class SearchResultViewController: BaseViewController {
     // 검색 결과 - 좋아요 버튼 - 좋아요 저장
     @objc func likeButtonClicked(_ sender: UIButton) {
         viewModel.inputSearchItemLikeButtonClicked.value = sender.tag
-        
-//        let id = viewModel.outputShoppingResult.value[sender.tag].productId
-        
-//        if !repository.isLikeItem(id: id) {
-//            // 찜 안했을 때 - 찜 하기
-//            let likeItem = LikeItem(item: viewModel.outputShoppingResult.value[sender.tag])
-//            showCategoryActionSheet(repository.getAllLikeCategory()) { selected in
-//                guard let selected else { return print("선택한 카테고리 없음") }
-//                if let category = self.repository.findLikeCategory(title: selected) {
-//                    self.repository.createLikeItem(likeItem, category: category)
-//                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
-//                }
-//            }
-//        } else {
-//            // 찜했을 때 - 찜 취소
-//            showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
-//                let item = self.viewModel.outputShoppingResult.value[sender.tag]
-//                let target = self.repository.findLikeItem(id: item.productId)
-//                if let target {
-//                    self.repository.deleteLikeItem(item: target)
-//                    self.mainView.resultCollectionView.reloadItems(at: [IndexPath(row: sender.tag, section: 0)])
-//                }
-//            }
-//        }
     }
     
 }

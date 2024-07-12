@@ -16,17 +16,27 @@ import WebKit
 final class SearchResultDetailViewController: BaseViewController {
     
     private let webView = WKWebView()
-    private let viewModel = SearchResultViewModel()
+    private let viewModel = SearchResultDetailViewModel()
     private var repository = RealmLikeItemRepository()
 
 //    var itemId: String?
 //    var itemTitle: String?
 //    var itemLink: String?
+    
     var item: Shopping?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaultsManager.like.removeAll())
+        print(UserDefaultsManager.like)
+        bindData()
         configureData()
+    }
+    
+    private func bindData() {
+        viewModel.outputLikeBarButtonClicked.bind { _ in
+            self.configureViewController()
+        }
     }
     
     override func configureViewController() {
@@ -60,8 +70,13 @@ final class SearchResultDetailViewController: BaseViewController {
     }
     
     @objc private func likeBarButtonClicked() {
-        print("여기에용")
-//        // like -> unLike
+        print(self, #function)
+        
+        guard let item = item else { return }
+        viewModel.inputLikeBarButtonClicked.value = item
+        
+        
+        // like -> unLike
 //        guard let itemTitle = itemTitle else { return }
 //        if likeList.contains(itemTitle) {
 //            likeList.append(itemTitle)

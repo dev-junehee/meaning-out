@@ -9,61 +9,81 @@ import UIKit
 
 final class LikeCategoryViewController: BaseViewController {
     
-    private let categoryView = LikeCategoryView()
+    private let mainView = LikeCategoryView()
+    private let viewModel = LikeCategoryViewModel()
     
     private let repository = RealmLikeItemRepository()
-    private var categoryList: [LikeCategory]? {
-        didSet {
-            viewToggle()
-            categoryView.tableView.reloadData()
-        }
-    }
     
     override func loadView() {
-        self.view = categoryView
+        self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         repository.getFileURL()
-        categoryList = repository.getAllLikeCategory()
         
-        categoryView.tableView.delegate = self
-        categoryView.tableView.dataSource = self
-        categoryView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicCell")
-        categoryView.tableView.rowHeight = 60
+        bindData()
+        viewModel.inputViewDidLoadTrigger.value = ()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        categoryView.tableView.reloadData()
+        mainView.tableView.reloadData()
         viewToggle()
+    }
+    
+    private func bindData() {
+        viewModel.outputAllLikeCategory.bind { _ in
+            self.viewToggle()
+            self.mainView.tableView.reloadData()
+        }
+        
+        viewModel.outputAddLikeCetagoryButton.bind { _ in
+            self.mainView.tableView.reloadData()
+        }
+        
+        viewModel.outputDeleteLikeCategoryIsSucceed.bind { _ in
+            self.mainView.tableView.reloadData()
+        }
+        
+        viewModel.outputDeleteLikeCategoryAlert.bind { title, message, category in
+            guard let category = category else { return }
+            self.showAlert(title: title, message: message, type: .twoButton) { _ in
+                self.repository.deleteLikeCategory(category)
+            }
+        }
     }
     
     override func configureViewController() {
         navigationItem.title = Constants.Title.likeCategory.rawValue
+        
         addTextBarBtn(title: Constants.Button.edit.rawValue, style: .plain, target: self, action: #selector(editButtonClicked), type: .left)
         addImgBarBtn(image: Resource.SystemImages.plus, style: .plain, target: self, action: #selector(addLikeCategoryButtonClicked), type: .right)
+        
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicCell")
+        mainView.tableView.rowHeight = 60
     }
     
     private func viewToggle() {
-        guard let categoryList = categoryList else { return }
-        categoryView.emptyView.isHidden = !categoryList.isEmpty
-        categoryView.tableView.isHidden = categoryList.isEmpty
+        let categoryList = viewModel.outputAllLikeCategory.value
+        mainView.emptyView.isHidden = !categoryList.isEmpty
+        mainView.tableView.isHidden = categoryList.isEmpty
         
         // 찜 카테고리 없을 때 Edit 버튼 숨기고, 편집 모드 해지
         if #available(iOS 16.0, *) {
             navigationItem.leftBarButtonItem?.isHidden = categoryList.isEmpty
-            categoryView.tableView.isEditing = false
+            mainView.tableView.isEditing = false
         } else {
             navigationItem.leftBarButtonItem?.isEnabled = categoryList.isEmpty
-            categoryView.tableView.isEditing = false
+            mainView.tableView.isEditing = false
         }
     }
     
     @objc private func editButtonClicked() {
-        let isEditing = !categoryView.tableView.isEditing
-        categoryView.tableView.setEditing(isEditing, animated: true)
+        let isEditing = !mainView.tableView.isEditing
+        mainView.tableView.setEditing(isEditing, animated: true)
         editButtonItem.isSelected = isEditing
     }
     
@@ -72,11 +92,7 @@ final class LikeCategoryViewController: BaseViewController {
             title: Constants.Alert.CreateLikeCategory.title.rawValue,
             message: Constants.Alert.CreateLikeCategory.message.rawValue,
             placeholder: Constants.Like.placeholder.rawValue) { textFieldText in
-            guard let textFieldText = textFieldText else { return }
-            let likeCategory = LikeCategory(name: textFieldText)
-            self.repository.createLikeCategory(likeCategory)
-            self.categoryList = self.repository.getAllLikeCategory()
-            self.categoryView.tableView.reloadData()
+                self.viewModel.inputAddLikeCategoryButtonClicked.value = textFieldText
         }
     }
     
@@ -84,51 +100,35 @@ final class LikeCategoryViewController: BaseViewController {
 
 extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryList?.count ?? 0
+        return viewModel.outputAllLikeCategory.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
         cell = UITableViewCell(style: .subtitle, reuseIdentifier: "basicCell")
-        
-        if let categoryList = categoryList {
-            cell.textLabel?.text = categoryList[indexPath.row].title
-            cell.detailTextLabel?.text = "\(categoryList[indexPath.row].detailData.count)개"
-        }
+
+        cell.textLabel?.text = viewModel.outputAllLikeCategory.value[indexPath.row].title
+        cell.detailTextLabel?.text = "\(viewModel.outputAllLikeCategory.value[indexPath.row].detailData.count)개"
         cell.accessoryType = .disclosureIndicator
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let categoryList = categoryList else { return }
-        
-        let category = categoryList[indexPath.row]
+        let category = viewModel.outputAllLikeCategory.value[indexPath.row]
         if category.detailData.isEmpty {
             showAlert(
                 title: Constants.Alert.EmptyLikeCategory.title.rawValue, 
                 message: Constants.Alert.EmptyLikeCategory.message.rawValue, type: .oneButton) { _ in return }
         } else {
             let likeDetailVC = LikeDetailViewController()
-            likeDetailVC.category = categoryList[indexPath.row]
+            likeDetailVC.category = category
             navigationController?.pushViewController(likeDetailVC, animated: true)
         }
     }
     
     // 찜 카테고리 밀어서 삭제
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let categoryList = self.categoryList else { return }
-        let category = categoryList[indexPath.row]
-        
-        if category.detailData.isEmpty {
-            self.repository.deleteLikeCategory(category)
-        } else {
-            showAlert(
-                title: Constants.Alert.DeleteLikeCategory.title.rawValue,
-                message: Constants.Alert.DeleteLikeCategory.message.rawValue, type: .twoButton) { _ in
-                self.repository.deleteLikeCategory(category)
-            }
-        }
-        self.categoryList = self.repository.getAllLikeCategory()
+        viewModel.inputDeleteLikeCategory.value = indexPath.row
     }
 }

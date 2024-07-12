@@ -67,7 +67,7 @@ final class SearchResultViewController: BaseViewController {
         }
         
         viewModel.outputLikeItemIsValid.bind { isValid, categoryList, likeItem in
-            print("=======", isValid, categoryList, likeItem)
+//            print("=======", isValid, categoryList, likeItem)
             if !isValid {
                 guard let categoryList else { return }
                 self.showCategoryActionSheet(categoryList) { selected in

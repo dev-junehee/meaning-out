@@ -76,6 +76,11 @@ enum Constants {
             case message = "검색 결과에 오류가 생겼어요."
         }
         
+        enum NoSearchResult: String {
+            case title = "검색 결과가 없어요."
+            case message = "다른 검색어를 입력해 주세요!"
+        }
+        
         enum CreateLikeCategory: String {
             case title = "찜 카테고리 생성"
             case message = "찜 카테고리명을 작성해 주세요!"

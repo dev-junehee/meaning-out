@@ -6,22 +6,23 @@
 //
 
 import UIKit
-import RealmSwift
 
 final class LikeDetailViewController: BaseViewController {
     
-    private let likeView = LikeDetailView()
+    private let mainView = LikeDetailView()
+//    private let viewModel = LikeDetailViewModel()
     
     private let repository = RealmLikeItemRepository()
+    
     var category: LikeCategory?
 
     override func loadView() {
-        self.view = likeView
+        self.view = mainView
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        likeView.likeCollectionView.reloadData()
+        mainView.likeCollectionView.reloadData()
     }
     
     override func configureViewController() {
@@ -35,9 +36,9 @@ final class LikeDetailViewController: BaseViewController {
     }
     
     private func setTableViewDelegate() {
-        likeView.likeCollectionView.delegate = self
-        likeView.likeCollectionView.dataSource = self
-        likeView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
+        mainView.likeCollectionView.delegate = self
+        mainView.likeCollectionView.dataSource = self
+        mainView.likeCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
     }
     
     // 찜 버튼 클릭하면 찜 해제 처리
@@ -48,7 +49,7 @@ final class LikeDetailViewController: BaseViewController {
                 if category.detailData.isEmpty {
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    self.likeView.likeCollectionView.reloadData()
+                    self.mainView.likeCollectionView.reloadData()
                 }
             }
         }

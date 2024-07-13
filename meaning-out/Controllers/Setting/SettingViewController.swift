@@ -12,35 +12,38 @@ import UIKit
  */
 final class SettingViewController: BaseViewController {
     
-    private let settingView = SettingView()
+    private let mainView = SettingView()
+    private let viewModel = SettingViewModel()
 
     private let repository = RealmLikeItemRepository()
-    
-    var nickname = UserDefaultsManager.nickname {
-        didSet {
-            settingView.tableView.reloadData()
-        }
-    }
 
     override func loadView() {
-        self.view = settingView
+        self.view = mainView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        nickname = UserDefaultsManager.nickname
-        settingView.tableView.reloadData()
+        viewModel.inputViewWillAppearTrigger.value = ()
+    }
+    
+    private func bindData() {
+        viewModel.outputNickname.bind { _ in
+            self.mainView.tableView.reloadData()
+        }
     }
     
     override func configureViewController() {
         navigationItem.title = Constants.Title.setting.rawValue
-    }
-    
-    override func configureHierarchy() {
-        settingView.tableView.delegate = self
-        settingView.tableView.dataSource = self
-        settingView.tableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.id)
-        settingView.tableView.register(SettingMenuTableViewCell.self, forCellReuseIdentifier: SettingMenuTableViewCell.id)
+        
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.id)
+        mainView.tableView.register(SettingMenuTableViewCell.self, forCellReuseIdentifier: SettingMenuTableViewCell.id)
     }
     
 }
@@ -73,14 +76,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let idx = indexPath.row
         
         if section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id, for: indexPath) as! SettingProfileTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id, for: indexPath) as? SettingProfileTableViewCell else { return SettingProfileTableViewCell() }
  
             cell.configureCellData()
             
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as! SettingMenuTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingMenuTableViewCell.id, for: indexPath) as? SettingMenuTableViewCell else { return SettingMenuTableViewCell() }
             
             let menu = Constants.SettingOptions.allCases[section].menuOptions[idx]
           

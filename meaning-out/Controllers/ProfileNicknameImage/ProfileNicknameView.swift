@@ -15,8 +15,8 @@ final class ProfileNicknameView: BaseView {
     let profileImageView = UIView()
     let profileImage = UIImageView()
     
-    let cameraImageView = UIView()
-    let cameraImage = UIImageView()
+    private let cameraImageView = UIView()
+    private let cameraImage = UIImageView()
     
     let nicknameField = HoshiTextField()
     let invalidMessage = UILabel()
@@ -34,7 +34,7 @@ final class ProfileNicknameView: BaseView {
         profileImageView.addSubview(profileImage)
         profileImageView.addSubview(cameraImageView)
         
-        let subviews: [UIView] = [profileImageView, nicknameField, invalidMessage, doneButton]
+        let subviews = [profileImageView, nicknameField, invalidMessage, doneButton]
         subviews.forEach {
             self.addSubview($0)
         }

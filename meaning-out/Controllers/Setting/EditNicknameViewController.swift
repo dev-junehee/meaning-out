@@ -13,6 +13,7 @@ import UIKit
 final class EditNicknameViewController: BaseViewController {
     
     private let mainView = ProfileNicknameView()
+    private let viewModel = EditNicknameViewModel()
     
     var isValidate = false
     
@@ -27,8 +28,6 @@ final class EditNicknameViewController: BaseViewController {
             mainView.profileImage.image = Resource.Images.profiles[profileNum]
         }
     }
-    
-    let viewModel = EditNicknameViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -63,12 +62,11 @@ final class EditNicknameViewController: BaseViewController {
                 self.showAlert(
                     title: Constants.Alert.EditNickname.title.rawValue,
                     message: Constants.Alert.EditNickname.message.rawValue,
-                    type: .oneButton,
-                    okHandler: self.alertPopViewController)
+                    type: .oneButton) { _ in
+                        self.popViewController()
+                    }
             } else {
-                self.showAlert(title: title, message: message, type: .oneButton) { _ in
-                    return
-                }
+                self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
             }
         }
     }
@@ -127,21 +125,10 @@ final class EditNicknameViewController: BaseViewController {
 
 // MARK: EditNicknameViewController 익스텐션
 extension EditNicknameViewController {
-    // Alert Action 알럿 액션 함수
-    func alertReturn(action: UIAlertAction) {
-        return
-    }
-    
-    func alertPopViewController(action: UIAlertAction) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     // 온보딩으로 root 바꾸기
     func backOnboardingController(action: UIAlertAction) {
-        // UserDefaults에 저장된 모든 데이터 삭제
+        // UserDefaults에 저장된 모든 데이터 삭제 & 온보딩 화면으로 전환
         UserDefaultsManager.deleteAllUserDefaults()
-        
-        // 온보딩 화면으로 전환
         changeRootViewControllerToOnboarding()
     }
 }

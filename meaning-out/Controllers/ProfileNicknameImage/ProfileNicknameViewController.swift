@@ -15,7 +15,6 @@ final class ProfileNicknameViewController: BaseViewController {
     // 닉네임 유효성 검사 여부, 가입 완료 여부, 프로필 이미지 번호
     var isValid = false
     var isUser = false
-    var profileNum: Int?
 
     override func loadView() {
         self.view = mainView
@@ -24,9 +23,9 @@ final class ProfileNicknameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindData()
-        viewModel.inputViewDidLoadTrigger.value = ()
         configureData()
         configureHandler()
+        viewModel.inputViewDidLoadTrigger.value = ()
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -35,18 +34,25 @@ final class ProfileNicknameViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputProfileNum.bind { num in
-            self.profileNum = num
+        viewModel.outputProfileNum.bind { _ in
             self.configureData()
         }
+        
         viewModel.outputIsValid.bind { value in
             self.isValid = value
         }
+        
         viewModel.outputInvalidMessage.bind { message in
             self.mainView.invalidMessage.text = message
         }
+        
         viewModel.outputSaveUserAccountResult.bind { value in
             self.isUser = value
+        }
+        
+        viewModel.transitionProfileImage = {
+            let profileImageVC = ProfileImageViewController()
+            self.navigationController?.pushViewController(profileImageVC, animated: true)
         }
     }
     
@@ -56,7 +62,7 @@ final class ProfileNicknameViewController: BaseViewController {
     }
     
     private func configureData() {
-        guard let profileNum = profileNum else { return }
+        let profileNum = viewModel.outputProfileNum.value
         mainView.profileImage.image = Resource.Images.profiles[profileNum]
     }
     
@@ -73,8 +79,7 @@ final class ProfileNicknameViewController: BaseViewController {
     }
     
     @objc private func profileTapped() {
-        let profileImageVC = ProfileImageViewController()
-        navigationController?.pushViewController(profileImageVC, animated: true)
+        viewModel.inputProfileTapped.value = ()
     }
     
     @objc private func validateNickname() {

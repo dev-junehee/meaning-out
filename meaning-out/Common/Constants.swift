@@ -77,7 +77,7 @@ enum Constants {
         }
         
         enum NoSearchResult: String {
-            case title = "검색 결과가 없어요."
+            case title = "검색 결과가 존재하지 않아요🥲"
             case message = "다른 검색어를 입력해 주세요!"
         }
         
@@ -98,6 +98,11 @@ enum Constants {
         enum DeleteLikeCategory: String {
             case title = "찜 카테고리를 삭제합니다."
             case message = "카테고리에 포함된 모든 찜 상품도 함께 삭제됩니다."
+        }
+        
+        enum DeleteLikeItem: String {
+            case title = "찜을 해제할까요?"
+            case message = "해당 상품이 찜에서 사라져요!"
         }
         
         enum InvalidUser: String {
@@ -146,7 +151,7 @@ enum Constants {
     
     enum Placeholder: String {
         case nickname = "닉네임 NICKNAME"
-        case searchBar = "브랜드, 상품 등을 입력하세요."
+        case searchBar = "브랜드, 상품 등을 검색해 보세요!"
     }
     
     enum Integer: Int {

@@ -35,6 +35,10 @@
 		C44DDC5A2C4032940019E549 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC592C4032940019E549 /* SearchResultViewModel.swift */; };
 		C44DDC5C2C412A800019E549 /* SearchResultDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC5B2C412A800019E549 /* SearchResultDetailViewModel.swift */; };
 		C44DDC5E2C4171180019E549 /* LikeCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC5D2C4171180019E549 /* LikeCategoryViewModel.swift */; };
+		C44DDC602C429BF80019E549 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC5F2C429BF80019E549 /* SettingViewModel.swift */; };
+		C44DDC622C42A3080019E549 /* LikeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC612C42A3080019E549 /* LikeDetailViewModel.swift */; };
+		C44DDC742C43F0DE0019E549 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC732C43F0DE0019E549 /* OnboardingViewModel.swift */; };
+		C44DDC762C4414AF0019E549 /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC752C4414AF0019E549 /* SearchResultDetailView.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
@@ -101,6 +105,10 @@
 		C44DDC592C4032940019E549 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		C44DDC5B2C412A800019E549 /* SearchResultDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailViewModel.swift; sourceTree = "<group>"; };
 		C44DDC5D2C4171180019E549 /* LikeCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCategoryViewModel.swift; sourceTree = "<group>"; };
+		C44DDC5F2C429BF80019E549 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		C44DDC612C42A3080019E549 /* LikeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDetailViewModel.swift; sourceTree = "<group>"; };
+		C44DDC732C43F0DE0019E549 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		C44DDC752C4414AF0019E549 /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 				C44DDC5D2C4171180019E549 /* LikeCategoryViewModel.swift */,
 				C413D2872C3AA6CA00676D26 /* LikeDetailViewController.swift */,
 				C413D2892C3AAF5A00676D26 /* LikeDetailView.swift */,
+				C44DDC612C42A3080019E549 /* LikeDetailViewModel.swift */,
 			);
 			path = Like;
 			sourceTree = "<group>";
@@ -264,7 +273,6 @@
 				C48B9A262C1B4F1700A3EC84 /* Common */,
 				C48B9A4B2C1C2A1400A3EC84 /* Protocol */,
 				C48B9A292C1B4FB700A3EC84 /* Extension */,
-				C47C46A32C31987200665A7A /* Base */,
 				C48B9A472C1C29C900A3EC84 /* Components */,
 				C48B9A2F2C1B5EC500A3EC84 /* Controllers */,
 				C48B9A412C1C1C1E00A3EC84 /* Utils */,
@@ -322,6 +330,7 @@
 			children = (
 				C48B9A1E2C1B4A3D00A3EC84 /* OnboardingViewController.swift */,
 				C47C46A82C31992000665A7A /* OnboardingView.swift */,
+				C44DDC732C43F0DE0019E549 /* OnboardingViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 		C48B9A472C1C29C900A3EC84 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C47C46A32C31987200665A7A /* Base */,
 				C48B9A202C1B4DF500A3EC84 /* CustomViews */,
 				C48B9A482C1C29D600A3EC84 /* Cells */,
 			);
@@ -394,6 +404,7 @@
 				C44DDC592C4032940019E549 /* SearchResultViewModel.swift */,
 				C423D1792C21085C001CE395 /* SearchResultDetailViewController.swift */,
 				C44DDC5B2C412A800019E549 /* SearchResultDetailViewModel.swift */,
+				C44DDC752C4414AF0019E549 /* SearchResultDetailView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -403,6 +414,7 @@
 			children = (
 				C48B9A522C1C671200A3EC84 /* SettingViewController.swift */,
 				C47C46B22C31ACBD00665A7A /* SettingView.swift */,
+				C44DDC5F2C429BF80019E549 /* SettingViewModel.swift */,
 				C48B9A5A2C1CAE2800A3EC84 /* EditNicknameViewController.swift */,
 				C44DDC1F2C3D594C0019E549 /* EditNicknameViewModel.swift */,
 				C48B9A602C1DFD5A00A3EC84 /* EditProfileImageViewController.swift */,
@@ -524,6 +536,7 @@
 				C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */,
 				C48B99E22C1AEE5300A3EC84 /* SceneDelegate.swift in Sources */,
 				C47C46B32C31ACBD00665A7A /* SettingView.swift in Sources */,
+				C44DDC602C429BF80019E549 /* SettingViewModel.swift in Sources */,
 				C47C46AB2C319E3800665A7A /* ProfileNicknameView.swift in Sources */,
 				C44DDC4A2C3F5C5E0019E549 /* SearchViewModel.swift in Sources */,
 				C48B9A282C1B4F6200A3EC84 /* Resource.swift in Sources */,
@@ -538,12 +551,14 @@
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
 				C44DDC202C3D594C0019E549 /* EditNicknameViewModel.swift in Sources */,
 				C413D2802C3A9E3100676D26 /* RealmTable.swift in Sources */,
+				C44DDC742C43F0DE0019E549 /* OnboardingViewModel.swift in Sources */,
 				C423D1752C2096C5001CE395 /* SearchResultCollectionViewCell.swift in Sources */,
 				C44DDC062C3AE8DC0019E549 /* BaseTableViewCell.swift in Sources */,
 				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,
 				C4A52AD92C270B870013BCDF /* UIButton+Extension.swift in Sources */,
 				C48B9A552C1C733700A3EC84 /* UITabBarController+Extension.swift in Sources */,
 				C423D16E2C207C04001CE395 /* API.swift in Sources */,
+				C44DDC622C42A3080019E549 /* LikeDetailViewModel.swift in Sources */,
 				C48B9A502C1C5AA800A3EC84 /* SearchViewController.swift in Sources */,
 				C48B9A572C1C76DF00A3EC84 /* SettingProfileTableViewCell.swift in Sources */,
 				C44DDC5E2C4171180019E549 /* LikeCategoryViewModel.swift in Sources */,
@@ -562,6 +577,7 @@
 				C44DDC5C2C412A800019E549 /* SearchResultDetailViewModel.swift in Sources */,
 				C48B9A402C1C016F00A3EC84 /* TextFieldEffects+Extension.swift in Sources */,
 				C48B9A4D2C1C2A3A00A3EC84 /* ReuseableProtocol.swift in Sources */,
+				C44DDC762C4414AF0019E549 /* SearchResultDetailView.swift in Sources */,
 				C44DDC082C3AEAB50019E549 /* BaseCollectionViewCell.swift in Sources */,
 				C423D1422C1F3FA5001CE395 /* SearchItemHeaderTableViewCell.swift in Sources */,
 				C44DDC0C2C3BDC730019E549 /* LikeCategoryViewController.swift in Sources */,

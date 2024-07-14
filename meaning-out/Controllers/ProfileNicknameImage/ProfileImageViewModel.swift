@@ -10,7 +10,7 @@ import Foundation
 final class ProfileImageViewModel {
     
     var inputViewWillAppear: Observable<Void?> = Observable(nil)
-    var outputProfileNum: Observable<Int> = Observable(0)
+    var outputProfileNum: Observable<Int> = Observable(UserDefaultsManager.profile)
     
     var inputImageSelected: Observable<Int?> = Observable(nil)
     

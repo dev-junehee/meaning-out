@@ -5,18 +5,16 @@
 //  Created by junehee on 6/18/24.
 //
 
-import UIKit
-
-import SnapKit
-import WebKit
+import Foundation
 
 /**
  메인 - 검색 결과 상세 화면
  */
 final class SearchResultDetailViewController: BaseViewController {
-    
-    private let webView = WKWebView()
+
+    private let mainView =  SearchResultDetailView()
     private let viewModel = SearchResultDetailViewModel()
+    
     private var repository = RealmLikeItemRepository()
 
 //    var itemId: String?
@@ -25,17 +23,45 @@ final class SearchResultDetailViewController: BaseViewController {
     
     var item: Shopping?
     
+    override func loadView() {
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaultsManager.like.removeAll())
-        print(UserDefaultsManager.like)
         bindData()
         configureData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.inputViewWillAppearTrigger.value = item?.productId
+    }
+    
     private func bindData() {
-        viewModel.outputLikeBarButtonClicked.bind { _ in
-            self.configureViewController()
+        viewModel.outputLikeBarButtonClicked.bind { isValid, categoryList, likeItem in
+            if !isValid {
+                guard let categoryList else { return }
+                self.showCategoryActionSheet(categoryList) { selected in
+                    self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
+                }
+            } else {
+                self.showAlert(
+                    title: Constants.Alert.DeleteLikeItem.title.rawValue,
+                    message: Constants.Alert.DeleteLikeItem.message.rawValue, type: .twoButton) { _ in
+                    self.viewModel.inputDeleteLikeItem.value = likeItem
+                }
+            }
+        }
+        
+        viewModel.outputLikeItemSaveDeleteReuslt.bind { result in
+            switch result {
+            case .like:
+                self.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeSelected
+                self.navigationItem.rightBarButtonItem?.tintColor = Resource.Colors.primary
+            case .unlike:
+                self.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeUnselected
+            }
         }
     }
     
@@ -52,44 +78,16 @@ final class SearchResultDetailViewController: BaseViewController {
         }
     }
     
-    override func configureHierarchy() {
-        view.addSubview(webView)
-    }
-    
-    override func configureLayout() {
-        webView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
     private func configureData() {
         guard let item else { return }
         let URL = URL(string: item.link)!
         let request = URLRequest(url: URL)
-        webView.load(request)
+        mainView.webView.load(request)
     }
     
     @objc private func likeBarButtonClicked() {
-        print(self, #function)
-        
         guard let item = item else { return }
         viewModel.inputLikeBarButtonClicked.value = item
-        
-        
-        // like -> unLike
-//        guard let itemTitle = itemTitle else { return }
-//        if likeList.contains(itemTitle) {
-//            likeList.append(itemTitle)
-//            UserDefaultsManager.like = likeList
-//        } else {
-//            guard let idx = likeList.firstIndex(of: itemTitle) else {
-//                print("좋아요 리스트에 해당 상품이 없어요~!")
-//                return
-//            }
-//            likeList.remove(at: idx)
-//            UserDefaultsManager.like = likeList
-//        }
-//        configureViewController()
     }
 
 }

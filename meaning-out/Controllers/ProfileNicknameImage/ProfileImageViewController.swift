@@ -12,8 +12,6 @@ final class ProfileImageViewController: BaseViewController {
     private let mainView = ProfileImageView()
     private let viewModel = ProfileImageViewModel()
     
-    private var profileNum: Int?
-    
     override func loadView() {
         self.view = mainView
     }
@@ -29,8 +27,7 @@ final class ProfileImageViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputProfileNum.bind { num in
-            self.profileNum = num
+        viewModel.outputProfileNum.bind { _ in
             self.configureData()
         }
     }
@@ -47,14 +44,14 @@ final class ProfileImageViewController: BaseViewController {
     }
 
     private func configureData() {
-        guard let profileNum = profileNum else { return }
+        let profileNum = viewModel.outputProfileNum.value
         mainView.profileImage.image = Resource.Images.profiles[profileNum]
     }
     
 }
 
 
-// MARK: 익스텐션
+// MARK: CollectionView Extension
 extension ProfileImageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Resource.Images.profiles.count
@@ -66,7 +63,7 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         let idx = indexPath.item
         let image = Resource.Images.profiles[idx]
         
-        if idx == profileNum {
+        if idx == viewModel.outputProfileNum.value {
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .init())
             cell.configureSelectedCellUI()

@@ -10,7 +10,7 @@ import UIKit
 final class LikeDetailViewController: BaseViewController {
     
     private let mainView = LikeDetailView()
-//    private let viewModel = LikeDetailViewModel()
+    private let viewModel = LikeDetailViewModel()
     
     private let repository = RealmLikeItemRepository()
     
@@ -19,10 +19,31 @@ final class LikeDetailViewController: BaseViewController {
     override func loadView() {
         self.view = mainView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindData()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mainView.likeCollectionView.reloadData()
+        viewModel.inputViewAppearTrigger.value = category?.detailData.count
+    }
+    
+    private func bindData() {
+        viewModel.outputCategoryDataIsEmpty.bind { isEmpty in
+            if isEmpty {
+                self.mainView.likeCollectionView.reloadData()
+                self.showAlert(
+                    title: Constants.Alert.EmptyLikeCategory.title.rawValue,
+                    message: Constants.Alert.EmptyLikeCategory.message.rawValue, 
+                    type: .oneButton) { _ in
+                        self.popViewController()
+                    }
+            } else {
+                self.mainView.likeCollectionView.reloadData()
+            }
+        }
     }
     
     override func configureViewController() {

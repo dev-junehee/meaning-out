@@ -57,9 +57,9 @@ final class SearchResultViewController: BaseViewController {
                 self.showAlert(
                     title: Constants.Alert.NoSearchResult.title.rawValue,
                     message: Constants.Alert.NoSearchResult.message.rawValue,
-                    type: .oneButton,
-                    okHandler: self.alertPopViewController(action:)
-                )
+                    type: .oneButton) { _ in
+                        self.popViewController()
+                    }
             }
         }
         

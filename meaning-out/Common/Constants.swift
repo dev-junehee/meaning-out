@@ -77,7 +77,7 @@ enum Constants {
         }
         
         enum NoSearchResult: String {
-            case title = "검색 결과가 없어요."
+            case title = "검색 결과가 존재하지 않아요🥲"
             case message = "다른 검색어를 입력해 주세요!"
         }
         

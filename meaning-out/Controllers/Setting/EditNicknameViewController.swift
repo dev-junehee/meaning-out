@@ -63,12 +63,11 @@ final class EditNicknameViewController: BaseViewController {
                 self.showAlert(
                     title: Constants.Alert.EditNickname.title.rawValue,
                     message: Constants.Alert.EditNickname.message.rawValue,
-                    type: .oneButton,
-                    okHandler: self.alertPopViewController)
+                    type: .oneButton) { _ in
+                        self.popViewController()
+                    }
             } else {
-                self.showAlert(title: title, message: message, type: .oneButton) { _ in
-                    return
-                }
+                self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
             }
         }
     }
@@ -132,9 +131,9 @@ extension EditNicknameViewController {
         return
     }
     
-    func alertPopViewController(action: UIAlertAction) {
-        navigationController?.popViewController(animated: true)
-    }
+//    func alertPopViewController(action: UIAlertAction) {
+//        navigationController?.popViewController(animated: true)
+//    }
     
     // 온보딩으로 root 바꾸기
     func backOnboardingController(action: UIAlertAction) {

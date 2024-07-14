@@ -100,6 +100,11 @@ enum Constants {
             case message = "카테고리에 포함된 모든 찜 상품도 함께 삭제됩니다."
         }
         
+        enum DeleteLikeItem: String {
+            case title = "찜을 해제할까요?"
+            case message = "해당 상품이 찜에서 사라져요!"
+        }
+        
         enum InvalidUser: String {
             case title = "유효한 유저가 아니에요!"
             case message = "온보딩 화면으로 돌아갑니다."

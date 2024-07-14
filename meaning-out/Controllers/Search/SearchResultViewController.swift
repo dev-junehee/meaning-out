@@ -34,47 +34,51 @@ final class SearchResultViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bindData()
         viewModel.inputCallRequest.value = (query: searchText, start: start, sort: nowSort)
-        
         configureHandler()
         configureData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.resultCollectionView.reloadData()
+    }
+    
     private func bindData() {
-        viewModel.outputNoResultAlert.bind { title, message in
-            self.showAlert(title: title, message: message, type: .oneButton, okHandler: self.alertPopViewController(action:))
-        }
-        
         viewModel.outputShoppingResultIsValid.bind { isValid in
             if isValid {
                 self.configureData()
                 self.mainView.resultCollectionView.reloadData()
-            }
-            if self.start == 1 {
-                self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                if self.start == 1 {
+                    self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                }
+            } else {
+                self.showAlert(
+                    title: Constants.Alert.NoSearchResult.title.rawValue,
+                    message: Constants.Alert.NoSearchResult.message.rawValue,
+                    type: .oneButton,
+                    okHandler: self.alertPopViewController(action:)
+                )
             }
         }
         
         viewModel.outputTransitionToDetail.bind { item in
             let searchResultDetailVC = SearchResultDetailViewController()
-//            searchResultDetailVC.itemId = item.productId
-//            searchResultDetailVC.itemTitle = item.title
-//            searchResultDetailVC.itemLink = item.link
             searchResultDetailVC.item = item
             self.navigationController?.pushViewController(searchResultDetailVC, animated: true)
         }
         
         viewModel.outputLikeItemIsValid.bind { isValid, categoryList, likeItem in
-//            print("=======", isValid, categoryList, likeItem)
             if !isValid {
                 guard let categoryList else { return }
                 self.showCategoryActionSheet(categoryList) { selected in
                     self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
                 }
             } else {
-                self.showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
+                self.showAlert(
+                    title: Constants.Alert.DeleteLikeItem.title.rawValue,
+                    message: Constants.Alert.DeleteLikeItem.message.rawValue, type: .twoButton) { _ in
                     self.viewModel.inputDeleteLikeItem.value = likeItem
                 }
             }
@@ -110,7 +114,7 @@ final class SearchResultViewController: BaseViewController {
     
     private func configureData() {
         // 총 검색 결과 데이터 바인딩
-        mainView.totalLabel.text = "\(viewModel.outputShoppingTotal.value.formatted())개의 검색 결과"
+        mainView.totalLabel.text = "\(viewModel.outputShoppingResult.value.total.formatted())개의 검색 결과"
     }
     
     private func configureHandler() {
@@ -194,18 +198,18 @@ extension SearchResultViewController {
 // CollectionView
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.outputShoppingResult.value.count
+        return viewModel.outputShoppingResult.value.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell else { return SearchResultCollectionViewCell() }
        
         let idx = indexPath.item
-        let data = viewModel.outputShoppingResult.value[idx]
+        let item = viewModel.outputShoppingResult.value.items[idx]
         
         cell.likeButton.tag = indexPath.item
         cell.likeButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
-        cell.configureCellData(data: data)
+        cell.configureCellData(data: item)
         
         return cell
     }
@@ -220,7 +224,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if viewModel.outputShoppingResult.value.count - 2 == indexPath.item {
+            if viewModel.outputShoppingResult.value.items.count - 2 == indexPath.item {
                 start += 1
                 viewModel.inputCallRequest.value = (query: searchText, start: start, sort: nowSort)
             }

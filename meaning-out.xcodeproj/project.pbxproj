@@ -37,6 +37,7 @@
 		C44DDC5E2C4171180019E549 /* LikeCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC5D2C4171180019E549 /* LikeCategoryViewModel.swift */; };
 		C44DDC602C429BF80019E549 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC5F2C429BF80019E549 /* SettingViewModel.swift */; };
 		C44DDC622C42A3080019E549 /* LikeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC612C42A3080019E549 /* LikeDetailViewModel.swift */; };
+		C44DDC742C43F0DE0019E549 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DDC732C43F0DE0019E549 /* OnboardingViewModel.swift */; };
 		C47C46A52C31988400665A7A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A42C31988400665A7A /* BaseView.swift */; };
 		C47C46A72C31989900665A7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A62C31989900665A7A /* BaseViewController.swift */; };
 		C47C46A92C31992000665A7A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C46A82C31992000665A7A /* OnboardingView.swift */; };
@@ -105,6 +106,7 @@
 		C44DDC5D2C4171180019E549 /* LikeCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCategoryViewModel.swift; sourceTree = "<group>"; };
 		C44DDC5F2C429BF80019E549 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		C44DDC612C42A3080019E549 /* LikeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDetailViewModel.swift; sourceTree = "<group>"; };
+		C44DDC732C43F0DE0019E549 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		C47C46A42C31988400665A7A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C47C46A62C31989900665A7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C47C46A82C31992000665A7A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			children = (
 				C48B9A1E2C1B4A3D00A3EC84 /* OnboardingViewController.swift */,
 				C47C46A82C31992000665A7A /* OnboardingView.swift */,
+				C44DDC732C43F0DE0019E549 /* OnboardingViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				C48B9A462C1C206600A3EC84 /* User.swift in Sources */,
 				C44DDC202C3D594C0019E549 /* EditNicknameViewModel.swift in Sources */,
 				C413D2802C3A9E3100676D26 /* RealmTable.swift in Sources */,
+				C44DDC742C43F0DE0019E549 /* OnboardingViewModel.swift in Sources */,
 				C423D1752C2096C5001CE395 /* SearchResultCollectionViewCell.swift in Sources */,
 				C44DDC062C3AE8DC0019E549 /* BaseTableViewCell.swift in Sources */,
 				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,

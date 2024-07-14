@@ -10,8 +10,8 @@ import SnapKit
 
 final class OnboardingView: BaseView {
     
-    let titleLabel = UILabel()
-    let onboardingImage = UIImageView()
+    private let titleLabel = UILabel()
+    private let onboardingImage = UIImageView()
     let startButton = PointButton(title: Constants.Button.start.rawValue)
     
     override func configureViewHierarchy() {
@@ -41,9 +41,11 @@ final class OnboardingView: BaseView {
     }
     
     override func configureViewUI() {
-        titleLabel.font = Resource.Fonts.mainTitle
+        titleLabel.text = Constants.Title.meaningout.rawValue
         titleLabel.textColor = Resource.Colors.primary
         titleLabel.textAlignment = .center
+        titleLabel.font = Resource.Fonts.mainTitle
+        onboardingImage.image = Resource.Images.launch
         onboardingImage.contentMode = .scaleAspectFit
     }
     

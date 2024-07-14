@@ -5,18 +5,16 @@
 //  Created by junehee on 6/18/24.
 //
 
-import UIKit
-
-import SnapKit
-import WebKit
+import Foundation
 
 /**
  메인 - 검색 결과 상세 화면
  */
 final class SearchResultDetailViewController: BaseViewController {
-    
-    private let webView = WKWebView()
+
+    private let mainView =  SearchResultDetailView()
     private let viewModel = SearchResultDetailViewModel()
+    
     private var repository = RealmLikeItemRepository()
 
 //    var itemId: String?
@@ -24,6 +22,10 @@ final class SearchResultDetailViewController: BaseViewController {
 //    var itemLink: String?
     
     var item: Shopping?
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,21 +54,11 @@ final class SearchResultDetailViewController: BaseViewController {
         }
     }
     
-    override func configureHierarchy() {
-        view.addSubview(webView)
-    }
-    
-    override func configureLayout() {
-        webView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
     private func configureData() {
         guard let item else { return }
         let URL = URL(string: item.link)!
         let request = URLRequest(url: URL)
-        webView.load(request)
+        mainView.webView.load(request)
     }
     
     @objc private func likeBarButtonClicked() {

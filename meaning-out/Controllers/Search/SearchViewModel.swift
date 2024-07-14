@@ -12,6 +12,7 @@ final class SearchViewModel {
     var inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
     var inputViewWillAppearTrigger: Observable<Void?> = Observable(nil)
     
+    // 검색어 단일 삭제/전체 삭제
     var inputRemoveSearchList: Observable<Int?> = Observable(nil)
     var inputRemoveAllSearchList: Observable<Void?> = Observable(nil)
     
@@ -20,12 +21,11 @@ final class SearchViewModel {
     
     // 검색
     var inputSearchButtonClicked: Observable<String?> = Observable(nil)
-    var outputSearchAlert: Observable<(title: String, message: String)> = Observable(("", ""))
     var outputSearchIsValid: Observable<Bool> = Observable(false)
     
     // 검색 리스트 클릭
     var inputSearchListClicked: Observable<Int?> = Observable(nil)
-    var outputSearchListValue: Observable<String?> = Observable(nil)
+    var outputSearchListClicked: Observable<String?> = Observable(nil)
     
     init() {
         transform()
@@ -61,9 +61,7 @@ final class SearchViewModel {
             
             // 공백값 예외처리
             if searchText.trimmingCharacters(in: [" "]).count == 0 {
-                self.outputSearchAlert.value = (
-                    title: Constants.Alert.EmptyString.title.rawValue,
-                    message: Constants.Alert.EmptyString.message.rawValue)
+                self.outputSearchIsValid.value = false
             } else {
                 UserDefaultsManager.search.insert(searchText, at: 0)
                 self.outputSearchList.value = UserDefaultsManager.search
@@ -74,8 +72,8 @@ final class SearchViewModel {
         // 기존 검색어 리스트 클릭
         inputSearchListClicked.bind { idx in
             guard let idx else { return }
-            let item = self.outputSearchList.value[idx]
-            self.outputSearchListValue.value = item
+            let searchText = self.outputSearchList.value[idx]
+            self.outputSearchListClicked.value = searchText
         }
     }
     

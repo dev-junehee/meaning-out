@@ -21,12 +21,12 @@ final class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.inputViewWillAppearTrigger.value = () // 닉네임 바뀔 때마다 리로드
+        viewModel.inputViewWillAppearTrigger.value = ()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.inputViewDidLoadTrigger.value = () // 뷰 로드될 때 searchList 가져오기
+        viewModel.inputViewDidLoadTrigger.value = ()
         viewToggle()
         bindData()
     }
@@ -35,25 +35,28 @@ final class SearchViewController: BaseViewController {
         viewModel.outputNavigationTitle.bind { title in
             self.navigationItem.title = title
         }
+        
         viewModel.outputSearchList.bind { _ in
             self.viewToggle()
             self.mainView.shoppingTableView.reloadData()
             self.mainView.searchBar.text = ""
         }
-        viewModel.outputSearchAlert.bind { title, message in
-            self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
-            self.mainView.searchBar.text = ""
-        }
-        viewModel.outputSearchIsValid.bind { value in
-            if value {
+        
+        viewModel.outputSearchIsValid.bind { isValid in
+            if isValid {
                 let searchResultVC = SearchResultViewController()
                 searchResultVC.searchText = self.viewModel.outputSearchList.value.first ?? ""
                 self.navigationController?.pushViewController(searchResultVC, animated: true)
+            } else {
+                self.showAlert(title: Constants.Alert.EmptyString.title.rawValue, message: Constants.Alert.EmptyString.message.rawValue, type: .oneButton, okHandler: nil)
+                self.mainView.searchBar.text = ""
             }
         }
-        viewModel.outputSearchListValue.bind { item in
+        
+        viewModel.outputSearchListClicked.bind { searchText in
+            guard let searchText else { return }
             let searchResultVC = SearchResultViewController()
-            searchResultVC.searchText = item ?? ""
+            searchResultVC.searchText = searchText
             self.navigationController?.pushViewController(searchResultVC, animated: true)
         }
     }
@@ -92,8 +95,7 @@ final class SearchViewController: BaseViewController {
 }
 
 
-// MARK: MainViewContoller 익스텐션
-// SearchBar
+// MARK: SearchBar Extension
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.inputSearchButtonClicked.value = searchBar.text
@@ -101,7 +103,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 
-// TableView
+// MARK: TableView Extension
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.outputSearchList.value.count

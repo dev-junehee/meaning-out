@@ -146,7 +146,7 @@ enum Constants {
     
     enum Placeholder: String {
         case nickname = "닉네임 NICKNAME"
-        case searchBar = "브랜드, 상품 등을 입력하세요."
+        case searchBar = "브랜드, 상품 등을 검색해 보세요!"
     }
     
     enum Integer: Int {

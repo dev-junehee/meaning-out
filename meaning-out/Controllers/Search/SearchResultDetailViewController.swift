@@ -29,15 +29,39 @@ final class SearchResultDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaultsManager.like.removeAll())
-        print(UserDefaultsManager.like)
         bindData()
         configureData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.inputViewWillAppearTrigger.value = item?.productId
+    }
+    
     private func bindData() {
-        viewModel.outputLikeBarButtonClicked.bind { _ in
-            self.configureViewController()
+        viewModel.outputLikeBarButtonClicked.bind { isValid, categoryList, likeItem in
+            if !isValid {
+                guard let categoryList else { return }
+                self.showCategoryActionSheet(categoryList) { selected in
+                    self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
+                }
+            } else {
+                self.showAlert(
+                    title: Constants.Alert.DeleteLikeItem.title.rawValue,
+                    message: Constants.Alert.DeleteLikeItem.message.rawValue, type: .twoButton) { _ in
+                    self.viewModel.inputDeleteLikeItem.value = likeItem
+                }
+            }
+        }
+        
+        viewModel.outputLikeItemSaveDeleteReuslt.bind { result in
+            switch result {
+            case .like:
+                self.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeSelected
+                self.navigationItem.rightBarButtonItem?.tintColor = Resource.Colors.primary
+            case .unlike:
+                self.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeUnselected
+            }
         }
     }
     
@@ -62,26 +86,8 @@ final class SearchResultDetailViewController: BaseViewController {
     }
     
     @objc private func likeBarButtonClicked() {
-        print(self, #function)
-        
         guard let item = item else { return }
         viewModel.inputLikeBarButtonClicked.value = item
-        
-        
-        // like -> unLike
-//        guard let itemTitle = itemTitle else { return }
-//        if likeList.contains(itemTitle) {
-//            likeList.append(itemTitle)
-//            UserDefaultsManager.like = likeList
-//        } else {
-//            guard let idx = likeList.firstIndex(of: itemTitle) else {
-//                print("좋아요 리스트에 해당 상품이 없어요~!")
-//                return
-//            }
-//            likeList.remove(at: idx)
-//            UserDefaultsManager.like = likeList
-//        }
-//        configureViewController()
     }
 
 }

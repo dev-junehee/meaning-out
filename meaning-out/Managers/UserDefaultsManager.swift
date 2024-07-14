@@ -20,7 +20,7 @@ struct UserDefaultsManager {
     @UserDefaultsWrapper (key: .nickname, defaultValue: "손님")
     static var nickname: String
     
-    @UserDefaultsWrapper (key: .profile, defaultValue: Int.random(in: 0...11))
+    @UserDefaultsWrapper (key: .profile, defaultValue: Int.random(in: 0..<Resource.Images.profiles.count))
     static var profile: Int
     
     @UserDefaultsWrapper (key: .joinDate, defaultValue: "0000. 00. 00")

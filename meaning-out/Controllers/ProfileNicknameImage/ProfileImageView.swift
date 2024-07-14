@@ -10,17 +10,17 @@ import SnapKit
 
 final class ProfileImageView: BaseView {
     
-    let profileImageView = UIView()
+    private let profileImageView = UIView()
     let profileImage = UIImageView()
     
-    let cameraImageView = UIView()
-    let cameraImage = UIImageView()
+    private let cameraImageView = UIView()
+    private let cameraImage = UIImageView()
     
     // 프로필 이미지 컬렉션 뷰
     lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionviewLayout())
     
     // 프로필 이미지 컬렉션 뷰 레이아웃 구성
-    func collectionviewLayout() -> UICollectionViewLayout {
+    private func collectionviewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         
         let sectionSpaciing: CGFloat = 16

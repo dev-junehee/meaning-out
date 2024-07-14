@@ -12,12 +12,16 @@ final class ProfileNicknameViewModel {
     // 트리거
     var inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
     var inputViewWillAppearTrigger: Observable<Void?> = Observable(nil)
-    var outputProfileNum: Observable<Int> = Observable(0)
+    var outputProfileNum: Observable<Int> = Observable(UserDefaultsManager.profile)
     
     // 닉네임
     var inputNickname: Observable<String?> = Observable("")
     var outputIsValid = Observable(false)
     var outputInvalidMessage = Observable("")
+    
+    // 프로필 사진
+    var inputProfileTapped: Observable<Void?> = Observable(nil)
+    var transitionProfileImage: (() -> Void)?
     
     // 완료버튼
     var inputDoneButtonClicked: Observable<Void?> = Observable(nil)
@@ -39,6 +43,10 @@ final class ProfileNicknameViewModel {
         
         inputNickname.bind { _ in
             self.nicknameValidation()
+        }
+        
+        inputProfileTapped.bind { _ in
+            self.transitionProfileImage?()
         }
         
         inputDoneButtonClicked.bind { _ in

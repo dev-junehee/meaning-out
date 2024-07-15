@@ -101,8 +101,8 @@ extension LikeCategoryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
-        cell = UITableViewCell(style: .subtitle, reuseIdentifier: "basicCell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: Constants.Like.baseCellId.rawValue, for: indexPath)
+        cell = UITableViewCell(style: .subtitle, reuseIdentifier: Constants.Like.baseCellId.rawValue)
 
         cell.textLabel?.text = viewModel.outputAllLikeCategory.value[indexPath.row].title
         cell.detailTextLabel?.text = "\(viewModel.outputAllLikeCategory.value[indexPath.row].detailData.count)개"

@@ -12,15 +12,12 @@ final class LikeCategoryViewController: BaseViewController {
     private let mainView = LikeCategoryView()
     private let viewModel = LikeCategoryViewModel()
     
-    private let repository = RealmLikeItemRepository()
-    
     override func loadView() {
         self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        repository.getFileURL()
         
         bindData()
         viewModel.inputViewDidLoadTrigger.value = ()
@@ -34,8 +31,8 @@ final class LikeCategoryViewController: BaseViewController {
     
     private func bindData() {
         viewModel.outputAllLikeCategory.bind { _ in
-            self.viewToggle()
             self.mainView.tableView.reloadData()
+            self.viewToggle()
         }
         
         viewModel.outputAddLikeCetagoryButton.bind { _ in
@@ -49,7 +46,7 @@ final class LikeCategoryViewController: BaseViewController {
         viewModel.outputDeleteLikeCategoryAlert.bind { title, message, category in
             guard let category = category else { return }
             self.showAlert(title: title, message: message, type: .twoButton) { _ in
-                self.repository.deleteLikeCategory(category)
+                self.viewModel.inputDeleteLikeCategoryAlertOkay.value = category
             }
         }
     }

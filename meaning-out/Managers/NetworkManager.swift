@@ -7,7 +7,7 @@
 
 import Alamofire
 
-class NetworkManager {
+final class NetworkManager {
     
     static let shared = NetworkManager()
     
@@ -17,7 +17,8 @@ class NetworkManager {
         query: String,
         start: Int,
         sort: String,
-        completionHandler: @escaping (ShoppingResults) -> Void
+//        completionHandler: @escaping (ShoppingResults) -> Void
+        completionHandler: @escaping (Result<ShoppingResults, Error>) -> Void
     ) {
         let headers: HTTPHeaders = [
             API.Shopping.ID_KEY_NAME: API.Shopping.ID_KEY,
@@ -30,9 +31,11 @@ class NetworkManager {
             .responseDecodable(of: ShoppingResults.self) { res in
             switch res.result {
             case .success(let value):
-                completionHandler(value)
+//                completionHandler(value)
+                completionHandler(.success(value))
             case .failure(let error):
-                print(#function, error)
+//                print(#function, error)
+                completionHandler(.failure(error))
             }
         }
     }

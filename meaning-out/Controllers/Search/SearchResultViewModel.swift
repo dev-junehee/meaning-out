@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum ShoppingResponse {
+    case success
+    case noResult
+    case fail
+}
+
 final class SearchResultViewModel {
     
     // API 호출
@@ -21,7 +27,7 @@ final class SearchResultViewModel {
     var inputDeleteLikeItem: Observable<LikeItem?> = Observable(nil)
     
     // API 호출 결과
-    var outputShoppingResultIsValid: Observable<Bool> = Observable(false)
+    var outputShoppingResponse: Observable<ShoppingResponse> = Observable(.fail)
     var outputShoppingResult: Observable<(total: Int, items: [Shopping])> = Observable((total: 0, items:[]))
     
     // 찜 카테고리, 찜 상품
@@ -71,19 +77,24 @@ final class SearchResultViewModel {
     
     private func callRequest(query: String, start: Int, sort: SortType) {
         NetworkManager.shared.getShopping(query: query, start: start, sort: sort.rawValue) { res in
-            if res.total == 0 {
-                self.outputShoppingResultIsValid.value = false
-                return
-            }
-            
-            if start == 1 {
-                self.outputShoppingResult.value.items.removeAll()
-                self.outputShoppingResult.value = (total: res.total, items: res.items)
-                self.outputShoppingResultIsValid.value = true
-            } else {
-                self.outputShoppingResult.value.total = res.total
-                self.outputShoppingResult.value.items.append(contentsOf: res.items)
-                self.outputShoppingResultIsValid.value = true
+            switch res {
+            case .success(let data):
+                if data.total == 0 {
+                    self.outputShoppingResponse.value = .noResult
+                    return
+                }
+    
+                if start == 1 {
+                    self.outputShoppingResult.value.items.removeAll()
+                    self.outputShoppingResult.value = (total: data.total, items: data.items)
+                    self.outputShoppingResponse.value = .success
+                } else {
+                    self.outputShoppingResult.value.total = data.total
+                    self.outputShoppingResult.value.items.append(contentsOf: data.items)
+                    self.outputShoppingResponse.value = .success
+                }
+            case .failure(let error):
+                self.outputShoppingResponse.value = .fail
             }
         }
     }

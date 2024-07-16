@@ -17,7 +17,6 @@ final class NetworkManager {
         query: String,
         start: Int,
         sort: String,
-//        completionHandler: @escaping (ShoppingResults) -> Void
         completionHandler: @escaping (Result<ShoppingResults, Error>) -> Void
     ) {
         let headers: HTTPHeaders = [
@@ -31,10 +30,8 @@ final class NetworkManager {
             .responseDecodable(of: ShoppingResults.self) { res in
             switch res.result {
             case .success(let value):
-//                completionHandler(value)
                 completionHandler(.success(value))
             case .failure(let error):
-//                print(#function, error)
                 completionHandler(.failure(error))
             }
         }

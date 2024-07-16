@@ -8,7 +8,7 @@
 import UIKit
 
 /**
- 텍스트 입력값 유효성 검사 ver.2
+ 텍스트 입력값 유효성 검사
  throw Error
  */
 enum ValidationError: Error {

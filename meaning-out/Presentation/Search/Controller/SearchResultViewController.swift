@@ -46,14 +46,22 @@ final class SearchResultViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputShoppingResultIsValid.bind { isValid in
-            if isValid {
+        viewModel.outputShoppingResponse.bind { res in
+            switch res {
+            case .success:
                 self.configureData()
                 self.mainView.resultCollectionView.reloadData()
                 if self.start == 1 {
                     self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
-            } else {
+            case .noResult:
+                self.showAlert(
+                    title: Constants.Alert.FailSearch.title.rawValue,
+                    message: Constants.Alert.FailSearch.message.rawValue,
+                    type: .oneButton) { _ in
+                        self.popViewController()
+                    }
+            case .fail:
                 self.showAlert(
                     title: Constants.Alert.NoSearchResult.title.rawValue,
                     message: Constants.Alert.NoSearchResult.message.rawValue,

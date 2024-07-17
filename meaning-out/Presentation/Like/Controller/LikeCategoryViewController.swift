@@ -12,6 +12,17 @@ final class LikeCategoryViewController: BaseViewController {
     private let mainView = LikeCategoryView()
     private let viewModel = LikeCategoryViewModel()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("LikeCategoryViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("LikeCategoryViewController Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }

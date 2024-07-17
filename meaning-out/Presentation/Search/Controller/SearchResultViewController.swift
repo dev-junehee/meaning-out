@@ -27,6 +27,18 @@ final class SearchResultViewController: BaseViewController {
     var start = 1
     var nowSort: SortType = .sim
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("SearchResultViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("SearchResultViewController Deinit") }
+    
+    
     override func loadView() {
         self.view = mainView
     }

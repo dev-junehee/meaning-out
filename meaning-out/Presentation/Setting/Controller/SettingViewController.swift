@@ -15,6 +15,17 @@ final class SettingViewController: BaseViewController {
     private let mainView = SettingView()
     private let viewModel = SettingViewModel()
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("SettingViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("SettingViewController Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }
@@ -30,12 +41,12 @@ final class SettingViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputNickname.bind { _ in
-            self.mainView.tableView.reloadData()
+        viewModel.outputNickname.bind { [weak self] _ in
+            self?.mainView.tableView.reloadData()
         }
         
-        viewModel.outputCancelationIsSucceed.bind { result in
-            self.changeRootViewControllerToOnboarding()
+        viewModel.outputCancelationIsSucceed.bind { [weak self] _ in
+            self?.changeRootViewControllerToOnboarding()
         }
     }
     

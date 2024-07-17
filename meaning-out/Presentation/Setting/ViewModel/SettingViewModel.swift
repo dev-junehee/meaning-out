@@ -23,8 +23,8 @@ final class SettingViewModel {
     }
     
     private func transform() {
-        inputViewWillAppearTrigger.bind { _ in
-            self.outputNickname.value = UserDefaultsManager.nickname
+        inputViewWillAppearTrigger.bind { [weak self] _ in
+            self?.outputNickname.value = UserDefaultsManager.nickname
         }
         
         inputCancelationAlert.bind { [weak self] _ in

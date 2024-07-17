@@ -29,6 +29,17 @@ final class EditNicknameViewController: BaseViewController {
         }
     }
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("EditNicknameViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("EditNicknameViewController Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }
@@ -49,24 +60,24 @@ final class EditNicknameViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputIsValid.bind { value in
-            self.isValidate = value
+        viewModel.outputIsValid.bind { [weak self] value in
+            self?.isValidate = value
         }
         
-        viewModel.outputInvalidMessage.bind { message in
-            self.mainView.invalidMessage.text = message
+        viewModel.outputInvalidMessage.bind { [weak self] message in
+            self?.mainView.invalidMessage.text = message
         }
         
-        viewModel.outputAlertText.bind { (isValid, title, message) in
+        viewModel.outputAlertText.bind { [weak self] (isValid, title, message) in
             if isValid {
-                self.showAlert(
+                self?.showAlert(
                     title: Constants.Alert.EditNickname.title.rawValue,
                     message: Constants.Alert.EditNickname.message.rawValue,
                     type: .oneButton) { _ in
-                        self.popViewController()
+                        self?.popViewController()
                     }
             } else {
-                self.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
+                self?.showAlert(title: title, message: message, type: .oneButton, okHandler: nil)
             }
         }
     }

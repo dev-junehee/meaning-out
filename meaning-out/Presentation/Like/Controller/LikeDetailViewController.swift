@@ -14,6 +14,17 @@ final class LikeDetailViewController: BaseViewController {
     
     var category: LikeCategory?
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("LikeDetailViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("LikeDetailViewController Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }

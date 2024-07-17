@@ -16,6 +16,17 @@ final class ProfileImageViewController: BaseViewController {
         self.view = mainView
     }
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("ProfileImageViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("ProfileImageViewController Deinit") }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bindData()

@@ -21,7 +21,6 @@ final class SearchResultViewController: BaseViewController {
 
     private let mainView = SearchResultView()
     private let viewModel = SearchResultViewModel()
-    private let repository = RealmLikeItemRepository()
     
     // 검색 관련 데이터
     var searchText = ""
@@ -46,61 +45,55 @@ final class SearchResultViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputShoppingResponse.bind { res in
+        viewModel.outputShoppingResponse.bind { [weak self] res in
             switch res {
             case .success:
-                self.configureData()
-                self.mainView.resultCollectionView.reloadData()
-                if self.start == 1 {
-                    self.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                self?.configureData()
+                self?.mainView.resultCollectionView.reloadData()
+                if self?.start == 1 {
+                    self?.mainView.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
             case .noResult:
-                self.showAlert(
-                    title: Constants.Alert.FailSearch.title.rawValue,
-                    message: Constants.Alert.FailSearch.message.rawValue,
-                    type: .oneButton) { _ in
-                        self.popViewController()
-                    }
-            case .fail:
-                self.showAlert(
+                self?.showAlert(
                     title: Constants.Alert.NoSearchResult.title.rawValue,
                     message: Constants.Alert.NoSearchResult.message.rawValue,
                     type: .oneButton) { _ in
-                        self.popViewController()
+                        self?.popViewController()
+                    }
+            case .fail:
+                self?.showAlert(
+                    title: Constants.Alert.FailSearch.title.rawValue,
+                    message: Constants.Alert.FailSearch.message.rawValue,
+                    type: .oneButton) { _ in
+                        self?.popViewController()
                     }
             }
         }
         
-        viewModel.outputTransitionToDetail.bind { item in
+        viewModel.outputTransitionToDetail.bind { [weak self] item in
             let searchResultDetailVC = SearchResultDetailViewController()
             searchResultDetailVC.item = item
-            self.navigationController?.pushViewController(searchResultDetailVC, animated: true)
+            self?.navigationController?.pushViewController(searchResultDetailVC, animated: true)
         }
         
-        viewModel.outputLikeItemIsValid.bind { isValid, categoryList, likeItem in
+        viewModel.outputLikeItemIsValid.bind { [weak self] isValid, categoryList, likeItem in
             if !isValid {
                 guard let categoryList else { return }
-                self.showCategoryActionSheet(categoryList) { selected in
-                    self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
+                self?.showCategoryActionSheet(categoryList) { selected in
+                    self?.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
                 }
             } else {
-                self.showAlert(
+                self?.showAlert(
                     title: Constants.Alert.DeleteLikeItem.title.rawValue,
                     message: Constants.Alert.DeleteLikeItem.message.rawValue, type: .twoButton) { _ in
-                    self.viewModel.inputDeleteLikeItem.value = likeItem
+                    self?.viewModel.inputDeleteLikeItem.value = likeItem
                 }
             }
         }
         
-        viewModel.outputSaveLikeItemIsSucceed.bind { isSucceed in
+        viewModel.outputSaveDeleteLikeItemIsSucceed.bind { [weak self] isSucceed in
             if isSucceed {
-                self.mainView.resultCollectionView.reloadData()
-            }
-        }
-        
-        viewModel.outputDeleteLikeItemIsSucceed.bind { isSucceed in
-            if isSucceed {
-                self.mainView.resultCollectionView.reloadData()
+                self?.mainView.resultCollectionView.reloadData()
             }
         }
     }

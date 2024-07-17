@@ -19,7 +19,8 @@ final class SearchResultDetailViewModel {
     
     // 상단 찜 바버튼 클릭
     var inputLikeBarButtonClicked: Observable<Shopping?> = Observable(nil)
-    var outputLikeBarButtonClicked: Observable<(isValid: Bool, categoryList: [LikeCategory]?, likeItem: LikeItem?)> = Observable((isValid: false, categoryList: nil, likeItem: nil))
+    typealias outputLikeBarButtonClicked = (isValid: Bool, categoryList: [LikeCategory]?, likeItem: LikeItem?)
+    var outputLikeBarButtonClicked: Observable<outputLikeBarButtonClicked> = Observable((isValid: false, categoryList: nil, likeItem: nil))
     
     // 찜 카테고리 클릭, 찜 해제 Alert - 확인 클릭
     var inputSelectedLikeCategory:  Observable<(category: String?, likeItem: LikeItem?)> = Observable((category: nil, likeItem: nil))
@@ -44,24 +45,24 @@ final class SearchResultDetailViewModel {
             }
         }
         
-        inputLikeBarButtonClicked.bind { item in
+        inputLikeBarButtonClicked.bind { [weak self] item in
             guard let item else { return }
-            self.likeButtonClicked(item: item)
+            self?.likeButtonClicked(item: item)
         }
         
-        inputSelectedLikeCategory.bind { selected, likeItem in
+        inputSelectedLikeCategory.bind { [weak self] selected, likeItem in
             guard let selected else { return }
-            if let category = self.repository.findLikeCategory(title: selected) {
+            if let category = self?.repository.findLikeCategory(title: selected) {
                 guard let likeItem else { return }
-                self.repository.createLikeItem(likeItem, category: category)
-                self.outputLikeItemSaveDeleteReuslt.value = .like   // 찜 저장한 상태
+                self?.repository.createLikeItem(likeItem, category: category)
+                self?.outputLikeItemSaveDeleteReuslt.value = .like   // 찜 저장한 상태
             }
         }
         
-        inputDeleteLikeItem.bind { likeItem in
+        inputDeleteLikeItem.bind { [weak self] likeItem in
             guard let likeItem  else { return }
-            self.repository.deleteLikeItem(item: likeItem)
-            self.outputLikeItemSaveDeleteReuslt.value = .unlike   // 찜 해제한 상태
+            self?.repository.deleteLikeItem(item: likeItem)
+            self?.outputLikeItemSaveDeleteReuslt.value = .unlike   // 찜 해제한 상태
         }
         
     }

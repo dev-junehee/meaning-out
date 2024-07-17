@@ -15,6 +15,17 @@ final class SearchViewController: BaseViewController {
     private let mainView = SearchView()
     private let viewModel = SearchViewModel()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("검색 화면 Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("검색 화면 Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }
@@ -32,32 +43,32 @@ final class SearchViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputNavigationTitle.bind { title in
-            self.navigationItem.title = title
+        viewModel.outputNavigationTitle.bind { [weak self] title in
+            self?.navigationItem.title = title
         }
         
-        viewModel.outputSearchList.bind { _ in
-            self.viewToggle()
-            self.mainView.shoppingTableView.reloadData()
-            self.mainView.searchBar.text = ""
+        viewModel.outputSearchList.bind { [weak self] _ in
+            self?.viewToggle()
+            self?.mainView.shoppingTableView.reloadData()
+            self?.mainView.searchBar.text = ""
         }
         
-        viewModel.outputSearchIsValid.bind { isValid in
+        viewModel.outputSearchIsValid.bind { [weak self] isValid in
             if isValid {
                 let searchResultVC = SearchResultViewController()
-                searchResultVC.searchText = self.viewModel.outputSearchList.value.first ?? ""
-                self.navigationController?.pushViewController(searchResultVC, animated: true)
+                searchResultVC.searchText = self?.viewModel.outputSearchList.value.first ?? ""
+                self?.navigationController?.pushViewController(searchResultVC, animated: true)
             } else {
-                self.showAlert(title: Constants.Alert.EmptyString.title.rawValue, message: Constants.Alert.EmptyString.message.rawValue, type: .oneButton, okHandler: nil)
-                self.mainView.searchBar.text = ""
+                self?.showAlert(title: Constants.Alert.EmptyString.title.rawValue, message: Constants.Alert.EmptyString.message.rawValue, type: .oneButton, okHandler: nil)
+                self?.mainView.searchBar.text = ""
             }
         }
         
-        viewModel.outputSearchListClicked.bind { searchText in
+        viewModel.outputSearchListClicked.bind { [weak self] searchText in
             guard let searchText else { return }
             let searchResultVC = SearchResultViewController()
             searchResultVC.searchText = searchText
-            self.navigationController?.pushViewController(searchResultVC, animated: true)
+            self?.navigationController?.pushViewController(searchResultVC, animated: true)
         }
     }
     

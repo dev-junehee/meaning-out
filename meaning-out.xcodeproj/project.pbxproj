@@ -462,9 +462,9 @@
 		C4E459C32C4693CE006CCBF0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C44DDC5B2C412A800019E549 /* SearchResultDetailViewModel.swift */,
-				C44DDC592C4032940019E549 /* SearchResultViewModel.swift */,
 				C44DDC492C3F5C5E0019E549 /* SearchViewModel.swift */,
+				C44DDC592C4032940019E549 /* SearchResultViewModel.swift */,
+				C44DDC5B2C412A800019E549 /* SearchResultDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

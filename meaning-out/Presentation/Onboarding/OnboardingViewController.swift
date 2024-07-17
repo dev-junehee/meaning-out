@@ -12,6 +12,17 @@ final class OnboardingViewController: BaseViewController {
     private let mainView = OnboardingView()
     private let viewModel = OnboardingViewModel()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("온보딩 Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("온보딩 Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }

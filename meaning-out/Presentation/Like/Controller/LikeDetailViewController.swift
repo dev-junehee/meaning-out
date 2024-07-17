@@ -12,8 +12,6 @@ final class LikeDetailViewController: BaseViewController {
     private let mainView = LikeDetailView()
     private let viewModel = LikeDetailViewModel()
     
-//    private let repository = RealmLikeItemRepository()
-    
     var category: LikeCategory?
 
     override func loadView() {

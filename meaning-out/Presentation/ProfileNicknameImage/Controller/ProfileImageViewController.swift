@@ -27,8 +27,8 @@ final class ProfileImageViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputProfileNum.bind { _ in
-            self.configureData()
+        viewModel.outputProfileNum.bind { [weak self] _ in
+            self?.configureData()
         }
     }
     

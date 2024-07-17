@@ -12,7 +12,7 @@ final class LikeDetailViewController: BaseViewController {
     private let mainView = LikeDetailView()
     private let viewModel = LikeDetailViewModel()
     
-    private let repository = RealmLikeItemRepository()
+//    private let repository = RealmLikeItemRepository()
     
     var category: LikeCategory?
 
@@ -65,14 +65,7 @@ final class LikeDetailViewController: BaseViewController {
     // 찜 버튼 클릭하면 찜 해제 처리
     @objc private func likeButtonClicked(_ sender: UIButton) {
         showAlert(title: "찜을 해제할까요?", message: "해당 상품이 찜에서 사라져요!", type: .twoButton) { _ in
-            if let category = self.repository.findLikeCategory(title: self.navigationItem.title ?? "") {
-                self.repository.deleteLikeItemInCategory(item: category.detailData[sender.tag], category: category, at: sender.tag)
-                if category.detailData.isEmpty {
-                    self.navigationController?.popViewController(animated: true)
-                } else {
-                    self.mainView.likeCollectionView.reloadData()
-                }
-            }
+            self.viewModel.inputDeleteLikeItem.value = (title: self.navigationItem.title, tag: sender.tag)
         }
     }
 }

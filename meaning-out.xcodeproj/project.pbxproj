@@ -124,7 +124,6 @@
 		C48B99EB2C1AEE5400A3EC84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C48B99ED2C1AEE5400A3EC84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C48B99F32C1AEEC000A3EC84 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		C48B99F52C1AEED200A3EC84 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C48B9A1E2C1B4A3D00A3EC84 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C48B9A212C1B4E7400A3EC84 /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
 		C48B9A242C1B4EC100A3EC84 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -243,7 +242,6 @@
 		C48B99D32C1AEE5300A3EC84 = {
 			isa = PBXGroup;
 			children = (
-				C48B99F52C1AEED200A3EC84 /* README.md */,
 				C48B99F32C1AEEC000A3EC84 /* .gitignore */,
 				C48B99DE2C1AEE5300A3EC84 /* meaning-out */,
 				C48B99DD2C1AEE5300A3EC84 /* Products */,

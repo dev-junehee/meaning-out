@@ -19,14 +19,14 @@ final class ProfileImageViewModel {
     }
     
     private func transform() {
-        inputViewWillAppear.bind { _ in
-            self.outputProfileNum.value = UserDefaultsManager.profile
+        inputViewWillAppear.bind { [weak self] _ in
+            self?.outputProfileNum.value = UserDefaultsManager.profile
         }
         
-        inputImageSelected.bind { num in
+        inputImageSelected.bind { [weak self] num in
             guard let num = num else { return }
             UserDefaultsManager.profile = num
-            self.outputProfileNum.value = UserDefaultsManager.profile
+            self?.outputProfileNum.value = UserDefaultsManager.profile
         }
     }
     

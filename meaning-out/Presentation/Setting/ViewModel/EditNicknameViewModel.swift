@@ -26,8 +26,8 @@ final class EditNicknameViewModel {
             self.nicknameValidation()
         }
         
-        inputSaveButtonClicked.bind { _ in
-            self.changeNickname()
+        inputSaveButtonClicked.bind { [weak self] _ in
+            self?.changeNickname()
         }
     }
     

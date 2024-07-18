@@ -13,8 +13,8 @@ final class OnboardingViewModel {
     var transitionToProfileNickname: (() -> Void)?
     
     init() {
-        inputStartButtonClicked.bind { _ in
-            self.transitionToProfileNickname?()
+        inputStartButtonClicked.bind { [weak self] _ in
+            self?.transitionToProfileNickname?()
         }
     }
     

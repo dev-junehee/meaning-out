@@ -10,11 +10,21 @@ import UIKit
 final class EditProfileImageViewController: BaseViewController {
     
     private let editProfileImageView = ProfileImageView()
+    private let viewModel = EditProfileImageViewModel()
     
     // 사용자가 선택한 프로필 이미지
     var profileNum: Int = UserDefaultsManager.profile
     
-    let viewModel = EditProfileImageViewModel()
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("EditProfileImageViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("EditProfileImageViewController Deinit") }
     
     override func loadView() {
         self.view = editProfileImageView

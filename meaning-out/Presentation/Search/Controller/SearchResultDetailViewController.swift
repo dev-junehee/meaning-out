@@ -23,6 +23,17 @@ final class SearchResultDetailViewController: BaseViewController {
     
     var item: Shopping?
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("SearchResultDetailViewController Init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit { print("SearchResultDetailViewController Deinit") }
+    
     override func loadView() {
         self.view = mainView
     }
@@ -39,28 +50,28 @@ final class SearchResultDetailViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputLikeBarButtonClicked.bind { isValid, categoryList, likeItem in
+        viewModel.outputLikeBarButtonClicked.bind { [weak self] isValid, categoryList, likeItem in
             if !isValid {
                 guard let categoryList else { return }
-                self.showCategoryActionSheet(categoryList) { selected in
-                    self.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
+                self?.showCategoryActionSheet(categoryList) { selected in
+                    self?.viewModel.inputSelectedLikeCategory.value = (selected, likeItem)
                 }
             } else {
-                self.showAlert(
+                self?.showAlert(
                     title: Constants.Alert.DeleteLikeItem.title.rawValue,
                     message: Constants.Alert.DeleteLikeItem.message.rawValue, type: .twoButton) { _ in
-                    self.viewModel.inputDeleteLikeItem.value = likeItem
+                    self?.viewModel.inputDeleteLikeItem.value = likeItem
                 }
             }
         }
         
-        viewModel.outputLikeItemSaveDeleteReuslt.bind { result in
+        viewModel.outputLikeItemSaveDeleteReuslt.bind { [weak self] result in
             switch result {
             case .like:
-                self.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeSelected
-                self.navigationItem.rightBarButtonItem?.tintColor = Resource.Colors.primary
+                self?.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeSelected
+                self?.navigationItem.rightBarButtonItem?.tintColor = Resource.Colors.primary
             case .unlike:
-                self.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeUnselected
+                self?.navigationItem.rightBarButtonItem?.image = Resource.SystemImages.likeUnselected
             }
         }
     }

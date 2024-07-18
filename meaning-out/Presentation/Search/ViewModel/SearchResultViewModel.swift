@@ -32,8 +32,11 @@ final class SearchResultViewModel {
     
     // 찜 카테고리, 찜 상품
     var outputLikeItemIsValid: Observable<(isValid: Bool, categoryList: [LikeCategory]?, likeItem: LikeItem?)> = Observable((isValid: false, categoryList: [], likeItem: nil))
-    var outputSaveLikeItemIsSucceed: Observable<Bool> = Observable(false)
-    var outputDeleteLikeItemIsSucceed: Observable<Bool> = Observable(false)
+    
+    // 찜 저장/삭제 처리 결과
+    var outputSaveDeleteLikeItemIsSucceed: Observable<Bool> = Observable(false)
+    
+    // 상품 상세 화면 전환
     var outputTransitionToDetail: Observable<Shopping?> = Observable(nil)
     
     private let repository = RealmLikeItemRepository()
@@ -64,14 +67,14 @@ final class SearchResultViewModel {
             if let category = self.repository.findLikeCategory(title: selected) {
                 guard let likeItem else { return }
                 self.repository.createLikeItem(likeItem, category: category)
-                self.outputSaveLikeItemIsSucceed.value = true
+                self.outputSaveDeleteLikeItemIsSucceed.value = true
             }
         }
         
         inputDeleteLikeItem.bind { likeItem in
             guard let likeItem  else { return }
             self.repository.deleteLikeItem(item: likeItem)
-            self.outputDeleteLikeItemIsSucceed.value = true
+            self.outputSaveDeleteLikeItemIsSucceed.value = true
         }
     }
     

@@ -14,8 +14,8 @@ class EditProfileImageViewModel {
     var outputProfileNum: Observable<Int> = Observable(0)
     
     init() {
-        inputProfileNum.bind { _ in
-            self.changeProfileNum()
+        inputProfileNum.bind { [weak self] _ in
+            self?.changeProfileNum()
         }
     }
     

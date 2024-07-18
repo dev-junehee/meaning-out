@@ -32,25 +32,25 @@ final class ProfileNicknameViewModel {
     }
     
     private func transform() {
-        inputViewDidLoadTrigger.bind { _ in
+        inputViewDidLoadTrigger.bind { [weak self] _ in
             UserDefaultsManager.profile = Int.random(in: 0..<Resource.Images.profiles.count)
-            self.outputProfileNum.value = UserDefaultsManager.profile
+            self?.outputProfileNum.value = UserDefaultsManager.profile
         }
         
-        inputViewWillAppearTrigger.bind { _ in
-            self.outputProfileNum.value = UserDefaultsManager.profile
+        inputViewWillAppearTrigger.bind { [weak self] _ in
+            self?.outputProfileNum.value = UserDefaultsManager.profile
         }
         
-        inputNickname.bind { _ in
-            self.nicknameValidation()
+        inputNickname.bind { [weak self] _ in
+            self?.nicknameValidation()
         }
         
-        inputProfileTapped.bind { _ in
-            self.transitionProfileImage?()
+        inputProfileTapped.bind { [weak self] _ in
+            self?.transitionProfileImage?()
         }
         
-        inputDoneButtonClicked.bind { _ in
-            self.saveUserAccount()
+        inputDoneButtonClicked.bind { [weak self] _ in
+            self?.saveUserAccount()
         }
     }
     

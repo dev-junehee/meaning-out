@@ -40,17 +40,17 @@ final class LikeDetailViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputCategoryDataIsEmpty.bind { isEmpty in
+        viewModel.outputCategoryDataIsEmpty.bind { [weak self] isEmpty in
             if isEmpty {
-                self.mainView.likeCollectionView.reloadData()
-                self.showAlert(
+                self?.mainView.likeCollectionView.reloadData()
+                self?.showAlert(
                     title: Constants.Alert.EmptyLikeCategory.title.rawValue,
                     message: Constants.Alert.EmptyLikeCategory.message.rawValue, 
                     type: .oneButton) { _ in
-                        self.popViewController()
+                        self?.popViewController()
                     }
             } else {
-                self.mainView.likeCollectionView.reloadData()
+                self?.mainView.likeCollectionView.reloadData()
             }
         }
     }

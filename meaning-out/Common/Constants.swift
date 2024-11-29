@@ -20,11 +20,12 @@ import Foundation
 
 enum Constants {
     enum Title: String {
-        case meaningout = "MeaningOut"
-        case profile = "PROFILE SETTING"
+        case swimz = "swiMZ"
+        case swimzUpper = "SwiMZ"
+        case profile = "프로필 설정"
         case likeCategory = "찜 카테고리"
-        case setting = "SETTING"
-        case edit = "EDIT PROFILE"
+        case setting = "설정"
+        case edit = "프로필 수정"
     }
     
     enum Tab: String {
@@ -147,7 +148,7 @@ enum Constants {
             return ["내가 찜한 상품", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
         }
         
-        static let like = "의 상품"
+        static let like = "개의 상품"
     }
     
     enum Placeholder: String {

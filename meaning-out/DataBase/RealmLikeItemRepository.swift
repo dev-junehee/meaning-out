@@ -81,7 +81,7 @@ final class RealmLikeItemRepository {
     
     // 찜한 상품 개수 (문자열) 불러오기
     func getAllLikeItemString() -> String {
-        return "\(realm.objects(LikeItem.self).count)개"
+        return "\(realm.objects(LikeItem.self).count)"
     }
     
     

@@ -58,8 +58,8 @@ enum Resource {
         static let regular15 = Resource.customFont(ofSize: 15, weight: .regular)
         static let regular14 = Resource.customFont(ofSize: 14, weight: .regular)
         static let regular13 = Resource.customFont(ofSize: 13, weight: .regular)
-        /// 리소스 변경 전 사용했던 폰트셋
         
+        /// 리소스 변경 전 사용했던 폰트셋
         // static let mainTitle: UIFont = .systemFont(ofSize: 42, weight: .black)
         // static let button: UIFont = .systemFont(ofSize: 16, weight: .black)
         // static let bold16: UIFont = .systemFont(ofSize: 16, weight: .bold)
@@ -82,7 +82,7 @@ enum Resource {
             .profile6, .profile7, .profile8, .profile9, .profile10, .profile11
         ]
         
-        static let empty: UIImage = .empty
+        static let empty: UIImage = .cart
         static let launch: UIImage = .swimzlogo
     }
     

@@ -125,7 +125,7 @@ enum Constants {
     }
     
     enum Search: String {
-        case empty = "최근 검색어가 없어요"
+        case empty = "최근 검색어가 없어요 :("
         case recent = "최근 검색"
         case remove = "전체 삭제"
         case sortSim = "sim"
@@ -135,7 +135,7 @@ enum Constants {
     }
     
     enum Like: String {
-        case empty = "찜 카테고리가 없어요"
+        case empty = "찜 카테고리가 없어요 :("
         case placeholder = "e.g. 영화DVD"
         case baseCellId = "basicCell"
     }

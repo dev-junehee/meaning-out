@@ -41,23 +41,23 @@ final class LikeCategoryViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputAllLikeCategory.bind { _ in
-            self.mainView.tableView.reloadData()
-            self.viewToggle()
+        viewModel.outputAllLikeCategory.bind { [weak self] _ in
+            self?.mainView.tableView.reloadData()
+            self?.viewToggle()
         }
         
-        viewModel.outputAddLikeCetagoryButton.bind { _ in
-            self.mainView.tableView.reloadData()
+        viewModel.outputAddLikeCetagoryButton.bind { [weak self] _ in
+            self?.mainView.tableView.reloadData()
         }
         
-        viewModel.outputDeleteLikeCategoryIsSucceed.bind { _ in
-            self.mainView.tableView.reloadData()
+        viewModel.outputDeleteLikeCategoryIsSucceed.bind { [weak self] _ in
+            self?.mainView.tableView.reloadData()
         }
         
-        viewModel.outputDeleteLikeCategoryAlert.bind { title, message, category in
+        viewModel.outputDeleteLikeCategoryAlert.bind { [weak self] title, message, category in
             guard let category = category else { return }
-            self.showAlert(title: title, message: message, type: .twoButton) { _ in
-                self.viewModel.inputDeleteLikeCategoryAlertOkay.value = category
+            self?.showAlert(title: title, message: message, type: .twoButton) { _ in
+                self?.viewModel.inputDeleteLikeCategoryAlertOkay.value = category
             }
         }
     }

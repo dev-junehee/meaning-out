@@ -9,7 +9,7 @@ import Foundation
 
 final class OnboardingViewModel {
     
-    var inputStartButtonClicked: Observable<Void?> = Observable(nil)
+    var inputStartButtonClicked = Observable<Void?>(nil)
     var transitionToProfileNickname: (() -> Void)?
     
     init() {

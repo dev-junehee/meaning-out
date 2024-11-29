@@ -36,12 +36,13 @@ final class SearchResultDetailViewModel {
     }
     
     private func transform() {
-        inputViewWillAppearTrigger.bind { id in
+        inputViewWillAppearTrigger.bind { [weak self] id in
             guard let id else { return }
-            if self.repository.isLikeItem(id: id) {
-                self.outputLikeItemSaveDeleteReuslt.value = .like   // 찜 저장한 상태
+            let isLikeItem = self?.repository.isLikeItem(id: id)
+            if isLikeItem != nil && isLikeItem == true {
+                self?.outputLikeItemSaveDeleteReuslt.value = .like   // 찜 저장한 상태
             } else {
-                self.outputLikeItemSaveDeleteReuslt.value = .unlike   // 찜 해제한 상태
+                self?.outputLikeItemSaveDeleteReuslt.value = .unlike   // 찜 해제한 상태
             }
         }
         

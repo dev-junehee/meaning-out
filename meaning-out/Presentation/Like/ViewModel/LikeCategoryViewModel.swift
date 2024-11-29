@@ -28,29 +28,31 @@ final class LikeCategoryViewModel {
     }
     
     private func transform() {
-        inputViewDidLoadTrigger.bind { _ in
-            self.outputAllLikeCategory.value = self.repository.getAllLikeCategory()
+        inputViewDidLoadTrigger.bind { [weak self] _ in
+            self?.outputAllLikeCategory.value = self?.repository.getAllLikeCategory() ?? []
         }
         
-        inputAddLikeCategoryButtonClicked.bind { textFieldText in
+        // 찜 카테고리 추가 버튼 클릭
+        inputAddLikeCategoryButtonClicked.bind { [weak self] textFieldText in
             guard let textFieldText = textFieldText else { return }
             let likeCategory = LikeCategory(name: textFieldText)
-            self.repository.createLikeCategory(likeCategory)
-            self.outputAllLikeCategory.value = self.repository.getAllLikeCategory()
-            self.outputAddLikeCetagoryButton.value = ()
+            self?.repository.createLikeCategory(likeCategory)
+            self?.outputAllLikeCategory.value = self?.repository.getAllLikeCategory() ?? []
+            self?.outputAddLikeCetagoryButton.value = ()
         }
         
         // 밀어서 삭제하기 클릭
-        inputDeleteLikeCategory.bind { idx in
+        inputDeleteLikeCategory.bind { [weak self] idx in
             guard let idx = idx else { return }
-            let category = self.outputAllLikeCategory.value[idx]
+            let category = self?.outputAllLikeCategory.value[idx]
             
+            guard let category else { return }
             if category.detailData.isEmpty {
-                self.repository.deleteLikeCategory(category)
-                self.outputAllLikeCategory.value = self.repository.getAllLikeCategory()
-                self.outputDeleteLikeCategoryIsSucceed.value = ()
+                self?.repository.deleteLikeCategory(category)
+                self?.outputAllLikeCategory.value = self?.repository.getAllLikeCategory() ?? []
+                self?.outputDeleteLikeCategoryIsSucceed.value = ()
             } else {
-                self.outputDeleteLikeCategoryAlert.value = (
+                self?.outputDeleteLikeCategoryAlert.value = (
                     title: Constants.Alert.DeleteLikeCategory.title.rawValue,
                     message: Constants.Alert.DeleteLikeCategory.message.rawValue,
                     category: category)
@@ -58,11 +60,11 @@ final class LikeCategoryViewModel {
         }
         
         // 찜 상품이 있는 카테고리 삭제 시 Alert 확인 버튼 클릭
-        inputDeleteLikeCategoryAlertOkay.bind { category in
+        inputDeleteLikeCategoryAlertOkay.bind { [weak self] category in
             guard let category else { return }
-            self.repository.deleteLikeCategory(category)
-            self.outputAllLikeCategory.value = self.repository.getAllLikeCategory()
-            self.outputDeleteLikeCategoryIsSucceed.value = ()
+            self?.repository.deleteLikeCategory(category)
+            self?.outputAllLikeCategory.value = self?.repository.getAllLikeCategory() ?? []
+            self?.outputDeleteLikeCategoryIsSucceed.value = ()
         }
     }
     

@@ -21,24 +21,24 @@ final class LikeDetailViewModel {
     }
     
     private func transform() {
-        inputViewAppearTrigger.bind { count in
+        inputViewAppearTrigger.bind { [weak self] count in
             guard let count else { return }
             if count == 0 {
-                self.outputCategoryDataIsEmpty.value = true
+                self?.outputCategoryDataIsEmpty.value = true
             } else {
-                self.outputCategoryDataIsEmpty.value = false
+                self?.outputCategoryDataIsEmpty.value = false
             }
         }
         
-        inputDeleteLikeItem.bind { title, tag in
+        inputDeleteLikeItem.bind { [weak self] title, tag in
             guard let tag else { return }
             
-            if let category = self.repository.findLikeCategory(title: title ?? "") {
-                self.repository.deleteLikeItemInCategory(item: category.detailData[tag], category: category, at: tag)
+            if let category = self?.repository.findLikeCategory(title: title ?? "") {
+                self?.repository.deleteLikeItemInCategory(item: category.detailData[tag], category: category, at: tag)
                 if category.detailData.isEmpty {
-                    self.outputCategoryDataIsEmpty.value = true
+                    self?.outputCategoryDataIsEmpty.value = true
                 } else {
-                    self.outputCategoryDataIsEmpty.value = false
+                    self?.outputCategoryDataIsEmpty.value = false
                 }
             }
         }

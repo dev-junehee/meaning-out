@@ -46,35 +46,35 @@ final class SearchResultViewModel {
     }
  
     private func transform() {
-        inputCallRequest.bind { query, start, sort in
-            self.callRequest(query: query, start: start, sort: sort)
+        inputCallRequest.bind { [weak self] query, start, sort in
+            self?.callRequest(query: query, start: start, sort: sort)
         }
         
-        inputSearchItemClicked.bind { idx in
+        inputSearchItemClicked.bind { [weak self] idx in
             guard let idx else { return }
-            let item = self.outputShoppingResult.value.items[idx]
-            self.outputTransitionToDetail.value = item
+            let item = self?.outputShoppingResult.value.items[idx]
+            self?.outputTransitionToDetail.value = item
         }
         
-        inputSearchItemLikeButtonClicked.bind { tag in
+        inputSearchItemLikeButtonClicked.bind { [weak self] tag in
             guard let tag else { return }
-            let item = self.outputShoppingResult.value.items[tag]
-            self.likeButtonClicked(item: item)
+            let item = self?.outputShoppingResult.value.items[tag]
+            self?.likeButtonClicked(item: item)
         }
         
-        inputSelectedLikeCategory.bind { selected, likeItem in
+        inputSelectedLikeCategory.bind { [weak self] selected, likeItem in
             guard let selected else { return }
-            if let category = self.repository.findLikeCategory(title: selected) {
+            if let category = self?.repository.findLikeCategory(title: selected) {
                 guard let likeItem else { return }
-                self.repository.createLikeItem(likeItem, category: category)
-                self.outputSaveDeleteLikeItemIsSucceed.value = true
+                self?.repository.createLikeItem(likeItem, category: category)
+                self?.outputSaveDeleteLikeItemIsSucceed.value = true
             }
         }
         
-        inputDeleteLikeItem.bind { likeItem in
+        inputDeleteLikeItem.bind { [weak self] likeItem in
             guard let likeItem  else { return }
-            self.repository.deleteLikeItem(item: likeItem)
-            self.outputSaveDeleteLikeItemIsSucceed.value = true
+            self?.repository.deleteLikeItem(item: likeItem)
+            self?.outputSaveDeleteLikeItemIsSucceed.value = true
         }
     }
     
@@ -96,15 +96,16 @@ final class SearchResultViewModel {
                     self.outputShoppingResult.value.items.append(contentsOf: data.items)
                     self.outputShoppingResponse.value = .success
                 }
-            case .failure(let error):
+            case .failure(let _):
                 self.outputShoppingResponse.value = .fail
             }
         }
     }
     
-    private func likeButtonClicked(item: Shopping) {
+    private func likeButtonClicked(item: Shopping?) {
         // if - 저장된 상품이 없으면 저장 액션시트 보여주기
         // else - 이미 저장된 상품
+        guard let item else { return }
         if !repository.isLikeItem(id: item.productId) {
             self.outputLikeItemIsValid.value = (
                 isValid: false,

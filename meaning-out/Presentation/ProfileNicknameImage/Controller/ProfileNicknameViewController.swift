@@ -45,20 +45,20 @@ final class ProfileNicknameViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputProfileNum.bind { _ in
-            self.configureData()
+        viewModel.outputProfileNum.bind { [weak self] _ in
+            self?.configureData()
         }
         
-        viewModel.outputIsValid.bind { value in
-            self.isValid = value
+        viewModel.outputIsValid.bind { [weak self] value in
+            self?.isValid = value
         }
         
-        viewModel.outputInvalidMessage.bind { message in
-            self.mainView.invalidMessage.text = message
+        viewModel.outputInvalidMessage.bind { [weak self] message in
+            self?.mainView.invalidMessage.text = message
         }
         
-        viewModel.outputSaveUserAccountResult.bind { value in
-            self.isUser = value
+        viewModel.outputSaveUserAccountResult.bind { [weak self] value in
+            self?.isUser = value
         }
         
         viewModel.transitionProfileImage = {

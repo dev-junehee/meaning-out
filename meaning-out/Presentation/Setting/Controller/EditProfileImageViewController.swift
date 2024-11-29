@@ -37,9 +37,9 @@ final class EditProfileImageViewController: BaseViewController {
     }
     
     private func bindData() {
-        viewModel.outputProfileNum.bind { num in
-            self.profileNum = num
-            self.editProfileImageView.profileImage.image = Resource.Images.profiles[self.profileNum]
+        viewModel.outputProfileNum.bind { [weak self] num in
+            self?.profileNum = num
+            self?.editProfileImageView.profileImage.image = Resource.Images.profiles[num]
         }
     }
     

@@ -14,10 +14,13 @@ import UIKit
 
 enum Resource {
     enum Colors {
-//        static let primary: UIColor = .init(rgb: 0xef8947)
-        static let primary: UIColor = .init(rgb: 0xbb2649)
-        static let black: UIColor = .init(rgb: 0x000000)
+        // static let primary: UIColor = .init(rgb: 0xef8947)
+        static let primary: UIColor = .init(rgb: 0x5EBFD2)
+        static let secondary: UIColor = .init(rgb: 0x87D1DE)
+        static let tertiary: UIColor = .init(rgb: 0xB7DFE9)
+        static let lavender: UIColor = .init(rgb: 0xE6E6F0)
         static let transparentBlack: UIColor = .init(rgb: 0x000000, alpha: 0.3)
+        static let black: UIColor = .init(rgb: 0x000000)
         static let darkGray: UIColor = .init(rgb: 0x4c4c4c)
         static let gray: UIColor = .init(rgb: 0x828282)
         static let lightGray: UIColor = .init(rgb: 0xcdcdcd)

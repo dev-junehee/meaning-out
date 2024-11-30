@@ -37,6 +37,7 @@ final class EmptyView: BaseView {
     override func configureViewUI() {
         backgroundColor = Resource.Colors.white
         emptyImage.image = Resource.Images.empty
+        emptyImage.contentMode = .scaleAspectFit
         emptyLabel.font = Resource.Fonts.bold16
         emptyLabel.text = emptyText
         emptyLabel.textAlignment = .center

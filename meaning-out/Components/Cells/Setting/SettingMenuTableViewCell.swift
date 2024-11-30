@@ -60,7 +60,7 @@ final class SettingMenuTableViewCell: BaseTableViewCell {
         menuTitle.font = Resource.Fonts.regular14
         likeImage.tintColor = Resource.Colors.black
         likeImage.contentMode = .scaleAspectFit
-        likeCount.font = Resource.Fonts.bold13
+        likeCount.font = Resource.Fonts.bold16
         likeLabel.font = Resource.Fonts.regular16
     }
     

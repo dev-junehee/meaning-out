@@ -43,6 +43,7 @@ final class SearchView: BaseView {
     override func configureViewUI() {
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = Constants.Placeholder.searchBar.rawValue
+        searchBar.setPlaceholderFont(Resource.Fonts.regular14)
         emptyView.emptyText = Constants.Search.empty.rawValue
     }
     

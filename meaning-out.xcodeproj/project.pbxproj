@@ -12,6 +12,9 @@
 		C413D2852C3AA03A00676D26 /* RealmLikeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2842C3AA03A00676D26 /* RealmLikeItemRepository.swift */; };
 		C413D2882C3AA6CA00676D26 /* LikeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2872C3AA6CA00676D26 /* LikeDetailViewController.swift */; };
 		C413D28A2C3AAF5A00676D26 /* LikeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C413D2892C3AAF5A00676D26 /* LikeDetailView.swift */; };
+		C41F68272CF9E50E003BCCCC /* FasterOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C41F68262CF9E50E003BCCCC /* FasterOne-Regular.ttf */; };
+		C41F68292CF9E62A003BCCCC /* GowunDodum-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C41F68282CF9E62A003BCCCC /* GowunDodum-Regular.ttf */; };
+		C41F682B2CF9EA59003BCCCC /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F682A2CF9EA59003BCCCC /* UISearchBar+Extension.swift */; };
 		C423D13C2C1F2232001CE395 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13B2C1F2232001CE395 /* EmptyView.swift */; };
 		C423D13E2C1F3178001CE395 /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13D2C1F3178001CE395 /* Shopping.swift */; };
 		C423D1402C1F3269001CE395 /* SearchItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */; };
@@ -84,6 +87,9 @@
 		C413D2842C3AA03A00676D26 /* RealmLikeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLikeItemRepository.swift; sourceTree = "<group>"; };
 		C413D2872C3AA6CA00676D26 /* LikeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDetailViewController.swift; sourceTree = "<group>"; };
 		C413D2892C3AAF5A00676D26 /* LikeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDetailView.swift; sourceTree = "<group>"; };
+		C41F68262CF9E50E003BCCCC /* FasterOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FasterOne-Regular.ttf"; sourceTree = "<group>"; };
+		C41F68282CF9E62A003BCCCC /* GowunDodum-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunDodum-Regular.ttf"; sourceTree = "<group>"; };
+		C41F682A2CF9EA59003BCCCC /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		C423D13B2C1F2232001CE395 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		C423D13D2C1F3178001CE395 /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
 		C423D13F2C1F3269001CE395 /* SearchItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -182,6 +188,15 @@
 				C4E459C72C469426006CCBF0 /* Controller */,
 			);
 			path = Like;
+			sourceTree = "<group>";
+		};
+		C41F68232CF9E3B1003BCCCC /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				C41F68262CF9E50E003BCCCC /* FasterOne-Regular.ttf */,
+				C41F68282CF9E62A003BCCCC /* GowunDodum-Regular.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		C44DDC0F2C3BEC270019E549 /* Setting */ = {
@@ -290,6 +305,7 @@
 		C48B9A262C1B4F1700A3EC84 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C41F68232CF9E3B1003BCCCC /* Font */,
 				C48B9A242C1B4EC100A3EC84 /* Constants.swift */,
 				C48B9A272C1B4F6200A3EC84 /* Resource.swift */,
 			);
@@ -304,6 +320,7 @@
 				C48B9A3F2C1C016F00A3EC84 /* TextFieldEffects+Extension.swift */,
 				C48B9A542C1C733600A3EC84 /* UITabBarController+Extension.swift */,
 				C4A52AD82C270B870013BCDF /* UIButton+Extension.swift */,
+				C41F682A2CF9EA59003BCCCC /* UISearchBar+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -607,6 +624,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C48B99F42C1AEEC000A3EC84 /* .gitignore in Resources */,
+				C41F68272CF9E50E003BCCCC /* FasterOne-Regular.ttf in Resources */,
+				C41F68292CF9E62A003BCCCC /* GowunDodum-Regular.ttf in Resources */,
 				C48B99E92C1AEE5400A3EC84 /* Assets.xcassets in Resources */,
 				C48B99EC2C1AEE5400A3EC84 /* Base in Resources */,
 			);
@@ -646,6 +665,7 @@
 				C44DDC202C3D594C0019E549 /* EditNicknameViewModel.swift in Sources */,
 				C413D2802C3A9E3100676D26 /* RealmTable.swift in Sources */,
 				C44DDC742C43F0DE0019E549 /* OnboardingViewModel.swift in Sources */,
+				C41F682B2CF9EA59003BCCCC /* UISearchBar+Extension.swift in Sources */,
 				C423D1752C2096C5001CE395 /* SearchResultCollectionViewCell.swift in Sources */,
 				C44DDC062C3AE8DC0019E549 /* BaseTableViewCell.swift in Sources */,
 				C48B9A592C1C771000A3EC84 /* SettingMenuTableViewCell.swift in Sources */,

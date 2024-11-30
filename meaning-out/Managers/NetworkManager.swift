@@ -24,7 +24,7 @@ final class NetworkManager {
             API.Shopping.SECRET_KEY_NAME: API.Shopping.SECRET_KEY
         ]
         
-        let URL = "\(API.Shopping.URL)query=\(query)&start=\(start)&sort=\(sort)"
+        let URL = "\(API.Shopping.URL)query=\(query + API.Shopping.defaultQuery)&start=\(start)&sort=\(sort)"
 
         AF.request(URL, method: .get, headers: headers)
             .responseDecodable(of: ShoppingResults.self) { res in

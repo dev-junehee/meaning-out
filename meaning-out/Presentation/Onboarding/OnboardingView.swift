@@ -19,6 +19,13 @@ final class OnboardingView: BaseView {
         subViews.forEach {
             self.addSubview($0)
         }
+        UIFont.familyNames.sorted().forEach { familyName in
+            print("*** \(familyName) ***")
+            UIFont.fontNames(forFamilyName: familyName).forEach { fontName in
+                print("\(fontName)")
+            }
+            print("---------------------")
+        }
     }
     
     override func configureViewLayout() {
@@ -41,7 +48,7 @@ final class OnboardingView: BaseView {
     }
     
     override func configureViewUI() {
-        titleLabel.text = Constants.Title.meaningout.rawValue
+        titleLabel.text = Constants.Title.swimz.rawValue
         titleLabel.textColor = Resource.Colors.primary
         titleLabel.textAlignment = .center
         titleLabel.font = Resource.Fonts.mainTitle

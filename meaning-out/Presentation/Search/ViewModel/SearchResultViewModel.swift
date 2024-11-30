@@ -96,7 +96,7 @@ final class SearchResultViewModel {
                     self.outputShoppingResult.value.items.append(contentsOf: data.items)
                     self.outputShoppingResponse.value = .success
                 }
-            case .failure(let _):
+            case .failure(_):
                 self.outputShoppingResponse.value = .fail
             }
         }

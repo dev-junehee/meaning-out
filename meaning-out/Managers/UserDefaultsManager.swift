@@ -36,15 +36,11 @@ struct UserDefaultsManager {
     static var isUser: Bool
     
     static func getSearchMainTitle() -> String {
-        return "\(UserDefaultsManager.nickname)'s MEANING OUT"
+        return "수영하는 MZ들, 스윔즈"
     }
     
     static func getJoinDateLabel() -> String {
         return "\(UserDefaultsManager.joinDate) 가입"
-    }
-    
-    static func getLikeLabel() -> String {
-        return "\(String(UserDefaultsManager.like.count))개"
     }
     
     static func deleteAllUserDefaults() {
